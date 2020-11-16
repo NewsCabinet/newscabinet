@@ -11,7 +11,7 @@
   </welcome-file-list>
 	<context-param>
 		<param-name>JDBCUrl</param-name>
-		<param-value>jdbc:mysql://22.69.171.47:3306/newscabinet</param-value>
+		<param-value>jdbc:mysql://220.69.171.47:3306/newscabinet</param-value>
 	</context-param>
 	<context-param>
 		<param-name>DBuser</param-name>

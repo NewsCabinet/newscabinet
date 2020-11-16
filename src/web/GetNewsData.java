@@ -3,6 +3,7 @@ package web;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -37,6 +38,7 @@ public class GetNewsData extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml");
+		PrintWriter out = response.getWriter();
 		
 		String keyword = "IT";
 		ServletContext sc = getServletContext(); 
@@ -56,9 +58,12 @@ public class GetNewsData extends HttpServlet {
 			while ((line = br.readLine()) != null) {
 				result = result + line + "\n";
 			}
-			response.getWriter().append(result);
+			out.append(result);
+			DataParsing dp = new DataParsing();
+			dp.getXmlData(result);
+			//response.getWriter().append(result);
 		} catch (Exception e) {
-			response.getWriter().append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><response><header><resultCode>-999</resultCode><resultMsg>알 수 없는 오류</resultMsg></header></response>");
+			//response.getWriter().append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><response><header><resultCode>-999</resultCode><resultMsg>알 수 없는 오류</resultMsg></header></response>");
 		}
 	}
 
