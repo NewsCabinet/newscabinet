@@ -1,6 +1,5 @@
 package web;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -35,6 +34,7 @@ public class DataParsing {
         // XML 데이터 중 <item> 태그의 내용을 가져온다.
         NodeList personTagList = document.getElementsByTagName("item");
         
+        title = new String[personTagList.getLength()];
         // <item> 태그 리스트를 하나씩 돌면서 값들을 가져온다.
         for (int i = 0; i < personTagList.getLength(); ++i) {
             
@@ -44,8 +44,8 @@ public class DataParsing {
                 
                 if ("title".equals(childNodes.item(j).getNodeName())) {
                     // do somthing...
-                	
-                	System.out.println(childNodes.item(j).getTextContent());
+                	title[i] = childNodes.item(j).getTextContent();
+                	//System.out.println(childNodes.item(j).getTextContent());
                 }
                 
                 if ("originallink".equals(childNodes.item(j).getNodeName())) {

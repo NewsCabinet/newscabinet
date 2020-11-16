@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,10 +60,14 @@ public class GetNewsData extends HttpServlet {
 			while ((line = br.readLine()) != null) {
 				result = result + line + "\n";
 			}
-			out.append(result);
+			//out.append(result);
 			DataParsing dp = new DataParsing();
 			dp.getXmlData(result);
-			//response.getWriter().append(result);
+			String[] title = dp.getTitle();
+			request.setAttribute("title", title);
+			RequestDispatcher view = request.getRequestDispatcher("news.jsp");
+			view.forward(request, response);
+			
 		} catch (Exception e) {
 			//response.getWriter().append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><response><header><resultCode>-999</resultCode><resultMsg>알 수 없는 오류</resultMsg></header></response>");
 		}
