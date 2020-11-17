@@ -29,13 +29,13 @@ public class DBConnection implements ServletContextListener {
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	/*Connection conn= (Connection) sce.getServletContext().getAttribute("DBconnection");
+    	Connection conn= (Connection) sce.getServletContext().getAttribute("DBconnection");
     	try {
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}/**/
     }
 
 	/**
@@ -48,15 +48,15 @@ public class DBConnection implements ServletContextListener {
 		Properties connectionProps = new Properties();
 		
 		ServletContext sc = sce.getServletContext();
-		/*String DBUrl = sc.getInitParameter("JDBCUrl");
+		String DBUrl = sc.getInitParameter("JDBCUrl");
 		String DBUser = sc.getInitParameter("DBuser");
 		String DBpasswd = sc.getInitParameter("DBpasswd");
-		String DBTimeZone = sc.getInitParameter("DBTimeZone");*/
+		String DBTimeZone = sc.getInitParameter("DBTimeZone");/**/
 		String NaverAPIUrl = sc.getInitParameter("NaverAPIUrl");
 		String NaverClientId = sc.getInitParameter("X-Naver-Client-Id");
 		String NaverClientSecret = sc.getInitParameter("X-Naver-Client-Secret");
 		
-		/*connectionProps.put("user", DBUser);
+		connectionProps.put("user", DBUser);
 		connectionProps.put("password", DBpasswd);
 		connectionProps.put("serverTimezone", DBTimeZone);
 		
@@ -67,7 +67,7 @@ public class DBConnection implements ServletContextListener {
 			e.printStackTrace();
 		}
 		
-		sc.setAttribute("DBconnection", conn); // 이 DBconnection을 얻으면 바로 커넥션해서 사용 가능.*/
+		sc.setAttribute("DBconnection", conn); // 이 DBconnection을 얻으면 바로 커넥션해서 사용 가능./**/
 		sc.setAttribute("NaverAPIUrl", NaverAPIUrl);
 		sc.setAttribute("X-Naver-Client-Id", NaverClientId);
 		sc.setAttribute("X-Naver-Client-Secret", NaverClientSecret);
