@@ -63,13 +63,13 @@ public class GetNewsData extends HttpServlet {
 			//out.append(result);
 			DataParsing dp = new DataParsing();
 			dp.getXmlData(result);
-			String[] title = dp.getTitle();
+			List title = dp.getTitle();
 			request.setAttribute("title", title);
 			RequestDispatcher view = request.getRequestDispatcher("news.jsp");
 			view.forward(request, response);
 			
 		} catch (Exception e) {
-			//response.getWriter().append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><response><header><resultCode>-999</resultCode><resultMsg>알 수 없는 오류</resultMsg></header></response>");
+			//response.getWriter().append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><response><header><resultCode>-999</resultCode><resultMsg>�븣 �닔 �뾾�뒗 �삤瑜�</resultMsg></header></response>");
 		}
 	}
 
