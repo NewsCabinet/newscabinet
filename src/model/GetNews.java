@@ -10,10 +10,10 @@ import javax.servlet.ServletContext;
 
 public class GetNews {
 
-	public NewsData[] getNewsFromOpenAPI(String apiUrl, String clientId, String clientPasswd) {
+	public NewsData[] getNewsFromOpenAPI(String apiUrl, String clientId, String clientPasswd, String type) {
 		
 		String keyword = "IT";
-		String type = "sim";
+		
 		BufferedReader br = null;
 		try {
 			String urlstr = apiUrl + "?query=" + keyword + "&display=10&start=1&sort=" + type;

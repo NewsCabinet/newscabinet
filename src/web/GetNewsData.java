@@ -44,9 +44,16 @@ public class GetNewsData extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml");
 		
-		ServletContext sc = getServletContext(); 
+		ServletContext sc = getServletContext();
+		String url = (String) sc.getAttribute("NaverAPIUrl");
+		String clientId = (String) sc.getAttribute("X-Naver-Client-Id");
+		String clientPW = (String) sc.getAttribute("X-Naver-Client-Secret");
+		
+		String newsType = request.getParameter("newsType");
+		if(newsType == null) {newsType = "sim";}
+		
 		GetNews gn = new GetNews();
-		NewsData[] newsdata = gn.getNewsFromOpenAPI((String) sc.getAttribute("NaverAPIUrl"), (String) sc.getAttribute("X-Naver-Client-Id"), (String) sc.getAttribute("X-Naver-Client-Secret"));
+		NewsData[] newsdata = gn.getNewsFromOpenAPI(url, clientId, clientPW, newsType);
 		request.setAttribute("newsdata", newsdata);
 		RequestDispatcher view = request.getRequestDispatcher("../news.jsp");
 		view.forward(request, response);

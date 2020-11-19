@@ -163,13 +163,18 @@ section, article {
 
 #newsContents {
 	position : relative;
-	top:150px;
+	top:200px;
 	folat: right;
 	width : 50%;
 	margin: auto;
 	padding-left: 25px;
 	padding-right: 25px;
 	border-bottom: 2px solid #2E404E;
+}
+.newsType {
+	position : relative;
+	top:150px;
+	folat: right;
 }
 .newsDescription {
 word-wrap: break-word; font-size: 10px;
@@ -179,6 +184,13 @@ word-wrap: break-word; font-size: 10px;
 </head>
 <body class="totalbox">
 	<jsp:include page="newsHeader.html" />
+	<div class = "newsType">
+		<form method="post" action="../news/getNews">
+			관련도순 <input type="radio" name="newsType" value="sim">
+			최근순 <input type="radio" name="newsType" value="date">
+			<input type="submit" value="SUBMIT">
+		</form>
+	</div>
 	<section>
 		<%
 			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
