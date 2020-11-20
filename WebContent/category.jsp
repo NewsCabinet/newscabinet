@@ -11,18 +11,16 @@
 
 </head>
 <body>
-<% %>
-	<% Vector<String> category = (Vector)request.getAttribute("subcategory");%>
-		<div class="categoryBox">
-			<ul class="categoryList">
-				<%
-					for (int i = 0; i < category.size(); i++){
-						out.println("<li>");
-						out.println(category.elementAt(i));
-						out.println("</li> ");
-					}
-				%>	
-					</ul>
-		</div>
+	<%
+		Vector<String> category = (Vector) request.getAttribute("subcategory");
+		out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
+		for (int i = 0; i < category.size(); i++) {
+			out.println("<li>");
+			out.println(category.elementAt(i));
+			out.println("</li> ");
+		}
+	%>
+	</ul>
+	</div>
 </body>
 </html>

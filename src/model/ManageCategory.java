@@ -8,14 +8,12 @@ import java.sql.Statement;
 
 
 public class ManageCategory {
-	// category id를 받아옴 
-	//회원가입시 getAttribute하면 id값이 같이 넘어옴,
-	//public static ResultSet GETinterestCategory(Connection con, String interestCategory, String userID) {
-	public static ResultSet getCategoryId(Connection con, String category_Id) {
-		//String user_id = "t_1234";
-		String sqlSt = "select category_id from newscabinet.user where user_id=" + category_Id;
-		//String sqlSt = "SELECT category_id FROM newscabinet.user WHERE user_id=user_id";
+	
+	public static ResultSet searchCategoryNameById(Connection con, int categoryId) {
+
+		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;
 		Statement st;
+		
 		try {
 			st = con.createStatement();
 			if (st.execute(sqlSt)) {
@@ -24,14 +22,14 @@ public class ManageCategory {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		return null;
 	}
 	
-	public static ResultSet getCategoryName(Connection con, String category_Id) {
-	//	String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" + category_Id;
+	public static ResultSet searchSubCategoryName(Connection con, int categoryId) {
 		
-		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id = 2";
+		String sqlSt = "SELECT subcategory_id, subcategory_name FROM newscabinet.subcategory WHERE category_id=" + categoryId;
 		Statement st;
 		try {
 			st = con.createStatement();
@@ -41,22 +39,30 @@ public class ManageCategory {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		return null;
 	}
-	public static ResultSet GetSubCategoryName(Connection con, String userCategory) {
-	//	String sqlSt = "SELECT subcategory_name, subcategory_name FROM newscabinet.subcategory WHERE category_id="+string;
-		String sqlSt = "SELECT subcategory_name, subcategory_name FROM newscabinet.subcategory WHERE category_id= 3";
+	
+	public static int searchCountSubCategory(Connection con, int categoryId) {
+		String sqlSt = "SELECT COUNT(*) FROM newscabinet.subcategory WHERE category_id=" + categoryId;
 		Statement st;
 		try {
 			st = con.createStatement();
 			if (st.execute(sqlSt)) {
-				return st.getResultSet();
+				ResultSet rs = st.getResultSet();
+				if(rs!=null) {
+					while(true) {
+						if(rs.next()) {
+							return rs.getInt(1);
+						}
+					}
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 	}
 }

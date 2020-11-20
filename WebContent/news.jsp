@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="model.NewsData" %>
+    pageEncoding="UTF-8" import="java.util.*"%>
+<%@ page import="model.NewsData"  import="model.SubcategoryData"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,6 +184,18 @@ word-wrap: break-word; font-size: 10px;
 </head>
 <body class="totalbox">
 	<jsp:include page="newsHeader.html" />
+	<%
+		SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
+		out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
+		System.out.println("test "+ subcateData.length);
+		for(int i = 0; i < subcateData.length; i++){
+			out.println("<li>");
+			out.println(subcateData[i].getSubcategoryName());
+			out.println("</li> ");
+		}
+	%>
+	</ul>
+	</div>
 	<div class = "newsType">
 		<form method="post" action="../news/main">
 			<%
