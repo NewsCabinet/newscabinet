@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,8 +54,41 @@ public class ManageRecord {
 			
 		}
 			
-		return -1;	
-			
+		return result;	
+	}
+	
+	public static ResultSet searchFolderNameById(Connection conn, String userId) {
+		String query = "SELECT (folder_name, folder_id) FROM newscabinet.user_record_folder WHERE user_id=" + "'" + userId + "'";
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 		
 	}
+	
+	public static ResultSet searchUserByID(Connection conn, String userID) {
+		
+		String query = "SELECT * FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 }
