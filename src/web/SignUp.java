@@ -21,14 +21,14 @@ import model.ManageUser;
 /**
  * Servlet implementation class DoJoin
  */
-@WebServlet("/doJoin")
-public class DoJoin extends HttpServlet {
+@WebServlet("/SignUp")
+public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DoJoin() {
+    public SignUp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,9 +53,15 @@ public class DoJoin extends HttpServlet {
 		
 		try {
 			if (result != -1) {
+<<<<<<< HEAD:src/web/DoJoin.java
 			System.out.println("ÀÔ·Â ¼º°ø");
 			RequestDispatcher view = request.getRequestDispatcher("index.html");
 			view.forward(request, response);
+=======
+				System.out.println("ìž…ë ¥ ì„±ê³µ");
+				RequestDispatcher view = request.getRequestDispatcher("index.html");
+				view.forward(request, response);
+>>>>>>> main:src/web/SignUp.java
 			}
 			
 		}catch(Exception e){
