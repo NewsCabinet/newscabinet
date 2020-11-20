@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.ManageScrapNews;
 import model.NewsData;
@@ -46,14 +47,22 @@ public class ScrapNews extends HttpServlet {
 		
 		ManageScrapNews scrapNews = new ManageScrapNews();
 		String subCategory = (String) sc.getAttribute("subCategory");
-		int subcategoryId = 75; 
+		
+		HttpSession userSession = request.getSession(false);
+		String userId = (String) userSession.getAttribute("userId");
+		int subcategoryId = 1; 
 		
 		NewsData[] nd = (NewsData[]) sc.getAttribute("newsdata");
 		int location = Integer.parseInt((String)request.getParameter("location"));
+		int customCategoryId = 0;
 		
 		try {
-			String url = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
-			System.out.println(url);
+			String newsUrl = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
+			//String newsUrl = "http://yna.kr/AKR20201120055551017?did=11";
+			System.out.println(newsUrl);
+			int newsId = scrapNews.searchScrapNewsIdByURL(conn, newsUrl).getInt(1);
+			scrapNews.insertScrapNewsRelationWithUser(conn, newsId, userId, customCategoryId);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -9,25 +9,33 @@ public class ManageScrapNews {
 	
 	private int scrapCount = 0;
 
-	public int searchScrapNewsIdByURL(Connection conn, String newsUrl) {
-		String query = "SELECT INTO newscabinet.scrap_news WHERE url=?";
+	public ResultSet searchScrapNewsIdByURL(Connection conn, String newsUrl) {
+		String query = "SELECT news_id from newscabinet.scrap_news WHERE url=?";
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
 			pstat.setString(1, newsUrl);
 			rs = pstat.executeQuery();
-			
-			return Integer.parseInt(rs.toString());
-			
+				if(rs.next()) {
+					System.out.println(rs.getInt(1));
+					return rs;
+				}
+			return null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 	
 	public String insertScrapNewsData(Connection conn, int subcategoryId, NewsData newsData) throws SQLException {
+		//searchScrapNewsIdByURL(conn, newsData.getUrl()).next() == true || 
+		if (searchScrapNewsIdByURL(conn, newsData.getUrl()) != null) {
+			System.out.println(newsData.getUrl() + "in method");
+			return newsData.getUrl();
+		}
 		
+		System.out.println(newsData.getUrl() + "out of the method");
 		String query = "INSERT INTO newscabinet.scrap_news (subcategory_id, headline, published_date, description, url, scrap_count) VALUES(?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -38,6 +46,7 @@ public class ManageScrapNews {
 			pstat.setString(4, newsData.getDescription());
 			pstat.setString(5, newsData.getUrl());
 			pstat.setInt(6, ++scrapCount);
+
 			pstat.executeUpdate();
 			
 			return newsData.getUrl();
