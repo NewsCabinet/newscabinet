@@ -1,4 +1,4 @@
-package model;
+package web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,8 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
+import model.ManageCategory;
+import model.ManageUser;
+
+import java.util.*;
+import web.SignIn;
 
 /**
  * Servlet implementation class NewsLook_getCategory
@@ -23,51 +29,53 @@ import java.util.*;
 @WebServlet("/newscategory")
 public class ShowCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L; 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ShowCategory() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ShowCategory() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
 		Vector vec = new Vector();
 		//String customCategoryName = request.getParameter("");
 
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection) sc.getAttribute("DBconnection");
-		
-		ResultSet rs = ManageCategory.GetSubCategoryName(conn, "");
+		int userCategory = 0;
+		//int category_Id = (Integer)request.getAttribute("UserCategory");
+		//request.getAttribute("userCategory");
+		//request.getAttribute("userCategory");
 		PrintWriter out = response.getWriter();
 
-	
+		ResultSet rs = ManageCategory.GetSubCategoryName(conn," ");
 		if(rs != null) {
 			try{
 				while(true) {
-				if(rs.next()) { // existing user
+					if(rs.next()) { // existing user
 						String subCategory = rs.getString(1);
 						System.out.println(subCategory);
 						vec.add(subCategory);
 						request.setAttribute("subcategory",vec);
+					}
+					else { // invalid user
+						out.print("no data");
+						break;
+					}
 				}
-				else { // invalid user
-					out.print("no data");
-					break;
-				}
-			}
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/test.jsp");
+
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/category.jsp");
 				rd.forward(request, response);
 			}catch (SQLException e) {
 				e.printStackTrace();
 			} //try end
 		}
 
-		} // if end
+	} // if end
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

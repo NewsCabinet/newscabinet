@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
 <html lang="en">
-<<head>
+<head>
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet">
 <title>Home</title>

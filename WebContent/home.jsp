@@ -15,7 +15,7 @@
 				<%
 					int signInCheck = (Integer) request.getAttribute("SignInCheck");
 					HttpSession userSession = request.getSession(false);
-					
+
 					if (signInCheck == 1) {
 						out.print("로그인에 성공하였습니다.");
 						if(session != null){
@@ -28,7 +28,6 @@
 							out.print("잘못된 비밀번호 입니다. 다시 시도해주세요");
 						else
 							out.print("없는 아이디입니다. 다시 시도해주세요");
-					
 					
 				%>
 

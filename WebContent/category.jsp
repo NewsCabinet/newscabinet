@@ -11,19 +11,8 @@
 
 </head>
 <body>
+<% %>
 	<% Vector<String> category = (Vector)request.getAttribute("subcategory");%>
-	<div class="box-area">
-		<header class="head">
-			<div class="wrapper">
-				<div class="logo">
-					<a href="#"><b>N</b>ews<b>C</b>abinet</a>
-				</div>
-				<nav>
-					<a href="#">홈</a> <a href="#">뉴스보기</a> <a href="#">스크랩보기</a> <a
-						href="#">기록보기</a> <a href="#">기록작성</a>
-				</nav>
-			</div>
-		</header>
 		<div class="categoryBox">
 			<ul class="categoryList">
 				<%
@@ -35,6 +24,5 @@
 				%>	
 					</ul>
 		</div>
-	</div>
 </body>
 </html>
