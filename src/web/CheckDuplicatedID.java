@@ -31,13 +31,13 @@ public class CheckDuplicatedID extends HttpServlet {
 		
 		if (rs != null) {
 			try {
-				if (rs.next()) {  // ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””
+				if (rs.next()) {  // ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµğ
 					checkID = false;
-					out.print("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
+					out.print("ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
 				}
 				else {
 					checkID = true;
-					out.print("ì‚¬ìš©ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.");
+					out.print("»ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

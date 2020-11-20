@@ -53,15 +53,9 @@ public class SignUp extends HttpServlet {
 		
 		try {
 			if (result != -1) {
-<<<<<<< HEAD:src/web/DoJoin.java
-			System.out.println("涝仿 己傍");
-			RequestDispatcher view = request.getRequestDispatcher("index.html");
-			view.forward(request, response);
-=======
-				System.out.println("鞛呺牓 靹标车");
+				System.out.println("涝仿 己傍");
 				RequestDispatcher view = request.getRequestDispatcher("index.html");
 				view.forward(request, response);
->>>>>>> main:src/web/SignUp.java
 			}
 			
 		}catch(Exception e){
