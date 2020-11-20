@@ -7,7 +7,7 @@
 <link href="style.css" rel="stylesheet">
 <title>Home</title>
 </head>
-
+<jsp:include page="newsHeader.html"/>
 <body>
 	<p class="newsType"> NewsCabinet이란? </p>
 	<div class="content-area">

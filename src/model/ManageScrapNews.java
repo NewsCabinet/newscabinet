@@ -60,13 +60,21 @@ public class ManageScrapNews {
 	
 	public void insertScrapNewsRelationWithUser(Connection conn, int newsId, String userId, int customCategoryId) {
 		
-		String query = "INSERT INTO newscabinet.user_scrap_news (user_id, news_id, custom_category_id) VALUES(?, ?, ?)";
+		String queryWithoutCustom = "INSERT INTO newscabinet.user_scrap_news (user_id, news_id) VALUES(?, ?)";
+		String queryWithCustom = "INSERT INTO newscabinet.user_scrap_news (user_id, news_id, custom_category_id) VALUES(?, ?, ?)";
 		
 		try {
-			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setString(1, userId);
-			pstat.setInt(2, newsId);
-			pstat.setInt(3, customCategoryId);
+			PreparedStatement pstat = null;
+			if(customCategoryId == 0 ) {
+				pstat = conn.prepareStatement(queryWithoutCustom);
+				pstat.setString(1, userId);
+				pstat.setInt(2, newsId);
+			}else {
+				pstat = conn.prepareStatement(queryWithCustom);
+				pstat.setString(1, userId);
+				pstat.setInt(2, newsId);
+				pstat.setInt(3, customCategoryId);
+			}
 			pstat.executeUpdate();
 			
 		} catch (SQLException e) {
