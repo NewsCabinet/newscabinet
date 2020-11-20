@@ -1,59 +1,214 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.NewsData" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-    <link href="css/style.css" rel="stylesheet" type="text/css">
-    <title>뉴스보기</title>
-</head>
+<meta charset="UTF-8">
+<style>
+.wrapper {
+	width: 1170px;
+	margin: 0 auto;
+}
 
+.head {
+	height: 100px;
+	background: #2E404E;
+	width: 100%;
+	z-index: 10;
+	position: fixed;
+}
+
+.logo {
+	width: 30%;
+	float: left;
+	line-height: 100px;
+}
+
+.logo a {
+	text-decoration: none;
+	font-size: 30px;
+	font-family: poppins;
+	color: #fff;
+	letter-spacing: 5px;
+}
+
+nav {
+	float: right;
+	line-height: 100px;
+}
+
+nav a {
+	text-decoration: none;
+	font-family: poppins;
+	letter-spacing: 4px;
+	font-size: 20px;
+	margin: 0 10px;
+	color: #fff;
+}
+
+.banner-area {
+	width: 100%;
+	height: 500px;
+	position: fixed;
+	top: 100px;
+	background-image: url(../images/news.jpg);
+	background-size: cover;
+	opacity: 0.9;
+	background-position: center center;
+}
+
+.banner-area h2 {
+	padding-top: 8%;
+	font-size: 70px;
+	font-family: poppins;
+	text-transform: uppercase;
+	color: black;
+}
+
+.content-area {
+	width: 100%;
+	position: relative;
+	top: 450px;
+	background: #ebebeb;
+	height: 500px;
+}
+
+.content-area h2 {
+	font-family: poppins;
+	letter-spacing: 4px;
+	padding-top: 30px;
+	font-size: 40px;
+	margin: 0;
+}
+
+.content-area p {
+	padding: 2% 0px;
+	font-family: poppins;
+	line-height: 30px;
+}
+
+section, article {
+	width: 100%;
+	margin: 0;
+}
+
+#menuNav {
+	width: 17%;
+	float: left;
+}
+
+#profile {
+	height: 200px;
+	background-color: white;
+}
+
+#listDiv {
+	padding: 5px;
+}
+
+#ulList {
+	list-style-type: none;
+	font-size: 20px;
+	text-align: left;
+}
+
+.list {
+	margin: 10px;
+	text-decoration: none;
+}
+
+.list a {
+	color: #2E404E;
+}
+
+#mainDiv {
+	width: 80%;
+	float: right;
+	margin-left: 10px;
+	height: 500px;
+	border: 2px solid red;
+}
+
+#subCategoryBox {
+	width: 100%;
+	height: 50px;
+	background-color: #2E404E;
+}
+
+#subCategoryBox li {
+	margin: 5px;
+	padding: 10px;
+}
+
+#subCategoryBox li:hover {
+	background-color: #d49466;
+	border-radius: 4px;
+}
+
+#subCategoryBox li a {
+	color: white;
+}
+
+#subCategoryList {
+	list-style-type: none;
+	s padding-left: 0px;
+}
+
+.subCategoryElement {
+	margin-right: 20px;
+	color: white;
+	float: left;
+}
+
+#newsContents {
+	position : relative;
+	top:200px;
+	folat: right;
+	width : 50%;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-bottom: 2px solid #2E404E;
+}
+.newsType {
+	position : relative;
+	top:150px;
+	folat: right;
+}
+.newsDescription {
+word-wrap: break-word; font-size: 10px;
+}
+</style>
+<title>뉴스 보기</title>
+</head>
 <body class="totalbox">
-    <header id ="container"><p id="title"><b style="color:#d49466">
-        N</b>ews <b style="color:#d49466">C</b>abinet</p></header>
-        <hr color="#2E404E">
-    <section>
-       <nav id ="menuNav">
-          <div id = "profile">My own Newsroom</div>
-          <div id = "listDiv">
-           <ul id ="ulList">
-               <li class="list"><a href="">홈</a></li>
-               <li class="list"><a href="">뉴스 보기</a></li>
-               <li class="list"><a href="">스크랩 보기</a></li>
-               <li class="list"><a href="">기록 보기</a></li>
-               <li class="list"><a href="">기록 작성</a></li>
-           </ul>
-           </div>
-       </nav>
-       <div id="mainDiv">
-                <h2>뉴스 보기</h2> 
-          <div id="subCategoryBox">       
-          <ul id ="subCategoryList">
-              <li class="subCategoryElement"><a href="">정치</a></li>
-              <li class="subCategoryElement"><a href="">과학</a></li>
-              <li class="subCategoryElement"><a href="">IT</a></li>
-              <li class="subCategoryElement"><a href="">경제</a></li>
-              <li class="subCategoryElement"><a href="">시사</a></li>
-          </ul> 
-          </div>  
-          
-          <div id="newsContents">
-                   <p style="font-size: 18px"><i>주식형펀드서 사흘째 자금 순유출<% out.println(request.getAttribute("title")); %></i></p>
-                    <p>국내 <b>주식</b>형 펀드에서 사흘째 자금이 빠져나갔다. 
-                    26일 금융투자협회에 따르면 지난 22일 상장지수펀드(ETF)를 제외한 국내 <b>주식</b>형 펀드에서 126억원이 순유출됐다. 
-                    472억원이 들어오고 598억원이 펀드...</p>
-                    <p style="color: gray; font-size: 12px" >Mon, 26 Sep 2016</p>
-              
-          </div>
-          <div id="newsContents">
-                   <p style="font-size: 18px"><i>주식형펀드서 사흘째 자금 순유출</i></p>
-                    <p>국내 <b>주식</b>형 펀드에서 사흘째 자금이 빠져나갔다. 
-                    26일 금융투자협회에 따르면 지난 22일 상장지수펀드(ETF)를 제외한 국내 <b>주식</b>형 펀드에서 126억원이 순유출됐다. 
-                    472억원이 들어오고 598억원이 펀드...</p>
-                    <p style="color: gray; font-size: 12px" >Mon, 26 Sep 2016</p>
-              
-          </div>
-         </div>
-       </section>
+	<jsp:include page="newsHeader.html" />
+	<div class = "newsType">
+		<form method="post" action="../news/main">
+			관련도순 <input type="radio" name="newsType" value="sim">
+			최근순 <input type="radio" name="newsType" value="date">
+			<input type="submit" value="SUBMIT">
+		</form>
+	</div>
+	
+	<section>
+		<%
+			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
+			for(int i = 0; i < nd.length; i++){
+				out.println("<div id='newsContents'><p style='font-size: 10px'><b><i>");
+				out.println(nd[i].getHeadline());
+				out.println("</i></b><br/><p class='newsDescription'>");
+				out.println(nd[i].getDescription());
+				out.println("</p><a class='newsDescription' href='");
+				out.println(nd[i].getUrl());
+				out.println("' target='_blank'>");
+				out.println(nd[i].getUrl());
+				out.println("</a><br/><p class='newsDescription'>");
+				out.println(nd[i].getPubDate());
+				out.println("</p></div>");
+			}
+		%>
+	</section>
+</body>
 </html>
