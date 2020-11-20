@@ -38,7 +38,7 @@ public class ManageUser {
 			
 			}catch(Exception e) {
 				e.printStackTrace();
-				System.out.println("conn ë¬¸ì œ");
+				System.out.println("conn ¹®Á¦");
 			}
 			
 			pstmt.setString(1, userid);

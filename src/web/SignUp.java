@@ -1,3 +1,4 @@
+  
 package web;
 
 
@@ -45,14 +46,14 @@ public class SignUp extends HttpServlet {
 		
 		int result = ManageUser.insertUser(conn, request);
 		
-		//ì•„ì´ë”” ì¤‘ë³µ í™•ì¸ ì½”ë“œ ì‘ì„±
+		//¾ÆÀÌµğ Áßº¹ È®ÀÎ ÄÚµå ÀÛ¼º
 
 
-		//user ì •ë³´ DBì— ë„£ê¸°
+		//user Á¤º¸ DB¿¡ ³Ö±â
 		
 		try {
 			if (result != -1) {
-				System.out.println("ì…ë ¥ ì„±ê³µ");
+				System.out.println("ÀÔ·Â ¼º°ø");
 				RequestDispatcher view = request.getRequestDispatcher("index.html");
 				view.forward(request, response);
 			}
