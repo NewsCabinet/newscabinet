@@ -22,14 +22,14 @@ import model.NewsData;
 /**
  * Servlet implementation class GetNewsData
  */
-@WebServlet("/news/getNews")
-public class GetNewsData extends HttpServlet {
+@WebServlet("/news/main")
+public class NewsCatching extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetNewsData() {
+    public NewsCatching() {
         super();
         // TODO Auto-generated constructor stub
     }
