@@ -2,12 +2,14 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class ManageUser {
-	public static int addMember(Connection conn, HttpServletRequest request) {
+	public static int insertUser(Connection conn, HttpServletRequest request) {
 		
 		int result = -1;
 		PreparedStatement pstmt = null;
@@ -31,7 +33,7 @@ public class ManageUser {
 			//conn.setAutoCommit(false);
 			
 			try {
-				String query = "INSERT INTO newscabinet.user (user_id, user_pw, user_name, user_email, category_id, user_age) VALUES(?, ?, ?, ?, ?,?)";
+				String query = "INSERT INTO newscabinet.user (user_id, user_pw, user_name, user_email, category_id, user_age) VALUES(?, ?, ?, ?, ?, ?)";
 				pstmt = conn.prepareStatement(query);
 			
 			}catch(Exception e) {
@@ -61,5 +63,22 @@ public class ManageUser {
 		return result;
 			
 	}
-
+	
+	public static ResultSet searchUserByID(Connection conn, String userID) {
+		String query = "SELECT (user_id, user_pw, user_name, user_email, category_id) FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	
 }

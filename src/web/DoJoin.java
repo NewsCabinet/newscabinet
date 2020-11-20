@@ -43,7 +43,7 @@ public class DoJoin extends HttpServlet {
 			System.out.println("conn is nul");
 		}
 		
-		int result = ManageUser.addMember(conn, request);
+		int result = ManageUser.insertUser(conn, request);
 		
 		//아이디 중복 확인 코드 작성
 
