@@ -59,6 +59,7 @@ public class NewsCatching extends HttpServlet {
 		HandlingNews gn = new HandlingNews();
 		NewsData[] newsdata = gn.getNewsFromOpenAPI(url, clientId, clientPW, subCategory, newsType);
 		request.setAttribute("newsdata", newsdata);
+		sc.setAttribute("newsdata", newsdata);
 		RequestDispatcher view = request.getRequestDispatcher("../news.jsp");
 		view.forward(request, response);
 	}

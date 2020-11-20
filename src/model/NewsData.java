@@ -49,27 +49,31 @@ public class NewsData {
 		this.pubDate = pubDate;
 	}
 	
+	private void refineDescription(String description) {
+		
+	}
+	
 	private void refineDate(String pubDate) {
 		String date[] = pubDate.split(" ");
-		setPubDate(date[3]+"³â " + translateMonth(date[2])+ date[1] + "ÀÏ " + translateDay(date[0]));
+		setPubDate(date[3]+"." + translateMonth(date[2])+"." +  date[1]);
 	}
 	
 	private String translateMonth(String data) {
 		String month = null;
 		switch(data){
-			case "Jan": month = "1¿ù "; break;
-			case "Feb": month = "2¿ù "; break;
-			case "Mar": month = "3¿ù "; break;
-			case "Apr": month = "4¿ù "; break;
-			case "May": month = "5¿ù "; break;
-			case "June": month = "6¿ù "; break;
-			case "July": month = "7¿ù "; break;
-			case "Aug": month = "8¿ù "; break;
-			case "Sep": month = "9¿ù "; 
-			case "Sept": month = "9¿ù "; break;
-			case "Oct": month = "10¿ù "; break;
-			case "Nov": month = "11¿ù "; break;
-			case "Dec": month = "12¿ù "; break;
+			case "Jan": month = "1"; break;
+			case "Feb": month = "2"; break;
+			case "Mar": month = "3"; break;
+			case "Apr": month = "4"; break;
+			case "May": month = "5"; break;
+			case "June": month = "6"; break;
+			case "July": month = "7"; break;
+			case "Aug": month = "8"; break;
+			case "Sep": month = "9"; 
+			case "Sept": month = "9"; break;
+			case "Oct": month = "10"; break;
+			case "Nov": month = "11"; break;
+			case "Dec": month = "12"; break;
 			default: month = ""; break;
 		}
 		return month;
@@ -78,18 +82,18 @@ public class NewsData {
 	private String translateDay(String data) {
 		String day = null;
 		switch(data){
-			case "Mon,": day = "¿ù¿äÀÏ"; break;
-			case "Tu,": day = "È­¿äÀÏ ";
-			case "Tue,": day = "È­¿äÀÏ ";
-			case "Tues,": day = "È­¿äÀÏ ";break;
-			case "Wed,": day = "¼ö¿äÀÏ"; break;
-			case "Th,": day = "¸ñ¿äÀÏ";
-			case "Thu,": day = "¸ñ¿äÀÏ";
-			case "Thur,": day = "¸ñ¿äÀÏ";
-			case "Thurs,": day = "¸ñ¿äÀÏ"; break;
-			case "Fri,": day = "±Ý¿äÀÏ"; break;
-			case "Sat,": day = "Åä¿äÀÏ"; break;
-			case "Sun,": day = "ÀÏ¿äÀÏ"; break;
+			case "Mon,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; break;
+			case "Tu,": day = "È­ï¿½ï¿½ï¿½ï¿½ ";
+			case "Tue,": day = "È­ï¿½ï¿½ï¿½ï¿½ ";
+			case "Tues,": day = "È­ï¿½ï¿½ï¿½ï¿½ ";break;
+			case "Wed,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"; break;
+			case "Th,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			case "Thu,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			case "Thur,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½";
+			case "Thurs,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½"; break;
+			case "Fri,": day = "ï¿½Ý¿ï¿½ï¿½ï¿½"; break;
+			case "Sat,": day = "ï¿½ï¿½ï¿½ï¿½ï¿½"; break;
+			case "Sun,": day = "ï¿½Ï¿ï¿½ï¿½ï¿½"; break;
 			default: day = ""; break;
 		}
 		return day;

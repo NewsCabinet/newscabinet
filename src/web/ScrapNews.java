@@ -46,13 +46,14 @@ public class ScrapNews extends HttpServlet {
 		
 		ManageScrapNews scrapNews = new ManageScrapNews();
 		String subCategory = (String) sc.getAttribute("subCategory");
-		int subcategoryId = 0; // sql문 처리해서 id 받아오기
+		int subcategoryId = 75; 
 		
-		NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
-		int location = Integer.parseInt(request.getParameter("location"));
+		NewsData[] nd = (NewsData[]) sc.getAttribute("newsdata");
+		int location = Integer.parseInt((String)request.getParameter("location"));
 		
 		try {
 			String url = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
+			System.out.println(url);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
