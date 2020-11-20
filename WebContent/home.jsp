@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link href="css/style.css" rel="stylesheet">
+<title>News Cabinet Home</title>
 </head>
 <body>
-	입력 테스트 성공
+	<jsp:include page="newsHeader.html" />
+	
+	<p class="newsType"> NewsCabinet이란? </p>
 </body>
 </html>
