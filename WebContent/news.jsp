@@ -185,7 +185,7 @@ word-wrap: break-word; font-size: 10px;
 <body class="totalbox">
 	<jsp:include page="newsHeader.html" />
 	<div class = "newsType">
-		<form method="post" action="../news/getNews">
+		<form method="post" action="../news/main">
 			관련도순 <input type="radio" name="newsType" value="sim">
 			최근순 <input type="radio" name="newsType" value="date">
 			<input type="submit" value="SUBMIT">
