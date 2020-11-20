@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>HOME</title>
-	<link href="css/style.css" rel="stylesheet">
+<meta charset="UTF-8">
+<link href="css/style.css" rel="stylesheet">
+<title>Home</title>
 </head>
+<jsp:include page="newsHeader.html" />
 <body>
-
-	<div class="box-area">
+<div class="box-area">
 		<header class="head">
 			<div class="wrapper">
 				<div class="logo">
@@ -22,23 +22,24 @@
 				</nav>
 			</div>
 		</header>
+</div>
 		<div class="banner-area">
             <h2><b>Own your mind!</b></h2>
 		</div>
 		<div class="content-area">
 			<div class="wrapper">
-			<form method="post" action="doLogin">
+			<form method="post" action="SignIn">
 				<p width="50%" text-align="left"> <br/>
 				User Id: &nbsp;&nbsp; <input type="text" name="userid" required /> <br/>
 				PassWd: &nbsp;&nbsp; <input type="password" name="passwd" required /><br/>
 				<input type="submit" value="LOGIN"/> <br /> <br />
-				<a href="join.html"> JOIN HERE </a> <br />
+				<a href="signUp.jsp"> JOIN HERE </a> <br />
 				</p>
 			</form>
 				<p></p>
 			</div>
 		</div>
-	</div>
+	
 
 </body>
 </html>
