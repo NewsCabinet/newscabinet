@@ -9,10 +9,9 @@
 	margin: 0;
 	padding: 0;
 }
-/*body {
-	 text-align: center;
+body {
+	text-align: center;
 }
-*/
 .wrapper {
 	width: 1170px;
 	margin: 0 auto;
@@ -68,8 +67,10 @@ nav a {
 .content-area {
 	width: 100%;
 	/*position: relative;*/
-	margin-top:78px;
-	/*background: red;*/
+	position : relative;
+	top:200px;
+	margin-top:180px;
+	/*background: #ebebeb;*/
 	height: 500px;
     border: 1px solid red;
 }

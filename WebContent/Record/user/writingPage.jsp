@@ -15,10 +15,13 @@
 	<div class="content-area">
 		<div class="wrapper">
 		<p> </p>
-			<form action="">
+			<form method = "post" action="Record/userWrite">
 				<h2>기록 작성하기</h2>
-				<h3> 제목 &nbsp; <input type="text" name="record_title"></h3> <br>
-				<%	Calendar cal = Calendar.getInstance(); %>
+				<h3> 제목 &nbsp; <input type="text" name="recordTitle"></h3> <br>
+				<%	request.setAttribute("newsId", 1);	
+				Calendar cal = Calendar.getInstance(); 
+				String recordDate = null;
+				%>
 
 				<h3>날짜  &nbsp; <%= cal.get(Calendar.YEAR) %>년 <%= cal.get(Calendar.MONTH)+1 %>월 <%= cal.get(Calendar.DATE) %>일 </h3><br>
 
@@ -33,8 +36,8 @@
 				</h3><br>
 				<h3>
 					공개 설정 : 
-					<input type="radio" name="SelectPrivate" value="1" checked> 공개 
-					<input type="radio" name="SelectPrivate" value="2"> 비공개
+					<input type="radio" name="recordPrivate" value="1" checked> 공개 
+					<input type="radio" name="recordPrivate" value="2"> 비공개
 				</h3><br>
 				<h3>
 					<a href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=018&aid=0004784909">뉴스 보러가기:</a> 

@@ -8,16 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class WriteRecrod
+ * Servlet implementation class RestoreUserRecord
  */
-@WebServlet("/userRecrod/restore")
-public class WriteRecrod extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+@WebServlet("/Restore/userRecord")
+public class RestoreUserRecord extends HttpServlet {
+     
+
+    public RestoreUserRecord() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int recordNewsId = (Integer)request.getAttribute("newsId");
+		String recordTitle = (String)request.getAttribute("recordTitle");
+		
+		
 		
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
