@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link href="css/style.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 <title>Home</title>
 </head>
-<jsp:include page="newsHeader.html" />
 <body>
 <div class="box-area">
 		<header class="head">
@@ -18,7 +17,7 @@
 					<a href="#">뉴스보기</a>
 					 <a href="#">스크랩보기</a> 
 					 <a href="#">기록보기</a>
-				     <a href="#">기록작성</a>
+				     <a href="./Record/user/writingPage.jsp">기록작성</a>
 				</nav>
 			</div>
 		</header>
@@ -33,7 +32,8 @@
 				User Id: &nbsp;&nbsp; <input type="text" name="userid" required /> <br/>
 				PassWd: &nbsp;&nbsp; <input type="password" name="passwd" required /><br/>
 				<input type="submit" value="LOGIN"/> <br /> <br />
-				<a href="signUp.jsp"> JOIN HERE </a> <br />
+				<a href="Sign/findId.jsp">아이디 찾기</a> <a href="Sign/findPasswd.jsp">비밀번호 찾기</a>
+				<br><a href="signUp.jsp"> JOIN HERE </a> <br />
 				</p>
 			</form>
 				<p></p>

@@ -48,8 +48,7 @@ public class SignIn extends HttpServlet {
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
 		
 		ResultSet rs = ManageUser.searchUserByID(conn, userID);
-		
-		//ResultSet rs = ManageUser.searchUserPasswdByID(conn, userID);
+	
 		
 		
 		if (rs != null) {

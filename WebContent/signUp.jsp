@@ -45,6 +45,7 @@
 					
 					
 				  <input type="submit" value="가입하기"/>
+				  
 					</p>
 				</form>
 			</div>
