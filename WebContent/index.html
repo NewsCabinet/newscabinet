@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>HOME</title>
+	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	<form method="post" action="news/main">
-		<input type="submit" value="news" /> <br /> <br />
-	</form>
+
+	<div class="box-area">
+		<header class="head">
+			<div class="wrapper">
+				<div class="logo">
+                    <a href="#"><b>N</b>ews<b>C</b>abinet</a>
+				</div>
+				<nav>
+					<a href="#">홈</a> 
+					<a href="#">뉴스보기</a>
+					 <a href="#">스크랩보기</a> 
+					 <a href="#">기록보기</a>
+				     <a href="#">기록작성</a>
+				</nav>
+			</div>
+		</header>
+		<div class="banner-area">
+            <h2><b>Own your mind!</b></h2>
+		</div>
+		<div class="content-area">
+			<div class="wrapper">
+			<form method="post" action="doLogin">
+				<p width="50%" text-align="left"> <br/>
+				User Id: &nbsp;&nbsp; <input type="text" name="userid" required /> <br/>
+				PassWd: &nbsp;&nbsp; <input type="password" name="passwd" required /><br/>
+				<input type="submit" value="LOGIN"/> <br /> <br />
+				<a href="join.html"> JOIN HERE </a> <br />
+				</p>
+			</form>
+				<p></p>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>

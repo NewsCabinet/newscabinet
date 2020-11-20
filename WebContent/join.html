@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HOME</title>
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<div class="box-area">
+		<header class="head">
+			<div class="wrapper">
+				<div class="logo">
+                    <a href="#"><b>N</b>ews<b>C</b>abinet</a>
+				</div>
+				<nav>
+					<a href="#">홈</a> 
+					<a href="#">뉴스보기</a>
+					 <a href="#">스크랩보기</a> 
+					 <a href="#">기록보기</a>
+				     <a href="#">기록작성</a>
+				</nav>
+			</div>
+		</header>
+		<div class="content-area">
+			<div class="wrapper">
+				<form method="post" action="doJoin">
+					<p width="50%" text-align="left">
+					아이디 : <input type="text" name="userid" required> <input type="button" name="checkDuplicationID" value="아이디 중복 체크"> <br/>
+        			비밀번호 : <input type="password" name="passwd" required><br/>
+        			이름 : <input type="text" name="name" required><br/>
+       			 	이메일 : <input type="email" name="email"><br/> 
+       			 	나이 : <input type="number" name="age"><br/>
+       			 	관심 분야를 선택해주세요 <br/>
+					<select name="category" size="1">
+						<option value="1">정치</option>
+						<option value="2">사회</option>
+						<option value="3">경제</option>
+						<option value="4">국제</option>
+						<option value="5">문화</option>
+						<option value="6">스포츠</option>
+						<option value="7">IT</option>
+						<option value="8">과학</option>
+					</select>
+					<input type="submit" value="가입하기"/> 
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
