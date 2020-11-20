@@ -81,15 +81,47 @@ public class ManageUser {
 	}
 	
 	
-	public static ResultSet searchUserPasswdByID(Connection conn, String userID) {
+	public static String searchUserPasswdByID(Connection conn, String userID) {
 		
 		String query = "SELECT user_pw FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
 		Statement st;
+		String userPw;
+		ResultSet rs;
+		
+		try {
+			st = conn.createStatement();
+			
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {//email로 검색되는 값이 있음
+					String userId = rs.getString(1);
+					if(!userId.isEmpty()) {
+						return userId;
+					}
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String searchUserIDByEmail(Connection conn, String userEmail) {
+		
+		String query = "SELECT user_id FROM newscabinet.user WHERE user_email =" + "'" + userEmail + "'" ; 
+		Statement st;
+		ResultSet rs;
 		
 		try {
 			st = conn.createStatement();
 			if(st.execute(query)) {
-				return st.getResultSet();
+				rs = st.getResultSet();
+				if(rs.next()) {//email로 검색되는 값이 있음
+					String userId = rs.getString(1);
+					if(!userId.isEmpty()) {
+						return userId;
+					}
+				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -98,5 +130,28 @@ public class ManageUser {
 	}
 	
 	
+public static String searchUserPasswdByIDAndEmail(Connection conn, String userId, String userEmail) {
+		
+		String query = "SELECT user_pw FROM newscabinet.user WHERE user_email =" + "'" + userEmail + "' AND user_id='" +userId+ "'"; 
+		Statement st;
+		ResultSet rs;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {//email로 검색되는 값이 있음
+					String userPw = rs.getString(1);
+					if(!userPw.isEmpty()) {
+						return userPw;
+					}
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 }
