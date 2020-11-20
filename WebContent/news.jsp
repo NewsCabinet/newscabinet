@@ -196,7 +196,9 @@ word-wrap: break-word; font-size: 10px;
 			%>
 			<input type="submit" value="선택 완료">
 		</form>
+		<button name="scrap" onclick="../scrap/main?location=<%= 1%>"> 스크랩하기 </button>
 	</div>
+	
 	
 	<section>
 		<%
@@ -204,7 +206,9 @@ word-wrap: break-word; font-size: 10px;
 			
 			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 			for(int i = 0; i < nd.length; i++){
-				out.println("<div id='newsContents'><p style='font-size: 10px'><b><i>");
+				out.println("<div id='newsContents'>");
+				out.println(i + " <button name='scrap' onclick='../scrap/main?location=" + i + "'> 스크랩하기 </button>");
+				out.println("<p style='font-size: 10px'><b><i>");
 				out.println(nd[i].getHeadline());
 				out.println("</i></b><br/><p class='newsDescription'>");
 				out.println(nd[i].getDescription());

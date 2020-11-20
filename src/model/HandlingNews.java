@@ -20,9 +20,7 @@ import org.xml.sax.SAXException;
 
 public class HandlingNews {
 
-	public NewsData[] getNewsFromOpenAPI(String apiUrl, String clientId, String clientPasswd, String type) {
-		
-		String keyword = "IT";
+	public NewsData[] getNewsFromOpenAPI(String apiUrl, String clientId, String clientPasswd, String keyword, String type) {
 		
 		BufferedReader br = null;
 		try {
