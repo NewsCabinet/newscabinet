@@ -1,31 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
+<%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>HOME</title>
-	<link href="css/style.css" rel="stylesheet">
+<<head>
+<meta charset="UTF-8">
+<link href="css/style.css" rel="stylesheet">
+<title>Home</title>
 </head>
+<jsp:include page="newsHeader.html" />
 <body>
-	<div class="box-area">
-		<header class="head">
-			<div class="wrapper">
-				<div class="logo">
-                    <a href="#"><b>N</b>ews<b>C</b>abinet</a>
-				</div>
-				<nav>
-					<a href="#">홈</a> 
-					<a href="#">뉴스보기</a>
-					 <a href="#">스크랩보기</a> 
-					 <a href="#">기록보기</a>
-				     <a href="#">기록작성</a>
-				</nav>
-			</div>
-		</header>
+	
 		<div class="content-area">
 			<div class="wrapper">
-				<form method="post" action="doJoin">
+				<form method="post" action="SignUp">
 					<p width="50%" text-align="left">
-					아이디 : <input type="text" name="userid" required> <input type="button" name="checkDuplicationID" value="아이디 중복 체크"> <br/>
+					<script method="post" action="checkID">
+						function idCheck(){
+							//아이디 중복 확인 창띄우기
+							window.open("checkID.jsp", "아이디 확인", "width=400 height=350")
+						}
+					</script>
+					
+					아이디 : <input type="text" name="userid" required> 
+					<input type="button" name="checkID" value="아이디 중복 체크" onclick="idCheck()" >
+					
+					<br/>
         			비밀번호 : <input type="password" name="passwd" required><br/>
         			이름 : <input type="text" name="name" required><br/>
        			 	이메일 : <input type="email" name="email"><br/> 
@@ -41,7 +42,9 @@
 						<option value="7">IT</option>
 						<option value="8">과학</option>
 					</select>
-					<input type="submit" value="가입하기"/> 
+					
+					
+				  <input type="submit" value="가입하기"/>
 					</p>
 				</form>
 			</div>

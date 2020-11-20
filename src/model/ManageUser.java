@@ -65,7 +65,25 @@ public class ManageUser {
 	}
 	
 	public static ResultSet searchUserByID(Connection conn, String userID) {
-		String query = "SELECT (user_id, user_pw, user_name, user_email, category_id) FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
+	
+		String query = "SELECT * FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public static ResultSet searchUserPasswdByID(Connection conn, String userID) {
+		
+		String query = "SELECT user_pw FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
 		Statement st;
 		
 		try {
