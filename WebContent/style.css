@@ -57,8 +57,8 @@ nav a {
     opacity: 0.9;
 	background-position: center center;
 }
-.banner-area h2 {
-	padding-top: 8%;
+ .banner-area h2 {
+	/*padding-top: 8%;*/
 	font-size: 70px;
 	font-family: poppins;
 	text-transform: uppercase;
@@ -66,10 +66,13 @@ nav a {
 }
 .content-area {
 	width: 100%;
-	position: relative;
-	top: 450px;
-	background: #ebebeb;
+	/*position: relative;*/
+	position : relative;
+	top:200px;
+	margin-top:180px;
+	/*background: #ebebeb;*/
 	height: 500px;
+    border: 1px solid red;
 }
 .content-area h2 {
 	font-family: poppins;
@@ -83,15 +86,3 @@ nav a {
 	font-family: poppins;
 	line-height: 30px;
 }
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
