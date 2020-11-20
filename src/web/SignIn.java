@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -35,6 +36,9 @@ public class SignIn extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
 		
 		String userID = request.getParameter("userid");
 		String userPW = request.getParameter("passwd");
@@ -48,8 +52,7 @@ public class SignIn extends HttpServlet {
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
 		
 		ResultSet rs = ManageUser.searchUserByID(conn, userID);
-		
-		//ResultSet rs = ManageUser.searchUserPasswdByID(conn, userID);
+		PrintWriter out = response.getWriter();
 		
 		
 		if (rs != null) {
@@ -75,25 +78,27 @@ public class SignIn extends HttpServlet {
 							session.setAttribute("userCategory", userCategory);
 							session.setAttribute("userName", userName);
 						}
+						
+						request.setAttribute("SignInCheck", check);
+						RequestDispatcher view = request.getRequestDispatcher("/home.jsp");
+						view.forward(request, response);
 					}
 					else {
 						check = 0;
 						System.out.println("비밀번호 틀림");
+						out.print("<script>alert('비밀번호가 틀렸습니다. 다시 로그인해주세요'); location.href='index.html'; </script>\r\n");
 					}
 				}
 				else{//아이디가 없음 
 					check = -1;
 					System.out.println("아이디없음");
+					out.print("<script>alert('아이디가 없습니다. 다시 로그인해주세요'); location.href='index.html'; </script>\r\n");
 				}	
 			} catch (Exception e) {
 				e.printStackTrace();
 			} // try end
 		} 
-		
-		request.setAttribute("SignInCheck", check);
-		RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-		view.forward(request, response);
-		
+
 		
 	}
 
@@ -102,6 +107,7 @@ public class SignIn extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		doGet(request, response);
 	}
 
