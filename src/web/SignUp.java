@@ -1,3 +1,4 @@
+  
 package web;
 
 
@@ -57,7 +58,6 @@ public class SignUp extends HttpServlet {
 		}
 		
 		
-		
 		int result = ManageUser.insertUser(conn, request);
 		
 		try {
@@ -74,15 +74,7 @@ public class SignUp extends HttpServlet {
 					view.forward(request, response);
 					
 				}
-				
 			}
-			
-		//아이디 중복 확인 코드 작성
-		
-
-		//user 정보 DB에 넣기
-		
-		
 		}catch(Exception e){
 			
 		}
@@ -90,9 +82,7 @@ public class SignUp extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

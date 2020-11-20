@@ -43,7 +43,7 @@ public class DBConnection implements ServletContextListener {
      */
     public void contextInitialized(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	// ì—¬ê¸°ì— db connectioní•˜ëŠ” ë‚´ìš©ì„ ë„£ì–´ë‘ë©´ ëœë‹¤.
+    	// ¿©±â¿¡ db connectionÇÏ´Â ³»¿ëÀ» ³Ö¾îµÎ¸é µÈ´Ù.
 		Connection conn = null;
 		Properties connectionProps = new Properties();
 		
@@ -67,7 +67,7 @@ public class DBConnection implements ServletContextListener {
 			e.printStackTrace();
 		}
 		
-		sc.setAttribute("DBconnection", conn); // ì´ DBconnectionì„ ì–»ìœ¼ë©´ ë°”ë¡œ ì»¤ë„¥ì…˜í•´ì„œ ì‚¬ìš© ê°€ëŠ¥./**/
+		sc.setAttribute("DBconnection", conn); // ÀÌ DBconnectionÀ» ¾òÀ¸¸é ¹Ù·Î Ä¿³Ø¼ÇÇØ¼­ »ç¿ë °¡´É./**/
 		sc.setAttribute("NaverAPIUrl", NaverAPIUrl);
 		sc.setAttribute("X-Naver-Client-Id", NaverClientId);
 		sc.setAttribute("X-Naver-Client-Secret", NaverClientSecret);

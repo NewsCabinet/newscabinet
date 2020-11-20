@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="model.NewsData" %>
+    pageEncoding="UTF-8" import="java.util.*"%>
+<%@ page import="model.NewsData"  import="model.SubcategoryData"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,19 +184,43 @@ word-wrap: break-word; font-size: 10px;
 </head>
 <body class="totalbox">
 	<jsp:include page="newsHeader.html" />
+	<%
+		SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
+		out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
+		System.out.println("test "+ subcateData.length);
+		for(int i = 0; i < subcateData.length; i++){
+			out.println("<li>");
+			out.println(subcateData[i].getSubcategoryName());
+			out.println("</li> ");
+		}
+	%>
+	</ul>
+	</div>
 	<div class = "newsType">
 		<form method="post" action="../news/main">
-			관련도순 <input type="radio" name="newsType" value="sim">
-			최근순 <input type="radio" name="newsType" value="date">
-			<input type="submit" value="SUBMIT">
+			<%
+				String newsType = (String) request.getAttribute("newsType");
+				if(newsType.toString().equals("sim")){
+					out.println("관련도순 <input type='radio' name='newsType' value='sim' checked>\n최근순 <input type='radio' name='newsType' value='date'>");
+				}else if(newsType.toString().equals("date")){
+					out.println("관련도순 <input type='radio' name='newsType' value='sim'>\n최근순 <input type='radio' name='newsType' value='date' checked>");
+				}
+			%>
+			<input type="submit" value="선택 완료">
 		</form>
 	</div>
 	
+	
 	<section>
 		<%
+			
+			
 			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 			for(int i = 0; i < nd.length; i++){
-				out.println("<div id='newsContents'><p style='font-size: 10px'><b><i>");
+				out.println("<div id='newsContents'>");
+				String tmp = "location.href='../scrap/main?location=" + i + "'";
+				out.println(i + " <button name='scrap' onclick=" + tmp + "> 스크랩하기 </button>");
+				out.println("<p style='font-size: 10px'><b><i>");
 				out.println(nd[i].getHeadline());
 				out.println("</i></b><br/><p class='newsDescription'>");
 				out.println(nd[i].getDescription());
