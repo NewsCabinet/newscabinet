@@ -1,10 +1,14 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,7 +18,34 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-public class DataParsing {
+public class HandlingNews {
+
+	public NewsData[] getNewsFromOpenAPI(String apiUrl, String clientId, String clientPasswd, String type) {
+		
+		String keyword = "IT";
+		
+		BufferedReader br = null;
+		try {
+			String urlstr = apiUrl + "?query=" + keyword + "&display=10&start=1&sort=" + type;
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			urlconnection.setRequestProperty("X-Naver-Client-Id", clientId);            
+			urlconnection.setRequestProperty("X-Naver-Client-Secret", clientPasswd);
+			
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+			String result = "";
+			String line;
+			while ((line = br.readLine()) != null) {
+				result = result + line + "\n";
+			}
+			
+			NewsData[] newsdata = getNewsData(result);
+			return newsdata;		
+		} catch (Exception e) {
+			return null;
+		}
+	}
 	
 	public NewsData[] getNewsData(String xmlFile) throws ParserConfigurationException, SAXException, IOException {
 		

@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.DataParsing;
-import model.GetNews;
+import model.HandlingNews;
 import model.NewsData;
 
 /**
@@ -52,7 +51,7 @@ public class GetNewsData extends HttpServlet {
 		String newsType = request.getParameter("newsType");
 		if(newsType == null) {newsType = "sim";}
 		
-		GetNews gn = new GetNews();
+		HandlingNews gn = new HandlingNews();
 		NewsData[] newsdata = gn.getNewsFromOpenAPI(url, clientId, clientPW, newsType);
 		request.setAttribute("newsdata", newsdata);
 		RequestDispatcher view = request.getRequestDispatcher("../news.jsp");

@@ -191,6 +191,7 @@ word-wrap: break-word; font-size: 10px;
 			<input type="submit" value="SUBMIT">
 		</form>
 	</div>
+	
 	<section>
 		<%
 			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
