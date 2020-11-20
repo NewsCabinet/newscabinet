@@ -186,14 +186,22 @@ word-wrap: break-word; font-size: 10px;
 	<jsp:include page="newsHeader.html" />
 	<div class = "newsType">
 		<form method="post" action="../news/main">
-			관련도순 <input type="radio" name="newsType" value="sim">
-			최근순 <input type="radio" name="newsType" value="date">
-			<input type="submit" value="SUBMIT">
+			<%
+				String newsType = (String) request.getAttribute("newsType");
+				if(newsType.toString().equals("sim")){
+					out.println("관련도순 <input type='radio' name='newsType' value='sim' checked>\n최근순 <input type='radio' name='newsType' value='date'>");
+				}else if(newsType.toString().equals("date")){
+					out.println("관련도순 <input type='radio' name='newsType' value='sim'>\n최근순 <input type='radio' name='newsType' value='date' checked>");
+				}
+			%>
+			<input type="submit" value="선택 완료">
 		</form>
 	</div>
 	
 	<section>
 		<%
+			
+			
 			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 			for(int i = 0; i < nd.length; i++){
 				out.println("<div id='newsContents'><p style='font-size: 10px'><b><i>");

@@ -50,6 +50,7 @@ public class NewsCatching extends HttpServlet {
 		
 		String newsType = request.getParameter("newsType");
 		if(newsType == null) {newsType = "sim";}
+		request.setAttribute("newsType", newsType);
 		
 		HandlingNews gn = new HandlingNews();
 		NewsData[] newsdata = gn.getNewsFromOpenAPI(url, clientId, clientPW, newsType);
