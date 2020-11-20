@@ -37,27 +37,44 @@ public class SignUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
+		String userId = request.getParameter("userid");
+		String categoryStr[] = request.getParameterValues("category");
+		int category = 0;
+	
+		for(String str : categoryStr) {
+			category = Integer.parseInt(str);
+		}
+		
+		System.out.println(userId + category);
+		
+		
+		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		if(conn == null) {
 			System.out.println("conn is nul");
 		}
 		
-		int result = ManageUser.insertUser(conn, request);
 		
-		//¾ÆÀÌµð Áßº¹ È®ÀÎ ÄÚµå ÀÛ¼º
-
-
-		//user Á¤º¸ DB¿¡ ³Ö±â
+		int result = ManageUser.insertUser(conn, request);
 		
 		try {
 			if (result != -1) {
-				System.out.println("ÀÔ·Â ¼º°ø");
-				RequestDispatcher view = request.getRequestDispatcher("index.html");
-				view.forward(request, response);
+				System.out.println("ìž…ë ¥ ì„±ê³µ");
+				
+				int folder = ManageUser.insertFirstUserFolderByID(conn, userId);
+				//int custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userId, category);
+				int custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userId, category);
+				
+				if(folder != -1 && custom != -1) {
+					System.out.println("folder, custom table ìž…ë ¥ ì„±ê³µ");
+					RequestDispatcher view = request.getRequestDispatcher("index.html");
+					view.forward(request, response);
+					
+				}
 			}
-			
 		}catch(Exception e){
 			
 		}
@@ -65,9 +82,7 @@ public class SignUp extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

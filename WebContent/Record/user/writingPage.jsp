@@ -21,6 +21,9 @@
 				<%	request.setAttribute("newsId", 1);	
 				Calendar cal = Calendar.getInstance(); 
 				String recordDate = null;
+				recordDate = cal.get(Calendar.YEAR)+"."+ (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DATE);
+				request.setAttribute("recordDate", recordDate);
+				
 				%>
 
 				<h3>날짜  &nbsp; <%= cal.get(Calendar.YEAR) %>년 <%= cal.get(Calendar.MONTH)+1 %>월 <%= cal.get(Calendar.DATE) %>일 </h3><br>
@@ -36,8 +39,8 @@
 				</h3><br>
 				<h3>
 					공개 설정 : 
-					<input type="radio" name="recordPrivate" value="1" checked> 공개 
-					<input type="radio" name="recordPrivate" value="2"> 비공개
+					<input type="radio" name="recordPrivate" value="false" checked> 공개 
+					<input type="radio" name="recordPrivate" value="true"> 비공개
 				</h3><br>
 				<h3>
 					<a href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=018&aid=0004784909">뉴스 보러가기:</a> 
@@ -47,7 +50,7 @@
 					style="width: 90%; height: 300px; margin: auto"> </iframe>
 				<br>
 				<br>
-				<textarea name="txtcomment" cols="110" rows="30">뉴스 url을 카테고리 처럼 선택할 수 있게 할까??</textarea>
+				<textarea name="recordComment" cols="110" rows="30">뉴스 url을 카테고리 처럼 선택할 수 있게 할까??</textarea>
 				<br>
 				<br>
 				<button type="button">저장하기</button>
