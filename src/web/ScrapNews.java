@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ManageCategory;
 import model.ManageScrapNews;
 import model.NewsData;
 
@@ -54,20 +56,20 @@ public class ScrapNews extends HttpServlet {
 		
 		NewsData[] nd = (NewsData[]) sc.getAttribute("newsdata");
 		int location = Integer.parseInt((String)request.getParameter("location"));
-		int customCategoryId = 0;
 		
 		try {
 			String newsUrl = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
-			//String newsUrl = "http://yna.kr/AKR20201120055551017?did=11";
 			System.out.println(newsUrl);
 			int newsId = scrapNews.searchScrapNewsIdByURL(conn, newsUrl).getInt(1);
+			int customCategoryId = ManageCategory.searchDefualtCustomCategoryIdByUserId(conn, userId);
 			scrapNews.insertScrapNewsRelationWithUser(conn, newsId, userId, customCategoryId);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		RequestDispatcher view = request.getRequestDispatcher("../news.jsp");
+		view.forward(request, response);
 	}
 
 	/**
