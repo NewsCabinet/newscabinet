@@ -61,7 +61,6 @@ public class NewsCatching extends HttpServlet {
 		}
 		HttpSession userSession = request.getSession(false);
 		int userCategoryId = (int) userSession.getAttribute("userCategory");
-		//System.out.println("user category id" + userCategoryId);
 		
 		int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
 		
@@ -72,7 +71,7 @@ public class NewsCatching extends HttpServlet {
 				while(true) {
 					if(tmp.next()) {
 						userCategoryName = tmp.getString(1);	
-						System.out.println(userCategoryName);
+						//System.out.println(userCategoryName);
 					}else {
 						break;
 					}
@@ -86,7 +85,7 @@ public class NewsCatching extends HttpServlet {
 				while(true) {
 					if(rs.next()) {
 						subcateData[count++] = new SubcategoryData(rs.getInt(1),rs.getString(2));
-						System.out.println(rs.getString(2));
+						//System.out.println(rs.getString(2));
 					}else {
 						break;
 					}

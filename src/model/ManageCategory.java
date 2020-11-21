@@ -76,7 +76,7 @@ public class ManageCategory {
 			
 			rs = pstat.executeQuery();
 				if(rs.next()) {
-					System.out.println(rs.getInt(1));
+					//System.out.println(rs.getInt(1));
 					return rs.getInt(1);
 				}
 		} catch (SQLException e) {

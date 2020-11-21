@@ -59,7 +59,7 @@ public class ScrapNews extends HttpServlet {
 		
 		try {
 			String newsUrl = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
-			System.out.println(newsUrl);
+			//System.out.println(newsUrl);
 			int newsId = scrapNews.searchScrapNewsIdByURL(conn, newsUrl).getInt(1);
 			int customCategoryId = ManageCategory.searchDefualtCustomCategoryIdByUserId(conn, userId);
 			scrapNews.insertScrapNewsRelationWithUser(conn, newsId, userId, customCategoryId);
@@ -68,7 +68,7 @@ public class ScrapNews extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher view = request.getRequestDispatcher("../news.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("../scrapnews.jsp");
 		view.forward(request, response);
 	}
 
