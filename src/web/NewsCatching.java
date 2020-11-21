@@ -100,8 +100,8 @@ public class NewsCatching extends HttpServlet {
 		}
 
 		String subCategory = request.getParameter("subCategory"); // keyword로 사용할 subCategory
+		if(subCategory == null) {subCategory = (String) request.getAttribute("userCategoryName");}
 		request.setAttribute("subCategory", subCategory);
-		if(subCategory == null) {subCategory = "IT";}
 		
 		String newsType = request.getParameter("newsType");
 		if(newsType == null) {newsType = "sim";}
