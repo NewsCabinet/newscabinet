@@ -17,7 +17,7 @@
 			<form method = "post" action="../../UserRecord/restore">
 				<h2>기록 작성하기</h2>
 				<h3> 제목 &nbsp; <input type="text" name="recordTitle"></h3> <br>
-				<%	request.setAttribute("newsId", 1);	
+				<%
 					String newsUrl = (String)request.getAttribute("newsUrl");
 					String newsSubcategory = (String) request.getAttribute("subCategoryName");
 					int newsSubcategoryId = (Integer) request.getAttribute("subCategoryId");
@@ -40,6 +40,10 @@
 						}else{
 							out.print("Folder가 로딩되지 않음");
 						}
+				
+				request.setAttribute("recordDate", todayDate);
+				request.setAttribute("newsSubcategoryID", newsSubcategoryId);
+				request.setAttribute("newsUrl",newsUrl);
 					%>
 				</h3> <br>
 				 
@@ -59,6 +63,7 @@
 				<textarea name="recordComment" cols="110" rows="30">뉴스 url을 카테고리 처럼 선택할 수 있게 할까??</textarea>
 				<br>
 				<br>
+				
 				<button type="button">저장하기</button>
 			</form>
 			<br><br>

@@ -28,6 +28,27 @@ public class ManageScrapNews {
 		}
 	}
 	
+	public static int searchScrapNewsIdByUrl(Connection conn, String newsUrl) {
+		String query = "SELECT news_id from newscabinet.scrap_news WHERE url=?";
+		ResultSet rs = null;
+		int result = -1;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setString(1, newsUrl);
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					//System.out.println(rs.getInt(1));
+					return rs.getInt(1);
+				}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
 	public String insertScrapNewsData(Connection conn, int subcategoryId, NewsData newsData) throws SQLException {
 		//searchScrapNewsIdByURL(conn, newsData.getUrl()).next() == true || 
 		if (searchScrapNewsIdByURL(conn, newsData.getUrl()) != null) {

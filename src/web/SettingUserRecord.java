@@ -52,7 +52,7 @@ public class SettingUserRecord extends HttpServlet {
 		
 		
 		//사용자 폴더 내용 가져오기
-		userFolder = ManageRecord.searchFolderNameById(conn, userId);
+		userFolder = (ResultSet) ManageRecord.searchFolderNameByUserId(conn, userId);
 
 		
 		//날짜
@@ -78,7 +78,7 @@ public class SettingUserRecord extends HttpServlet {
 		
 	
 		request.setAttribute("newsUrl", newsUrl);
-		request.setAttribute("SubcategoryId", newsSubcategory);
+		request.setAttribute("subCategoryId", newsSubcategory);
 		request.setAttribute("subCategoryName", newsSubcategoryName);
 		request.setAttribute("todayDate", todayDate);
 		request.setAttribute("userFolder", userFolder);
@@ -87,7 +87,6 @@ public class SettingUserRecord extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("../Record/user/writingPage.jsp");
 		view.forward(request, response);
 
-		//request.setAttribute("newsId", 1);	
 		
 	}
 
