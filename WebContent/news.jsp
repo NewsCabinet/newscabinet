@@ -184,18 +184,20 @@ word-wrap: break-word; font-size: 10px;
 </head>
 <body class="totalbox">
 	<jsp:include page="newsHeader.html" />
-	</ul>
-	</div>
 	<div class = "newsType">
 		<form method="post" action="../news/main">
+			<%! int subCategoryId = -1; %>
 			<%
 					SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
 					String subCategory = (String) request.getAttribute("subCategory");
+					
+					
 					out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
 					for(int i = 0; i < subcateData.length; i++){
 						out.println(subcateData[i].getSubcategoryName());
 						if(subcateData[i].getSubcategoryName().equals(subCategory)){
 							out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked>");
+							subCategoryId = subcateData[i].getSubcategoryId();
 						}else{
 							out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'>");
 						}
@@ -221,9 +223,12 @@ word-wrap: break-word; font-size: 10px;
 			for(int i = 0; i < nd.length; i++){
 				out.println("<div id='newsContents'>");
 				String tmpForScrap = "location.href='../scrap/main?location=" + i + "'";
-				String tmpForRecord = "location.href='../UserRecord/restore?location=" + i + "'";
+				String tmpForRecord = "location.href='../UserRecord/setting?location=" + i + "&" + "subid="+ subCategoryId + "'";
+				//String tmpForRecord = "location.href='../UserRecord/setting?location=" + i + "'";
 				out.println(i + " <button name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");
 				out.println(" <button name='record' onclick=" + tmpForRecord + "> 기록 작성하기 </button>");
+				request.setAttribute("SelectednewsCategory", subCategory);
+				System.out.println("now =" +  subCategory);
 				out.println("<p style='font-size: 10px'><b><i>");
 				out.println(nd[i].getHeadline());
 				out.println("</i></b><br/><p class='newsDescription'>");

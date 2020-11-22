@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "java.util.Calendar" %>
+    <%@ page import = "java.sql.ResultSet" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <link href="../../style.css" rel="stylesheet">
 <title>Home</title>
 </head>
@@ -15,38 +14,45 @@
 	<div class="content-area">
 		<div class="wrapper">
 		<p> </p>
-			<form method = "post" action="Record/userWrite">
+			<form method = "post" action="../../UserRecord/restore">
 				<h2>기록 작성하기</h2>
 				<h3> 제목 &nbsp; <input type="text" name="recordTitle"></h3> <br>
 				<%	request.setAttribute("newsId", 1);	
-				Calendar cal = Calendar.getInstance(); 
-				String recordDate = null;
-				recordDate = cal.get(Calendar.YEAR)+"."+ (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DATE);
-				request.setAttribute("recordDate", recordDate);
+					String newsUrl = (String)request.getAttribute("newsUrl");
+					String newsSubcategory = (String) request.getAttribute("subCategoryName");
+					int newsSubcategoryId = (Integer) request.getAttribute("subCategoryId");
+					String todayDate = (String)request.getAttribute("todayDate");
+					ResultSet userFolder = (ResultSet)request.getAttribute("userFolder");
 				
 				%>
 
-				<h3>날짜  &nbsp; <%= cal.get(Calendar.YEAR) %>년 <%= cal.get(Calendar.MONTH)+1 %>월 <%= cal.get(Calendar.DATE) %>일 </h3><br>
-
-				<%
-					int firstCategory = 1;
-					int subCategory = 3;
-				%>
-				<h3>
-					카테고리 상위
-					<%=firstCategory%>&nbsp; &nbsp; &nbsp; 
-					하위<%=subCategory%>&nbsp;
-				</h3><br>
+				<h3>날짜  <%=todayDate %> </h3><br>
+				<h3> 카테고리 <%= newsSubcategory %>  </h3><br>
+				<h3> 폴더  
+					<%
+						if(userFolder != null){
+							out.println("<select name='userFolder' size='2'>");
+							while(userFolder.next()){
+								String folderName = userFolder.getString(1);
+								out.print("<option value='" + folderName + "'>" + folderName+ "</option>");
+							}
+							out.println("</select>");
+						}else{
+							out.print("Folder가 로딩되지 않음");
+						}
+					%>
+				</h3> <br>
+				 
 				<h3>
 					공개 설정 : 
 					<input type="radio" name="recordPrivate" value="false" checked> 공개 
 					<input type="radio" name="recordPrivate" value="true"> 비공개
 				</h3><br>
 				<h3>
-					<a href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=018&aid=0004784909">뉴스 보러가기:</a> 
+					<a href="<%=newsUrl%>">뉴스 보러가기:</a> 
 				</h3><br>
 				<iframe
-					src="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=018&aid=0004784909"
+					src="<%=newsUrl%>"
 					style="width: 90%; height: 300px; margin: auto"> </iframe>
 				<br>
 				<br>

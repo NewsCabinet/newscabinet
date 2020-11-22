@@ -85,4 +85,54 @@ public class ManageCategory {
 		}
 		return -1;
 	}
+	
+	
+	public static String searchSubcatogoryNameBySubcateogoryId(Connection conn, int subcategoryId) {
+		String sqlSt = "SELECT subcategory_name FROM newscabinet.subcategory WHERE subcategory_id=" + subcategoryId;
+		
+		Statement st;
+		try {
+			st = conn.createStatement();
+			if (st.execute(sqlSt)) {
+				ResultSet rs = st.getResultSet();
+				if(rs!=null) {
+					if(rs.next()) {
+						return rs.getString(1);
+					}		
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+		
+	}
+	
+	
+	public static int searchSubcatogoryIdBySubcateogoryName(Connection conn, String subcategoryName) {
+		String sqlSt = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_id=" + subcategoryName;
+		
+		Statement st;
+		try {
+			st = conn.createStatement();
+			if (st.execute(sqlSt)) {
+				ResultSet rs = st.getResultSet();
+				if(rs!=null) {
+					if(rs.next()) {
+						return rs.getInt(1);
+					}		
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+		
+	}
+	
+	
+	
 }

@@ -65,7 +65,6 @@ public class SignUp extends HttpServlet {
 				System.out.println("입력 성공");
 				
 				int folder = ManageUser.insertFirstUserFolderByID(conn, userId);
-				//int custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userId, category);
 				int custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userId, category);
 				
 				if(folder != -1 && custom != -1) {
