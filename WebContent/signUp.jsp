@@ -3,15 +3,13 @@
     
 <!DOCTYPE html>
 <%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
-<html lang="en">
-<<head>
+<html>
+<head>
 <meta charset="UTF-8">
-<link href="css/style.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 <title>Home</title>
 </head>
-<jsp:include page="newsHeader.html" />
 <body>
-	
 		<div class="content-area">
 			<div class="wrapper">
 				<form method="post" action="SignUp">
@@ -50,6 +48,5 @@
 				</form>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

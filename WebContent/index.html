@@ -3,43 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <link href="style.css" rel="stylesheet">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <title>Home</title>
 </head>
 <body>
-<div class="box-area">
+	<div class="box-area">
 		<header class="head">
 			<div class="wrapper">
 				<div class="logo">
-                    <a href="#"><b>N</b>ews<b>C</b>abinet</a>
+					<a href="#"><b>N</b>ews<b>C</b>abinet</a>
 				</div>
-				<nav>
-					<a href="#">홈</a> 
-					<a href="#">뉴스보기</a>
-					 <a href="#">스크랩보기</a> 
-					 <a href="#">기록보기</a>
-				     <a href="./Record/user/writingPage.jsp">기록작성</a>
-				</nav>
 			</div>
 		</header>
-</div>
-		<div class="banner-area">
-            <h2><b>Own your mind!</b></h2>
+	</div>
+	<div class="banner-area">
+		<h2>
+			<b class="title">Own your mind!</b>
+		</h2>
+		<script>
+			$(function(){
+				$(".title").fadeIn(2000);
+			});
+			</script>
+	</div>
+	<div class="index_content-area">
+		<div class="index_wrapper">
+			<div class="login"><h2>Login</h2>
+			<div>
+				<form method="post" action="SignIn">
+					<input class="enterId" type="text" name="userid" placeholder="아이디를 입력해주세요." required /><br />
+				    <input class="enterId" type="password" name="passwd" required
+				    placeholder="비밀번호를 입력해주세요." /><br />
+					<input class="enterId" type="submit" value="login" /> <br /> 
+				</form>
+			</div> 
+			<div>
+			<a href="Sign/findId.jsp">아이디 찾기</a>
+			 <a href="Sign/findPasswd.jsp">비밀번호 찾기</a>
+			<a href="signUp.jsp"> JOIN HERE </a> <br />
+           </div>
 		</div>
-		<div class="content-area">
-			<div class="wrapper">
-			<form method="post" action="SignIn">
-				<p width="50%" text-align="left"> <br/>
-				User Id: &nbsp;&nbsp; <input type="text" name="userid" required /> <br/>
-				PassWd: &nbsp;&nbsp; <input type="password" name="passwd" required /><br/>
-				<input type="submit" value="LOGIN"/> <br /> <br />
-				<a href="Sign/findId.jsp">아이디 찾기</a> <a href="Sign/findPasswd.jsp">비밀번호 찾기</a>
-				<br><a href="signUp.jsp"> JOIN HERE </a> <br />
-				</p>
-			</form>
-				<p></p>
-			</div>
 		</div>
-	
+	</div>
+
 
 </body>
 </html>

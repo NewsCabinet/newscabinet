@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
+<link href="style.css" rel="stylesheet">
+<!--style>
 .wrapper {
 	width: 1170px;
 	margin: 0 auto;
@@ -179,11 +180,11 @@ section, article {
 .newsDescription {
 word-wrap: break-word; font-size: 10px;
 }
-</style>
+</style -->
+
 <title>뉴스 보기</title>
 </head>
 <body class="totalbox">
-	<jsp:include page="newsHeader.html" />
 	<div class = "newsType">
 		<form method="post" action="../news/main">
 			관련도순 <input type="radio" name="newsType" value="sim">
