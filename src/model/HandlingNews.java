@@ -1,11 +1,13 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -21,11 +23,13 @@ import org.xml.sax.SAXException;
 public class HandlingNews {
 
 	public NewsData[] getNewsFromOpenAPI(String apiUrl, String clientId, String clientPasswd, String keyword, String type) {
-		
 		BufferedReader br = null;
 		try {
+			keyword = URLEncoder.encode(keyword, "UTF-8");
 			String urlstr = apiUrl + "?query=" + keyword + "&display=10&start=1&sort=" + type;
+			//System.out.println(urlstr);
 			URL url = new URL(urlstr);
+			
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");
 			urlconnection.setRequestProperty("X-Naver-Client-Id", clientId);            
@@ -36,6 +40,7 @@ public class HandlingNews {
 			String line;
 			while ((line = br.readLine()) != null) {
 				result = result + line + "\n";
+				//System.out.println(result);
 			}
 			
 			NewsData[] newsdata = getNewsData(result);

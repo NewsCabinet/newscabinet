@@ -184,27 +184,31 @@ word-wrap: break-word; font-size: 10px;
 </head>
 <body class="totalbox">
 	<jsp:include page="newsHeader.html" />
-	<%
-		SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
-		out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
-		System.out.println("test "+ subcateData.length);
-		for(int i = 0; i < subcateData.length; i++){
-			out.println("<li>");
-			out.println(subcateData[i].getSubcategoryName());
-			out.println("</li> ");
-		}
-	%>
 	</ul>
 	</div>
 	<div class = "newsType">
 		<form method="post" action="../news/main">
 			<%
-				String newsType = (String) request.getAttribute("newsType");
-				if(newsType.toString().equals("sim")){
-					out.println("관련도순 <input type='radio' name='newsType' value='sim' checked>\n최근순 <input type='radio' name='newsType' value='date'>");
-				}else if(newsType.toString().equals("date")){
-					out.println("관련도순 <input type='radio' name='newsType' value='sim'>\n최근순 <input type='radio' name='newsType' value='date' checked>");
-				}
+					SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
+					String subCategory = (String) request.getAttribute("subCategory");
+					out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
+					for(int i = 0; i < subcateData.length; i++){
+						out.println(subcateData[i].getSubcategoryName());
+						if(subcateData[i].getSubcategoryName().equals(subCategory)){
+							out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked>");
+						}else{
+							out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'>");
+						}
+					}
+					out.println("<p>");
+					String newsType = (String) request.getAttribute("newsType");
+					if (newsType.toString().equals("sim")) {
+						out.println(
+								"관련도순 <input type='radio' name='newsType' value='sim' checked>\n최근순 <input type='radio' name='newsType' value='date'>");
+					} else if (newsType.toString().equals("date")) {
+						out.println(
+								"관련도순 <input type='radio' name='newsType' value='sim'>\n최근순 <input type='radio' name='newsType' value='date' checked>");
+					}
 			%>
 			<input type="submit" value="선택 완료">
 		</form>
@@ -213,13 +217,13 @@ word-wrap: break-word; font-size: 10px;
 	
 	<section>
 		<%
-			
-			
 			NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 			for(int i = 0; i < nd.length; i++){
 				out.println("<div id='newsContents'>");
-				String tmp = "location.href='../scrap/main?location=" + i + "'";
-				out.println(i + " <button name='scrap' onclick=" + tmp + "> 스크랩하기 </button>");
+				String tmpForScrap = "location.href='../scrap/main?location=" + i + "'";
+				String tmpForRecord = "location.href='../UserRecord/restore?location=" + i + "'";
+				out.println(i + " <button name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");
+				out.println(" <button name='record' onclick=" + tmpForRecord + "> 기록 작성하기 </button>");
 				out.println("<p style='font-size: 10px'><b><i>");
 				out.println(nd[i].getHeadline());
 				out.println("</i></b><br/><p class='newsDescription'>");
