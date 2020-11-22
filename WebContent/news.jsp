@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="style.css" rel="stylesheet">
-<!--style>
+<style>
 .wrapper {
 	width: 1170px;
 	margin: 0 auto;
@@ -180,17 +179,13 @@ section, article {
 .newsDescription {
 word-wrap: break-word; font-size: 10px;
 }
-</style -->
-
+</style>
 <title>뉴스 보기</title>
 </head>
 <body class="totalbox">
-<<<<<<< HEAD
-=======
 	<jsp:include page="newsHeader.html" />
 	</ul>
 	</div>
->>>>>>> main
 	<div class = "newsType">
 		<form method="post" action="../news/main">
 			<%

@@ -12,7 +12,6 @@
 	padding: 0;
 }
 
-
 body {
 	text-align: center;
 }
@@ -102,7 +101,23 @@ nav a {
 }
 .content-area {
 	width: 100%;
+	height: 600px;
+	position: relative;
+    background-color: white;
+	top: 450px;
+}
 
+.content-area h2 {
+	font-family: poppins;
+	letter-spacing: 4px;
+	font-size: 40px;
+	margin: 0;
+}
+
+.content-area p {
+	padding: 2% 0px;
+	font-family: poppins;
+	line-height: 30px;
 }
 
 .login {
@@ -149,5 +164,42 @@ a {
 	font-family: bold;
 	color: black;
 }
+#newsContents {
+	position : relative;
+	top:200px;
+	folat: right;
+	width : 50%;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-bottom: 2px solid #2E404E;
+}
 
-
+.listWriteInput{
+	padding-top:10px;
+	width: 700px;
+	height: 40px;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	color: #333;
+	font-size: 15px;	
+}
+.listWriteInput:hover {
+	box-shadow: 2px 2px 2px #555;
+	background-color: #ddd;
+}
+.newsBox{
+	border:1px solid #666666;
+}
+.textBox{
+	border:none;
+	box-shadow: 0 0 5px #666666;
+}
+.writhingPageBtn{
+		font-size: 15px; padding:10px 10px;
+		border-radius:5px;
+		transition-duration: 0.4s;
+		background-color:#2E404E;
+		color:white;
+}
