@@ -47,7 +47,7 @@ body {
 }
 
 nav {
-	 width: 700px;
+	 width: 800px;
 	 float: right;
 	 line-height:100px;
 
@@ -58,7 +58,6 @@ nav a {
 	font-family: poppins;
 	letter-spacing: 4px;
 	font-size:10px;
-	margin: 0 3px;
 	color: #fff;
 }
 
@@ -86,12 +85,18 @@ nav a {
 }
 
 .basic_contentzone{
-    padding-top: 20px;
+    padding-top: 15px;
     position: relative;
     width: 100%;
 	height: 500px;
 	top:100px;
 }
+.home_contentzone{
+    position: relative;
+    width: 100%;
+	top:100px;
+}
+
 .index_content-area{
 	width: 100%;
 	height: 600px;
@@ -167,7 +172,7 @@ a {
 #newsContents {
 	position : relative;
 	top:200px;
-	folat: right;
+	float: right;
 	width : 50%;
 	margin: auto;
 	padding-left: 25px;

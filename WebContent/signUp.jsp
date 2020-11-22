@@ -41,7 +41,6 @@
 						<option value="8">과학</option>
 					</select>
 					
-					
 				  <input type="submit" value="가입하기"/>
 				  
 					</p>
