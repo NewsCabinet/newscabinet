@@ -58,7 +58,7 @@ public class ManageRecord {
 	}
 	
 	public static ResultSet searchFolderNameById(Connection conn, String userId) {
-		String query = "SELECT (folder_name, folder_id) FROM newscabinet.user_record_folder WHERE user_id=" + "'" + userId + "'";
+		String query = "SELECT folder_name, folder_id FROM newscabinet.user_record_folder WHERE user_id=" + "'" + userId + "'";
 		Statement st;
 		
 		try {

@@ -22,6 +22,7 @@ public class WriteRecrod extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
 		/*
 		NewsData[] nd = (NewsData[]) sc.getAttribute("newsdata");		
 		int location = Integer.parseInt((String)request.getParameter("location"));
@@ -37,6 +38,7 @@ public class WriteRecrod extends HttpServlet {
 		}*/
 		
 	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
