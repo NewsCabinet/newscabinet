@@ -30,7 +30,7 @@ public class ManageUser {
 		//member table = (id, pw, email, category)
 		try {
 				
-			//conn.setAutoCommit(false);
+			conn.setAutoCommit(false);
 			
 			try {
 				String query = "INSERT INTO newscabinet.user (user_id, user_pw, user_name, user_email, category_id, user_age) VALUES(?, ?, ?, ?, ?, ?)";
@@ -38,7 +38,7 @@ public class ManageUser {
 			
 			}catch(Exception e) {
 				e.printStackTrace();
-				System.out.println("conn ë¬¸ì œ");
+				System.out.println("conn ¹®Á¦");
 			}
 			
 			pstmt.setString(1, userid);
@@ -51,7 +51,7 @@ public class ManageUser {
 			
 			result = pstmt.executeUpdate();
 			conn.commit();
-			//conn.setAutoCommit(true);
+			conn.setAutoCommit(true);
 			
 			return result;
 				
@@ -130,7 +130,7 @@ public class ManageUser {
 	}
 	
 	
-public static String searchUserPasswdByIDAndEmail(Connection conn, String userId, String userEmail) {
+	public static String searchUserPasswdByIDAndEmail(Connection conn, String userId, String userEmail) {
 		
 		String query = "SELECT user_pw FROM newscabinet.user WHERE user_email =" + "'" + userEmail + "' AND user_id='" +userId+ "'"; 
 		Statement st;
@@ -154,4 +154,64 @@ public static String searchUserPasswdByIDAndEmail(Connection conn, String userId
 	}
 
 	
+	public static int insertFirstUserFolderByID(Connection conn, String userId) {
+		
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO newscabinet.user_record_folder (user_id, folder_name) VALUES(?, ?)";
+		
+		try {
+			
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, "default");
+			
+			result = pstmt.executeUpdate();
+			conn.commit();
+			conn.setAutoCommit(true);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
+	
+	public static int insertFirstUserCustomCategoryByID(Connection conn, String userId, int category) {
+		
+			int result = -1;
+			PreparedStatement pstmt = null;
+			
+			String query = "INSERT INTO newscabinet.custom_category (user_id, category_id, custom_category_name) VALUES(?, ?, ?)";
+			
+			try {
+				
+				conn.setAutoCommit(false);
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, userId);
+				pstmt.setInt(2, category);
+				pstmt.setString(3, "ì „ì²´");
+				
+				result = pstmt.executeUpdate();
+				conn.commit();
+				conn.setAutoCommit(true);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return result;
+			
+	}
+	
+	
+		
+
 }

@@ -3,7 +3,11 @@
     
 <!DOCTYPE html>
 <%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
+<<<<<<< HEAD
 <html>
+=======
+<html lang="en">
+>>>>>>> main
 <head>
 <meta charset="UTF-8">
 <link href="style.css" rel="stylesheet">

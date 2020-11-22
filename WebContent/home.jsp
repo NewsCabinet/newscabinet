@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
@@ -35,5 +36,23 @@
 		</div>
 	</div>
 	<div class="content-area">여기서 div하나 만들어서 작업하면 됨.</div>
+=======
+<link href="style.css" rel="stylesheet">
+<title>Home</title>
+</head>
+<jsp:include page="newsHeader.html"/>
+<body>
+	<p class="newsType"> NewsCabinet이란? </p>
+	<div class="content-area">
+		<div class="wrapper">
+			<p>
+				<%	request.setCharacterEncoding("UTF-8");
+					int signInCheck = (Integer) request.getAttribute("SignInCheck");
+					HttpSession userSession = request.getSession(false);
+				%>
+			</p>
+		</div>
+	</div>
+>>>>>>> main
 </body>
 </html>
