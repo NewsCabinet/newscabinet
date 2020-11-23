@@ -3,15 +3,13 @@
     
 <!DOCTYPE html>
 <%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
-<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<link href="css/style.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 <title>Home</title>
 </head>
-<jsp:include page="newsHeader.html" />
 <body>
-	
 		<div class="content-area">
 			<div class="wrapper">
 				<form method="post" action="SignUp">
@@ -43,13 +41,11 @@
 						<option value="8">과학</option>
 					</select>
 					
-					
 				  <input type="submit" value="가입하기"/>
 				  
 					</p>
 				</form>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

@@ -85,6 +85,7 @@ public class SettingUserRecord extends HttpServlet {
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("../Record/user/writingPage.jsp");
+		//RequestDispatcher view = request.getRequestDispatcher("../../../writingPage.jsp");
 		view.forward(request, response);
 
 		//request.setAttribute("newsId", 1);	
