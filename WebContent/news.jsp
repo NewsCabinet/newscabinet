@@ -7,7 +7,11 @@
 <meta charset="UTF-8">
 <title>뉴스 보기</title>
 <link href="../style.css" rel="stylesheet">
-
+<style>
+body{
+	text-align: left;
+}
+</style>
 </head>
 <body>
 	<div class="box-area">
@@ -65,7 +69,7 @@
             String tmpForScrap = "location.href='../scrap/main?location=" + i + "'";
             String tmpForRecord = "location.href='../UserRecord/setting?location=" + i + "&" + "subid="+ subCategoryId + "'";
             //String tmpForRecord = "location.href='../UserRecord/setting?location=" + i + "'";
-            out.println(i + " <button name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");
+            out.println((i+1) + " <button name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");
             out.println(" <button name='record' onclick=" + tmpForRecord + "> 기록 작성하기 </button>");
             request.setAttribute("SelectednewsCategory", subCategory);
             System.out.println("now =" +  subCategory);
@@ -73,7 +77,6 @@
             out.println(nd[i].getHeadline());
             out.println("</i></b><br/><p class='newsDescription'>");
 			out.println("<br>"); 
-			out.println("<hr>");
 			out.println(nd[i].getDescription());
             out.println("</p><a class='newsDescription' href='");
             out.println(nd[i].getUrl());
@@ -81,7 +84,7 @@
             out.println(nd[i].getUrl());
             out.println("</a><br/><p class='newsDescription'>");
             out.println(nd[i].getPubDate());
-            out.println("</p></div>");
+            out.println("</p><br></div>");
          }
       %>
 		</section>
