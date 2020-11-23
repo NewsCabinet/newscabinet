@@ -56,6 +56,8 @@ public class ScrapNews extends HttpServlet {
 		
 		NewsData[] nd = (NewsData[]) sc.getAttribute("newsdata");
 		int location = Integer.parseInt((String)request.getParameter("location"));
+		int subcategory;
+		
 		
 		try {
 			String newsUrl = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);

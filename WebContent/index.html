@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link href="style.css" rel="stylesheet">
+<link href="./style.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <title>Home</title>
@@ -22,31 +22,30 @@
 			<b class="title">Own your mind!</b>
 		</h2>
 		<script>
-			$(function(){
-				$(".title").fadeIn(2000);
-			});
-			</script>
+         $(function(){
+            $(".title").fadeIn(2000);
+         });
+         </script>
 	</div>
 	<div class="index_content-area">
 		<div class="index_wrapper">
-			<div class="login"><h2>Login</h2>
-			<div>
-				<form method="post" action="SignIn">
-					<input class="enterId" type="text" name="userid" placeholder="아이디를 입력해주세요." required /><br />
-				    <input class="enterId" type="password" name="passwd" required
-				    placeholder="비밀번호를 입력해주세요." /><br />
-					<input class="enterId" type="submit" value="login" /> <br /> 
-				</form>
-			</div> 
-			<div>
-			<a href="Sign/findId.jsp">아이디 찾기</a>
-			 <a href="Sign/findPasswd.jsp">비밀번호 찾기</a>
-			<a href="signUp.jsp"> JOIN HERE </a> <br />
-           </div>
-		</div>
+			<div class="login">
+				<h2>Login</h2>
+				<div>
+					<form method="post" action="SignIn">
+						<input class="enterId" type="text" name="userid"
+							placeholder="아이디를 입력해주세요." required /><br /> <input
+							class="enterId" type="password" name="passwd" required
+							placeholder="비밀번호를 입력해주세요." /><br /> <input class="enterId"
+							type="submit" value="login" /> <br />
+					</form>
+				</div>
+				<div>
+					<a href="Sign/findId.jsp">아이디 찾기</a> <a href="Sign/findPasswd.jsp">비밀번호
+						찾기</a> <a href="signUp.jsp"> JOIN HERE </a> <br />
+				</div>
+			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>
