@@ -3,7 +3,7 @@
     
 <!DOCTYPE html>
 <%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
-<html>
+
 <head>
 <meta charset="UTF-8">
 <link href="style.css" rel="stylesheet">
@@ -40,7 +40,6 @@
 						<option value="7">IT</option>
 						<option value="8">과학</option>
 					</select>
-					
 					
 				  <input type="submit" value="가입하기"/>
 				  

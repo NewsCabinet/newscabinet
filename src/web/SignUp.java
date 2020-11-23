@@ -1,3 +1,4 @@
+  
 package web;
 
 
@@ -36,27 +37,43 @@ public class SignUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
+		String userId = request.getParameter("userid");
+		String categoryStr[] = request.getParameterValues("category");
+		int category = 0;
+	
+		for(String str : categoryStr) {
+			category = Integer.parseInt(str);
+		}
+		
+		System.out.println(userId + category);
+		
+		
+		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		if(conn == null) {
 			System.out.println("conn is nul");
 		}
 		
-		int result = ManageUser.insertUser(conn, request);
 		
-		//아이디 중복 확인 코드 작성
-
-
-		//user 정보 DB에 넣기
+		int result = ManageUser.insertUser(conn, request);
 		
 		try {
 			if (result != -1) {
 				System.out.println("입력 성공");
-				RequestDispatcher view = request.getRequestDispatcher("index.html");
-				view.forward(request, response);
+				
+				int folder = ManageUser.insertFirstUserFolderByID(conn, userId);
+				int custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userId, category);
+				
+				if(folder != -1 && custom != -1) {
+					System.out.println("folder, custom table 입력 성공");
+					RequestDispatcher view = request.getRequestDispatcher("index.html");
+					view.forward(request, response);
+					
+				}
 			}
-			
 		}catch(Exception e){
 			
 		}
@@ -64,9 +81,7 @@ public class SignUp extends HttpServlet {
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -15,15 +15,17 @@
 body {
 	text-align: center;
 }
-.index_wrapper{
+
+.index_wrapper {
 	width: 1170px;
 	margin: 0 auto;
 }
+
 .wrapper {
 	width: 1170px;
 	margin: 0 auto;
 }
- 
+
 .head {
 	height: 100px;
 	background: #2E404E;
@@ -33,7 +35,7 @@ body {
 }
 
 .logo {
-	width:30%;
+	width: 30%;
 	float: left;
 	line-height: 100px;
 }
@@ -47,17 +49,16 @@ body {
 }
 
 nav {
-	 width: 700px;
-	 float: right;
-	 line-height:100px;
-
+	width: 600px;
+	float: right;
+	line-height: 100px;
 }
+
 nav a {
 	text-decoration: none;
-    margin-right: 50px;
 	font-family: poppins;
 	letter-spacing: 4px;
-	font-size:10px;
+	font-size: 20px;
 	margin: 0 3px;
 	color: #fff;
 }
@@ -73,7 +74,6 @@ nav a {
 	background-position: center center;
 }
 
-
 .banner-area h2 {
 	padding-top: 8%;
 	font-size: 90px;
@@ -85,25 +85,27 @@ nav a {
 	display: none;
 }
 
-.basic_contentzone{
-    padding-top: 20px;
-    position: relative;
-    width: 100%;
+.basic_contentzone {
+	padding-top: 20px;
+	position: relative;
+	width: 100%;
 	height: 500px;
-	top:100px;
+	top: 100px;
 }
-.index_content-area{
+
+.index_content-area {
 	width: 100%;
 	height: 600px;
 	position: relative;
-    background-color:#C7C7C7;
+	background-color: #C7C7C7;
 	top: 450px;
 }
+
 .content-area {
 	width: 100%;
 	height: 600px;
 	position: relative;
-    background-color: white;
+	background-color: white;
 	top: 450px;
 }
 
@@ -122,10 +124,10 @@ nav a {
 
 .login {
 	margin: auto;
-	padding:8%;
+	padding: 8%;
 	width: 680px;
 	height: 400px;
-	font-size: 30px;
+	font-size: 20px;
 	box-shadow: 0 0 20px #666666;
 }
 
@@ -164,42 +166,63 @@ a {
 	font-family: bold;
 	color: black;
 }
+
 #newsContents {
-	position : relative;
-	top:200px;
+	position: relative;
+	top: 200px;
 	folat: right;
-	width : 50%;
+	width: 50%;
 	margin: auto;
 	padding-left: 25px;
 	padding-right: 25px;
 	border-bottom: 2px solid #2E404E;
 }
 
-.listWriteInput{
-	padding-top:10px;
+.listWriteInput {
+	padding-top: 10px;
 	width: 700px;
 	height: 40px;
 	border: none;
 	outline: none;
 	box-sizing: border-box;
 	color: #333;
-	font-size: 15px;	
+	font-size: 15px;
 }
+
 .listWriteInput:hover {
 	box-shadow: 2px 2px 2px #555;
 	background-color: #ddd;
 }
-.newsBox{
-	border:1px solid #666666;
+
+.newsBox {
+	width: 60%;
+	height: 350px;
+	border: 1px solid #666666;
 }
-.textBox{
-	border:none;
+
+.textBox {
+	width: 60%;
+	height: 400px;
+	/*cols:"110";
+	rows:"30";*/
+	border: none;
 	box-shadow: 0 0 5px #666666;
 }
-.writhingPageBtn{
-		font-size: 15px; padding:10px 10px;
-		border-radius:5px;
-		transition-duration: 0.4s;
-		background-color:#2E404E;
-		color:white;
+
+.writhingPageBtn {
+	font-size: 15px;
+	padding: 10px 10px;
+	border-radius: 5px;
+	transition-duration: 0.4s;
+	background-color: #2E404E;
+	color: white;
+}
+
+.push_button_Stoore {
+	border: 1px solid #2E404E;
+	background-color: #2E404E;
+	color: white;
+	font-size: 15px;
+	border-radius:3px;
+	padding: 15px 15px;
 }
