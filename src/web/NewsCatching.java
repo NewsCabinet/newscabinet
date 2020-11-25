@@ -60,9 +60,9 @@ public class NewsCatching extends HttpServlet {
 			System.out.println("DBconnection is null");
 		}
 		HttpSession userSession = request.getSession(false);
-		int userCategoryId = (int) userSession.getAttribute("userCategory");
+		int userCategoryId = (int) userSession.getAttribute("userCategoryId");
 		
-		int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
+		//int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
 		
 		try {
 			ResultSet tmp = ManageCategory.searchCategoryNameById(conn, userCategoryId);
@@ -78,7 +78,7 @@ public class NewsCatching extends HttpServlet {
 				}
 			}
 			
-			ResultSet rs = ManageCategory.searchSubCategoryName(conn, userCategoryId);
+			/*ResultSet rs = ManageCategory.searchSubCategoryName(conn, userCategoryId);
 			SubcategoryData[] subcateData = new SubcategoryData[size];
 			if(rs!= null) {
 				int count = 0;
@@ -91,14 +91,15 @@ public class NewsCatching extends HttpServlet {
 					}
 				}
 				
-			}
+			}*/
 			request.setAttribute("userCategoryName", userCategoryName);
-			request.setAttribute("subcateData", subcateData); // 화면에 보여줄 subCategoryData
+			//request.setAttribute("subcateData", subcateData); // 화면에 보여줄 subCategoryData
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		SubcategoryData[] subcateData = (SubcategoryData[]) sc.getAttribute("subcateData");
+		request.setAttribute("subcateData", subcateData);
 		String subCategory = request.getParameter("subCategory"); // keyword로 사용할 subCategory
 		if(subCategory == null) {subCategory = (String) request.getAttribute("userCategoryName");}
 		request.setAttribute("subCategory", subCategory);
