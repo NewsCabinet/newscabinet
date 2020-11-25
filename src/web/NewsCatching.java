@@ -108,13 +108,15 @@ public class NewsCatching extends HttpServlet {
 			}
 		}
 		
-		List tmp = new ArrayList();
+		List tmp = new ArrayList<String>();
 		try {
 			ResultSet customCategoryArray = ManageCategory.searchCustomcategoryNameByUser(conn, userId, userCategoryId);	
 			if(customCategoryArray!=null) {
 				while(true) {
 					if(customCategoryArray.next()) {
-						tmp.add(customCategoryArray.getInt(1));
+						tmp.add(customCategoryArray.getString(1));
+					}else {
+						break;
 					}
 				}
 			}
@@ -122,7 +124,7 @@ public class NewsCatching extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(tmp);
 		request.setAttribute("customCategories", tmp);
 		
 		

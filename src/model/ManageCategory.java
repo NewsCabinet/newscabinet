@@ -153,6 +153,31 @@ public class ManageCategory {
 	}
 	
 	public static void insertCustomcategory(Connection conn, int userId, String customCategoryName, int categoryId) {
+		
+		if(searchCustomcategoryNameByUser(conn, userId, categoryId) != null) {
+			ResultSet tmp = searchCustomcategoryNameByUser(conn, userId, categoryId);
+			if(tmp!=null) {
+				while(true) {
+					try {
+						if(tmp.next()) {
+							if(tmp.getString(1).equals(customCategoryName))
+								return;
+						}else {
+							break;
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
+				}
+			}
+		}
+		String tmp = customCategoryName.trim();
+		if(tmp.length() == 0) {
+			return;
+		}
+		
 		String query = "INSERT INTO newscabinet.custom_category (user_id, custom_category_name, category_id) VALUES(?, ?, ?)";
 		
 		try {

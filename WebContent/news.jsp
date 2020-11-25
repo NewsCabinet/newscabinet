@@ -48,12 +48,13 @@ body{
 	               }
 	               out.println("<br/>");
 	               
-	               String[] customCategories = (String[]) request.getAttribute("customCategories");
+	               List customCategories = (ArrayList) request.getAttribute("customCategories");
 	               if(customCategories != null){
-	            	   for(int i = 0; i< customCategories.length; i++){
-	            			System.out.println(customCategories[i]);
-	            			out.println("내가 만든 카테고리 : " + customCategories[i]);
-	            			out.println("<input type='radio' name='customCategory' value='" + customCategories[i] + "'>");   
+	            	   out.println("내가 만든 카테고리 : ");
+	            	   for(int i = 0; i< customCategories.size(); i++){
+	            			//System.out.println(customCategories[i]);
+	            			out.println(customCategories.get(i));
+	            			out.println("<input type='radio' name='customCategory' value='" + customCategories.get(i) + "'>");   
 	            	   }
 	               }
 				%>
