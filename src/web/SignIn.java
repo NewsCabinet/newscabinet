@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ManageCategory;
 import model.ManageUser;
+import model.SubcategoryData;
 
 /**
  * Servlet implementation class DoLogin
@@ -77,6 +80,31 @@ public class SignIn extends HttpServlet {
 							session.setAttribute("userCategoryId", userCategory);
 							session.setAttribute("userName", userName);
 						}
+						
+						// insert subcategory data into the servlet context
+						int userCategoryId = (int) session.getAttribute("userCategoryId");
+						int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
+						
+						try {
+							ResultSet resultSet = ManageCategory.searchSubCategoryName(conn, userCategoryId);
+							SubcategoryData[] subcateData = new SubcategoryData[size];
+							if(resultSet!= null) {
+								int count = 0;
+								while(true) {
+									if(resultSet.next()) {
+										subcateData[count++] = new SubcategoryData(resultSet.getInt(1),resultSet.getString(2));
+									}else {
+										break;
+									}
+								}
+								
+							}
+							sc.setAttribute("subcateData", subcateData); // 화면에 보여줄 subCategoryData
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						
 						out.print("<script>alert('로그인 성공! 환영합니다'); location.href='home.jsp'; </script>\r\n");
 						//RequestDispatcher view = request.getRequestDispatcher("/home.jsp");
