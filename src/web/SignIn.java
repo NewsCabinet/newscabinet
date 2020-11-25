@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ManageCategory;
 import model.ManageUser;
+import model.SubcategoryData;
 
 /**
  * Servlet implementation class DoLogin
@@ -59,7 +62,7 @@ public class SignIn extends HttpServlet {
 			try {
 				if (rs.next()) {  // 해당 아이디가 있음
 					String checkpw = rs.getString(4);
-					if(userPW.equals(checkpw)) { //로그인 성공
+					if (userPW.equals(checkpw)) { // 로그인 성공
 						check = 1;
 						System.out.println("로그인 성공");
 						session = request.getSession();
@@ -69,7 +72,7 @@ public class SignIn extends HttpServlet {
 						session.setAttribute("userId", userID);
 						session.setAttribute("userCategory", userCategory);
 						session.setAttribute("userName", userName);
-						if(session.isNew()) {
+						if (session.isNew()) {
 							System.out.println("------session 생성됨");
 							userCategory = rs.getInt(2);
 							userName = rs.getString(3);
@@ -78,8 +81,34 @@ public class SignIn extends HttpServlet {
 							session.setAttribute("userCategory", userCategory);
 							session.setAttribute("userName", userName);
 						}
-						
+
 						request.setAttribute("SignInCheck", check);
+
+						// setting the subcategory data in servlet context
+						int userCategoryId = (int) session.getAttribute("userCategory");
+						int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
+
+						try {
+							ResultSet resultSet = ManageCategory.searchSubCategoryName(conn, userCategoryId);
+							SubcategoryData[] subcateData = new SubcategoryData[size];
+							if (resultSet != null) {
+								int count = 0;
+								while (true) {
+									if (resultSet.next()) {
+										subcateData[count++] = new SubcategoryData(resultSet.getInt(1),
+												resultSet.getString(2));
+										// System.out.println(rs.getString(2));
+									} else {
+										break;
+									}
+								}
+
+							}
+							sc.setAttribute("subcateData", subcateData); // 화면에 보여줄 subCategoryData
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						RequestDispatcher view = request.getRequestDispatcher("/home.jsp");
 						view.forward(request, response);
 					}
