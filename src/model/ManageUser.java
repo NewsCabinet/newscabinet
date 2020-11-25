@@ -106,6 +106,27 @@ public class ManageUser {
 		return null;
 	}
 	
+	public static int serachUserIDForCheck(Connection conn, String userId) {
+		
+		String query = "SELECT user_id FROM newscabinet.user WHERE user_id='" + userId + "'";
+		Statement st;
+		ResultSet rs;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {//email로 검색되는 값이 있음
+					return 1;
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+		
+	}
+	
 	public static String searchUserIDByEmail(Connection conn, String userEmail) {
 		
 		String query = "SELECT user_id FROM newscabinet.user WHERE user_email =" + "'" + userEmail + "'" ; 

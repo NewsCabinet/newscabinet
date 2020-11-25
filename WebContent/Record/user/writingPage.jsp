@@ -14,7 +14,7 @@
 	<div class="content-area">
 		<div class="wrapper">
 		<p> </p>
-			<form method = "post" action="../../UserRecord/restore">
+			<form method = "post" action="/NewsCabinet/UserRecord/restore">
 				<h2>기록 작성하기</h2>
 				<h3> 제목 &nbsp; <input type="text" name="recordTitle"></h3> <br>
 				<%
@@ -26,12 +26,13 @@
 				
 				%>
 
-				<h3>날짜  <%=todayDate %> </h3><br>
+.3+6-                                                    
+				<h3 name="recordDate"> <%=todayDate %> </h3><br>
 				<h3> 카테고리 <%= newsSubcategory %>  </h3><br>
 				<h3> 폴더  
 					<%
 						if(userFolder != null){
-							out.println("<select name='userFolder' size='2'>");
+							out.println("<select name='userFolder' size='1'>");
 							while(userFolder.next()){
 								String folderName = userFolder.getString(1);
 								out.print("<option value='" + folderName + "'>" + folderName+ "</option>");
@@ -41,7 +42,7 @@
 							out.print("Folder가 로딩되지 않음");
 						}
 				
-				request.setAttribute("recordDate", todayDate);
+				request.setAttribute("recordWritingDate", todayDate);
 				request.setAttribute("newsSubcategoryID", newsSubcategoryId);
 				request.setAttribute("newsUrl",newsUrl);
 					%>
@@ -60,11 +61,11 @@
 					style="width: 90%; height: 300px; margin: auto"> </iframe>
 				<br>
 				<br>
-				<textarea name="recordComment" cols="110" rows="30">뉴스 url을 카테고리 처럼 선택할 수 있게 할까??</textarea>
+				<textarea name="recordComment" cols="110" rows="30"></textarea>
 				<br>
 				<br>
 				
-				<button type="button">저장하기</button>
+				<button type="submit">저장하기</button>
 			</form>
 			<br><br>
          </div>

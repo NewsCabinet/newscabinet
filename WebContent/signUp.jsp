@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet">
 <title>Home</title>
+<script method="post" action="Sign/checkId.html">
+		function idCheck(){
+		//아이디 중복 확인 창띄우기
+		window.open("Sign/checkId.html", "아이디 확인", "width=400 height=350")
+		}
+</script>
 </head>
 <jsp:include page="newsHeader.html" />
 <body>
@@ -16,12 +22,7 @@
 			<div class="wrapper">
 				<form method="post" action="SignUp">
 					<p width="50%" text-align="left">
-					<script method="post" action="checkID">
-						function idCheck(){
-							//아이디 중복 확인 창띄우기
-							window.open("checkID.jsp", "아이디 확인", "width=400 height=350")
-						}
-					</script>
+					
 					
 					아이디 : <input type="text" name="userid" required> 
 					<input type="button" name="checkID" value="아이디 중복 체크" onclick="idCheck()" >

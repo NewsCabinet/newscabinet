@@ -26,6 +26,16 @@
             $(".title").fadeIn(2000);
          });
          </script>
+    <script action="Sign/findId.html">
+		function findId(){
+			window.open("Sign/findId.html", "아이디찾기", "width=400 height=350")
+		}
+	</script> 
+	<script action="Sign/findPasswd.html">
+		function findPasswd(){
+			window.open("Sign/findPasswd.html", "비밀번호찾기", "width=400 height=350")
+		}
+	</script> 
    </div>
    <div class="index_content-area">
       <div class="index_wrapper">
@@ -39,8 +49,8 @@
             </form>
          </div> 
          <div>
-         <a href="Sign/findId.jsp">아이디 찾기</a>
-          <a href="Sign/findPasswd.jsp">비밀번호 찾기</a>
+         <a onclick='findId()'>아이디 찾기</a>
+          <a onclick='findPasswd()'>비밀번호 찾기</a>
          <a href="signUp.jsp"> JOIN HERE </a> <br />
            </div>
       </div>

@@ -30,6 +30,8 @@ public class WriteRecrod extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
 		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
@@ -42,7 +44,7 @@ public class WriteRecrod extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
 			view.forward(request, response);
 		}else {
-			out.print("<script>alert('저장에 실패하였습니다.'); location.href='../index.html'; </script>\r\n");
+			out.print("<script>alert('저장에 실패하였습니다.'); location.href='../home.jsp'; </script>\r\n");
 		}
 	}
 	
