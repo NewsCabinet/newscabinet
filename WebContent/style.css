@@ -1,69 +1,65 @@
-
-@font-face {
-	src: url(../fonts/RIDIBatang.otf);
-	font-family: RIDI;
+@font-face{
+  src: url(../fonts/RIDIBatang.otf);
+  font-family: RIDI;
 }
-
-* {
-	font-family: RIDI;
+*{
+  font-family: RIDI;
 }
-
 * {
 	margin: 0;
 	padding: 0;
 }
-
 body {
 	text-align: center;
 }
 
+/*
 .index_wrapper {
 	width: 1170px;
 	margin: 0 auto;
 }
+*/
 
 .wrapper {
 	width: 1170px;
 	margin: 0 auto;
 }
-
-.head {
+.head{
 	height: 100px;
-	background: #2E404E;
+	background:#2E404E;
 	width: 100%;
 	z-index: 10;
 	position: fixed;
 }
-
 .logo {
-	width: 30%;
+	width: 20%;
 	float: left;
 	line-height: 100px;
 }
-
 .logo a {
 	text-decoration: none;
 	font-size: 30px;
 	font-family: poppins;
-	color: #B0B0B0;
+	color: #fff;
 	letter-spacing: 5px;
 }
-
 nav {
-	width: 600px;
 	float: right;
 	line-height: 100px;
 }
-
 nav a {
 	text-decoration: none;
 	font-family: poppins;
 	letter-spacing: 4px;
-	font-size: 20px;
-	margin: 0 3px;
+	font-size: 15px;
+	margin: 0 10px;
 	color: #fff;
 }
-
+.headerA:hover{
+    color: #bbb;
+    font-weight: bolder;
+    text-decoration: underline;
+}
 .banner-area {
 	width: 100%;
 	height: 500px;
@@ -152,11 +148,13 @@ nav a {
 	font-size: 15px;
 }
 
-.enterId:hover {
+.enterId:visited {
 	box-shadow: 2px 2px 5px #555;
 	background-color: #ddd;
 }
-
+/*
+여기를 지정했을 때 header가 제대로 나오지 않기 때문에 수정해야 함. 
+이 부분 찾아서 class 나 id로 만들어서 작업하기 
 div a {
 	padding-top: 50px;
 	font-size: 15px;
@@ -167,11 +165,12 @@ a {
 	font-family: bold;
 	color: black;
 }
+*/
 
 #newsContents {
 	position: relative;
 	top: 200px;
-	folat: right;
+	float: right;
 	width: 50%;
 	margin: auto;
 	padding-left: 25px;

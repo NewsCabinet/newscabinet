@@ -32,14 +32,14 @@ import model.SubcategoryData;
 @WebServlet("/news/main")
 public class NewsCatching extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public NewsCatching() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public NewsCatching() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,21 +49,21 @@ public class NewsCatching extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml");
-		
+
 		ServletContext sc = getServletContext();
 		String url = (String) sc.getAttribute("NaverAPIUrl");
 		String clientId = (String) sc.getAttribute("X-Naver-Client-Id");
 		String clientPW = (String) sc.getAttribute("X-Naver-Client-Secret");
-		
+
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		if(conn == null) {
 			System.out.println("DBconnection is null");
 		}
 		HttpSession userSession = request.getSession(false);
-		int userCategoryId = (int) userSession.getAttribute("userCategory");
-		
+		int userCategoryId = (int) userSession.getAttribute("userCategoryId");
+
 		int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
-		
+
 		try {
 			ResultSet tmp = ManageCategory.searchCategoryNameById(conn, userCategoryId);
 			String userCategoryName = null;;
@@ -77,7 +77,7 @@ public class NewsCatching extends HttpServlet {
 					}
 				}
 			}
-			
+
 			ResultSet rs = ManageCategory.searchSubCategoryName(conn, userCategoryId);
 			SubcategoryData[] subcateData = new SubcategoryData[size];
 			if(rs!= null) {
@@ -90,7 +90,7 @@ public class NewsCatching extends HttpServlet {
 						break;
 					}
 				}
-				
+
 			}
 			request.setAttribute("userCategoryName", userCategoryName);
 			request.setAttribute("subcateData", subcateData); // 화면에 보여줄 subCategoryData
@@ -102,11 +102,11 @@ public class NewsCatching extends HttpServlet {
 		String subCategory = request.getParameter("subCategory"); // keyword로 사용할 subCategory
 		if(subCategory == null) {subCategory = (String) request.getAttribute("userCategoryName");}
 		request.setAttribute("subCategory", subCategory);
-		
+
 		String newsType = request.getParameter("newsType");
 		if(newsType == null) {newsType = "sim";}
 		request.setAttribute("newsType", newsType);
-		
+
 		HandlingNews gn = new HandlingNews();
 		NewsData[] newsdata = gn.getNewsFromOpenAPI(url, clientId, clientPW, subCategory, newsType);
 		request.setAttribute("newsdata", newsdata);
