@@ -33,21 +33,39 @@ body{
 			<form method="post" action="../news/main">
 				<% int subCategoryId = -1; %>
 				<%
-               SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
-               String subCategory = (String) request.getAttribute("subCategory");
-               
-               out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
-               for(int i = 0; i < subcateData.length; i++){
-                  out.println(subcateData[i].getSubcategoryName());
-                  if(subcateData[i].getSubcategoryName().equals(subCategory)){
-                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked>");
-                     subCategoryId = subcateData[i].getSubcategoryId();
-                  }else{
-                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'>");
-                  }
-               }
-               out.println("<br/>");
-
+	               SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
+	               String subCategory = (String) request.getAttribute("subCategory");
+	               
+	               out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
+	               for(int i = 0; i < subcateData.length; i++){
+	                  out.println(subcateData[i].getSubcategoryName());
+	                  if(subcateData[i].getSubcategoryName().equals(subCategory)){
+	                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked>");
+	                     subCategoryId = subcateData[i].getSubcategoryId();
+	                  }else{
+	                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'>");
+	                  }
+	               }
+	               out.println("<br/>");
+	               
+	               String[] customCategories = (String[]) request.getAttribute("customCategories");
+	               if(customCategories != null){
+	            	   for(int i = 0; i< customCategories.length; i++){
+	            			System.out.println(customCategories[i]);
+	            			out.println("내가 만든 카테고리 : " + customCategories[i]);
+	            			out.println("<input type='radio' name='customCategory' value='" + customCategories[i] + "'>");   
+	            	   }
+	               }
+				%>
+				<script type="text/javascript">
+					function add_textbox() {
+						document.getElementById("addCustomCategories").innerHTML += "<input type='text' name='customCategories' >";
+					}
+				</script>
+				<div id="addCustomCategories">
+	               <input type="button" value="나만의 키워드 추가" onclick="add_textbox()"> <br>
+	            </div>
+               <%
                String newsType = (String) request.getAttribute("newsType");
                if (newsType.toString().equals("sim")) {
                   out.println(

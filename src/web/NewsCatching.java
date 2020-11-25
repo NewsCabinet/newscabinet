@@ -99,6 +99,33 @@ public class NewsCatching extends HttpServlet {
 		request.setAttribute("newsdata", newsdata);
 		sc.setAttribute("newsdata", newsdata);
 		
+		String[] customCategories = request.getParameterValues("customCategories");
+		
+		if(customCategories != null) {
+			//System.out.println(customCategories[0]);
+			for(int i = 0; i < customCategories.length; i++) {
+				ManageCategory.insertCustomcategory(conn,userId,customCategories[i],userCategoryId);
+			}
+		}
+		
+		List tmp = new ArrayList();
+		try {
+			ResultSet customCategoryArray = ManageCategory.searchCustomcategoryNameByUser(conn, userId, userCategoryId);	
+			if(customCategoryArray!=null) {
+				while(true) {
+					if(customCategoryArray.next()) {
+						tmp.add(customCategoryArray.getInt(1));
+					}
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("customCategories", tmp);
+		
+		
 		try {
 			
 			ResultSet scrappedNews = ManageScrapNews.searchAllScrapNewsByUserId(conn, userId);
@@ -109,7 +136,7 @@ public class NewsCatching extends HttpServlet {
 						for(int i = 0; i< newsdata.length; i++) {
 							if(newsdata[i].getUrl().equals(scrappedNews.getString(6))) {
 								scrappedNewsId.add(i);
-								System.out.println("scrapped : " + i + " " + newsdata[i].getUrl());
+								//System.out.println("scrapped : " + i + " " + newsdata[i].getUrl());
 							}
 						}
 					}else {
@@ -117,7 +144,7 @@ public class NewsCatching extends HttpServlet {
 					}
 				}
 			}
-			System.out.println(scrappedNewsId);
+			//System.out.println(scrappedNewsId);
 			
 			request.setAttribute("scrappedNewsId", scrappedNewsId);
 		} catch (SQLException e) {
