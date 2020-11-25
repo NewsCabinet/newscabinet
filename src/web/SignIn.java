@@ -63,12 +63,12 @@ public class SignIn extends HttpServlet {
 					userIdinDB = rs.getInt(2);
 					userCategory = rs.getInt(3);
 					userName = rs.getString(4);
-					System.out.println("pw : "+ checkpw + " : "+userIdinDB + " : " +  userCategory+ " : " + userName);
+					//System.out.println("pw : "+ checkpw + " : "+userIdinDB + " : " +  userCategory+ " : " + userName);
 					if(userPW.equals(checkpw)) { //로그인 성공
 						System.out.println("로그인 성공");
 						session = request.getSession();
 						
-						System.out.println(userIdinDB + " : " +  userCategory+ " : " + userName);
+						//System.out.println(userIdinDB + " : " +  userCategory+ " : " + userName);
 						session.setAttribute("userId", userIdinDB);
 						session.setAttribute("userCategoryId", userCategory);
 						session.setAttribute("userName", userName);

@@ -66,12 +66,12 @@ public class ManageCategory {
 		return -1;
 	}
 	
-	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, String userid) {
+	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
 		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=?";
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setString(1, userid);
+			pstat.setInt(1, userid);
 			pstat.setString(2, "전체");
 			
 			rs = pstat.executeQuery();
