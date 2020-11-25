@@ -14,40 +14,51 @@ public class ManageUser {
 		int result = -1;
 		PreparedStatement pstmt = null;
 		
-		String userid = request.getParameter("userid");
-		String passwd = request.getParameter("passwd");
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String numberStr = request.getParameter("age");
+		String emailId = request.getParameter("userEmailId");
+		String passwd = request.getParameter("userPassword");
+		String name = request.getParameter("userName");
+		String phone = request.getParameter("userPhone");
+		String numberStr = request.getParameter("userAge");
+		String genderStr[] = request.getParameterValues("userGender");
 		String categoryStr[] = request.getParameterValues("category");
+		
+		boolean gender = true; // true - 여성
+		for(String str : genderStr) {
+			if(str.equals("true"))
+				gender = true;
+			else
+				gender = false;
+		}
+		
 		int category = 0;
-		int number = Integer.parseInt(numberStr);
+		int age = Integer.parseInt(numberStr);
 	
 		for(String str : categoryStr) {
 			category = Integer.parseInt(str);
 		}
 		
-		//member table = (id, pw, email, category)
+		
+		//member table = (emailId, pw, email, category)
 		try {
 				
 			conn.setAutoCommit(false);
 			
 			try {
-				String query = "INSERT INTO newscabinet.user (user_id, user_pw, user_name, user_email, category_id, user_age) VALUES(?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO newscabinet.user (user_email_id, user_pw, user_name, user_phone, user_age, user_gender, category_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
 				pstmt = conn.prepareStatement(query);
 			
 			}catch(Exception e) {
 				e.printStackTrace();
-				System.out.println("conn ����");
+				System.out.println("conn problem");
 			}
 			
-			pstmt.setString(1, userid);
+			pstmt.setString(1, emailId);
 			pstmt.setString(2, passwd);
 			pstmt.setNString(3, name);
-			pstmt.setString(4, email);
-			pstmt.setInt(5, category);
-			pstmt.setInt(6, number);
-			
+			pstmt.setString(4, phone);
+			pstmt.setInt(5, age);
+			pstmt.setBoolean(6, gender);
+			pstmt.setInt(7, category);
 			
 			result = pstmt.executeUpdate();
 			conn.commit();
@@ -67,6 +78,22 @@ public class ManageUser {
 	public static ResultSet searchUserByID(Connection conn, String userID) {
 	
 		String query = "SELECT * FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static ResultSet searchUserByEmailId(Connection conn, String userEmailId) {
+		
+		String query = "SELECT user_pw, user_id, category_id, user_name FROM newscabinet.user WHERE user_email_id ='" + userEmailId + "'" ; 
 		Statement st;
 		
 		try {
@@ -106,9 +133,9 @@ public class ManageUser {
 		return null;
 	}
 	
-	public static int serachUserIDForCheck(Connection conn, String userId) {
+	public static int serachUserEmailIdForCheck(Connection conn, String userEmailId) {
 		
-		String query = "SELECT user_id FROM newscabinet.user WHERE user_id='" + userId + "'";
+		String query = "SELECT user_id FROM newscabinet.user WHERE user_email_id='" + userEmailId + "'";
 		Statement st;
 		ResultSet rs;
 		
@@ -127,9 +154,11 @@ public class ManageUser {
 		
 	}
 	
-	public static String searchUserIDByEmail(Connection conn, String userEmail) {
+	
+	
+	public static int searchUserIDByEmail(Connection conn, String emailId) {
 		
-		String query = "SELECT user_id FROM newscabinet.user WHERE user_email =" + "'" + userEmail + "'" ; 
+		String query = "SELECT user_id FROM newscabinet.user WHERE user_email_id ='" + emailId + "'" ; 
 		Statement st;
 		ResultSet rs;
 		
@@ -138,9 +167,34 @@ public class ManageUser {
 			if(st.execute(query)) {
 				rs = st.getResultSet();
 				if(rs.next()) {//email로 검색되는 값이 있음
-					String userId = rs.getString(1);
-					if(!userId.isEmpty()) {
-						return userId;
+					int userIdinDB = rs.getInt(1);
+					if(userIdinDB != -1){
+						return userIdinDB;
+					}
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	
+	
+	public static String searchUserEmailIdIdByPhone(Connection conn, String phone) {
+		
+		String query = "SELECT user_email_id FROM newscabinet.user WHERE user_phone ='" + phone + "'" ; 
+		Statement st;
+		ResultSet rs;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {//email로 검색되는 값이 있음
+					String userEmailId = rs.getString(1);
+					if(userEmailId != null) {
+						return userEmailId;
 					}
 				}
 			}
@@ -151,9 +205,9 @@ public class ManageUser {
 	}
 	
 	
-	public static String searchUserPasswdByIDAndEmail(Connection conn, String userId, String userEmail) {
+	public static String searchUserPasswdByEmailIdAndPhone(Connection conn, String userEmailId, String phone) {
 		
-		String query = "SELECT user_pw FROM newscabinet.user WHERE user_email =" + "'" + userEmail + "' AND user_id='" +userId+ "'"; 
+		String query = "SELECT user_pw FROM newscabinet.user WHERE user_email_id =" + "'" + userEmailId + "' AND user_phone='" +phone+ "'"; 
 		Statement st;
 		ResultSet rs;
 		
@@ -175,7 +229,10 @@ public class ManageUser {
 	}
 
 	
-	public static int insertFirstUserFolderByID(Connection conn, String userId) {
+
+	
+	
+	public static int insertFirstUserFolderByID(Connection conn, int userId) {
 		
 		int result = -1;
 		PreparedStatement pstmt = null;
@@ -187,7 +244,7 @@ public class ManageUser {
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, userId);
+			pstmt.setInt(1, userId);
 			pstmt.setString(2, "default");
 			
 			result = pstmt.executeUpdate();
@@ -203,7 +260,7 @@ public class ManageUser {
 		
 	}
 	
-	public static int insertFirstUserCustomCategoryByID(Connection conn, String userId, int category) {
+	public static int insertFirstUserCustomCategoryByID(Connection conn, int userId, int category) {
 		
 			int result = -1;
 			PreparedStatement pstmt = null;
@@ -215,7 +272,7 @@ public class ManageUser {
 				conn.setAutoCommit(false);
 				pstmt = conn.prepareStatement(query);
 				
-				pstmt.setString(1, userId);
+				pstmt.setInt(1, userId);
 				pstmt.setInt(2, category);
 				pstmt.setString(3, "전체");
 				
