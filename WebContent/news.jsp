@@ -45,6 +45,9 @@ body{
 	                  }else{
 	                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'>");
 	                  }
+	                  if(i == 0){
+	                	  out.println("<br/>");
+	                  }
 	               }
 	               out.println("<br/>");
 	               
@@ -54,7 +57,11 @@ body{
 	            	   for(int i = 0; i< customCategories.size(); i++){
 	            			//System.out.println(customCategories[i]);
 	            			out.println(customCategories.get(i));
-	            			out.println("<input type='radio' name='customCategory' value='" + customCategories.get(i) + "'>");   
+	            			if(customCategories.get(i).equals(subCategory)){
+	            				out.println("<input type='radio' name='subCategory' value='" + customCategories.get(i) + "' checked>");
+	            			}else{
+	            				out.println("<input type='radio' name='subCategory' value='" + customCategories.get(i) + "'>");
+	            			}
 	            	   }
 	               }
 				%>
