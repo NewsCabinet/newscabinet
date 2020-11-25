@@ -11,12 +11,12 @@
 </script>
 </head>
 <body>
-	<%	String userInputId = (String)request.getParameter("checkId");
-		System.out.println("입력 아이디 = " + userInputId);
+	<%	String userInputEmailId = (String)request.getParameter("checkEmailId");
+		System.out.println("입력 아이디 = " + userInputEmailId);
 		
 		ServletContext sc = getServletContext();
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
-		int result = ManageUser.serachUserIDForCheck(conn, userInputId);
+		int result = ManageUser.serachUserEmailIdForCheck(conn, userInputEmailId);
 	
 		if(result != -1){%>
 			<p> 이미존재하는 아이디입니다.<br> 다른 아이디를 사용해주세요 </p>
@@ -25,7 +25,7 @@
 			</form>
 		<%}else {%>
 			<p> 사용가능한 아이디입니다.</p>
-			<input type="submit" value="확인" onclick=windowClosed()>
+			<input type="submit" value="확인" onclick="windowClosed()">
 		<% }%>
 </body>
 </html>

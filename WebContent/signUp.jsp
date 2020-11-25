@@ -21,15 +21,16 @@
 				<form method="post" action="SignUp">
 					<p width="50%" text-align="left">
 					
-					
-					아이디 : <input type="text" name="userid" required> 
+					이메일 : <input type="email" name="userEmailId" required> 
 					<input type="button" name="checkID" value="아이디 중복 체크" onclick="idCheck()" >
 					
 					<br/>
-        			비밀번호 : <input type="password" name="passwd" required><br/>
-        			이름 : <input type="text" name="name" required><br/>
-       			 	이메일 : <input type="email" name="email"><br/> 
-       			 	나이 : <input type="number" name="age"><br/>
+        			비밀번호 : <input type="text" name="userPassword" required><br/>
+        			이름 : <input type="text" name="userName" required><br/>
+       			 	핸드폰 번호 : <input type="tel" name="userPhone" placeholder="010-9999-9999" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"required><br>
+       			 	나이 : <input type="number" name="userAge" required><br/>
+       				성별 : 여성 <input type="radio" name="userGender" value="true" checked> 
+       					 | 남성  <input type="radio" name="userGender"  value="false"> <br>
        			 	관심 분야를 선택해주세요 <br/>
 					<select name="category" size="1">
 						<option value="1">정치</option>

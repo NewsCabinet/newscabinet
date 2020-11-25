@@ -15,15 +15,15 @@
 
 	<h3>비밀번호 찾기</h3>
 	<%
-		String userId = (String)request.getParameter("userIdForPw");
-		String userEmail = (String)request.getParameter("userEmailForPw");
+		String userEmailId = (String)request.getParameter("userEmailId");
+		String userPhone = (String)request.getParameter("userPhone");
 		
-		System.out.println("비밀번호 찾기 ID = " + userId);
-		System.out.println("비밀번호 찾기 Email = " + userEmail);
+		System.out.println("비밀번호 찾기 ID = " + userEmailId);
+		System.out.println("비밀번호 찾기 phone = " + userPhone);
 		
 		ServletContext sc = getServletContext();
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
-		String userPasswd = ManageUser.searchUserPasswdByIDAndEmail(conn, userId, userEmail);		
+		String userPasswd = ManageUser.searchUserPasswdByEmailIdAndPhone(conn, userEmailId, userPhone);		
 		
 		if (userPasswd == null) {
 		%>
