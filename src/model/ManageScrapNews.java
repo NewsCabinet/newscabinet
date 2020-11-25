@@ -49,31 +49,15 @@ public class ManageScrapNews {
 		
 	}
 	
-	public static int searchNewsIdByUserId(Connection conn, int userId) {
-		String query = "SELECT news_id FROM newscabinet.user_scrap_news WHERE user_id=?";
+	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {
+
+		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
+				+ "ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
+				+ "WHERE user_id=?";
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
 			pstat.setInt(1, userId);
-			rs = pstat.executeQuery();
-			if(rs.next()) {
-				//System.out.println(rs.getInt(1));
-				return rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	
-	public static ResultSet searchScrapNewsForUser(Connection conn, int newsId) {
-
-		String query = "SELECT * FROM newscabinet.scrap_news WHERE news_id=?";
-		ResultSet rs = null;
-		try {
-			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setInt(1, newsId);
 			rs = pstat.executeQuery();
 			return rs;
 		} catch (SQLException e) {
