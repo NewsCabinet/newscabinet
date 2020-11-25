@@ -8,7 +8,7 @@
 </head>
 <body>
 		<section>
-			<div id = 'newsContests'>
+			<div id ='newsContests'>
 				<p> 내가 스크랩한 뉴스 정보 </p>
 			</div>
 	</section>
