@@ -49,6 +49,24 @@ public class ManageScrapNews {
 		
 	}
 	
+	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {
+
+		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
+				+ "ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
+				+ "WHERE user_id=?";
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			rs = pstat.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public String insertScrapNewsData(Connection conn, int subcategoryId, NewsData newsData) throws SQLException {
 		//searchScrapNewsIdByURL(conn, newsData.getUrl()).next() == true || 
 		if (searchScrapNewsIdByURL(conn, newsData.getUrl()) != null) {
