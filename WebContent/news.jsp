@@ -89,5 +89,5 @@ body{
       %>
 		</section>
 	</div>
-	</body>
+</body>
 </html>

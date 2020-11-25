@@ -34,7 +34,7 @@ public class FindUserID extends HttpServlet{
 			request.setAttribute("userId", null);
 		
 		
-		request.getRequestDispatcher("/Sign/findIdAfter.jsp").forward(request, response);
+	//	request.getRequestDispatcher("/Sign/findIdAfter.jsp").forward(request, response);
 	//	RequestDispatcher view = request.getRequestDispatcher("/Sign/findIdAfter.jsp");
 	//	view.forward(request, response);
 		
