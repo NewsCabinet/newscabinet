@@ -39,16 +39,14 @@ public class SignUp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("userid");
+		String userEmailId = request.getParameter("userEmailId");
 		String categoryStr[] = request.getParameterValues("category");
 		int category = 0;
+		int userIdinDB = -1;
 	
 		for(String str : categoryStr) {
 			category = Integer.parseInt(str);
 		}
-		
-		System.out.println(userId + category);
-		
 		
 		
 		ServletContext sc = getServletContext();
@@ -59,13 +57,19 @@ public class SignUp extends HttpServlet {
 		
 		
 		int result = ManageUser.insertUser(conn, request);
+		int folder = -1;
+		int custom = -1;
 		
 		try {
 			if (result != -1) {
 				System.out.println("입력 성공");
+				userIdinDB = ManageUser.searchUserIDByEmail(conn, userEmailId);
+				System.out.println("userID = " + userIdinDB);
 				
-				int folder = ManageUser.insertFirstUserFolderByID(conn, userId);
-				int custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userId, category);
+				if(userIdinDB != -1) {
+					folder = ManageUser.insertFirstUserFolderByID(conn, userIdinDB);
+					custom = ManageUser.insertFirstUserCustomCategoryByID(conn, userIdinDB, category);
+				}
 				
 				if(folder != -1 && custom != -1) {
 					System.out.println("folder, custom table 입력 성공");
