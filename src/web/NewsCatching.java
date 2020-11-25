@@ -60,7 +60,7 @@ public class NewsCatching extends HttpServlet {
 			System.out.println("DBconnection is null");
 		}
 		HttpSession userSession = request.getSession(false);
-		int userCategoryId = (int) userSession.getAttribute("userCategory");
+		int userCategoryId = (int) userSession.getAttribute("userCategoryId");
 		
 		int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
 		
