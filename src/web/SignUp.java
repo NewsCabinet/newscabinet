@@ -54,10 +54,7 @@ public class SignUp extends HttpServlet {
 		
 		String todayDate = null;
 		ServletContext sc = getServletContext();
-		//날짜
-		Calendar cal = Calendar.getInstance();  
-		todayDate = cal.get(Calendar.YEAR)+"."+ (cal.get(Calendar.MONTH)+1) +"."+ cal.get(Calendar.DATE);
-		sc.setAttribute("todayDate", todayDate);
+		
 
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		if(conn == null) {

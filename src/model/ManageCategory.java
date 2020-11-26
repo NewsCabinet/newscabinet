@@ -88,8 +88,8 @@ public class ManageCategory {
 		}
 		return null;
 		
-		
 	}
+	
 	
 	
 	public static int searchSubcatogoryIdBySubcateogoryName(Connection conn, String subcategoryName) {

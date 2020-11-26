@@ -83,9 +83,9 @@ public class ManageRecord {
 			
 		return result;	
 	}
-	
-	public static ResultSet searchFolderNameByUserId(Connection conn, String userId) {
-		String query = "SELECT folder_name, folder_id FROM newscabinet.user_record_folder WHERE user_id=" + "'" + userId + "'";
+
+	public static ResultSet searchFolderByUserId(Connection conn, int userId) {
+		String query = "SELECT folder_id, folder_name FROM newscabinet.user_record_folder WHERE user_id=" + "'" + userId + "'";
 		Statement st;
 		
 		try {
@@ -99,7 +99,7 @@ public class ManageRecord {
 		return null;
 		
 	}
-	
+
 	
 	public static int searchFolderIdByFolderName(Connection conn, String userId, String folderName) {
 		int result = -1;

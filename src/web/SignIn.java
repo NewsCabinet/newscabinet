@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -53,6 +54,11 @@ public class SignIn extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
 		
+		//날짜
+		Calendar cal = Calendar.getInstance();  
+		String todayDate = cal.get(Calendar.YEAR)+"."+ (cal.get(Calendar.MONTH)+1) +"."+ cal.get(Calendar.DATE);
+		sc.setAttribute("todayDate", todayDate);
+
 		ResultSet rs = ManageUser.searchUserByEmailId(conn, userEmailId);
 		PrintWriter out = response.getWriter();
 		
