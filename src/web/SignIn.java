@@ -80,7 +80,8 @@ public class SignIn extends HttpServlet {
 							session.setAttribute("userCategoryId", userCategory);
 							session.setAttribute("userName", userName);
 						}
-						
+												
+								
 						// insert subcategory data into the servlet context
 						int userCategoryId = (int) session.getAttribute("userCategoryId");
 						int size = ManageCategory.searchCountSubCategory(conn, userCategoryId);
@@ -122,9 +123,7 @@ public class SignIn extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} // try end
-		} 
-
-		
+		}
 	}
 
 	/**

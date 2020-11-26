@@ -1,14 +1,17 @@
-@font-face{
-  src: url(../fonts/RIDIBatang.otf);
-  font-family: RIDI;
+@font-face {
+	src: url(../fonts/RIDIBatang.otf);
+	font-family: RIDI;
 }
-*{
-  font-family: RIDI;
+
+* {
+	font-family: RIDI;
 }
+
 * {
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	text-align: center;
 }
@@ -19,23 +22,25 @@ body {
 	margin: 0 auto;
 }
 */
-
 .wrapper {
 	width: 1170px;
 	margin: 0 auto;
 }
-.head{
+
+.head {
 	height: 100px;
-	background:#2E404E;
+	background: #2E404E;
 	width: 100%;
 	z-index: 10;
 	position: fixed;
 }
+
 .logo {
 	width: 20%;
 	float: left;
 	line-height: 100px;
 }
+
 .logo a {
 	text-decoration: none;
 	font-size: 30px;
@@ -43,10 +48,12 @@ body {
 	color: #fff;
 	letter-spacing: 5px;
 }
+
 nav {
 	float: right;
 	line-height: 100px;
 }
+
 nav a {
 	text-decoration: none;
 	font-family: poppins;
@@ -55,11 +62,13 @@ nav a {
 	margin: 0 10px;
 	color: #fff;
 }
-.headerA:hover{
-    color: #bbb;
-    font-weight: bolder;
-    text-decoration: underline;
+
+.headerA:hover {
+	color: #bbb;
+	font-weight: bolder;
+	text-decoration: underline;
 }
+
 .banner-area {
 	width: 100%;
 	height: 500px;
@@ -166,7 +175,6 @@ a {
 	color: black;
 }
 */
-
 #newsContents {
 	position: relative;
 	top: 200px;
@@ -218,7 +226,6 @@ a {
 	color: white;
 }
 
-
 .newsBox {
 	width: 60%;
 	height: 350px;
@@ -248,6 +255,15 @@ a {
 	background-color: #2E404E;
 	color: white;
 	font-size: 15px;
-	border-radius:3px;
+	border-radius: 3px;
 	padding: 15px 15px;
+}
+
+.nameButton {
+	float:right;
+	background-color: #2E404E;
+	color:white;
+	font-weight:bold;
+	border:none;
+	text-align: center;
 }
