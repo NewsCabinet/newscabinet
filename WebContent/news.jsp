@@ -97,7 +97,7 @@ body{
 				
 				for (int i = 0; i < nd.length; i++) {
 					out.println("<div id='newsContents'>");
-					String tmpForScrap = "location.href='../scrap/main?location=" + i + "&subId="+ subCategoryId
+					String tmpForScrap = "location.href='../scrap/scrapNews?location=" + i + "&subId="+ subCategoryId
 										+ "&custom=" + selectedCustomCategory + "'";
 					
 					boolean check = false;

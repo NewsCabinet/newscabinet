@@ -1,6 +1,7 @@
 package web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +24,7 @@ import model.NewsData;
 /**
  * Servlet implementation class ScrapNews
  */
-@WebServlet("/scrap/main")
+@WebServlet("/scrap/scrapNews")
 public class ScrapNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,8 +43,9 @@ public class ScrapNews extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/xml");
-		
+		response.setContentType("text/html");
+
+		PrintWriter out = response.getWriter();
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		if(conn == null) {
@@ -75,17 +77,11 @@ public class ScrapNews extends HttpServlet {
 			}
 			ManageScrapNews.insertScrapNewsRelationWithUser(conn, newsId, userId, customCategoryId);
 			
+			out.print("<script>alert('스크랩 되었습니다!'); location.href='/NewsCabinet/news/main'; </script>\r\n");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		ResultSet rs = ManageScrapNews.searchAllScrapNewsByUserId(conn,userId); // userid가 동일한 scrap news 전체 가져오기
-		
-		
-		
-		RequestDispatcher view = request.getRequestDispatcher("../scrapnews.jsp");
-		view.forward(request, response);
 	}
 
 	/**
