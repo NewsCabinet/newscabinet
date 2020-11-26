@@ -65,27 +65,7 @@ public class ManageCategory {
 		}
 		return -1;
 	}
-	
-	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, String userid) {
-		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=?";
-		ResultSet rs = null;
-		try {
-			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setString(1, userid);
-			pstat.setString(2, "전체");
-			
-			rs = pstat.executeQuery();
-				if(rs.next()) {
-					//System.out.println(rs.getInt(1));
-					return rs.getInt(1);
-				}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	
+
 	
 	public static String searchSubcatogoryNameBySubcateogoryId(Connection conn, int subcategoryId) {
 		String sqlSt = "SELECT subcategory_name FROM newscabinet.subcategory WHERE subcategory_id=" + subcategoryId;
@@ -132,7 +112,86 @@ public class ManageCategory {
 		return -1;
 		
 	}
+		
+	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
+		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=?";
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userid);
+			pstat.setString(2, "전체");
+			
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					//System.out.println(rs.getInt(1));
+					return rs.getInt(1);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
+	public static ResultSet searchCustomcategoryNameByUser(Connection conn, int userId, int categoryId) {
+		String query = "SELECT custom_category_name FROM newscabinet.custom_category WHERE user_id=? and category_id=?";
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setInt(2, categoryId);
+			
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					return rs;
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static void insertCustomcategory(Connection conn, int userId, String customCategoryName, int categoryId) {
+		
+		if(searchCustomcategoryNameByUser(conn, userId, categoryId) != null) {
+			ResultSet tmp = searchCustomcategoryNameByUser(conn, userId, categoryId);
+			if(tmp!=null) {
+				while(true) {
+					try {
+						if(tmp.next()) {
+							if(tmp.getString(1).equals(customCategoryName))
+								return;
+						}else {
+							break;
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
+				}
+			}
+		}
+		String tmp = customCategoryName.trim();
+		if(tmp.length() == 0) {
+			return;
+		}
+		
+		String query = "INSERT INTO newscabinet.custom_category (user_id, custom_category_name, category_id) VALUES(?, ?, ?)";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, customCategoryName);
+			pstat.setInt(3, categoryId);
+			pstat.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 }

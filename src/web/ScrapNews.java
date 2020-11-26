@@ -51,20 +51,20 @@ public class ScrapNews extends HttpServlet {
 		String subCategory = (String) sc.getAttribute("subCategory");
 		
 		HttpSession userSession = request.getSession(false);
-		String userId = (String) userSession.getAttribute("userId");
+		int userId = (int) userSession.getAttribute("userId");
 		int subcategoryId = 1; 
 		
 		NewsData[] nd = (NewsData[]) sc.getAttribute("newsdata");
 		int location = Integer.parseInt((String)request.getParameter("location"));
 		int subcategory;
 		
-		
 		try {
 			String newsUrl = scrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
 			//System.out.println(newsUrl);
-			int newsId = scrapNews.searchScrapNewsIdByURL(conn, newsUrl).getInt(1);
+			int newsId = scrapNews.searchScrapNewsIdByUrl(conn, newsUrl);
 			int customCategoryId = ManageCategory.searchDefualtCustomCategoryIdByUserId(conn, userId);
 			scrapNews.insertScrapNewsRelationWithUser(conn, newsId, userId, customCategoryId);
+			request.setAttribute("scrapped", location);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
