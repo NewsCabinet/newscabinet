@@ -56,6 +56,17 @@ public class SignIn extends HttpServlet {
 		ResultSet rs = ManageUser.searchUserByEmailId(conn, userEmailId);
 		PrintWriter out = response.getWriter();
 		
+		String[][] subList = ManageCategory.searchAllSubcategory(conn);
+		if(subList != null) {
+			for(int i = 0 ; i < 8; i++) {
+				for(int j = 0; j < subList[i].length; j++) {
+					System.out.println("["+ i +"]" + "["+ j +"]"+ subList[i][j]);
+				}
+			}
+		} else {
+			System.out.println("null넘어옴");
+		}
+		
 		if (rs != null) {
 			try {
 				if (rs.next()) {  // 해당 아이디가 있음
@@ -73,6 +84,7 @@ public class SignIn extends HttpServlet {
 						session.setAttribute("userCategoryId", userCategory);
 						session.setAttribute("userName", userName);
 						
+					
 						if(session.isNew()) {
 							System.out.println("------session 생성됨");
 							System.out.println(userIdinDB + " : " +  userCategory+ " : " + userName);

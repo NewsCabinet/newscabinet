@@ -60,9 +60,14 @@ public class ManageUser {
 			pstmt.setBoolean(6, gender);
 			pstmt.setInt(7, category);
 			
-			result = pstmt.executeUpdate();
-			conn.commit();
-			conn.setAutoCommit(true);
+			try {
+				result = pstmt.executeUpdate();
+				conn.commit();
+				conn.setAutoCommit(true);
+			}catch(Exception e) {
+				System.out.println("중복된 이메일로 로그인");
+				return 0;
+			}
 			
 			return result;
 				

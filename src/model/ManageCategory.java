@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class ManageCategory {
@@ -132,6 +133,56 @@ public class ManageCategory {
 		return -1;
 		
 	}
+	/*
+	public static String[][] searchAllSubcategory(Connection conn){
+		
+		//ArrayList<String[]> subcategoryList = new ArrayList<String[]>();
+		String[][] subcategoryList = null;
+		
+		String sqlSt = "SELECT category_id, subcategory_name FROM newscabinet.subcategory";
+		Statement st, st2;
+		ResultSet rs = null;
+		int categoryId = -1;
+		String subcategoryName = null;
+		
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(sqlSt)) {
+				rs = st.getResultSet();
+			}
+			if(rs != null) {
+				subcategoryList = new String[8][];
+				int count = 0;
+				int element = 0;
+				while(rs.next()) {
+					categoryId = rs.getInt(1);
+					subcategoryName = rs.getString(2);
+					if(count == 0) {
+						element = ManageCategory.searchCountSubCategory(conn, categoryId); // 서브카테고리 개수
+						subcategoryList[categoryId - 1] = new String[element];
+						subcategoryList[categoryId][element++] = subcategoryName;
+						System.out.println(subcategoryName);
+					
+					}else {
+						count++;
+						element = 0;
+						subcategoryList[categoryId][element] = subcategoryName;
+						System.out.println(subcategoryName);
+					}
+				}
+			}	
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return subcategoryList;
+		
+	}
+	
+	*/
 	
 	
 	

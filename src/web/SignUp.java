@@ -3,7 +3,9 @@ package web;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -39,17 +41,24 @@ public class SignUp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");
 		String userEmailId = request.getParameter("userEmailId");
 		String categoryStr[] = request.getParameterValues("category");
 		int category = 0;
 		int userIdinDB = -1;
-	
+		PrintWriter out = response.getWriter();
 		for(String str : categoryStr) {
 			category = Integer.parseInt(str);
 		}
 		
-		
+		String todayDate = null;
 		ServletContext sc = getServletContext();
+		//날짜
+		Calendar cal = Calendar.getInstance();  
+		todayDate = cal.get(Calendar.YEAR)+"."+ (cal.get(Calendar.MONTH)+1) +"."+ cal.get(Calendar.DATE);
+		sc.setAttribute("todayDate", todayDate);
+
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		if(conn == null) {
 			System.out.println("conn is nul");
@@ -61,7 +70,9 @@ public class SignUp extends HttpServlet {
 		int custom = -1;
 		
 		try {
-			if (result != -1) {
+			if(result == 0) {
+				out.print("<script>alert('중복된 아이디입니다. 다시 작성해주세요'); location.href='signUp.jsp'; </script>\\r\\n");
+			}else if (result != -1) {
 				System.out.println("입력 성공");
 				userIdinDB = ManageUser.searchUserIDByEmail(conn, userEmailId);
 				System.out.println("userID = " + userIdinDB);
@@ -78,6 +89,7 @@ public class SignUp extends HttpServlet {
 					
 				}
 			}
+			
 		}catch(Exception e){
 			
 		}
