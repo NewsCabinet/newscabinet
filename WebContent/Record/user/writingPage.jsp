@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.sql.ResultSet" import="import javax.servlet.ServletContext"%>
+<%@ page import="java.sql.ResultSet" import="javax.servlet.ServletContext"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,7 +78,7 @@
 			<br>
 		
 			<p>
-				날짜 : <%= sc.getAttribute("todayDate") %>
+				날짜 : <%=sc.getAttribute("todayDate") %>
 			<br>
 			<p>
 				카테고리 
@@ -97,18 +97,7 @@
 			</p>
 			<br>
 			<h3>폴더</h3>
-			<%
-				if (userFolder != null) {
-				out.println("<select name='userFolder' size='2'>");
-					while (userFolder.next()) {
-						String folderName = userFolder.getString(1);
-						out.print("<option value='" + folderName + "'>" + folderName + "</option>");
-					}
-				out.println("</select>");
-				} else {
-				out.print("Folder가 로딩되지 않음");
-				}
-			%>
+			
 			<br>
 			<p>
 				공개 설정 : <input type="radio" name="recordPrivate" value="false"
@@ -117,12 +106,12 @@
 			</p>
 			<br>
 			<p>
-			<!-- 	<a href="<%=newsUrl%>">뉴스 보러가기:</a>-->
+			<!-- 	<a href="<%=//newsUrl%>">뉴스 보러가기:</a>-->
 			</p>
 			<br>
 			<br>
 
-		<!--  	<iframe class="newsBox" src="<%=newsUrl%>"> </iframe>-->
+		<!--  	<iframe class="newsBox" src="<%=//newsUrl%>"> </iframe>-->
 			<textarea class="textBox" name="recordComment">뉴스 url을 카테고리 처럼 선택할 수 있게 할까??</textarea>
 			<br>
 			<br>

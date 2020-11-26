@@ -56,16 +56,7 @@ public class SignIn extends HttpServlet {
 		ResultSet rs = ManageUser.searchUserByEmailId(conn, userEmailId);
 		PrintWriter out = response.getWriter();
 		
-		String[][] subList = ManageCategory.searchAllSubcategory(conn);
-		if(subList != null) {
-			for(int i = 0 ; i < 8; i++) {
-				for(int j = 0; j < subList[i].length; j++) {
-					System.out.println("["+ i +"]" + "["+ j +"]"+ subList[i][j]);
-				}
-			}
-		} else {
-			System.out.println("null넘어옴");
-		}
+		
 		
 		if (rs != null) {
 			try {
@@ -74,12 +65,12 @@ public class SignIn extends HttpServlet {
 					userIdinDB = rs.getInt(2);
 					userCategory = rs.getInt(3);
 					userName = rs.getString(4);
-					System.out.println("pw : "+ checkpw + " : "+userIdinDB + " : " +  userCategory+ " : " + userName);
+					//System.out.println("pw : "+ checkpw + " : "+userIdinDB + " : " +  userCategory+ " : " + userName);
 					if(userPW.equals(checkpw)) { //로그인 성공
 						System.out.println("로그인 성공");
 						session = request.getSession();
 						
-						System.out.println(userIdinDB + " : " +  userCategory+ " : " + userName);
+						//System.out.println(userIdinDB + " : " +  userCategory+ " : " + userName);
 						session.setAttribute("userId", userIdinDB);
 						session.setAttribute("userCategoryId", userCategory);
 						session.setAttribute("userName", userName);
