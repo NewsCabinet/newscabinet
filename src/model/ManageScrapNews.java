@@ -7,27 +7,6 @@ import java.sql.SQLException;
 
 public class ManageScrapNews {
 	
-	private int scrapCount = 0;
-
-	public ResultSet searchScrapNewsIdByURL(Connection conn, String newsUrl) {
-		String query = "SELECT news_id from newscabinet.scrap_news WHERE url=?";
-		ResultSet rs = null;
-		try {
-			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setString(1, newsUrl);
-			rs = pstat.executeQuery();
-				if(rs.next()) {
-					//System.out.println(rs.getInt(1));
-					return rs;
-				}
-			return null;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	public static int searchScrapNewsIdByUrl(Connection conn, String newsUrl) {
 		String query = "SELECT news_id from newscabinet.scrap_news WHERE url=?";
 		ResultSet rs = null;
@@ -49,11 +28,32 @@ public class ManageScrapNews {
 		
 	}
 	
+	public static boolean searchScrapNewsAndUserByNewsId(Connection conn, int newsId, int userId) {
+		String query = "SELECT news_id from newscabinet.user_scrap_news WHERE news_id=? and user_id=?";
+		ResultSet rs = null;
+		int result = -1;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, newsId);
+			pstat.setInt(2, userId);
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					//System.out.println(rs.getInt(1));
+					return true;
+				}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;		
+	}
+	
 	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {
 
 		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
-				+ "ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
-				+ "WHERE user_id=?";
+				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
+				+ " WHERE user_id=?";
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
@@ -67,11 +67,46 @@ public class ManageScrapNews {
 		}
 	}
 	
+	public int searchScrapCountByUrl(Connection conn, String newsUrl) {
+		String query = "SELECT scrap_count from newscabinet.scrap_news WHERE url=?";
+		ResultSet rs = null;
+		int result = -1;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setString(1, newsUrl);
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					//System.out.println(rs.getInt(1));
+					return rs.getInt(1);
+				}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public String insertScrapNewsData(Connection conn, int subcategoryId, NewsData newsData) throws SQLException {
 		//searchScrapNewsIdByURL(conn, newsData.getUrl()).next() == true || 
-		if (searchScrapNewsIdByURL(conn, newsData.getUrl()) != null) {
-			//System.out.println(newsData.getUrl() + "in method");
-			return newsData.getUrl();
+		if (searchScrapNewsIdByUrl(conn, newsData.getUrl()) != -1) {
+			int scrapCount = searchScrapCountByUrl(conn, newsData.getUrl());
+			// UPDATE 테이블명 SET 칼럼명 = '내용' WHERE 조건문
+			String query = "UPDATE newscabinet.scrap_news SET scrap_count = ? where url = ?";
+			
+			try {
+				PreparedStatement pstat = conn.prepareStatement(query);
+				pstat.setInt(1, ++scrapCount);
+				pstat.setString(2, newsData.getUrl());
+
+				pstat.executeUpdate();
+				
+				return newsData.getUrl();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
 		
 		//System.out.println(newsData.getUrl() + "out of the method");
@@ -84,7 +119,7 @@ public class ManageScrapNews {
 			pstat.setString(3, newsData.getPubDate());
 			pstat.setString(4, newsData.getDescription());
 			pstat.setString(5, newsData.getUrl());
-			pstat.setInt(6, ++scrapCount);
+			pstat.setInt(6, 1); // init scrapCount 1
 
 			pstat.executeUpdate();
 			
@@ -97,7 +132,11 @@ public class ManageScrapNews {
 		
 	}
 	
-	public void insertScrapNewsRelationWithUser(Connection conn, int newsId, String userId, int customCategoryId) {
+	public void insertScrapNewsRelationWithUser(Connection conn, int newsId, int userId, int customCategoryId) {
+		
+		if (searchScrapNewsAndUserByNewsId(conn, newsId, userId)) {
+			return;
+		}
 		
 		String queryWithoutCustom = "INSERT INTO newscabinet.user_scrap_news (user_id, news_id) VALUES(?, ?)";
 		String queryWithCustom = "INSERT INTO newscabinet.user_scrap_news (user_id, news_id, custom_category_id) VALUES(?, ?, ?)";
@@ -106,11 +145,11 @@ public class ManageScrapNews {
 			PreparedStatement pstat = null;
 			if(customCategoryId == 0 ) {
 				pstat = conn.prepareStatement(queryWithoutCustom);
-				pstat.setString(1, userId);
+				pstat.setInt(1, userId);
 				pstat.setInt(2, newsId);
 			}else {
 				pstat = conn.prepareStatement(queryWithCustom);
-				pstat.setString(1, userId);
+				pstat.setInt(1, userId);
 				pstat.setInt(2, newsId);
 				pstat.setInt(3, customCategoryId);
 			}
