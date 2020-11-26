@@ -152,6 +152,25 @@ public class ManageCategory {
 		return null;
 	}
 	
+	public static int searchCustomcategoryIdByUserAndCustomcategoryName(Connection conn, int userId, String customCategoryName) {
+		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=? ";
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, customCategoryName);
+			
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public static void insertCustomcategory(Connection conn, int userId, String customCategoryName, int categoryId) {
 		
 		if(searchCustomcategoryNameByUser(conn, userId, categoryId) != null) {
