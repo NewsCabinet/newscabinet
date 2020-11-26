@@ -25,13 +25,13 @@ import model.NewsData;
  * Servlet implementation class ScrapNews
  */
 @WebServlet("/scrap/scrapNews")
-public class ScrapNews extends HttpServlet {
+public class ScrappingNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScrapNews() {
+    public ScrappingNews() {
         super();
         // TODO Auto-generated constructor stub
     }
