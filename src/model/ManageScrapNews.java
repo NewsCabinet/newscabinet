@@ -28,14 +28,14 @@ public class ManageScrapNews {
 		
 	}
 	
-	public static boolean searchScrapNewsAndUserByNewsId(Connection conn, int newsId, int userId) {
+	public static boolean searchScrapNewsAndUserByNewsId(Connection conn, int newsId, String userId) {
 		String query = "SELECT news_id from newscabinet.user_scrap_news WHERE news_id=? and user_id=?";
 		ResultSet rs = null;
 		int result = -1;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
 			pstat.setInt(1, newsId);
-			pstat.setInt(2, userId);
+			pstat.setString(2, userId);
 			rs = pstat.executeQuery();
 				if(rs.next()) {
 					//System.out.println(rs.getInt(1));
@@ -49,7 +49,7 @@ public class ManageScrapNews {
 		return false;		
 	}
 	
-	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {
+	public static ResultSet searchAllScrapNewsByUserId(Connection conn, String userId) {
 
 		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
 				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
@@ -57,7 +57,7 @@ public class ManageScrapNews {
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setInt(1, userId);
+			pstat.setString(1, userId);
 			rs = pstat.executeQuery();
 			return rs;
 		} catch (SQLException e) {
@@ -67,7 +67,7 @@ public class ManageScrapNews {
 		}
 	}
 	
-	public static ResultSet searchScrapNewsByUserIdAndCategory(Connection conn, int userId, int subCategoryId) {
+	public static ResultSet searchScrapNewsByUserIdAndCategory(Connection conn, String userId, int subCategoryId) {
 
 		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
 				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
@@ -75,7 +75,7 @@ public class ManageScrapNews {
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setInt(1, userId);
+			pstat.setString(1, userId);
 			pstat.setInt(2, subCategoryId);
 			rs = pstat.executeQuery();
 			return rs;
@@ -151,7 +151,7 @@ public class ManageScrapNews {
 		
 	}
 	
-	public static void insertScrapNewsRelationWithUser(Connection conn, int newsId, int userId, int customCategoryId) {
+	public static void insertScrapNewsRelationWithUser(Connection conn, int newsId, String userId, int customCategoryId) {
 		
 		if (searchScrapNewsAndUserByNewsId(conn, newsId, userId)) {
 			return;
@@ -164,11 +164,11 @@ public class ManageScrapNews {
 			PreparedStatement pstat = null;
 			if(customCategoryId == 0 ) {
 				pstat = conn.prepareStatement(queryWithoutCustom);
-				pstat.setInt(1, userId);
+				pstat.setString(1, userId);
 				pstat.setInt(2, newsId);
 			}else {
 				pstat = conn.prepareStatement(queryWithCustom);
-				pstat.setInt(1, userId);
+				pstat.setString(1, userId);
 				pstat.setInt(2, newsId);
 				pstat.setInt(3, customCategoryId);
 			}

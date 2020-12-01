@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.ManageCategory;
+import model.ManageScrapNews;
 
 /**
  * Servlet implementation class DisplayScrapNews
@@ -48,11 +49,14 @@ public class DisplayScrapNews extends HttpServlet {
 		}
 		
 		HttpSession userSession = request.getSession(false);
-		//int userId = (int) userSession.getAttribute("userId");
+		int userId = (int) userSession.getAttribute("userId");
 		
 		// TODO: 삭제하기
 		ResultSet rs = ManageCategory.searchAllCategoryAndSubCategory(conn);
 		request.setAttribute("Categories", rs);
+		
+		String tmp = request.getParameter("category")
+		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, tmp);
 
 		RequestDispatcher view = request.getRequestDispatcher("../scrapnews.jsp");
 		view.forward(request, response);
