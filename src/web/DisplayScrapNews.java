@@ -62,7 +62,7 @@ public class DisplayScrapNews extends HttpServlet {
 		
 		request.setAttribute("ScrapNews", rs);
 		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
-		if(scrapNews!=null){
+		/*if(scrapNews!=null){
 			while(true){
 				try {
 					if(scrapNews.next()){
@@ -75,7 +75,7 @@ public class DisplayScrapNews extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-		}
+		}*/
 		
 		RequestDispatcher view = request.getRequestDispatcher("/scrapnews.jsp");
 		view.forward(request, response);
