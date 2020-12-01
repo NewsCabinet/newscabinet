@@ -63,7 +63,7 @@ public class NewsCatching extends HttpServlet {
 		}
 		HttpSession userSession = request.getSession(false);
 		int userCategoryId = (int) userSession.getAttribute("userCategoryId");
-		int userId = (int) userSession.getAttribute("userId");
+		String userId = (String) userSession.getAttribute("userId");
 		
 		try {
 			ResultSet tmp = ManageCategory.searchCategoryNameById(conn, userCategoryId);

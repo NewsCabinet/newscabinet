@@ -55,8 +55,9 @@ public class DisplayScrapNews extends HttpServlet {
 		ResultSet rs = ManageCategory.searchAllCategoryAndSubCategory(conn);
 		request.setAttribute("Categories", rs);
 		
-		String tmp = request.getParameter("category")
-		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, tmp);
+		String tmp = request.getParameter("category");
+		int categoryId = 0;
+		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
 
 		RequestDispatcher view = request.getRequestDispatcher("../scrapnews.jsp");
 		view.forward(request, response);

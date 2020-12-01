@@ -77,7 +77,7 @@
 			</script>
 
 			<div>
-				<form name='form'>
+				<form name='form' method="POST" action="/scrap/main">
 					<select name='Step1' onchange='changes1Step(value)'>
 						<option>--상위 카테고리--</option>
 						<%
