@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -40,26 +41,35 @@ public class ChangeUser extends HttpServlet {
 		HttpSession httpSession = request.getSession();
 		System.out.println("회원정보수정 서블릿");
 		String userName = request.getParameter("userName");	
-		String passWd = request.getParameter("userPassword");
+		//String passWd = request.getParameter("userPassword");
 		String userEmailId = request.getParameter("userEmailId");
+		String userPhone = request.getParameter("userPhone");
+		String userAge = request.getParameter("userAge");
+		String Sgender = request.getParameter("userGender");
+		Boolean userGender = Boolean.parseBoolean(Sgender);
+		String Scategory = request.getParameter("category");
+		int category = Integer.parseInt(Scategory);
+		System.out.println("일단 가져온 이름" + userName);
 		ServletContext sc = getServletContext();
+		
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
+		System.out.println("그다음" + userName);
 
-		if( userName!= null) {
-	    System.out.println("성공");
-	    
-		 ManageUser.updateChangeUser(conn,userEmailId,userName);
-		 
-		 //session에서 받아온걸 attribute
-		 request.setAttribute("id", userName);
+		try {
+			ManageUser.updateChangeUser(conn,userName,userPhone,userAge,userGender,category,userEmailId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	    System.out.println("성공"); 
+		 HttpSession session = request.getSession();
+		 session.setAttribute("name",userName);
+		 //session.setAttribute("phone",userPhone);
 		 RequestDispatcher view = sc.getRequestDispatcher("/home.jsp");
          view.forward(request, response);	
-		}		
-		
-	else {
-		System.out.println("이름이 없습니다.");
-	}
-}
+		}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class ManageUser {
 	public static int insertUser(Connection conn, HttpServletRequest request) {
@@ -226,10 +229,6 @@ public class ManageUser {
 		return null;
 	}
 
-
-
-
-
 	public static int insertFirstUserFolderByID(Connection conn, int userId) {
 
 		int result = -1;
@@ -291,27 +290,30 @@ public class ManageUser {
 	}
 	
 	
-	public static void updateChangeUser(Connection conn,String userEmailId, String user_name) {
+	public static void updateChangeUser(Connection conn,String user_name,String userPhone,String userAge, boolean userGender,
+			int category, String userEmailId) throws SQLException {
 		int result = -1;
 		PreparedStatement pstmt = null;
-		
-	//	String name = userName.getParameter("userName");
+		HttpSession session = null;
+		String query = "UPDATE newscabinet.user SET user_name=?,user_phone=?,user_age=?,user_gender=?,category_id=? WHERE user_email_id=?";
 
-		String query = "UPDATE newscabinet.user SET user_name=? WHERE user_email_id=?";
-		try {
-			conn.setAutoCommit(false);
+		//	conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(query);
+
 			pstmt.setString(1,user_name);
-			pstmt.setString(2,userEmailId);
+			pstmt.setString(2,userPhone);
+			pstmt.setString(3,userAge);
+			pstmt.setBoolean(4,userGender);
+			pstmt.setInt(5, category);
+			pstmt.setString(6,userEmailId);
 
 			result = pstmt.executeUpdate();
-			conn.commit();
-			conn.setAutoCommit(true);
-			
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		
+			System.out.println("update" + result);
+		//	conn.commit();
+		//	conn.setAutoCommit(true);
+		
 	
 	}
 
