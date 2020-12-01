@@ -9,6 +9,22 @@ import java.sql.Statement;
 
 public class ManageCategory {
 	
+	public static ResultSet searchAllCategoryAndSubCategory(Connection conn) {
+		String sqlSt = "select category_name, subcategory_name from newscabinet.category join newscabinet.subcategory "
+						+"on newscabinet.category.category_id = newscabinet.subcategory.category_id";
+		Statement st = null;
+		try { 
+			st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+			if (st.execute(sqlSt)) {
+				return st.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static ResultSet searchCategoryNameById(Connection con, int categoryId) {
 
 		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;
@@ -92,25 +108,20 @@ public class ManageCategory {
 	
 	
 	public static int searchSubcatogoryIdBySubcateogoryName(Connection conn, String subcategoryName) {
-		String sqlSt = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_id=" + subcategoryName;
-		
-		Statement st;
+		String query = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_name=?";
+		ResultSet rs = null;
 		try {
-			st = conn.createStatement();
-			if (st.execute(sqlSt)) {
-				ResultSet rs = st.getResultSet();
-				if(rs!=null) {
-					if(rs.next()) {
-						return rs.getInt(1);
-					}		
-				}
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setString(1, subcategoryName);
+			rs = pstat.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
-		
 	}
 		
 	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {

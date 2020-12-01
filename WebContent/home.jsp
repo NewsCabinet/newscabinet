@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- root -->
 <link href="/../..style.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>HOME</title>
@@ -25,13 +24,14 @@
 				</div>
 				<nav>
 					<a class=headerA href="/NewsCabinet/news/main">뉴스보기</a>
+					<a href="/NewsCabinet/scrap/main">스크랩보기</a>
 				    <a class=headerA href="#">나의 기록보기</a>
 				    <a class=headerA href="#">다른사람 기록보기</a>
 				    <a class=headerA href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
                 </nav>
+
 			</div>
         </header>
     </div>
-
 </body>
 </html>
