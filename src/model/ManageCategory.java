@@ -9,6 +9,22 @@ import java.sql.Statement;
 
 public class ManageCategory {
 	
+	public static ResultSet searchAllCategoryAndSubCategory(Connection conn) {
+		String sqlSt = "select category_name, subcategory_name from newscabinet.category join newscabinet.subcategory "
+						+"on newscabinet.category.category_id = newscabinet.subcategory.category_id";
+		Statement st = null;
+		try { 
+			st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+			if (st.execute(sqlSt)) {
+				return st.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static ResultSet searchCategoryNameById(Connection con, int categoryId) {
 
 		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;

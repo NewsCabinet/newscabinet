@@ -1,20 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.sql.*, java.util.*"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>내가 스크랩한 뉴스보기</title>
-<link href="../style.css" rel="stylesheet">
-</head>
-<body>
-	<section>
-		<div>
+<%@ page import="java.sql.*, java.util.*" %>
+<div>
 			<p>내가 스크랩한 뉴스 정보</p>
 			<% List cate = new ArrayList(); %>
 			<%
-				// TODO: application 으로 바꾸기
-				ResultSet rs = (ResultSet) request.getAttribute("Categories");
+				ResultSet rs = (ResultSet) application.getAttribute("Categories");
 				if (rs != null) {
 					rs.beforeFirst();
 					String tmp = "";
@@ -44,8 +33,7 @@
 								vnum = new Array();
 								<%String nameTest = "testing";%>
 								<%
-									// TODO: application 으로 바꾸기
-									rs = (ResultSet) request.getAttribute("Categories");
+									rs = (ResultSet) application.getAttribute("Categories");
 									if(rs!=null){
 										rs.beforeFirst();
 										String tmp = cate.get(i).toString();
@@ -91,6 +79,3 @@
 				</form>
 			</div>
 		</div>
-	</section>
-</body>
-</html>
