@@ -1,7 +1,7 @@
 <%@ page import="java.sql.*, java.util.*" %>
 <div>
 			<p>내가 스크랩한 뉴스 정보</p>
-			<% List cate = new ArrayList(); %>
+			<% List categoryInJava = new ArrayList(); %>
 			<%
 				ResultSet rs = (ResultSet) application.getAttribute("Categories");
 				if (rs != null) {
@@ -10,7 +10,7 @@
 					while (true) {
 						if (rs.next()) {
 					if (!tmp.equals(rs.getString("category_name"))) {
-						cate.add(rs.getString("category_name"));
+						categoryInJava.add(rs.getString("category_name"));
 					}
 					tmp = rs.getString("category_name");
 						} else {
@@ -20,15 +20,15 @@
 				}
 			%>
 			<script>
-				cate = new Array();
+				category = new Array();
 				<%
-					for(int i = 0; i< cate.size(); i++){%>
-						cate.push("<%=cate.get(i).toString()%>");
+					for(int i = 0; i< categoryInJava.size(); i++){%>
+						category.push("<%=categoryInJava.get(i).toString()%>");
 					<%}
 				%>
 				function changes1Step(fr) {
-						<%for(int i = 0; i< cate.size(); i++){%>
-		 					if (fr == "<%=cate.get(i)%>") {
+						<%for(int i = 0; i< categoryInJava.size(); i++){%>
+		 					if (fr == "<%=categoryInJava.get(i)%>") {
 								num = new Array();
 								vnum = new Array();
 								<%String nameTest = "testing";%>
@@ -36,7 +36,7 @@
 									rs = (ResultSet) application.getAttribute("Categories");
 									if(rs!=null){
 										rs.beforeFirst();
-										String tmp = cate.get(i).toString();
+										String tmp = categoryInJava.get(i).toString();
 										while(true){
 											if(rs.next()){
 												if(tmp.equals(rs.getString("category_name"))){
@@ -69,8 +69,8 @@
 					<select name='Step1' onchange='changes1Step(value)'>
 						<option>--상위 카테고리--</option>
 						<%
-							for(int i = 0; i< cate.size(); i++){
-								out.println("<option>"+ cate.get(i).toString() + "</option>");
+							for(int i = 0; i< categoryInJava.size(); i++){
+								out.println("<option>"+ categoryInJava.get(i).toString() + "</option>");
 							}
 						%>
 					</select> <select name='Step2'>
