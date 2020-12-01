@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -56,10 +57,27 @@ public class DisplayScrapNews extends HttpServlet {
 		request.setAttribute("Categories", rs);
 		
 		String tmp = request.getParameter("Step2");
-		int categoryId = 0;
+		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, tmp);
 		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
-
-		RequestDispatcher view = request.getRequestDispatcher("../scrapnews.jsp");
+		
+		request.setAttribute("ScrapNews", rs);
+		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
+		if(scrapNews!=null){
+			while(true){
+				try {
+					if(scrapNews.next()){
+						System.out.println(scrapNews.getString("headline"));
+					}else{
+						break;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("/scrapnews.jsp");
 		view.forward(request, response);
 	}
 

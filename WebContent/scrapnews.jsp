@@ -77,7 +77,7 @@
 			</script>
 
 			<div>
-				<form name='form' method="POST" action="/scrap/main">
+				<form name='form' method="POST" action="/NewsCabinet/scrap/main">
 					<select name='Step1' onchange='changes1Step(value)'>
 						<option>--상위 카테고리--</option>
 						<%
@@ -88,9 +88,29 @@
 					</select> <select name='Step2'>
 						<option>--하위 카테고리--</option>
 					</select>
+					<input type="submit" value="카테고리 선택 완료">
 				</form>
 			</div>
 		</div>
 	</section>
+		<section>
+			<%
+				ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
+				if(scrapNews!=null){
+					while(true){
+						try {
+							if(scrapNews.next()){
+								//out.println(scrapNews.getString("headline"));
+							}else{
+								break;
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			%>
+		</section>
 </body>
 </html>

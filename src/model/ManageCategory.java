@@ -108,25 +108,20 @@ public class ManageCategory {
 	
 	
 	public static int searchSubcatogoryIdBySubcateogoryName(Connection conn, String subcategoryName) {
-		String sqlSt = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_id=" + subcategoryName;
-		
-		Statement st;
+		String query = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_name=?";
+		ResultSet rs = null;
 		try {
-			st = conn.createStatement();
-			if (st.execute(sqlSt)) {
-				ResultSet rs = st.getResultSet();
-				if(rs!=null) {
-					if(rs.next()) {
-						return rs.getInt(1);
-					}		
-				}
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setString(1, subcategoryName);
+			rs = pstat.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
-		
 	}
 		
 	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
