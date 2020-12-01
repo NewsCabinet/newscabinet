@@ -5,11 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 스크랩한 뉴스보기</title>
+<link href="../style.css" rel="stylesheet">
 </head>
 <body>
 		<section>
 			<div id ='newsContests'>
 				<p> 내가 스크랩한 뉴스 정보 </p>
+				
 			</div>
 	</section>
 </body>
