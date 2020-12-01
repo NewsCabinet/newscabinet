@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="./style.css" rel="stylesheet">
+<!-- root -->
+<link href="/../..style.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>HOME</title>
 </head>
@@ -15,8 +16,9 @@
 			<div class="wrapper">
 			<form name ="changeuser" action="changeUser.jsp">
 			   <% HttpSession userSession = request.getSession(false);
-            	 String userName = (String)userSession.getAttribute("userName");
-             	 out.println("<button class=nameButton>" + userName + "님 환영합니다!</button>"); %>
+            	 //String userName = (String)userSession.getAttribute("userName");
+            	 String username =(String)request.getAttribute("id");
+             	 out.println("<button class=nameButton>"  + username + "님 환영합니다!</button>"); %>
              </form>
 				<div class="logo">
                     <a href="/NewsCabinet/home.jsp"><b style="color: #bbb">N</b>ews<b style="color: #bbb">C</b>abinet</a>

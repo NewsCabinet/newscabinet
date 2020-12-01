@@ -286,15 +286,33 @@ public class ManageUser {
 		return result;
 	}
 	
-	public static ResultSet updateChangeUser(Connection conn, String userEmailId, String name) {
+	public static void updateuser_pw(Connection conn, HttpServletRequest reques) {
+		
+	}
+	
+	
+	public static void updateChangeUser(Connection conn,String userEmailId, String user_name) {
 		int result = -1;
 		PreparedStatement pstmt = null;
 		
-		String query = "UPDATE newscabinet.user SET user_pw=?, user_name=?, user_phone=?, user_age=?, user_gender=?, category_id=?"
-				+ "WHERE = userEmailId";
+	//	String name = userName.getParameter("userName");
+
+		String query = "UPDATE newscabinet.user SET user_name=? WHERE user_email_id=?";
+		try {
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,user_name);
+			pstmt.setString(2,userEmailId);
+
+			result = pstmt.executeUpdate();
+			conn.commit();
+			conn.setAutoCommit(true);
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
-	
-	return null;
 	}
 
 

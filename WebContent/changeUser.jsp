@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form name ="changeuser" action="changeuser">
-        			비밀번호 : <input type="text" name="userPassword" required><br/>
+	<form name ="changeuser" action="user/changeuser">
+        			
+        			<!--  비밀번호 : <input type="text" name="userPassword" required><br/>
         			이름 : <input type="text" name="userName" required><br/>
        			 	핸드폰 번호 : <input type="tel" name="userPhone" placeholder="010-9999-9999" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"required><br>
        			 	나이 : <input type="number" name="userAge" required><br/>
@@ -25,8 +26,10 @@
 						<option value="7">IT</option>
 						<option value="8">과학</option>
 					</select>
-					
-				  <input type="submit" value="가입하기"/>
+					-->
+					이메일:<input type="email" name="userEmailId" required> 
+					이름 : <input type="text" name="userName" required><br/>
+				  <input type="submit" value="수정하기"/>
 	</form>
 </body>
 </html>
