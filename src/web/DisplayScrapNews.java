@@ -3,7 +3,10 @@ package web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import model.ManageCategory;
+import model.ManageScrapNews;
 
 /**
  * Servlet implementation class DisplayScrapNews
@@ -46,8 +52,33 @@ public class DisplayScrapNews extends HttpServlet {
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
 		
+		// TODO: 삭제하기
+		ResultSet rs = ManageCategory.searchAllCategoryAndSubCategory(conn);
+		request.setAttribute("Categories", rs);
 		
+		String tmp = request.getParameter("Step2");
+		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, tmp);
+		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
 		
+		request.setAttribute("ScrapNews", rs);
+		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
+		if(scrapNews!=null){
+			while(true){
+				try {
+					if(scrapNews.next()){
+						System.out.println(scrapNews.getString("headline"));
+					}else{
+						break;
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("/scrapnews.jsp");
+		view.forward(request, response);
 	}
 
 	/**
