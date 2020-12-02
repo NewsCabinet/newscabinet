@@ -6,23 +6,18 @@
 <meta charset="UTF-8">
 <title>나의 기록 보기</title>
 <link href="../style.css" rel="stylesheet">
+<style>
+.basic_contentzone {
+   padding-top: 20px;
+   position: relative;
+   width: 100%;
+   height: 500px;
+   top: 100px;
+}
+</style>
 </head>
+<jsp:include page="../../newsHeader.html"></jsp:include>
 <body>
-	<div class="box-area">
-		<header class="head">
-			<div class="wrapper">
-				<div class="logo">
-					<a href="/NewsCabinet/home.jsp"><b>N</b>ews<b>C</b>abinet</a>
-				</div>
-				<nav>
-					<a href="/NewsCabinet/news/main">뉴스보기</a> <a
-						href="/NewsCabinet/scrap/main">스크랩보기</a> <a class=headerA href="#">나의
-					</a> <a class=headerA href="#">다른 사람 </a> <a
-						href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
-				</nav>
-			</div>
-		</header>
-	</div>
 	<div class="basic_contentzone">
 		<p>폴더별로 보기</p>
 		<p>
