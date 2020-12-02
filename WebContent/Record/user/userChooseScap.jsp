@@ -3,6 +3,7 @@
  <%@ page import="java.sql.Connection" 
  		  import="model.ManageScrapNews"
  		  import="java.sql.ResultSet"
+ 		  import="java.util.ArrayList"
  %>
 <!DOCTYPE html>
 <html>
@@ -22,15 +23,12 @@
 		 
 	    $("input[name='userSelectedNews']:checked").each(function(e){
 	        var value = $(this).val();
-	        var innerText = $(this).html();
-	       // opener.newsIdArr.add(value);
-	        checkArr.push(value);      
-	        str = "<input type='radio' name='userSelectedNews' value='" + value +  "'>"
+	        var valueText = $(this).text();
+	        checkArr.push(value);   
+	        str = "<input type='checkbox' name='userSelectedNews' value='" + value +  "'checked>"
 	        opener.document.getElementById("parentDiv").innerHTML += str + value + "<br>";
 	    })
-		
-		//opener.document.getElementById("parentDiv").innerHTML += str;
-		//console.log(checkArr);
+	    
 		window.close();
 	}
 
@@ -58,8 +56,8 @@
 					while(userScrapResult.next()){
 						int newsid = userScrapResult.getInt(1);
 						newsHead = userScrapResult.getString(2);
-						String str = "<input type='checkbox' name='userSelectedNews'" + 
-									"value='" + newsid+"'>" + "[" + newsid +"]"+ newsHead + "<br><br>";
+						String str = "<input type='checkbox' name='userSelectedNews'" + "value='" + newsid+"'>" 
+									+ "[" + newsid +"]"+ newsHead + "<br><br>";
 						out.println(str);
 					}
 					
@@ -68,8 +66,6 @@
 				}else{
 					out.println("스크랩한 뉴스 불러오는데 오류");
 				}
-				
-				
 			%>
 		<br>
 		<input type="button" value="선택하기" onclick="sendSelectedData()" >

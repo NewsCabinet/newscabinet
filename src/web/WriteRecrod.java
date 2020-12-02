@@ -35,12 +35,32 @@ public class WriteRecrod extends HttpServlet {
 		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
-		HttpSession userSession = request.getSession(false);
+		String today = (String)sc.getAttribute("todayDate");
 		PrintWriter out = response.getWriter();
+		request.setAttribute("todayDate", today);
 		
-		int result = ManageRecord.insertUserRecord(conn, request);
+		int recordId = ManageRecord.insertUserRecord(conn, request);
 		
-		if (result != -1) {			
+		String[] userSelectNews = request.getParameterValues("userSelectedNews");
+		
+		for(int i = 0; i <userSelectNews.length; i++) {
+			System.out.println("Selected News = " + userSelectNews[i]);
+		}
+		
+		if (recordId != -1) {			
+			//out.print("<script>alert('저장되었습니다.'); location.href='../Record/user/recordMainPage.jsp'; </script>\r\n");
+			
+			for(int i = 0; i <userSelectNews.length; i++) {
+				System.out.println("Selected News = " + userSelectNews[i]);
+				int selectedNewsId =  Integer.parseInt(userSelectNews[i]);
+				int recordResult = ManageRecord.insertUserScrapRecord(conn, recordId, selectedNewsId);
+				
+				if(recordResult == -1) {
+					System.out.println("user_scrap_record 저장하는데 문제가 생김");
+				}
+			}
+			
+			
 			RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
 			view.forward(request, response);
 		}else {

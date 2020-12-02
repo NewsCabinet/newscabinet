@@ -31,7 +31,7 @@ import model.NewsData;
 
 
 
-@WebServlet("/Record/write")
+@WebServlet("/UserRecord/write")
 public class SettingUserRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,11 +53,9 @@ public class SettingUserRecord extends HttpServlet {
 		//사용자 폴더 내용 가져오기
 		userFolder = (ResultSet) ManageRecord.searchFolderByUserId(conn, userId);
 
-	
 		request.setAttribute("userFolder", userFolder);
 		
-		
-		RequestDispatcher view = request.getRequestDispatcher("../Record/user/writingPage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Record/user/writingPage.jsp");
 		view.forward(request, response);
 
 	}

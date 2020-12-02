@@ -93,7 +93,7 @@ public class ManageCategory {
 	
 	
 	public static int searchSubcatogoryIdBySubcateogoryName(Connection conn, String subcategoryName) {
-		String sqlSt = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_id=" + subcategoryName;
+		String sqlSt = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_name='" +subcategoryName + "'";
 		
 		Statement st;
 		try {
@@ -224,6 +224,7 @@ public class ManageCategory {
 				}
 			}
 		}
+		
 		String tmp = customCategoryName.trim();
 		if(tmp.length() == 0) {
 			return;
@@ -242,6 +243,31 @@ public class ManageCategory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	
+	public static int searchCustomCategoryIdByName(Connection conn, int userId, String customCategoryName) {
+		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id="
+						+"'"+ userId +"'" + "and custom_category_name='" +customCategoryName + "'";
+		
+		int result = -1;
+		
+		Statement st;
+		ResultSet rs;
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {
+					int userCustomCategoryId = rs.getInt(1);
+					result = userCustomCategoryId;
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 	

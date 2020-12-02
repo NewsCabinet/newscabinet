@@ -3,8 +3,10 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,28 +16,41 @@ public class ManageRecord {
 		
 		int result = -1;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO newscabinet.user_record"
-				+ " (user_id, news_id, folder_id, record_title, record_date, record_private, record_comment)"
-				+ " VALUES(?, ?, ?, ?, ?, ?, ?)";
+		
+	
 		
 		HttpSession userSession = request.getSession(false);
-		String userId = (String) userSession.getAttribute("userId");
+		int userId = (Integer)userSession.getAttribute("userId");
+		System.out.println("insert Record userId = " + userId);
 		
-		String newsUrl = (String)request.getAttribute("newsUrl");
-		System.out.println("url = " + newsUrl);
-		int newsId = ManageScrapNews.searchScrapNewsIdByUrl(conn, newsUrl);
+		String userSelectCategory = request.getParameter("subCategory");
+		int recordSubcategoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, userSelectCategory);
+		System.out.println("insert Record userSelectCategory = " + recordSubcategoryId + userSelectCategory);
+		
+		String userCustomCategory = "전체";
+		int recordCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, userCustomCategory);
+		System.out.println("insert Record userCustomCategory= " + recordCustomCategoryId + userCustomCategory);		
+		
+		String userFolderStr =  request.getParameter("userFolder");
+		int folderId = Integer.parseInt(userFolderStr);
+		System.out.println("insert Record folderId= " + folderId);
+		
+		/*
 		String userFolderStr[] =  request.getParameterValues("userFolder");
 		String folderName = null;
 		
 		for(String str : userFolderStr) {
 			folderName = str;
 		}
+		*/
 		
-		int folderId = ManageRecord.searchFolderIdByFolderName(conn, userId, folderName);   
-		
+	
 		String recordTitle = (String)request.getParameter("recordTitle");
-		String recordDate = (String)request.getAttribute("recordDate");
+		System.out.println("insert Record recordTitle= " + recordTitle);
+		String recordDate = (String)request.getAttribute("todayDate");
+		System.out.println("insert Record todayDate= " + recordDate);
 		String recordComment = request.getParameter("recordComment");
+		System.out.println("insert Record recordComment= " + recordComment);
 		
 		String recordPrivateStr[] = request.getParameterValues("recordPrivate");
 		boolean recordPrivate = false;
@@ -43,6 +58,13 @@ public class ManageRecord {
 			if(str.equals("true"))
 				recordPrivate = true;
 		}
+		System.out.println("insert Record recordPrivate = " + recordPrivate);
+		
+		
+		
+		String query = "INSERT INTO newscabinet.user_record"
+				+ " (user_id, subcategory_id, custom_category_id, folder_id, record_title, record_date, record_private, record_comment)"
+				+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			conn.setAutoCommit(false);
@@ -55,16 +77,18 @@ public class ManageRecord {
 				System.out.println("connection problem");
 			}
 			
-			pstmt.setString(1, userId);
-			pstmt.setInt(2, newsId);
-			pstmt.setInt(3, folderId);
-			pstmt.setString(4, recordTitle);
-			pstmt.setString(5, recordDate);
-			pstmt.setBoolean(6, recordPrivate);
-			pstmt.setString(7, recordComment);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, recordSubcategoryId);
+			pstmt.setInt(3, recordCustomCategoryId);
+			pstmt.setInt(4, folderId);
+			pstmt.setString(5, recordTitle);
+			pstmt.setString(6, recordDate);
+			pstmt.setBoolean(7, recordPrivate);
+			pstmt.setString(8, recordComment);
 			
 			System.out.println("userId = "+ userId);
-			System.out.println("newsid = " + newsId);
+			System.out.println("recordSubcategoryId = " + recordSubcategoryId);
+			System.out.println("recordCustomCategoryId = " + recordCustomCategoryId);
 			System.out.println("folderId = " + folderId);
 			System.out.println("record Title = "+recordTitle);
 			System.out.println("record date = " + recordDate);
@@ -72,10 +96,22 @@ public class ManageRecord {
 			System.out.println("record comment = " + recordComment);
 			
 			result = pstmt.executeUpdate();
+			System.out.println("결과 = "+ result);
 			conn.commit();
 			conn.setAutoCommit(true);
 			
-			return result;
+			if(result == -1)
+				return -1;
+			
+			
+			int recordId = ManageRecord.searchRecordIdByUserIdAndTitle(conn, userId, recordTitle);
+			
+			if(recordId == -1)
+				return -1;
+			
+			System.out.println("recordId = "+ recordId);
+			return recordId;
+			
 			
 		}catch(Exception e) {
 			
@@ -84,6 +120,66 @@ public class ManageRecord {
 		return result;	
 	}
 
+	
+	public static int searchRecordIdByUserIdAndTitle(Connection conn, int userId, String title) {
+		
+		String query = "SELECT record_id FROM newscabinet.user_record WHERE user_id="+userId + " and record_title ='"+title + "'";
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				ResultSet rs = st.getResultSet();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	
+	}
+
+
+	public static int insertUserScrapRecord(Connection conn, int recordId, int newsId) {
+		String query = "INSERT INTO newscabinet.user_scrap_record" + "(record_id, news_id)" + " VALUES(?, ?)";
+		int result = -1;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn.setAutoCommit(false);
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setInt(1, recordId);
+				pstmt.setInt(2, newsId);
+				
+				System.out.println("userId = "+ recordId);
+				System.out.println("newsId = "+ newsId);
+			
+				result = pstmt.executeUpdate();
+				System.out.println("결과 = "+ result);
+				conn.commit();
+				conn.setAutoCommit(true);
+				
+				return result;
+			}catch(SQLException e) {
+				
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("connection problem");
+		}
+			
+			
+		return result;
+
+	}
+	
+	
 	public static ResultSet searchFolderByUserId(Connection conn, int userId) {
 		String query = "SELECT folder_id, folder_name FROM newscabinet.user_record_folder WHERE user_id=" + "'" + userId + "'";
 		Statement st;
@@ -101,7 +197,7 @@ public class ManageRecord {
 	}
 
 	
-	public static int searchFolderIdByFolderName(Connection conn, String userId, String folderName) {
+	public static int searchFolderIdByFolderName(Connection conn, int userId, String folderName) {
 		int result = -1;
 
 		String query = "SELECT folder_id FROM newscabinet.user_record_folder "

@@ -7,10 +7,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link href="../../style.css" rel="stylesheet">
-<title>기록작성하기</title>
-<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+	<meta charset="UTF-8">
+	<link href="../../style.css" rel="stylesheet">
+	<title>기록작성하기</title>
+	<script src="http://code.jquery.com/jquery-3.3.1.js">
+	
+	
+	
+	</script>
+	<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript">
         $(function() {
             $("#firstCategory").change(function() {
@@ -26,14 +31,14 @@
                 var changeItem;
                
                 switch (this.value){
-                case '1': changeItem = cate1; break;
-                case '2': changeItem = cate2; break;
-                case '3': changeItem = cate3; break;
-                case '4': changeItem = cate4; break;
-                case '5': changeItem = cate5; break;
-                case '6': changeItem = cate6; break;
-                case '7': changeItem = cate7; break;
-                case '8': changeItem = cate8; break;
+	                case '1': changeItem = cate1; break;
+	                case '2': changeItem = cate2; break;
+	                case '3': changeItem = cate3; break;
+	                case '4': changeItem = cate4; break;
+	                case '5': changeItem = cate5; break;
+	                case '6': changeItem = cate6; break;
+	                case '7': changeItem = cate7; break;
+	                case '8': changeItem = cate8; break;
                 }
                 
                 $('#subCategory').empty();
@@ -45,15 +50,12 @@
             });
         });
 	</script>
-<script>
-	function getUserChosenScap(){
-		//아이디 중복 확인 창띄우기
-		var newsIdArr = [];
-		
-		window.open("../Record/user/userChooseScap.jsp", "뉴스 선택하기", "width=600 height=500")
-		
-	}
-</script>
+	<script>
+		function getUserChosenScap(){
+			window.open("../Record/user/userChooseScap.jsp", "뉴스 선택하기", "width=600 height=500")
+			
+		}
+	</script>
 </head>
 <body>
 	<div class="box-area">
@@ -65,7 +67,7 @@
 				<nav>
 					<a href="/NewsCabinet/news/main">뉴스보기</a> <a href="#">스크랩보기</a> <a
 						href="#">기록보기</a> <a
-						href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
+						href="/NewsCabinet/UserRecord/write">기록작성</a>
 				</nav>
 			</div>
 		</header>
@@ -74,14 +76,13 @@
 		<%	ServletContext sc = getServletContext();
 			ResultSet userFolder = null;
 			userFolder = (ResultSet)request.getAttribute("userFolder");
-			%>
+		%>
 	
 	
-		<form method="post" action="../../UserRecord/restore">
+		<form method="post" action="/NewsCabinet/UserRecord/restore">
 			<h2 style="text-align: left; margin-left: 30px">기록 작성하기</h2>
 			<p>
-				<input class="listWriteInput" type="text" name="recordTitle"
-					placeholder="제목을 입력해주세요">
+				<input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요">
 			</p>
 			<br>
 		
@@ -100,29 +101,29 @@
 		            <option value='7'>과학</option>
 		            <option value='8'>스포츠</option>
 		        </select>
-		        <select id="subCategory"></select>
+		        <select id="subCategory" name="subCategory"></select>
 
 			</p>
 			<br>
 			<h3>폴더</h3>
-				<%
-					if (userFolder != null) {
-					out.println("<select name='userFolder'>");
-						while (userFolder.next()) {
-							int folderId = userFolder.getInt(1);
-							String folderName = userFolder.getString(2);
-							out.print("<option value='" + folderId + "'>" + folderName + "</option>");
-						}
-					out.println("</select>");
-					} else {
-					out.print("Folder가 로딩되지 않음");
+			<%
+				if (userFolder != null) {
+				out.println("<select name='userFolder'>");
+					while (userFolder.next()) {
+						int folderId = userFolder.getInt(1);
+						String folderName = userFolder.getString(2);
+						out.println("<option value='" + folderId + "'>" + folderName + "</option>");
 					}
-				%> 
+				out.println("</select>");
+				} else {
+				out.print("Folder가 로딩되지 않음");
+				}
+			%> 
 			<br>
 			<p>
-				공개 설정 : <input type="radio" name="recordPrivate" value="false"
-					checked> 공개 <input type="radio" name="recordPrivate"
-					value="true"> 비공개
+				공개 설정 : 
+				<input type="radio" name="recordPrivate" value="false" checked> 공개 
+				<input type="radio" name="recordPrivate" value="true"> 비공개
 			</p>
 			<br>
 			<p>
@@ -137,7 +138,7 @@
 			<textarea class="textBox" name="recordComment">글쓰기</textarea>
 			<br>
 			<br>
-			<button class="push_button_Stoore" type="button">저장하기</button>
+			<button class="push_button_Stoore" type="submit">저장하기</button>
 		</form>
 		<br>
 	</div>
