@@ -28,23 +28,22 @@
 				<p>내가 스크랩한 뉴스 정보</p>
 				<% List cate = new ArrayList(); %>
 				<%
-				// TODO: application 으로 바꾸기
-				ResultSet rs = (ResultSet) request.getAttribute("Categories");
-				if (rs != null) {
-					rs.beforeFirst();
-					String tmp = "";
-					while (true) {
-						if (rs.next()) {
-					if (!tmp.equals(rs.getString("category_name"))) {
-						cate.add(rs.getString("category_name"));
-					}
-					tmp = rs.getString("category_name");
-						} else {
-					break;
+					ResultSet rs = (ResultSet) application.getAttribute("Categories");
+					if (rs != null) {
+						rs.beforeFirst();
+						String tmp = "";
+						while (true) {
+							if (rs.next()) {
+						if (!tmp.equals(rs.getString("category_name"))) {
+							cate.add(rs.getString("category_name"));
+						}
+						tmp = rs.getString("category_name");
+							} else {
+						break;
+							}
 						}
 					}
-				}
-			%>
+				%>
 				<script>
 				cate = new Array();
 				<%
@@ -59,8 +58,7 @@
 								vnum = new Array();
 								<%String nameTest = "testing";%>
 								<%
-									// TODO: application 으로 바꾸기
-									rs = (ResultSet) request.getAttribute("Categories");
+									rs = (ResultSet) application.getAttribute("Categories");
 									if(rs!=null){
 										rs.beforeFirst();
 										String tmp = cate.get(i).toString();

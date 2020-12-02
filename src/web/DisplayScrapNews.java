@@ -52,9 +52,7 @@ public class DisplayScrapNews extends HttpServlet {
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
 		
-		// TODO: 삭제하기
-		ResultSet rs = ManageCategory.searchAllCategoryAndSubCategory(conn);
-		request.setAttribute("Categories", rs);
+		// TODO: custom category 받아와서 뿌려주기
 		
 		String selectedCategory = request.getParameter("Step1");
 		String selectedSubCategory = request.getParameter("Step2");
