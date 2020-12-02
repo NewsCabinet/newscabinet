@@ -17,7 +17,7 @@
 </style>
 </head>
 
-<jsp:include page="newsHeader.html"></jsp:include>
+<jsp:include page="webHeader.jsp"></jsp:include>
 
 <body>
 	<form method="POST" name="chaxngeuser" action="user/changeuser">

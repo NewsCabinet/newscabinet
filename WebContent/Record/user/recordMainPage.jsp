@@ -16,7 +16,7 @@
 }
 </style>
 </head>
-<jsp:include page="../../newsHeader.html"></jsp:include>
+<jsp:include page="../../webHeader.jsp"></jsp:include>
 <body>
 	<div class="basic_contentzone">
 		<p>폴더별로 보기</p>
