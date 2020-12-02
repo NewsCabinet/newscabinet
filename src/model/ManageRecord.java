@@ -138,4 +138,19 @@ public class ManageRecord {
 		}
 		return null;
 	}
+	
+	public static ResultSet searchRecordByRecordId(Connection conn, int recordId) {
+		String query = "SELECT * FROM newscabinet.user_record WHERE record_id=?";
+
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, recordId);
+			rs = pstat.executeQuery();
+				return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

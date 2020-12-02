@@ -23,26 +23,31 @@
 		<p>
 			폴더 :
 			<%
-			ResultSet rs = (ResultSet) request.getAttribute("folders");
-				if(rs!= null){
-			while(true){
-				if(rs.next()){
-					String tmpForFolder = "location.href='../UserRecord/main?folderId="+ rs.getInt("folder_id")+ "'";
-					out.println("<button name='folder' onclick=" + tmpForFolder + ">"+rs.getString("folder_name") + "</button>");
-				}else{
-					break;
+				ResultSet rs = (ResultSet) request.getAttribute("folders");
+				if (rs != null) {
+					while (true) {
+						if (rs.next()) {
+							String tmpForFolder = "location.href='../UserRecord/main?folderId=" + rs.getInt("folder_id")
+									+ "'";
+							out.println("<button name='folder' onclick=" + tmpForFolder + ">" + rs.getString("folder_name")
+									+ "</button>");
+						} else {
+							break;
+						}
+					}
 				}
-			}
-				}
-		%>
+			%>
 		</p>
 		<%		
 			rs = (ResultSet) request.getAttribute("recordData");
 			if(rs!= null){
 				while(true){
 					if(rs.next()){
-						//out.println(rs.getString("record_title")+ "<br/>");
-						out.println("<div id='newsContents'>");
+						String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId="+ rs.getInt("record_id")+ "'";
+						//System.out.println(tmpForScrap);
+						%>
+						<div id='newsContents' style="cursor: pointer;" onclick="<%=tmpForScrap%>;">
+						<%
 						out.println("<p style='font-size: 10px'><b><i>");
 						out.println(rs.getString("record_title"));
 						out.println("</i></b><p>");
