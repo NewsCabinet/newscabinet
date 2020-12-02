@@ -45,7 +45,7 @@ public class SettingUserRecord extends HttpServlet {
 		
 		
 		HttpSession userSession = request.getSession(false);
-		String userId = (String) userSession.getAttribute("userId");
+		int userId = (int) userSession.getAttribute("userId");
 		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");

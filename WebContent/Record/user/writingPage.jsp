@@ -8,7 +8,7 @@
 <link href="../../style.css" rel="stylesheet">
 <title>Home</title>
 </head>
-<jsp:include page="../../newsHeader.html"></jsp:include>
+<jsp:include page="../../webHeader.jsp"></jsp:include>
 
 <body>
 	<div class="basic_contentzone">
