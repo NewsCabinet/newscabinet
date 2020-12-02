@@ -59,7 +59,7 @@ public class DisplayScrapNews extends HttpServlet {
 		request.setAttribute("selectedCategory", selectedCategory);
 		request.setAttribute("selectedSubCategory", selectedSubCategory);
 		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, selectedSubCategory);
-		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
+		ResultSet rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
 		
 		request.setAttribute("ScrapNews", rs);
 		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
