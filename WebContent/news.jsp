@@ -21,7 +21,7 @@ body{
 					<a href="/NewsCabinet/home.jsp"><b>N</b>ews<b>C</b>abinet</a>
 				</div>
 				<nav>
-					<a href="/NewsCabinet/news/main">뉴스보기</a> <a href="#">스크랩보기</a> <a
+					<a href="/NewsCabinet/news/main">뉴스보기</a> <a href="/NewsCabinet/scrap/main">스크랩보기</a>  <a
 						href="#">기록보기</a> <a
 						href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
 				</nav>
@@ -32,6 +32,7 @@ body{
 		<div class="newsType">
 			<form method="post" action="../news/main">
 				<% int subCategoryId = -1; %>
+				<% String selectedCustomCategory = ""; %>
 				<%
 	               SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
 	               String subCategory = (String) request.getAttribute("subCategory");
@@ -59,6 +60,8 @@ body{
 	            			out.println(customCategories.get(i));
 	            			if(customCategories.get(i).equals(subCategory)){
 	            				out.println("<input type='radio' name='subCategory' value='" + customCategories.get(i) + "' checked>");
+	            				selectedCustomCategory = customCategories.get(i).toString();
+	            				subCategoryId = subcateData[0].getSubcategoryId();
 	            			}else{
 	            				out.println("<input type='radio' name='subCategory' value='" + customCategories.get(i) + "'>");
 	            			}
@@ -94,7 +97,8 @@ body{
 				
 				for (int i = 0; i < nd.length; i++) {
 					out.println("<div id='newsContents'>");
-					String tmpForScrap = "location.href='../scrap/main?location=" + i + "'";
+					String tmpForScrap = "location.href='../scrap/scrapNews?location=" + i + "&subId="+ subCategoryId
+										+ "&custom=" + selectedCustomCategory + "'";
 					
 					boolean check = false;
 					for(int j = scrappedNewsId.size() -1; j >= 0; j--){

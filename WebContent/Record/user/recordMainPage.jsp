@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/NewsCabinet/style.css" rel="stylesheet">
 </head>
 <body>
 	<p>저장되었습니다.</p>

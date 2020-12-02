@@ -69,6 +69,7 @@ public class ManageScrapNews {
 		}
 	}
 	
+
 	public static ResultSet searchAllUserScrapNewsForRecord(Connection conn, int userId) {
 
 		String query = "SELECT user_scrap_news.news_id, headline FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
@@ -88,7 +89,28 @@ public class ManageScrapNews {
 	}
 	
 	
-	public int searchScrapCountByUrl(Connection conn, String newsUrl) {
+	public static ResultSet searchScrapNewsByUserIdAndCategory(Connection conn, int userId, int subCategoryId) {
+	
+		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
+				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
+				+ " WHERE user_id=? and subcategory_id=?";
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setInt(2, subCategoryId);
+			rs = pstat.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
+	public static int searchScrapCountByUrl(Connection conn, String newsUrl) {
+
 		String query = "SELECT scrap_count from newscabinet.scrap_news WHERE url=?";
 		ResultSet rs = null;
 		int result = -1;
@@ -108,7 +130,7 @@ public class ManageScrapNews {
 		return result;
 	}
 	
-	public String insertScrapNewsData(Connection conn, int subcategoryId, NewsData newsData) throws SQLException {
+	public static String insertScrapNewsData(Connection conn, int subcategoryId, NewsData newsData) throws SQLException {
 		//searchScrapNewsIdByURL(conn, newsData.getUrl()).next() == true || 
 		if (searchScrapNewsIdByUrl(conn, newsData.getUrl()) != -1) {
 			int scrapCount = searchScrapCountByUrl(conn, newsData.getUrl());
@@ -153,7 +175,7 @@ public class ManageScrapNews {
 		
 	}
 	
-	public void insertScrapNewsRelationWithUser(Connection conn, int newsId, int userId, int customCategoryId) {
+	public static void insertScrapNewsRelationWithUser(Connection conn, int newsId, int userId, int customCategoryId) {
 		
 		if (searchScrapNewsAndUserByNewsId(conn, newsId, userId)) {
 			return;

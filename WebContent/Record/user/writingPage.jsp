@@ -3,49 +3,73 @@
 <%@ page import="java.sql.ResultSet" 
 	import="javax.servlet.ServletContext" 
 	import="java.sql.Connection" 
-	import="model.ManageRecord"%>
+	import="model.ManageRecord"
+	import="java.sql.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="../../style.css" rel="stylesheet">
+	<link href="/NewsCabinet/style.css" rel="stylesheet">
 	<title>기록작성하기</title>
-	<script src="http://code.jquery.com/jquery-3.3.1.js">
-	
-	
-	
-	</script>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript">
+
+		<% List categoryInJava = new ArrayList(); %>
+		<%
+			ResultSet rs = (ResultSet) application.getAttribute("Categories");
+			if (rs != null) {
+				rs.beforeFirst();
+				String tmp = "";
+				while (true) {
+					if (rs.next()) {
+				if (!tmp.equals(rs.getString("category_name"))) {
+					categoryInJava.add(rs.getString("category_name"));
+				}
+				tmp = rs.getString("category_name");
+					} else {
+				break;
+					}
+				}
+			}
+		%>
+		category = new Array();
+		<%
+		for(int i = 0; i< categoryInJava.size(); i++){%>
+			category.push("<%=categoryInJava.get(i).toString()%>");
+		<%}%>
+		
         $(function() {
             $("#firstCategory").change(function() {
-                var cate1 = ["정치", "청와대", "국회", "정당", "행정", "국방", "북한", "외교"];
-                var cate2 = ["경제", "금융", "증권" , "산업", "재계", "부동산", "소비자", "취업", "스타트업", "주식"];
-                var cate3 = ["국제", "아시아", "미국", "유럽", "중국", "일본", "중동", "아프리카", "국제기구", "국제경제"];
-                var cate4 = ["사회", "여성", "노동", "환경", "장애인", "인권", "복지", "건강", "교육", "종교"];
-                var cate5 = ["문화", "영화", "방송", "연예", "여행", "여가", "음악", "공연", "학술"];
-                var cate6 = ["IT", "웹", "IOS", "안드로이드", "네트워크", "게임", "빅데이터", "인공지능", "클라우드", "보안", "반도체", "IOT"];
-                var cate7 = ["과학", "로보틱스", "바이오", "의료", "천문학", "화학"];
-                var cate8 = ["스포츠", "축구", "프리미어리그","야구", "MLB", "골프", "바둑", "배구", "e-sport"];
-                
-                var changeItem;
-               
-                switch (this.value){
-	                case '1': changeItem = cate1; break;
-	                case '2': changeItem = cate2; break;
-	                case '3': changeItem = cate3; break;
-	                case '4': changeItem = cate4; break;
-	                case '5': changeItem = cate5; break;
-	                case '6': changeItem = cate6; break;
-	                case '7': changeItem = cate7; break;
-	                case '8': changeItem = cate8; break;
-                }
-                
-                $('#subCategory').empty();
-                for (var count = 0; count < changeItem.length; count++) {
-                    var option = $("<option>" + changeItem[count] + "</option>");
-                    $('#subCategory').append(option);
+            	<%for(int i = 0; i< categoryInJava.size(); i++){
+            		String selectedValue = Integer.toString(i);
+            	%>
+            	
+            		if(this.value == '<%=selectedValue%>') {
+            			<%System.out.println(selectedValue);%>
+            			subcategoryArray = new Array();
+            			<% String nameTest = "testing";%>
+            			<%
+						rs = (ResultSet) application.getAttribute("Categories");
+						if(rs!=null){
+							rs.beforeFirst();
+							String tmp = categoryInJava.get(i).toString();
+							while(true){
+								if(rs.next()){
+									if(tmp.equals(rs.getString("category_name"))){
+										nameTest = rs.getString("subcategory_name");%>
+										var name = "<%=nameTest%>"
+										subcategoryArray.push(name)
+								<%	}
+								}else break;	
+							}
+						}%>		
+            		}
+           		<%}%>
 
+                $('#subCategory').empty();
+                for (var i = 0; i < subcategoryArray.length; i++) {
+                	var option = $("<option value='" + subcategoryArray[i] + "'>" + subcategoryArray[i] +  "</option>");
+                    $('#subCategory').append(option);
                 }
             });
         });
@@ -89,19 +113,19 @@
 			<p>
 				날짜 : <%=sc.getAttribute("todayDate") %>
 			<br>
-			<p>
+			</p>
+			
+				<p>
 				카테고리 
-				<select name="firstCategory" id="firstCategory">
-		            <option value='1'>정치</option>
-		            <option value='2'>경제</option>
-		            <option value='3'>국제</option>
-		            <option value='4'>사회</option>
-		            <option value='5'>문화</option>
-		            <option value='6'>IT</option>
-		            <option value='7'>과학</option>
-		            <option value='8'>스포츠</option>
+				<select id="firstCategory">
+		            <%
+						for(int i = 0; i< categoryInJava.size(); i++){
+							out.println("<option value='"+ i + "'>" + categoryInJava.get(i).toString() + "</option>");
+						}
+						%>
 		        </select>
-		        <select id="subCategory" name="subCategory"></select>
+		        <select name= "subCategory" id="subCategory">
+		        </select>
 
 			</p>
 			<br>

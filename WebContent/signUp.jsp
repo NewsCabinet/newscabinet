@@ -39,7 +39,7 @@
 				<form method="post" action="SignUp">
 					<p width="50%" text-align="left">
 					
-					이메일 : <input type="email" name="userEmailId" required> 
+					이메일 : <input type="email" name="userEmailId" id="userEmailId" required> 
 					<input type="button" name="checkID" value="아이디 중복 체크" onclick="idCheck()" >
 					
 					<br/>
@@ -52,33 +52,14 @@
        			 	관심 분야를 선택해주세요 <br/>
 					<select name="category" size="1">
 						<option value="1">정치</option>
-						<option value="2">사회</option>
-						<option value="3">경제</option>
-						<option value="4">국제</option>
+						<option value="2">경제</option>
+						<option value="3">국제</option>
+						<option value="4">사회</option>
 						<option value="5">문화</option>
-						<option value="6">스포츠</option>
-						<option value="7">IT</option>
-						<option value="8">과학</option>
+						<option value="6">IT</option>
+						<option value="7">과학</option>
+						<option value="8">스포츠</option>
 					</select>
-					<p>
-						카테고리 
-						상위 <select name="firstCategory" id="firstCategory" onChange="makeSubcategoryList()" >
-							    <option value="1">정치</option>
-							    <option value="2">경제</option>
-							    <option value="3">국제</option>
-							    <option value="4">사회</option>
-							    <option value="5">문화</option>
-							    <option value="6">IT</option>
-							    <option value="7">과학</option>
-							    <option value="8">스포츠</option>
-						</select> 
-						<select name="subCategory" id="subCategory">
-							<option value="1">default</option>
-						</select>
-		
-					</p>
-					
-
 					<br>
 				  <input type="submit" value="가입하기"/>
 				  

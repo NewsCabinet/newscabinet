@@ -20,7 +20,9 @@ public class ManageUser {
 		String phone = request.getParameter("userPhone");
 		String numberStr = request.getParameter("userAge");
 		String genderStr[] = request.getParameterValues("userGender");
-		String categoryStr[] = request.getParameterValues("category");
+		String categoryText = request.getParameter("category");
+		System.out.println(categoryText);
+		int category = Integer.parseInt(categoryText);
 		
 		boolean gender = true; // true - 여성
 		for(String str : genderStr) {
@@ -30,15 +32,10 @@ public class ManageUser {
 				gender = false;
 		}
 		
-		int category = 0;
+		
 		int age = Integer.parseInt(numberStr);
 	
-		for(String str : categoryStr) {
-			category = Integer.parseInt(str);
-		}
 		
-		
-		//member table = (emailId, pw, email, category)
 		try {
 				
 			conn.setAutoCommit(false);

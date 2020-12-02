@@ -10,6 +10,24 @@ import java.util.ArrayList;
 
 public class ManageCategory {
 	
+	
+	public static ResultSet searchAllCategoryAndSubCategory(Connection conn) {
+		String sqlSt = "select category_name, subcategory_name from newscabinet.category join newscabinet.subcategory "
+						+"on newscabinet.category.category_id = newscabinet.subcategory.category_id";
+		Statement st = null;
+		try { 
+			st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+			if (st.execute(sqlSt)) {
+				return st.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static ResultSet searchCategoryNameById(Connection con, int categoryId) {
 
 		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;
@@ -114,53 +132,7 @@ public class ManageCategory {
 		
 	}
 	
-	/*	public static String[][] searchAllSubcategory(Connection conn){
-		
-		//ArrayList<String[]> subcategoryList = new ArrayList<String[]>();
-		String[][] subcategoryList = null;
-		
-		String sqlSt = "SELECT category_id, subcategory_name FROM newscabinet.subcategory";
-		Statement st, st2;
-		ResultSet rs = null;
-		int categoryId = -1;
-		String subcategoryName = null;
-		
-		
-		try {
-			st = conn.createStatement();
-			if(st.execute(sqlSt)) {
-				rs = st.getResultSet();
-			}
-			if(rs != null) {
-				subcategoryList = new String[8][];
-				int count = 0;
-				int element = 0;
-				while(rs.next()) {
-					categoryId = rs.getInt(1);
-					subcategoryName = rs.getString(2);
-					if(count == 0) {
-						element = ManageCategory.searchCountSubCategory(conn, categoryId); // 서브카테고리 개수
-						subcategoryList[categoryId - 1] = new String[element];
-						subcategoryList[categoryId][element++] = subcategoryName;
-						System.out.println(subcategoryName);
-					
-					}else {
-						count++;
-						element = 0;
-						subcategoryList[categoryId][element] = subcategoryName;
-						System.out.println(subcategoryName);
-					}
-				}
-			} 
-			}catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return subcategoryList;
-			
-		}
 
-	*/
 			
 	
 	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
@@ -172,9 +144,9 @@ public class ManageCategory {
 			pstat.setString(2, "전체");
 			
 			rs = pstat.executeQuery();
-				if(rs.next()) {
-					//System.out.println(rs.getInt(1));
-					return rs.getInt(1);
+			if(rs.next()) {
+				//System.out.println(rs.getInt(1));
+				return rs.getInt(1);
 				}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -202,6 +174,24 @@ public class ManageCategory {
 		return null;
 	}
 
+	public static int searchCustomcategoryIdByUserAndCustomcategoryName(Connection conn, int userId, String customCategoryName) {
+		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=? ";
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, customCategoryName);
+			
+			rs = pstat.executeQuery();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 	public static void insertCustomcategory(Connection conn, int userId, String customCategoryName, int categoryId) {
 		

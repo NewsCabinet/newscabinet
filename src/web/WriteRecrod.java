@@ -48,10 +48,9 @@ public class WriteRecrod extends HttpServlet {
 		}
 		
 		if (recordId != -1) {			
-			//out.print("<script>alert('저장되었습니다.'); location.href='../Record/user/recordMainPage.jsp'; </script>\r\n");
+			
 			
 			for(int i = 0; i <userSelectNews.length; i++) {
-				System.out.println("Selected News = " + userSelectNews[i]);
 				int selectedNewsId =  Integer.parseInt(userSelectNews[i]);
 				int recordResult = ManageRecord.insertUserScrapRecord(conn, recordId, selectedNewsId);
 				
@@ -59,8 +58,7 @@ public class WriteRecrod extends HttpServlet {
 					System.out.println("user_scrap_record 저장하는데 문제가 생김");
 				}
 			}
-			
-			
+			out.print("<script>alert('저장되었습니다.') </script>\r\n");
 			RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
 			view.forward(request, response);
 		}else {

@@ -35,15 +35,6 @@ public class ManageRecord {
 		int folderId = Integer.parseInt(userFolderStr);
 		System.out.println("insert Record folderId= " + folderId);
 		
-		/*
-		String userFolderStr[] =  request.getParameterValues("userFolder");
-		String folderName = null;
-		
-		for(String str : userFolderStr) {
-			folderName = str;
-		}
-		*/
-		
 	
 		String recordTitle = (String)request.getParameter("recordTitle");
 		System.out.println("insert Record recordTitle= " + recordTitle);
@@ -156,11 +147,8 @@ public class ManageRecord {
 				pstmt.setInt(1, recordId);
 				pstmt.setInt(2, newsId);
 				
-				System.out.println("userId = "+ recordId);
-				System.out.println("newsId = "+ newsId);
-			
 				result = pstmt.executeUpdate();
-				System.out.println("결과 = "+ result);
+				
 				conn.commit();
 				conn.setAutoCommit(true);
 				

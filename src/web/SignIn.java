@@ -114,10 +114,10 @@ public class SignIn extends HttpServlet {
 							e.printStackTrace();
 						}
 						
+						ResultSet categoryAndSubData = ManageCategory.searchAllCategoryAndSubCategory(conn);
+						sc.setAttribute("Categories", categoryAndSubData);
 						
 						out.print("<script>alert('로그인 성공! 환영합니다'); location.href='home.jsp'; </script>\r\n");
-						//RequestDispatcher view = request.getRequestDispatcher("/home.jsp");
-						//view.forward(request, response);
 					}
 					else {
 						System.out.println("비밀번호 틀림");
