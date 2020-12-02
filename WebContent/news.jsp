@@ -24,7 +24,6 @@
 <jsp:include page="newsHeader.html"></jsp:include>
 
 <body>
-
 	<div class="basic_contentzone">
 		<div class="newsType">
 			<form method="post" action="../news/main">
