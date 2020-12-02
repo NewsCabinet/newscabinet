@@ -63,8 +63,8 @@ public class ManageScrapNews {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 	
 	public static ResultSet searchScrapNewsByUserIdAndCategory(Connection conn, int userId, int subCategoryId) {
@@ -82,8 +82,8 @@ public class ManageScrapNews {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 	
 	public static int searchScrapCountByUrl(Connection conn, String newsUrl) {
