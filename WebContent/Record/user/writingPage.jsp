@@ -8,23 +8,9 @@
 <link href="../../style.css" rel="stylesheet">
 <title>Home</title>
 </head>
+<jsp:include page="../../newsHeader.html"></jsp:include>
+
 <body>
-	<div class="box-area">
-		<header class="head">
-			<div class="wrapper">
-				<div class="logo">
-					<a href="/NewsCabinet/home.jsp"><b>N</b>ews<b>C</b>abinet</a>
-				</div>
-				<nav>
-					<a href="/NewsCabinet/news/main">뉴스보기</a>
-					<a href="/NewsCabinet/scrap/main">스크랩보기</a>
-					<a class=headerA href="#">나의 </a>
-					<a class=headerA href="#">다른 사람 </a>
-					<a href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
-				</nav>
-			</div>
-		</header>
-	</div>
 	<div class="basic_contentzone">
 		<form method="post" action="../../UserRecord/restore">
 			<h2 style="text-align: left; margin-left: 30px">기록 작성하기</h2>
