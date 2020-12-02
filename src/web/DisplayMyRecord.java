@@ -52,7 +52,17 @@ public class DisplayMyRecord extends HttpServlet {
 		
 		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
 		request.setAttribute("folders", rs);
-
+		
+		String tmp = (String) request.getParameter("folderId");
+		int folderId;
+		if(tmp==null) {
+			folderId=0;
+		}else {
+			folderId = Integer.parseInt(tmp);
+		}
+		rs = ManageRecord.searchRecordByUserIdAndFolderId(conn, userId, folderId);
+		request.setAttribute("recordData", rs);
+		
 		RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
 		view.forward(request, response);
 	}

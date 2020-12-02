@@ -122,25 +122,20 @@ public class ManageRecord {
 		
 		return result;
 	}
-		
 	
-	
-	public static ResultSet searchUserByID(Connection conn, String userID) {
-		
-		String query = "SELECT * FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
-		Statement st;
-		
+	public static ResultSet searchRecordByUserIdAndFolderId(Connection conn, int userId, int folderId) {
+		String query = "SELECT * FROM newscabinet.user_record WHERE user_id=? and folder_id=?";
+
+		ResultSet rs = null;
 		try {
-			st = conn.createStatement();
-			if(st.execute(query)) {
-				return st.getResultSet();
-			}
-		}catch (Exception e) {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setInt(2, folderId);
+			rs = pstat.executeQuery();
+				return rs;
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
-	
 }
