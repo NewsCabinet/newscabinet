@@ -124,7 +124,6 @@ public class NewsCatching extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(tmp);
 		request.setAttribute("customCategories", tmp);
 		
 		

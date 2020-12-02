@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ public class ManageRecord {
 				+ " VALUES(?, ?, ?, ?, ?, ?, ?)";
 		
 		HttpSession userSession = request.getSession(false);
-		String userId = (String) userSession.getAttribute("userId");
+		int userId = (int) userSession.getAttribute("userId");
 		
 		String newsUrl = (String)request.getAttribute("newsUrl");
 		System.out.println("url = " + newsUrl);
@@ -100,14 +101,13 @@ public class ManageRecord {
 	}
 	
 	
-	public static int searchFolderIdByFolderName(Connection conn, String userId, String folderName) {
+	public static int searchFolderIdByFolderName(Connection conn, int userId, String folderName) {
 		int result = -1;
 
 		String query = "SELECT folder_id FROM newscabinet.user_record_folder "
-				+ "WHERE user_id ='"+userId+"' and folder_name='" +folderName + "'";
+				+ "WHERE user_id ="+userId+" and folder_name='" +folderName + "'";
 		Statement st = null;
 		ResultSet rs = null;
-		
 		
 		try {
 			st = conn.createStatement();
@@ -152,5 +152,25 @@ public class ManageRecord {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static int insertFolderUsingFolderName(Connection conn, int userId, String folderName) {
+		if(searchFolderIdByFolderName(conn, userId, folderName) != -1) {
+			return -1;
+		}
+		
+		String query = "insert into newscabinet.user_record_folder (user_id, folder_name) values(?, ?)";
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, folderName);
+			int tuple = pstat.executeUpdate();
+			
+			return tuple;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

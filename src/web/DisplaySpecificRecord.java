@@ -53,7 +53,6 @@ public class DisplaySpecificRecord extends HttpServlet {
 		String tmp = (String) request.getParameter("recordId");
 		int recordId = Integer.parseInt(tmp);
 		
-		System.out.println("record id : "+ tmp);
 		ResultSet rs = (ResultSet) ManageRecord.searchRecordByRecordId(conn, recordId);
 		request.setAttribute("recordData", rs);
 		

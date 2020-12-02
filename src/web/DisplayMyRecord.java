@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ManageCategory;
 import model.ManageRecord;
 
 /**
@@ -49,6 +50,20 @@ public class DisplayMyRecord extends HttpServlet {
 		
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
+		
+		String[] addfolder = request.getParameterValues("folder");
+		
+		if(addfolder != null) {
+			int tuple = 0;
+			for(int i = 0; i < addfolder.length; i++) {
+				tuple = ManageRecord.insertFolderUsingFolderName(conn, userId, addfolder[i]);
+			}
+			if(tuple == addfolder.length) {
+				System.out.println("folder가 잘 추가되었습니다.");
+			}else {
+				System.out.println("folder가 추가 안 되었습니다..");
+			}
+		}
 		
 		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
 		request.setAttribute("folders", rs);

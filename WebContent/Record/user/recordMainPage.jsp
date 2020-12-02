@@ -20,32 +20,45 @@
 <body>
 	<div class="basic_contentzone">
 		<p>폴더별로 보기</p>
-		<p>
-			폴더 :
-			<%
-				ResultSet rs = (ResultSet) request.getAttribute("folders");
-				if (rs != null) {
-					while (true) {
-						if (rs.next()) {
-							String tmpForFolder = "location.href='../UserRecord/main?folderId=" + rs.getInt("folder_id")
-									+ "'";
-							out.println("<button name='folder' onclick=" + tmpForFolder + ">" + rs.getString("folder_name")
-									+ "</button>");
-						} else {
-							break;
+		<form method="POST" action="/NewsCabinet/UserRecord/main">
+			<p>
+				폴더 :
+				<%
+					ResultSet rs = (ResultSet) request.getAttribute("folders");
+					if (rs != null) {
+						while (true) {
+							if (rs.next()) {
+								String tmpForFolder = "location.href='../UserRecord/main?folderId=" + rs.getInt("folder_id")
+										+ "'";
+								out.println("<button name='folder' onclick=" + tmpForFolder + ">" + rs.getString("folder_name")
+										+ "</button>");
+							} else {
+								break;
+							}
 						}
 					}
-				}
-			%>
-		</p>
-		<%		
+				%>
+				
+			</p>
+			<div id="addFolder">
+				<script type="text/javascript">
+					function add_textbox() {
+						document.getElementById("addFolder").innerHTML += "<input type='text' name='folder' >";
+					}
+				</script>
+				<input type="button" value="새로운 폴더 만들기" onclick="add_textbox()">
+			</div>
+			<input type="submit" value="제출">
+		</form>
+		<%
 			rs = (ResultSet) request.getAttribute("recordData");
-			if(rs!= null){
-				while(true){
-					if(rs.next()){
-						String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId="+ rs.getInt("record_id")+ "'";
-						//System.out.println(tmpForScrap);
-						%>
+		if (rs != null) {
+			while (true) {
+				if (rs.next()) {
+			String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId=" + rs.getInt("record_id")
+					+ "'";
+			//System.out.println(tmpForScrap);
+		%>
 						<div id='newsContents' style="cursor: pointer;" onclick="<%=tmpForScrap%>;">
 						<%
 						out.println("<p style='font-size: 10px'><b><i>");
