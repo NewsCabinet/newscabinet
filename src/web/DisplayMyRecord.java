@@ -56,7 +56,10 @@ public class DisplayMyRecord extends HttpServlet {
 		if(addfolder != null) {
 			int tuple = 0;
 			for(int i = 0; i < addfolder.length; i++) {
-				tuple = ManageRecord.insertFolderUsingFolderName(conn, userId, addfolder[i]);
+				addfolder[i] = addfolder[i].trim();
+				if(addfolder[i]!=null) {
+					tuple = ManageRecord.insertFolderUsingFolderName(conn, userId, addfolder[i]);	
+				}
 			}
 			if(tuple == addfolder.length) {
 				System.out.println("folder가 잘 추가되었습니다.");

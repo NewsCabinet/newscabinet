@@ -56,7 +56,7 @@ public class ManageRecord {
 				System.out.println("connection problem");
 			}
 			
-			pstmt.setString(1, userId);
+			pstmt.setInt(1, userId);
 			pstmt.setInt(2, newsId);
 			pstmt.setInt(3, folderId);
 			pstmt.setString(4, recordTitle);

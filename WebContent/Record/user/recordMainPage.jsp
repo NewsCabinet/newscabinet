@@ -20,7 +20,7 @@
 <body>
 	<div class="basic_contentzone">
 		<p>폴더별로 보기</p>
-		<form method="POST" action="/NewsCabinet/UserRecord/main">
+		<!-- <form method="POST" action="/NewsCabinet/UserRecord/main"> -->
 			<p>
 				폴더 :
 				<%
@@ -41,32 +41,31 @@
 				
 			</p>
 			<div id="addFolder">
+			<form method="POST" action="/NewsCabinet/UserRecord/main">
 				<script type="text/javascript">
 					function add_textbox() {
 						document.getElementById("addFolder").innerHTML += "<input type='text' name='folder' >";
 					}
 				</script>
 				<input type="button" value="새로운 폴더 만들기" onclick="add_textbox()">
+				<input type="submit" value="제출">
+			</form>
 			</div>
-			<input type="submit" value="제출">
-		</form>
 		<%
 			rs = (ResultSet) request.getAttribute("recordData");
-		if (rs != null) {
-			while (true) {
-				if (rs.next()) {
-			String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId=" + rs.getInt("record_id")
-					+ "'";
-			//System.out.println(tmpForScrap);
-		%>
-						<div id='newsContents' style="cursor: pointer;" onclick="<%=tmpForScrap%>;">
-						<%
-						out.println("<p style='font-size: 10px'><b><i>");
-						out.println(rs.getString("record_title"));
-						out.println("</i></b><p>");
-						out.println(rs.getString("record_date"));
-						out.println("</p><br></div>");
-						out.println("<br/>");
+			if (rs != null) {
+				while (true) {
+					if (rs.next()) {
+					String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId=" + rs.getInt("record_id") + "'";
+			%>
+							<div id='newsContents' style="cursor: pointer;" onclick="<%=tmpForScrap%>;">
+							<%
+							out.println("<p style='font-size: 10px'><b><i>");
+							out.println(rs.getString("record_title"));
+							out.println("</i></b><p>");
+							out.println(rs.getString("record_date"));
+							out.println("</p><br></div>");
+							out.println("<br/>");
 					}else{
 						break;
 					}
