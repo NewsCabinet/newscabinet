@@ -56,26 +56,16 @@ public class DisplayScrapNews extends HttpServlet {
 		ResultSet rs = ManageCategory.searchAllCategoryAndSubCategory(conn);
 		request.setAttribute("Categories", rs);
 		
-		String tmp = request.getParameter("Step2");
-		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, tmp);
+		String selectedCategory = request.getParameter("Step1");
+		String selectedSubCategory = request.getParameter("Step2");
+		request.setAttribute("selectedCategory", selectedCategory);
+		request.setAttribute("selectedSubCategory", selectedSubCategory);
+		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, selectedSubCategory);
 		rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
 		
 		request.setAttribute("ScrapNews", rs);
 		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
-		/*if(scrapNews!=null){
-			while(true){
-				try {
-					if(scrapNews.next()){
-						System.out.println(scrapNews.getString("headline"));
-					}else{
-						break;
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}*/
+		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/scrapnews.jsp");
 		view.forward(request, response);

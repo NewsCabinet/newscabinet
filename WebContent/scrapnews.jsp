@@ -96,10 +96,15 @@
 						<select name='Step1' onchange='changes1Step(value)'>
 							<option>--상위 카테고리--</option>
 							<%
-							for(int i = 0; i< cate.size(); i++){
-								out.println("<option>"+ cate.get(i).toString() + "</option>");
-							}
-						%>
+								String selectedCategory = (String) request.getAttribute("selectedCategory");
+								for(int i = 0; i< cate.size(); i++){
+									if(cate.get(i).equals(selectedCategory)){
+										out.println("<option value='"+cate.get(i).toString() + "' selected>"+ cate.get(i).toString() + "</option>");
+									}else{
+										out.println("<option value='"+cate.get(i).toString() + "'>"+ cate.get(i).toString() + "</option>");	
+									}
+								}
+							%>
 						</select> <select name='Step2'>
 							<option>--하위 카테고리--</option>
 						</select> <input type="submit" value="카테고리 선택 완료">
