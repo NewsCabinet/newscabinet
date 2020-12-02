@@ -78,7 +78,7 @@ public class ManageUser {
 
 	}
 
-	public ResultSet searchUserByID(Connection conn, String userID) {
+	public static ResultSet searchUserByID(Connection conn, String userID) {
 
 		String query = "SELECT * FROM newscabinet.user WHERE user_id =" + "'" + userID + "'" ; 
 		Statement st;
@@ -285,11 +285,7 @@ public class ManageUser {
 		return result;
 	}
 	
-	public static void updateuser_pw(Connection conn, HttpServletRequest reques) {
-		
-	}
-	
-	
+
 	public static void updateChangeUser(Connection conn, String user_name,String userPhone,String userAge, boolean userGender,int category,
 			String userPassword, String userEmailId) throws SQLException {
 		int result = -1;
