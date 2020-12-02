@@ -8,26 +8,23 @@
 <title>뉴스 보기</title>
 <link href="../style.css" rel="stylesheet">
 <style>
-body{
-	text-align: left;
+/*body {
+   text-align: left;
+}*/
+
+.basic_contentzone {
+	padding-top: 20px;
+	position: relative;
+	top: 100px;
+	width: 100%;
+	height: 500px;
 }
 </style>
 </head>
+<jsp:include page="newsHeader.html"></jsp:include>
+
 <body>
-	<div class="box-area">
-		<header class="head">
-			<div class="wrapper">
-				<div class="logo">
-					<a href="/NewsCabinet/home.jsp"><b>N</b>ews<b>C</b>abinet</a>
-				</div>
-				<nav>
-					<a href="/NewsCabinet/news/main">뉴스보기</a> <a href="/NewsCabinet/scrap/main">스크랩보기</a>  <a
-						href="#">기록보기</a> <a
-						href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
-				</nav>
-			</div>
-		</header>
-	</div>
+
 	<div class="basic_contentzone">
 		<div class="newsType">
 			<form method="post" action="../news/main">
@@ -74,9 +71,10 @@ body{
 					}
 				</script>
 				<div id="addCustomCategories">
-	               <input type="button" value="나만의 키워드 추가" onclick="add_textbox()"> <br>
-	            </div>
-               <%
+					<input type="button" value="나만의 키워드 추가" onclick="add_textbox()">
+					<br>
+				</div>
+				<%
                String newsType = (String) request.getAttribute("newsType");
                if (newsType.toString().equals("sim")) {
                   out.println(
@@ -90,7 +88,7 @@ body{
 				<input type="submit" value="선택 완료">
 			</form>
 		</div>
-		<section style="padding-top:0px;">
+		<section style="padding-top: 0px;">
 			<%
 				NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 				List scrappedNewsId = (ArrayList) request.getAttribute("scrappedNewsId"); 

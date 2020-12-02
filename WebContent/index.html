@@ -4,30 +4,38 @@
 <meta charset="UTF-8">
 <link href="./style.css" rel="stylesheet">
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+   src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <title>Home</title>
 </head>
-<jsp:include page="newsHeader.html"></jsp:include>
 <body>
-	<div class="banner-area">
-		<h2>
-			<b class="title">Own your mind!</b>
-		</h2>
-		<script>
+   <div class="box-area">
+      <header class="head">
+         <div class="wrapper">
+            <div class="logo">
+               <a href="#"><b>N</b>ews<b>C</b>abinet</a>
+            </div>
+         </div>
+      </header>
+   </div>
+   <div class="banner-area">
+      <h2>
+         <b class="title">Own your mind!</b>
+      </h2>
+      <script>
          $(function(){
             $(".title").fadeIn(2000);
          });
          </script>
     <script action="Sign/findId.html">
-		function findId(){
-			window.open("Sign/findId.html", "아이디찾기", "width=400 height=350")
-		}
-	</script> 
-	<script action="Sign/findPasswd.html">
-		function findPasswd(){
-			window.open("Sign/findPasswd.html", "비밀번호찾기", "width=400 height=350")
-		}
-	</script> 
+      function findId(){
+         window.open("Sign/findId.html", "아이디찾기", "width=400 height=350")
+      }
+   </script> 
+   <script action="Sign/findPasswd.html">
+      function findPasswd(){
+         window.open("Sign/findPasswd.html", "비밀번호찾기", "width=400 height=350")
+      }
+   </script> 
    </div>
    <div class="index_content-area">
       <div class="index_wrapper">

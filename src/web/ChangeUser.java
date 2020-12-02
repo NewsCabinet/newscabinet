@@ -38,6 +38,8 @@ public class ChangeUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
 		HttpSession httpSession = request.getSession();
 		System.out.println("회원정보수정 서블릿");
 		String userName = request.getParameter("userName");	
@@ -49,25 +51,21 @@ public class ChangeUser extends HttpServlet {
 		Boolean userGender = Boolean.parseBoolean(Sgender);
 		String Scategory = request.getParameter("category");
 		int category = Integer.parseInt(Scategory);
-		System.out.println("일단 가져온 이름" + userName);
+		String userPassword = request.getParameter("userPassword");
 		ServletContext sc = getServletContext();
-		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
-		System.out.println("그다음" + userName);
-
 		try {
-			ManageUser.updateChangeUser(conn,userName,userPhone,userAge,userGender,category,userEmailId);
+			ManageUser.updateChangeUser(conn,userName,userPhone,userAge,userGender,category,userPassword,userEmailId);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 HttpSession session = request.getSession(false);
+		 session.setAttribute("userName",userName);
 
-	    System.out.println("성공"); 
-		 HttpSession session = request.getSession();
-		 session.setAttribute("name",userName);
-		 //session.setAttribute("phone",userPhone);
-		 RequestDispatcher view = sc.getRequestDispatcher("/home.jsp");
-         view.forward(request, response);	
+		 out.print("<script>alert('회원정보수정 완료되었습니다.'); location.href='../home.jsp'; </script>\r\n");
 		}
 
 	/**

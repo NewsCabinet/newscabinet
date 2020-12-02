@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/../..style.css" rel="stylesheet">
+<link href="./style.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>HOME</title>
 </head>
@@ -13,18 +13,22 @@
     <div class="box-area">
 		<header class="head">
 			<div class="wrapper">
-			<form name ="changeuser" action="changeUser.jsp">
-			   <% HttpSession userSession = request.getSession(false);
-            	 String userName = (String)userSession.getAttribute("name");
-            	 String username =(String)request.getAttribute("id");
-             	 out.println("<button class=nameButton>"  + userName + "님 환영합니다!</button>"); %>
+			<form method ="POST" name ="changeuser" action="changeUser.jsp">
+			   <% 
+            	  if(session.getAttribute("userName")!= null){
+                	 out.println("<button class=nameButton>"  + session.getAttribute("userName") + "님 환영합니다!</button>"); 
+            	  }
+            	  else{
+            	   out.println("<p class=nameButton> SignIn session이 종료되었습니다.</p>");
+            	  }
+            	 %> 	 
              </form>
 				<div class="logo">
                     <a href="/NewsCabinet/home.jsp"><b style="color: #bbb">N</b>ews<b style="color: #bbb">C</b>abinet</a>
 				</div>
 				<nav>
 					<a class=headerA href="/NewsCabinet/news/main">뉴스보기</a>
-					<a href="/NewsCabinet/scrap/main">스크랩보기</a>
+					<a class=headerA href="/NewsCabinet/scrap/main">스크랩보기</a>
 				    <a class=headerA href="#">나의 기록보기</a>
 				    <a class=headerA href="#">다른사람 기록보기</a>
 				    <a class=headerA href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>

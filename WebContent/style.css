@@ -91,17 +91,18 @@ nav a {
 	display: none;
 }
 
-.basic_contentzone {
+/*.basic_contentzone {
 	padding-top: 20px;
 	position: relative;
+		top: 300px;
 	width: 100%;
 	height: 500px;
-	top: 100px;
-}
 
+}
+*/
 .index_content-area {
 	width: 100%;
-	height: 600px;
+	height: 500px;
 	position: relative;
 	background-color: #C7C7C7;
 	top: 450px;
@@ -109,7 +110,7 @@ nav a {
 
 .content-area {
 	width: 100%;
-	height: 600px;
+	height: 500px;
 	position: relative;
 	background-color: white;
 	top: 450px;
@@ -200,8 +201,22 @@ a {
 .listWriteInput:hover {
 	box-shadow: 2px 2px 2px #555;
 	background-color: #ddd;
+	box-sizing: border-box;
+	color: #333;
 }
 
+.modifyWriteInput{
+	padding-top: 10px;
+	width: 500px;
+	height: 40px;
+	border: none;
+	outline: none;
+	color: #333;
+
+}
+.modifyWriteInput:hover{
+	box-shadow: 2px 2px 2px #555;
+}
 .newsBox {
 	width: 60%;
 	height: 350px;
@@ -266,4 +281,7 @@ a {
 	font-weight:bold;
 	border:none;
 	text-align: center;
+}
+.inputCss{
+	
 }

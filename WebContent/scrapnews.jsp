@@ -7,6 +7,7 @@
 <title>내가 스크랩한 뉴스보기</title>
 <link href="../style.css" rel="stylesheet">
 </head>
+<jsp:include page="newsHeader.html"></jsp:include>
 <body>
 	<section>
 		<div>

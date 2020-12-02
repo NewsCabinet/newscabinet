@@ -290,12 +290,12 @@ public class ManageUser {
 	}
 	
 	
-	public static void updateChangeUser(Connection conn,String user_name,String userPhone,String userAge, boolean userGender,
-			int category, String userEmailId) throws SQLException {
+	public static void updateChangeUser(Connection conn, String user_name,String userPhone,String userAge, boolean userGender,int category,
+			String userPassword, String userEmailId) throws SQLException {
 		int result = -1;
 		PreparedStatement pstmt = null;
-		HttpSession session = null;
-		String query = "UPDATE newscabinet.user SET user_name=?,user_phone=?,user_age=?,user_gender=?,category_id=? WHERE user_email_id=?";
+		
+		String query = "UPDATE newscabinet.user SET user_name=?,user_phone=?,user_age=?,user_gender=?,category_id=?,user_pw=? WHERE user_email_id ='" + userEmailId + "'";
 
 		//	conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(query);
@@ -303,81 +303,17 @@ public class ManageUser {
 			pstmt.setString(1,user_name);
 			pstmt.setString(2,userPhone);
 			pstmt.setString(3,userAge);
-			pstmt.setBoolean(4,userGender);
-			pstmt.setInt(5, category);
-			pstmt.setString(6,userEmailId);
+			pstmt.setBoolean(4, userGender);
+			pstmt.setInt(5,category);
+			pstmt.setString(6, userPassword);
+			//pstmt.setString(6,userEmailId);
 
 			result = pstmt.executeUpdate();
-
-		
-			System.out.println("update" + result);
 		//	conn.commit();
 		//	conn.setAutoCommit(true);
 		
 	
 	}
-
-
-
-	/*public static String updateChangeUser(Connection conn, String passwd, String name, String phone, String numberStr, String categoryStr) {
-		int result = -1;
-		PreparedStatement pstmt = null;
-
-		//String emailId = (String)request.getParameter("userEmailId");
-		String passwd =request. etParameter("userPassword");
-		String name = request.getParameter("userName");
-		String phone = request.getParameter("userPhone");
-		String numberStr = request.getParameter("userAge");
-		String genderStr[] = request.getParameterValues("userGender");
-		String categoryStr[] = request.getParameterValues("category");
-
-		boolean gender = true; // true - 여성
-		for(String str : genderStr) {
-			if(str.equals("true"))
-				gender = true;
-			else
-				gender = false;
-		}
-
-		int category = 0;
-		int age = Integer.parseInt(numberStr);
-
-		for(String str : categoryStr) {
-			category = Integer.parseInt(str);
-		}
-
-		try {
-
-			conn.setAutoCommit(false);
-
-			try {
-				String query = "UPDATE newscabinet.user SET user_pw=?, user_name=?, user_phone=?, user_age=?, user_gender=?, category_id=?"
-						+ "WHERE = user_id";
-				pstmt = conn.prepareStatement(query);	
-			}catch(Exception e) {
-				e.printStackTrace();
-				System.out.println("conn problem");
-			}
-
-			pstmt.setString(1, passwd);
-			pstmt.setNString(2, name);
-			pstmt.setString(3, phone);
-			pstmt.setInt(4, age);
-			pstmt.setBoolean(5, gender);
-			pstmt.setInt(6, category);
-
-			result = pstmt.executeUpdate();
-			conn.commit();
-			conn.setAutoCommit(true);
-
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-*/
-
-
-	}
+}
 
 
