@@ -23,8 +23,8 @@ body{
 				<nav>
 					<a href="/NewsCabinet/news/main">뉴스보기</a>
 					<a href="/NewsCabinet/scrap/main">스크랩보기</a>
-					<a href="#">나의 기록보기</a>
-					<a href="#">다른 사람 기록보기</a>
+					<a class=headerA href="#">나의 </a>
+					<a class=headerA href="#">다른 사람 </a>
 					<a href="/NewsCabinet/Record/user/writingPage.jsp">기록작성</a>
 				</nav>
 			</div>
