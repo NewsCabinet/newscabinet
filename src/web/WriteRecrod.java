@@ -41,7 +41,7 @@ public class WriteRecrod extends HttpServlet {
 		
 		int recordId = ManageRecord.insertUserRecord(conn, request);
 		
-		String[] userSelectNews = request.getParameterValues("userSelectedNews");
+		String[] userSelectNews = request.getParameterValues("checkBoxSelectedNews");
 		
 		for(int i = 0; i <userSelectNews.length; i++) {
 			System.out.println("Selected News = " + userSelectNews[i]);

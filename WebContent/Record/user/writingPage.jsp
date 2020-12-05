@@ -3,11 +3,12 @@
 <%@ page import="java.sql.ResultSet" 
 	import="javax.servlet.ServletContext" 
 	import="java.sql.Connection" 
-	import="model.ManageRecord"
+	import="model.ManageRecord, model.UserScrapNews"
 	import="java.sql.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<jsp:include page="../../webHeader.jsp"></jsp:include>
 	<meta charset="UTF-8">
 	<link href="/NewsCabinet/style.css" rel="stylesheet">
 	<title>기록작성하기</title>
@@ -76,37 +77,21 @@
 	</script>
 	<script>
 		function getUserChosenScap(){
-			window.open("../Record/user/userChooseScap.jsp", "뉴스 선택하기", "width=600 height=500")
+			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
 			
 		}
 	</script>
 </head>
 <body>
-	<div class="box-area">
-		<header class="head">
-			<div class="wrapper">
-				<div class="logo">
-					<a href="/NewsCabinet/home.jsp"><b>N</b>ews<b>C</b>abinet</a>
-				</div>
-				<nav>
-
-					<a href="/NewsCabinet/news/main">뉴스보기</a>
-					<a href="/NewsCabinet/scrap/main">스크랩보기</a>
-					<a class=headerA href="#">나의 </a>
-					<a class=headerA href="#">다른 사람 </a>
-					<a href="/NewsCabinet/UserRecord/write">기록작성</a>
-
-				</nav>
-			</div>
-		</header>
-	</div>
+	
 	<div class="basic_contentzone">
-		<%	ServletContext sc = getServletContext();
-			ResultSet userFolder = null;
-			userFolder = (ResultSet)request.getAttribute("userFolder");
+	
+		<%	ArrayList<Integer> userFolderIdList = (ArrayList)request.getAttribute("forderIdList");
+			ArrayList<String> userFolderNameList = (ArrayList)request.getAttribute("forderNameList");
+			String today = (String)request.getAttribute("todayDate");
+			ArrayList<UserScrapNews> userScrapList = (ArrayList)request.getAttribute("userScrapList");
 		%>
-	
-	
+
 		<form method="post" action="/NewsCabinet/UserRecord/restore">
 			<h2 style="text-align: left; margin-left: 30px">기록 작성하기</h2>
 			<p>
@@ -115,38 +100,26 @@
 			<br>
 		
 			<p>
-				날짜 : <%=sc.getAttribute("todayDate") %>
+				날짜 : <%=today%>
 			<br>
 			</p>
-			
 				<p>
-				카테고리 
-				<select id="firstCategory">
-		            <%
-						for(int i = 0; i< categoryInJava.size(); i++){
+				카테고리  <select id="firstCategory">
+		            <%  for(int i = 0; i< categoryInJava.size(); i++){
 							out.println("<option value='"+ i + "'>" + categoryInJava.get(i).toString() + "</option>");
-						}
-						%>
+						}%>
 		        </select>
 		        <select name= "subCategory" id="subCategory">
 		        </select>
-
 			</p>
 			<br>
 			<h3>폴더</h3>
-			<%
-				if (userFolder != null) {
-				out.println("<select name='userFolder'>");
-					while (userFolder.next()) {
-						int folderId = userFolder.getInt(1);
-						String folderName = userFolder.getString(2);
-						out.println("<option value='" + folderId + "'>" + folderName + "</option>");
-					}
-				out.println("</select>");
-				} else {
-				out.print("Folder가 로딩되지 않음");
-				}
-			%> 
+			<select name='userFolder'>
+				<% for(int i = 0; i < userFolderIdList.size(); i++){
+						out.println("<option value='" + userFolderIdList.get(i) + "'>" + userFolderNameList.get(i) + "</option>");	
+				}%>
+			</select>
+			
 			<br>
 			<p>
 				공개 설정 : 
@@ -157,13 +130,35 @@
 			<p>
 				<input type="button" value="스크랩한 뉴스 고르기" onclick="getUserChosenScap()">
 			</p>
-			<div id="parentDiv">
-				
+			
+			<div id="scrapNewsDiv" >
+			<br>
+				<%
+				if(userScrapList.size() > 0){
+					for(int i = 0; i < userScrapList.size() ; i++){
+						int newsId = userScrapList.get(i).getNewsId();
+						String newsHead = userScrapList.get(i).getHeadline();
+						String subCategoryName = userScrapList.get(i).getSubCategoryName();
+						String newsUrl = userScrapList.get(i).getNewsURL();
+						String pTag = "<p id='" + "SelectedPtag"+ newsId + "' style='display:none'>";
+						String str = "<input type='radio' name='radioSelectedNews' value='" + newsId +"'>" 
+									+ "&nbsp&nbsp [" + subCategoryName +"] "+ newsHead + "</input><br>";
+						String checkboxStr = "<input type='checkbox' name='checkBoxSelectedNews' value='"+ newsId +"' style='display:none'>" ;
+						out.println(pTag + str + checkboxStr+ "</p>");
+					}
+				}else{
+					out.println("스크랩한 뉴스 불러오는데 오류");
+				}
+				%>
+			</div>
+			<br>
+			<div>
+				<iframe id='selectedNewsFrame' name='selectedNewsFrame' width='60%' height='400' style="display:none"></iframe>
 			</div>
 			<br>
 			<br>
 
-			<textarea class="textBox" name="recordComment">글쓰기</textarea>
+			<textarea class="textBox" id="recordComment" name="recordComment">글쓰기</textarea>
 			<br>
 			<br>
 			<button class="push_button_Stoore" type="submit">저장하기</button>
@@ -171,4 +166,28 @@
 		<br>
 	</div>
 </body>
+<script>
+	$("input[name='radioSelectedNews']").change(function(){
+		<% 
+		
+		String newsContent = "";	
+		int listLen = userScrapList.size();
+		
+			for(int i = 0; i < listLen; i++){%>
+				var index = <%=i%>
+				if(document.getElementsByName("radioSelectedNews")[index].checked == true){
+					<% 
+					String selectedNewsURL = userScrapList.get(i).getNewsURL();
+					if(selectedNewsURL == null || selectedNewsURL.equals("")){%>
+					document.getElementById("selectedNewsFrame").src = "https://news.naver.com/";
+					<%}else%>
+					document.getElementById("selectedNewsFrame").src = "<%=selectedNewsURL%>";
+				}
+		<%}%>
+		
+		<% System.out.print("change됨");%>
+	});
+</script>
+
+
 </html>

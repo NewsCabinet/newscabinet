@@ -65,14 +65,14 @@ public class ManageScrapNews {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 	
-
+	
 	public static ResultSet searchAllUserScrapNewsForRecord(Connection conn, int userId) {
 
-		String query = "SELECT user_scrap_news.news_id, headline FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
+		String query = "SELECT user_scrap_news.news_id, headline, subcategory_id, url FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
 				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
 				+ " WHERE user_id=" + userId;
 		Statement st;
@@ -104,8 +104,8 @@ public class ManageScrapNews {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 
 	

@@ -11,27 +11,6 @@
 		window.open("Sign/checkId.html", "아이디 확인", "width=400 height=350")
 		}
 </script>
-<script>
-
-
-</script>
-<script language="JavaScript">
-	function makeSubcategoryList(){
-		String selectFirst = document.getElementById("firstCategory");
-		
-		var length = 5;
-		
-		for(var i = 0; i < length; i++){
-			var op = new Option();
-			op.value = "y" +  i;
-			op.text = "y" +  i;
-			document.getElementById("subCategory").add(op);
-			//document.getElementById("subCategory")[document.getElementById("subCategory").length] = new Option("i","i");	
-
-		}
-	}
-</script>
-
 </head>
 <body>
 		<div class="content-area">

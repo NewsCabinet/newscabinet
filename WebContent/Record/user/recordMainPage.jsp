@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
-<jsp:include page="/newsHeader.html"/>
+<jsp:include page="../../webHeader.jsp"></jsp:include>
 </head>
 <body>
 	<p>저장되었습니다.</p>
