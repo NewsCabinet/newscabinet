@@ -46,7 +46,6 @@
             	%>
             	
             		if(this.value == '<%=selectedValue%>') {
-            			<%System.out.println(selectedValue);%>
             			subcategoryArray = new Array();
             			<% String nameTest = "testing";%>
             			<%
@@ -104,12 +103,12 @@
 			<br>
 			</p>
 				<p>
-				카테고리  <select id="firstCategory">
+				카테고리  <select id="firstCategory" required>
 		            <%  for(int i = 0; i< categoryInJava.size(); i++){
 							out.println("<option value='"+ i + "'>" + categoryInJava.get(i).toString() + "</option>");
 						}%>
 		        </select>
-		        <select name= "subCategory" id="subCategory">
+		        <select name= "subCategory" id="subCategory" required>
 		        </select>
 			</p>
 			<br>
@@ -158,7 +157,7 @@
 			<br>
 			<br>
 
-			<textarea class="textBox" id="recordComment" name="recordComment">글쓰기</textarea>
+			<textarea class="textBox" name="recordComment"></textarea>
 			<br>
 			<br>
 			<button class="push_button_Stoore" type="submit">저장하기</button>
@@ -179,13 +178,12 @@
 					<% 
 					String selectedNewsURL = userScrapList.get(i).getNewsURL();
 					if(selectedNewsURL == null || selectedNewsURL.equals("")){%>
+					//URL이 없는 경우도 있어서 없을 경우 네이버 뉴스 뜨도록 설정
 					document.getElementById("selectedNewsFrame").src = "https://news.naver.com/";
 					<%}else%>
 					document.getElementById("selectedNewsFrame").src = "<%=selectedNewsURL%>";
 				}
 		<%}%>
-		
-		<% System.out.print("change됨");%>
 	});
 </script>
 

@@ -52,7 +52,7 @@ public class SettingUserRecord extends HttpServlet {
 
 		//사용자 폴더 내용 가져오기
 		ResultSet userFolder = null;
-		userFolder = (ResultSet) ManageRecord.searchFolderByUserId(conn, userId);
+		userFolder = (ResultSet) ManageRecord.searchFolderNameByUserId(conn, userId);
 		ArrayList<Integer> forderIdList = new ArrayList<>();
 		ArrayList<String> forderNameList = new ArrayList<>();
 		

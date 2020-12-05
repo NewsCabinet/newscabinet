@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -35,21 +36,16 @@ public class WriteRecrod extends HttpServlet {
 		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
-		String today = (String)sc.getAttribute("todayDate");
 		PrintWriter out = response.getWriter();
+		 Calendar cal = Calendar.getInstance();
+	    String today = cal.get(Calendar.YEAR) + "."+ (cal.get(Calendar.MONTH) + 1)+ "." + cal.get(Calendar.DAY_OF_MONTH);
 		request.setAttribute("todayDate", today);
 		
 		int recordId = ManageRecord.insertUserRecord(conn, request);
 		
 		String[] userSelectNews = request.getParameterValues("checkBoxSelectedNews");
-		
-		for(int i = 0; i <userSelectNews.length; i++) {
-			System.out.println("Selected News = " + userSelectNews[i]);
-		}
-		
-		if (recordId != -1) {			
-			
-			
+	
+		if (recordId != -1) {					
 			for(int i = 0; i <userSelectNews.length; i++) {
 				int selectedNewsId =  Integer.parseInt(userSelectNews[i]);
 				int recordResult = ManageRecord.insertUserScrapRecord(conn, recordId, selectedNewsId);
@@ -58,9 +54,12 @@ public class WriteRecrod extends HttpServlet {
 					System.out.println("user_scrap_record 저장하는데 문제가 생김");
 				}
 			}
-			out.print("<script>alert('저장되었습니다.') </script>\r\n");
-			RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
+			System.out.println("저장성공!");
+			RequestDispatcher view = request.getRequestDispatcher("/UserRecord/main");
 			view.forward(request, response);
+			//out.print("<script>alert('저장되었습니다.'); </script>\r\n");
+			
+			
 		}else {
 			out.print("<script>alert('저장에 실패하였습니다.'); location.href='../home.jsp'; </script>\r\n");
 		}

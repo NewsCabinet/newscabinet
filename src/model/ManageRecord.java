@@ -79,7 +79,6 @@ public class ManageRecord {
 			if(recordId == -1)
 				return -1;
 			
-			System.out.println("recordId = "+ recordId);
 			return recordId;
 			
 			
@@ -100,23 +99,22 @@ public class ManageRecord {
 
 
 	public static int searchRecordIdByUserIdAndTitle(Connection conn, int userId, String title) {
-		
-		String query = "SELECT record_id FROM newscabinet.user_record WHERE user_id="+userId + " and record_title ='" + title + "'";
-		Statement st;
-		
+		String query = "SELECT record_id FROM newscabinet.user_record WHERE user_id=? and record_title = ?";
+		ResultSet rs = null;
 		try {
-			st = conn.createStatement();
-			if(st.execute(query)) {
-				ResultSet rs = st.getResultSet();
-				if(rs.next()) {
-					return rs.getInt(1);
-				}
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userId);
+			pstmt.setString(2, title);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				System.out.println(rs.getInt(1));
+				return rs.getInt(1);
 			}
-		}catch (Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return -1;
-	
 	}
 
 
@@ -153,12 +151,10 @@ public class ManageRecord {
 
 	}
 	
-	
-	public static ResultSet searchFolderByUserId(Connection conn, int userId) {
+	public static ResultSet searchFolderNameByUserId(Connection conn, int userId) {
 		String query = "SELECT folder_name, folder_id FROM newscabinet.user_record_folder WHERE user_id=?";
 
 		ResultSet rs = null;
-
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
 			pstat.setInt(1, userId);
