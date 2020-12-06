@@ -201,7 +201,26 @@ public class ManageUser {
 		return null;
 	}
 
+	public static int searchUserFirstCategoryByUserId(Connection conn, int userId) {
+		String query = "SELECT category_id FROM newscabinet.user WHERE user_id ='" + userId + "'" ; 
+		Statement st;
+		ResultSet rs;
 
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	
 	public static String searchUserPasswdByEmailIdAndPhone(Connection conn, String userEmailId, String phone) {
 
 		String query = "SELECT user_pw FROM newscabinet.user WHERE user_email_id =" + "'" + userEmailId + "' AND user_phone='" + phone+ "'"; 
