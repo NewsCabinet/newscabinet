@@ -3,14 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 중복 확인</title>
+<link href="../style.css" rel="stylesheet" type="text/css">
+<style>
+div {
+	width: 400px;
+	height: 300px;
+}
+
+body {
+   margin: 0 auto;
+  text-align: center;
+  background-color:#C7C7C7;
+}
+h3{
+ padding-top:100px;
+}
+</style>
 </head>
 <body>
 	<div style="text-align: center">
 		<h3>아이디 중복 확인</h3>
 		<p>아이디로 사용한 이메일을 적어주세요</p><br>
 		<form action="checkIdAfter.jsp">
-			이메일 : <input type="email" name="checkEmailId">
-			<input type="submit" value="아이디확인">
+		  <input class="modifyLogin" type="email" name="checkEmailId" placeholde="이메일을 입력해주세요">
+			<input class="FindButton" type="submit" value="아이디확인">
 		</form>
 	</div>
 

@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<link href="style.css" rel="stylesheet">
+<link href="style.css?ver=1" rel="stylesheet">
 <title>Home</title>
 <script method="post" action="Sign/checkId.html">
 		function idCheck(){
@@ -16,22 +16,33 @@
 </script>
 </head>
 <body>
-		<div class="content-area">
-			<div class="wrapper">
+   <div class="box-area">
+      <header class="head">
+         <div class="wrapper">
+            <div class="logo">
+              <a href="/NewsCabinet/home.jsp"><b style="color: #bbb">N</b>ews<b
+					style="color: #bbb">C</b>abinet</a>
+            </div>
+         </div>
+      </header>
+   </div>
+		<div class="basic_contentzone" style='background-color: #C7C7C7'>
+			<div class="login">
+			<h2>SignUp</h2>
 				<form method="post" action="SignUp">
-					<p width="50%" text-align="left">
-					
-					이메일 : <input type="email" name="userEmailId" required> 
-					<input type="button" name="checkID" value="아이디 중복 체크" onclick="idCheck()" >
-					
+					<input class="modifyLogin" type="email" name="userEmailId" placeholder="이메일을 입력해주세요" required>  <br />
+					<input class ="FindButton"type="button" name="checkID" value="중복 체크" onclick="idCheck()" >
 					<br/>
-        			비밀번호 : <input type="text" name="userPassword" required><br/>
-        			이름 : <input type="text" name="userName" required><br/>
-       			 	핸드폰 번호 : <input type="tel" name="userPhone" placeholder="010-9999-9999" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"required><br>
-       			 	나이 : <input type="number" name="userAge" required><br/>
-       				성별 : 여성 <input type="radio" name="userGender" value="true" checked> 
-       					 | 남성  <input type="radio" name="userGender"  value="false"> <br>
-       			 	관심 분야를 선택해주세요 <br/>
+        			 <input class="modifyLogin" type="password" name="userPassword" placeholder="비밀번호를 입력해주세요" required><br/>
+        			 <input class="modifyLogin" type="text" name="userName" placeholder="이름을 입력해주세요" required><br/>
+       			 	<input class="modifyLogin" type="tel" name="userPhone" placeholder="번호를 입력해주세요 010-9999-9999" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"required><br>
+       			 	<input class="modifyLogin"  type="number" name="userAge" placeholder="나이를 입력해주세요" required><br/>
+       			 	<div class="box1">
+       				<p style='font-size:20px'>여성<input type="radio" name="userGender" value="true" checked></p> 
+       			    <p style='font-size:20px'>남성<input type="radio" name="userGender"  value="false"></p> 
+       					 </div>
+       					 <br>
+       			     <p style='font-size:15px'>관심 분야를 선택해주세요</p>
 					<select name="category" size="1">
 						<option value="1">정치</option>
 						<option value="2">사회</option>
@@ -42,10 +53,10 @@
 						<option value="7">IT</option>
 						<option value="8">과학</option>
 					</select>
-					
-				  <input type="submit" value="가입하기"/>
+					<br />
+					<br />
+				  <input class="FindButton" style="top:20px" type="submit" value="가입하기"/>
 				  
-					</p>
 				</form>
 			</div>
 		</div>

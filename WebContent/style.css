@@ -1,165 +1,189 @@
 @font-face {
-   src: url(../fonts/RIDIBatang.otf);
-   font-family: RIDI;
+	src: url(../fonts/RIDIBatang.otf);
+	font-family: RIDI;
 }
 
 * {
-   font-family: RIDI;
+	font-family: RIDI;
 }
 
 * {
-   margin: 0;
-   padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-   text-align: center;
+	text-align: center;
 }
-
 /*
-.index_wrapper {
+_wrapper {
    width: 1170px;
    margin: 0 auto;
 }
 */
 .wrapper {
-   width: 1170px;
-   margin: 0 auto;
+	width: 1170px;
+	margin: 0 auto;
 }
 
 .head {
-   height: 100px;
-   background: #2E404E;
-   width: 100%;
-   z-index: 10;
-   position: fixed;
+	height: 100px;
+	background: #2E404E;
+	width: 100%;
+	z-index: 10;
+	position: fixed;
 }
 
 .logo {
-   width: 20%;
-   float: left;
-   line-height: 100px;
+	width: 20%;
+	float: left;
+	line-height: 100px;
 }
 
 .logo a {
-   text-decoration: none;
-   font-size: 30px;
-   font-family: poppins;
-   color: #fff;
-   letter-spacing: 5px;
+	text-decoration: none;
+	font-size: 30px;
+	font-family: poppins;
+	color: #fff;
+	letter-spacing: 5px;
 }
 
 nav {
-   float: right;
-   line-height: 100px;
+	float: right;
+	line-height: 100px;
 }
 
 nav a {
-   text-decoration: none;
-   font-family: poppins;
-   letter-spacing: 4px;
-   font-size: 15px;
-   margin: 0 10px;
-   color: #fff;
+	text-decoration: none;
+	font-family: poppins;
+	letter-spacing: 4px;
+	font-size: 15px;
+	margin: 0 10px;
+	color: #fff;
 }
 
 .headerA:hover {
-   color: #bbb;
-   font-weight: bolder;
-   text-decoration: underline;
+	color: #bbb;
+	font-weight: bolder;
+	text-decoration: underline;
 }
 
 .banner-area {
-   width: 100%;
-   height: 500px;
-   position: fixed;
-   top: 100px;
-   background-image: url("images/news.jpg");
-   background-size: cover;
-   opacity: 0.9;
-   background-position: center center;
+	width: 100%;
+	height: 300px;
+	position: fixed;
+	padding-top:100px;
+/*	top: 100px;*/
+	background-image: url("images/news.jpg");
+	background-size: cover;
+	opacity: 0.9;
+	background-position: center center;
+}
+.home_banner-area {
+	padding-top:8%;
+	width: 100%;
+	height:200px;
+	position: fixed;
+	top: 100px;
+	background-image: url("images/news.jpg");
+	background-size: cover;
+	opacity: 0.9;
+	background-position: center center;
 }
 
 .banner-area h2 {
-   padding-top: 8%;
-   font-size: 90px;
-   font-family: poppins;
-   text-transform: uppercase;
+	padding-top: 8%;
+	font-size: 80px;
+	font-family: poppins;
+	text-transform: uppercase;
 }
 
 .banner-area h2 b {
-   display: none;
+	display: none;
 }
-
-/*.basic_contentzone {
-   padding-top: 20px;
-   position: relative;
-   width: 100%;
-   height: 500px;
-   top: 100px;
+.basic_contentzone {
+	padding-top: 10px;
+	position: relative;
+	width: 100%;
+	height: 700px;
+	top: 100px;
 }
-*/
 .index_content-area {
-   width: 100%;
-   height: 600px;
-   position: relative;
-   background-color: #C7C7C7;
-   top: 450px;
+	width: 100%;
+	height: 600px;
+	position: relative;
+	background-color: #C7C7C7;
+	top: 400px;
 }
 
 .content-area {
-   width: 100%;
-   height: 600px;
-   position: relative;
-   background-color: white;
-   top: 450px;
+	width: 100%;
+	height: 700px;
+	position: relative;
+	background-color: white;
+	top: 450px;
 }
 
 .content-area h2 {
-   font-family: poppins;
-   letter-spacing: 4px;
-   font-size: 40px;
-   margin: 0;
+	font-family: poppins;
+	letter-spacing: 4px;
+	font-size: 100px;
+	margin: 0;
 }
 
 .content-area p {
-   padding: 2% 0px;
-   font-family: poppins;
-   line-height: 30px;
+	padding: 2% 0px;
+	font-family: poppins;
+	line-height: 20px;
 }
 
 .login {
-   margin: auto;
-   padding: 8%;
-   width: 680px;
-   height: 400px;
-   font-size: 20px;
-   box-shadow: 0 0 20px #666666;
+	margin: auto;
+	padding:5%;
+	width: 600px;
+	height: 400px;
+	font-size: 20px;
+	box-shadow: 1px 1px 20px #666666;
 }
-
 .login div {
-   border-radius: 25px;
-   padding-top: 10px;
+	border-radius: 25px;
+	padding-top: 10px;
 }
 
 .login h2 {
-   color: #333;
-   margin-bottom: 50px;
+	color: #333;
+	margin-bottom: 50px;
 }
 
 .enterId {
-   width: 500px;
-   height: 30px;
-   border: none;
-   outline: none;
-   box-sizing: border-box;
-   color: #333;
-   font-size: 15px;
+	width: 450px;
+	height: 50px;
+	border: none;
+	margin: 5px;
+	outline: none;
+	box-sizing: border-box;
+	color: #333;
+	font-size: 15px;
 }
 
-.enterId:visited {
-   box-shadow: 2px 2px 5px #555;
-   background-color: #ddd;
+.enterId:hover {
+	box-shadow: 2px 2px 5px #555;
+	background-color: #ddd;
+}
+
+.modifyLogin{
+	width: 400px;
+	height: 25px;
+	border: none;
+	margin: 5px;
+	outline: none;
+	box-sizing: border-box;
+	color: #333;
+	font-size: 15px;
+}
+.modifyLogin:hover {
+	box-shadow: 2px 2px 5px #555;
+	background-color: #ddd;
 }
 /*
 여기를 지정했을 때 header가 제대로 나오지 않기 때문에 수정해야 함. 
@@ -170,100 +194,229 @@ div a {
    margin: 3%;
 }
 
-a {
    font-family: bold;
    color: black;
 }
 */
-#newsContents {
-   position: relative;
-   top: 200px;
-   float: right;
-   width: 50%;
-   margin: auto;
-   padding-left: 25px;
-   padding-right: 25px;
-   border-bottom: 2px solid #2E404E;
-}
 
 .listWriteInput {
-   padding-top: 10px;
-   width: 700px;
-   height: 40px;
-   border: none;
-   outline: none;
-   box-sizing: border-box;
-   color: #333;
-   font-size: 15px;
+	padding-top: 10px;
+	width: 700px;
+	height: 40px;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	color: #333;
+	font-size: 15px;
 }
 
 .listWriteInput:hover {
-   box-shadow: 2px 2px 2px #555;
-   background-color: #ddd;
+	box-shadow: 2px 2px 2px #555;
+	background-color: #ddd;
 }
 
 .newsBox {
-   width: 60%;
-   height: 350px;
-   border: 1px solid #666666;
+	width: 60%;
+	height: 350px;
+	border: 1px solid #666666;
 }
 
 .textBox {
-   width: 60%;
-   height: 400px;
-   /*cols:"110";
+	width: 60%;
+	height: 400px;
+	/*cols:"110";
    rows:"30";*/
-   border: none;
-   box-shadow: 0 0 5px #666666;
+	border: none;
+	box-shadow: 0 0 5px #666666;
 }
 
 .writhingPageBtn {
-   font-size: 15px;
-   padding: 10px 10px;
-   border-radius: 5px;
-   transition-duration: 0.4s;
-   background-color: #2E404E;
-   color: white;
+	font-size: 15px;
+	padding: 10px 10px;
+	border-radius: 5px;
+	transition-duration: 0.4s;
+	background-color: #2E404E;
+	color: white;
 }
 
 .newsBox {
-   width: 60%;
-   height: 350px;
-   border: 1px solid #666666;
+	width: 60%;
+	height: 350px;
+	border: 1px solid #666666;
 }
 
 .textBox {
-   width: 60%;
-   height: 400px;
-   /*cols:"110";
+	width: 60%;
+	height: 400px;
+	/*cols:"110";
    rows:"30";*/
-   border: none;
-   box-shadow: 0 0 5px #666666;
+	border: none;
+	box-shadow: 0 0 5px #666666;
 }
 
 .writhingPageBtn {
-   font-size: 15px;
-   padding: 10px 10px;
-   border-radius: 5px;
-   transition-duration: 0.4s;
-   background-color: #2E404E;
-   color: white;
+	font-size: 15px;
+	padding: 10px 10px;
+	border-radius: 5px;
+	transition-duration: 0.4s;
+	background-color: #2E404E;
+	color: white;
 }
 
 .push_button_Stoore {
-   border: 1px solid #2E404E;
-   background-color: #2E404E;
-   color: white;
-   font-size: 15px;
-   border-radius: 3px;
-   padding: 15px 15px;
+	border: 1px solid #2E404E;
+	background-color: #2E404E;
+	color: white;
+	font-size: 15px;
+	border-radius: 3px;
+	padding: 10px 10px;
 }
 
 .nameButton {
-   float:right;
-   background-color: #2E404E;
-   color:white;
-   font-weight:bold;
-   border:none;
-   text-align: center;
+	float: right;
+	background-color: #2E404E;
+	color: white;
+	font-weight: bold;
+	border: none;
+	text-align: center;
+}
+
+/*FindButton Css*/
+.FindButton {
+	background: #2E404E;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 30px;
+	font-size: 14px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+
+.FindButton:hover {
+	background: #fff;
+	color: #2E404E;
+}
+/*
+.FindButton:before, .FindButton:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #2E404E;
+	transition: 400ms ease all;
+}
+*/
+/*
+.FindButton:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+*/
+/*
+.FindButton:hover:before, .FindButton:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
+*/
+.FindButton a {
+	text-decoration: none;
+	color: white;
+}
+
+.FindButton a:hover {
+	color: #2E404E;
+}
+/*아이디 비밀번호 회원가입 등 버튼 CSS끝 */
+
+/*뉴스보기 categoryBox*/
+.categoryBox {
+	width: 100%;
+	height: 220px;
+    padding:5px;
+    padding-bottom:10px;
+}
+
+.box1 input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #2E404E;
+	transition: 0.2s all linear;
+	outline: none;
+	padding-top: 5px;
+	position: relative;
+	font-size: 40px;
+	top: 4px;
+}
+
+.box1 label {
+	transition: 0.2s all linear;
+}
+
+.box1 input:checked {
+	border: 6px solid #2E404E;
+}
+
+/*뉴스보기 CSS */
+#addCustomCategories {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.sectionArti {
+	padding-top: 0px;
+	width: 80%;
+	margin: 0 auto;
+}
+
+#newsContents {
+	top: 15px;
+	width: 75%;
+	margin: 0 auto;
+	padding-right: 20px;
+	/*border: 1px solid #333333;*/
+	border-bottom: 1px solid #bbb;
+}
+
+.scrab_canclebtn{
+	background: #445F74;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 25px;
+	font-size: 12px;
+	float:right;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+.scrab_btn {
+    background: #283844;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 25px;
+	font-size: 12px;
+	float:right;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+
+.homeContent{
+	width:100%;
+	height:800px;
+	background-color:#C7C7C7;
 }
