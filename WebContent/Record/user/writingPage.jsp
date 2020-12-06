@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.sql.ResultSet" 
-	import="javax.servlet.ServletContext" 
-	import="java.sql.Connection" 
+<%@ page
 	import="model.UserScrapNewsData, model.CustomCategoryData, model.UserFolderData,
 			model.FristCategoryData, model.SubcategoryData"
 	import="java.sql.*, java.util.*"%>

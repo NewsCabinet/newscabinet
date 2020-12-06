@@ -23,7 +23,7 @@
 				category = new Array();
 				<%
 					for(int i = 0; i< categoryInJava.size(); i++){%>
-						category.push(<%=categoryInJava.get(i).toString()%>);
+						category.push("<%=categoryInJava.get(i).toString()%>");
 					<%}%>
 				
 				function changes1Step(fr) {

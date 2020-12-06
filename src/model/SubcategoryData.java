@@ -13,6 +13,7 @@ public class SubcategoryData {
 	
 	public SubcategoryData(int subcategoryId, String subcategoryName) {
 		super();
+		this.firstCategoryId = 0;
 		this.subcategoryId = subcategoryId;
 		this.subcategoryName = subcategoryName;
 	}
