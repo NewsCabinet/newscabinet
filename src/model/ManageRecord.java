@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 public class ManageRecord {
 
@@ -17,17 +16,10 @@ public class ManageRecord {
 		
 		int result = -1;
 		PreparedStatement pstmt = null;
-		
-		HttpSession userSession = request.getSession(false);
-		int userId = (Integer)userSession.getAttribute("userId");
-		
+
+		int userId = (Integer)request.getAttribute("recordUserId");
 		int recordSubcategoryId = (Integer)request.getAttribute("userSelectedSubCategoryId");
-		//int recordSubcategoryId = Integer.parseInt(recordSubcategory);
-		//int recordSubcategoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, userSelectCategory);
-		
 		int recordCustomCategoryId = (Integer)request.getAttribute("userSelectedCustomCategoryId");
-		//String userCustomCategory = "전체";
-		//int recordCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, userCustomCategory);
 		
 		String userFolderStr =  request.getParameter("userFolder");
 		int folderId = Integer.parseInt(userFolderStr);

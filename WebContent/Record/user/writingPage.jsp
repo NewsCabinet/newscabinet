@@ -30,7 +30,7 @@
 		<form method="post" action="/NewsCabinet/UserRecord/restore">
 			<h2 style="text-align: center; margin-left: 30px">기록 작성하기</h2>
 				<p>
-					<input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요">
+					<input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요" required>
 				</p>
 			<br>
 				<p>
@@ -49,7 +49,7 @@
 				</p>
 			<br>
 			<p> 폴더 지정 &nbsp;
-			<select name='userFolder'>
+			<select name='userFolder' required>
 				<% for(int i = 0; i < userForderList.size(); i++){
 						out.println("<option value='" + userForderList.get(i).getFolderId() + "'>" + userForderList.get(i).getFolderName() + "</option>");	
 				}%>
@@ -93,7 +93,7 @@
 			<br>
 			<br>
 
-			<textarea class="textBox" name="recordComment"></textarea>
+			<textarea class="textBox" name="recordComment" required></textarea>
 			<br>
 			<br>
 			<button class="push_button_Stoore" type="submit">저장하기</button>

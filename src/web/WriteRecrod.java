@@ -49,10 +49,8 @@ public class WriteRecrod extends HttpServlet {
 		int firstCategoryId = Integer.parseInt(firstCategory);
 		String firstCategoryName = ManageCategory.searchCategoryIdByCategoryName(conn, firstCategoryId);
 		
-		System.out.println("WriteRecord | firstCategoryName" + firstCategoryName);
 		
 		String checkCustomStr = request.getParameter("subCategory");
-		System.out.println("WriteRecord | checkCustomStr = "+ checkCustomStr);
 	
 		int userSelectedCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, checkCustomStr);
 		int userSelectedSubCategoryId = -1;
@@ -63,12 +61,15 @@ public class WriteRecrod extends HttpServlet {
 			userSelectedSubCategoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, firstCategoryName);
 			
 			if(userSelectedSubCategoryId == -1) {
-				System.out.println("WriteRecord | searchSubcatogoryIdBySubcateogoryName 가져오는데 문제생김 : " + firstCategoryName);
+				System.out.println("WriteRecord | searchSubcatogory 가져오는데 문제생김 : " + firstCategoryName);
 			}
 			
-			System.out.println("-----------custom category일 경우---------------");
-			System.out.println("custom name = " + checkCustomStr + " , id = " + userSelectedCustomCategoryId);
-			System.out.println("sub name = " + firstCategoryName+ " , id = " + userSelectedSubCategoryId);
+			/*
+			 * System.out.println("-----------custom category일 경우---------------");
+			 * System.out.println("custom name = " + checkCustomStr + " , id = " +
+			 * userSelectedCustomCategoryId); System.out.println("sub name = " +
+			 * firstCategoryName+ " , id = " + userSelectedSubCategoryId);
+			 */
 			
 		} else { //custom category가 아닌 경우
 			//subcategory는 그대로 받아오고
@@ -77,12 +78,16 @@ public class WriteRecrod extends HttpServlet {
 			//custom category는 user_id, "전체"인 custom_category_id 가져와야함
 			userSelectedCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, "전체");
 			
-			System.out.println("-----------일반 category일 경우---------------");
-			System.out.println("custom name = 전체 , id = " + userSelectedCustomCategoryId);
-			System.out.println("sub name = " + checkCustomStr+ " , id = " + userSelectedSubCategoryId);
+			/*
+			 * System.out.println("-----------일반 category일 경우---------------");
+			 * System.out.println("custom name = 전체 , id = " +
+			 * userSelectedCustomCategoryId); System.out.println("sub name = " +
+			 * checkCustomStr+ " , id = " + userSelectedSubCategoryId);
+			 */
 			
  		}
 		
+		request.setAttribute("recordUserId", userId);
 		request.setAttribute("userSelectedSubCategoryId", userSelectedSubCategoryId);
 		request.setAttribute("userSelectedCustomCategoryId", userSelectedCustomCategoryId);
 		
