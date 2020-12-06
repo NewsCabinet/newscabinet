@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
-<%@ page import="model.ManageUser, java.sql.Connection, java.sql.ResultSet" %>
-
 <head>
 <meta charset="UTF-8">
 <link href="style.css" rel="stylesheet">
@@ -21,7 +18,7 @@
 				<form method="post" action="SignUp">
 					<p width="50%" text-align="left">
 					
-					이메일 : <input type="email" name="userEmailId" required> 
+					이메일 : <input type="email" name="userEmailId" id="userEmailId" required> 
 					<input type="button" name="checkID" value="아이디 중복 체크" onclick="idCheck()" >
 					
 					<br/>
@@ -34,15 +31,15 @@
        			 	관심 분야를 선택해주세요 <br/>
 					<select name="category" size="1">
 						<option value="1">정치</option>
-						<option value="2">사회</option>
-						<option value="3">경제</option>
-						<option value="4">국제</option>
+						<option value="2">경제</option>
+						<option value="3">국제</option>
+						<option value="4">사회</option>
 						<option value="5">문화</option>
-						<option value="6">스포츠</option>
-						<option value="7">IT</option>
-						<option value="8">과학</option>
+						<option value="6">IT</option>
+						<option value="7">과학</option>
+						<option value="8">스포츠</option>
 					</select>
-					
+					<br>
 				  <input type="submit" value="가입하기"/>
 				  
 					</p>
