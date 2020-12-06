@@ -101,6 +101,7 @@ nav a {
 .banner-area h2 b {
 	display: none;
 }
+
 .basic_contentzone {
 	padding-top: 10px;
 	position: relative;
@@ -108,9 +109,11 @@ nav a {
 	height: 700px;
 	top: 100px;
 }
+
+
 .index_content-area {
 	width: 100%;
-	height: 600px;
+	height: 700px;
 	position: relative;
 	background-color: #C7C7C7;
 	top: 400px;
@@ -141,7 +144,7 @@ nav a {
 	margin: auto;
 	padding:5%;
 	width: 600px;
-	height: 400px;
+	height: 500px;
 	font-size: 20px;
 	box-shadow: 1px 1px 20px #666666;
 }
@@ -299,32 +302,7 @@ div a {
 	background: #fff;
 	color: #2E404E;
 }
-/*
-.FindButton:before, .FindButton:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 2px;
-	width: 0;
-	background: #2E404E;
-	transition: 400ms ease all;
-}
-*/
-/*
-.FindButton:after {
-	right: inherit;
-	top: inherit;
-	left: 0;
-	bottom: 0;
-}
-*/
-/*
-.FindButton:hover:before, .FindButton:hover:after {
-	width: 100%;
-	transition: 800ms ease all;
-}
-*/
+
 .FindButton a {
 	text-decoration: none;
 	color: white;
@@ -419,4 +397,11 @@ div a {
 	width:100%;
 	height:800px;
 	background-color:#C7C7C7;
+   float:right;
+   background-color: #2E404E;
+   color:white;
+   font-weight:bold;
+   border:none;
+   text-align: center;
+
 }
