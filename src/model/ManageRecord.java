@@ -200,4 +200,22 @@ public class ManageRecord {
 		}
 		return null;
 	}
+	
+	
+	public static ResultSet searchAllPublicRecord(Connection conn) {
+		String query = "SELECT record_id, user_id, subcategory_id, record_title, record_date, record_count FROM newscabinet.user_record WHERE record_private='0'";
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next())
+					return rs;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
