@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ page import="java.sql.Connection" 
- 		  import="model.ManageScrapNews, model.UserScrapNews"
+ 		  import="model.ManageScrapNews, model.UserScrapNewsData"
  		  import="java.sql.ResultSet"
  		  import="java.util.ArrayList"
  %>
@@ -17,7 +17,7 @@
 	<form>
 	<h3>뉴스를 선택해주세요</h3>
 		<div>
-			<%! ArrayList<UserScrapNews> userScrapList = null;%>
+			<%!ArrayList<UserScrapNewsData> userScrapList = null;%>
 			<% userScrapList = (ArrayList)request.getAttribute("userScrapList");
 			
 				if(userScrapList.size() > 0){
@@ -62,6 +62,7 @@
 						opener.document.getElementsByName("checkBoxSelectedNews")[index].checked = true;
 					}else{
 						opener.document.getElementById("<%=tagName%>").style.display = "none";
+						opener.document.getElementsByName("checkBoxSelectedNews")[index].checked = false;
 					}
 			<%}%>
 			

@@ -46,6 +46,27 @@ public class ManageCategory {
 		return null;
 	}
 	
+	public static String searchCategoryIdByCategoryName(Connection conn, int categoryId) {
+
+		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;
+		Statement st;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.createStatement();
+			if (st.execute(sqlSt)) {
+				rs = st.getResultSet();
+				if(rs.next())
+					return rs.getString(1); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+	
 	public static ResultSet searchSubCategoryName(Connection con, int categoryId) {
 		
 		String sqlSt = "SELECT subcategory_id, subcategory_name FROM newscabinet.subcategory WHERE category_id=" + categoryId;
@@ -133,7 +154,6 @@ public class ManageCategory {
 	}
 	
 
-			
 	
 	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
 		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=?";
@@ -260,5 +280,64 @@ public class ManageCategory {
 		return result;
 	}
 	
+
+	public static ResultSet searchAllFirstCateogry(Connection conn) {
+		String query = "SELECT category_id, category_name FROM newscabinet.category";
+		ResultSet rs = null;
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				 if(rs != null)
+					return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+
+	public static ResultSet searchAllSubCateogry(Connection conn) {
+		String query = "SELECT category_id, subcategory_id, subcategory_name FROM newscabinet.subcategory";
+		ResultSet rs = null;
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				
+				if(rs != null)
+					return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static ResultSet searchAllUserCustomCateogry(Connection conn, int userId) {
+		String query = "SELECT category_id, custom_category_id, custom_category_name FROM newscabinet.custom_category WHERE user_id='" + userId + "'";
+		ResultSet rs = null;
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				
+				if(rs != null)
+					return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

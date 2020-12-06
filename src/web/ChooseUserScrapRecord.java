@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.ManageScrapNews;
-import model.UserScrapNews;
+import model.UserScrapNewsData;
 import model.ManageCategory;
 
 /**
@@ -37,12 +37,12 @@ public class ChooseUserScrapRecord extends HttpServlet {
 		}
 		
 		
-		ArrayList<UserScrapNews> userScrapList = new ArrayList<UserScrapNews>();
+		ArrayList<UserScrapNewsData> userScrapList = new ArrayList<UserScrapNewsData>();
 		ResultSet userScrapResult = ManageScrapNews.searchAllUserScrapNewsForRecord(conn, userId);
 		if (userScrapResult != null) {
 			try {
 				while(userScrapResult.next()) {
-					UserScrapNews tmp = new UserScrapNews();
+					UserScrapNewsData tmp = new UserScrapNewsData();
 					tmp.setNewsId(userScrapResult.getInt(1));
 					tmp.setHeadline(userScrapResult.getString(2));
 					

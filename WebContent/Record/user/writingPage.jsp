@@ -3,7 +3,8 @@
 <%@ page import="java.sql.ResultSet" 
 	import="javax.servlet.ServletContext" 
 	import="java.sql.Connection" 
-	import="model.ManageRecord, model.UserScrapNews"
+	import="model.UserScrapNewsData, model.CustomCategoryData, model.UserFolderData,
+			model.FristCategoryData, model.SubcategoryData"
 	import="java.sql.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -12,113 +13,48 @@
 	<meta charset="UTF-8">
 	<link href="/NewsCabinet/style.css" rel="stylesheet">
 	<title>기록작성하기</title>
-	<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript">
-
-		<% List categoryInJava = new ArrayList(); %>
-		<%
-			ResultSet rs = (ResultSet) application.getAttribute("Categories");
-			if (rs != null) {
-				rs.beforeFirst();
-				String tmp = "";
-				while (true) {
-					if (rs.next()) {
-				if (!tmp.equals(rs.getString("category_name"))) {
-					categoryInJava.add(rs.getString("category_name"));
-				}
-				tmp = rs.getString("category_name");
-					} else {
-				break;
-					}
-				}
-			}
-		%>
-		category = new Array();
-		<%
-		for(int i = 0; i< categoryInJava.size(); i++){%>
-			category.push("<%=categoryInJava.get(i).toString()%>");
-		<%}%>
-		
-        $(function() {
-            $("#firstCategory").change(function() {
-            	<%for(int i = 0; i< categoryInJava.size(); i++){
-            		String selectedValue = Integer.toString(i);
-            	%>
-            	
-            		if(this.value == '<%=selectedValue%>') {
-            			subcategoryArray = new Array();
-            			<% String nameTest = "testing";%>
-            			<%
-						rs = (ResultSet) application.getAttribute("Categories");
-						if(rs!=null){
-							rs.beforeFirst();
-							String tmp = categoryInJava.get(i).toString();
-							while(true){
-								if(rs.next()){
-									if(tmp.equals(rs.getString("category_name"))){
-										nameTest = rs.getString("subcategory_name");%>
-										var name = "<%=nameTest%>"
-										subcategoryArray.push(name)
-								<%	}
-								}else break;	
-							}
-						}%>		
-            		}
-           		<%}%>
-
-                $('#subCategory').empty();
-                for (var i = 0; i < subcategoryArray.length; i++) {
-                	var option = $("<option value='" + subcategoryArray[i] + "'>" + subcategoryArray[i] +  "</option>");
-                    $('#subCategory').append(option);
-                }
-            });
-        });
-	</script>
-	<script>
-		function getUserChosenScap(){
-			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
-			
-		}
-	</script>
+	
 </head>
 <body>
 	
 	<div class="basic_contentzone">
 	
-		<%	ArrayList<Integer> userFolderIdList = (ArrayList)request.getAttribute("forderIdList");
-			ArrayList<String> userFolderNameList = (ArrayList)request.getAttribute("forderNameList");
-			String today = (String)request.getAttribute("todayDate");
-			ArrayList<UserScrapNews> userScrapList = (ArrayList)request.getAttribute("userScrapList");
-		%>
+		<%		String today = (String)request.getAttribute("todayDate");
+				ArrayList<FristCategoryData> firstCategoryList = (ArrayList)request.getAttribute("firstCategoryList");
+				ArrayList<SubcategoryData> subCategoryList = (ArrayList)request.getAttribute("subCategoryList");
+				ArrayList<CustomCategoryData> userCustomCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
+				ArrayList<UserFolderData> userForderList = (ArrayList)request.getAttribute("userForderList");				
+				ArrayList<UserScrapNewsData> userScrapList = (ArrayList)request.getAttribute("userScrapList");
+			%>
 
 		<form method="post" action="/NewsCabinet/UserRecord/restore">
-			<h2 style="text-align: left; margin-left: 30px">기록 작성하기</h2>
-			<p>
-				<input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요">
-			</p>
-			<br>
-		
-			<p>
-				날짜 : <%=today%>
-			<br>
-			</p>
+			<h2 style="text-align: center; margin-left: 30px">기록 작성하기</h2>
 				<p>
-				카테고리  <select id="firstCategory" required>
-		            <%  for(int i = 0; i< categoryInJava.size(); i++){
-							out.println("<option value='"+ i + "'>" + categoryInJava.get(i).toString() + "</option>");
-						}%>
-		        </select>
-		        <select name= "subCategory" id="subCategory" required>
-		        </select>
-			</p>
+					<input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요">
+				</p>
 			<br>
-			<h3>폴더</h3>
+				<p>
+					날짜 : <%=today%>
+				</p>	
+			<br>
+			  	<p>
+					카테고리  &nbsp;
+					<select name="firstCategory" id="firstCategory" required>
+			            <%  for(int i = 0; i< firstCategoryList.size(); i++){
+								out.println("<option value='"+ firstCategoryList.get(i).getCategoryId() + "'>" + firstCategoryList.get(i).getCategoryName() + "</option>");
+							}%>
+			        </select>
+			        <select name="subCategory" id="subCategory" required>
+			        </select>
+				</p>
+			<br>
+			<p> 폴더 지정 &nbsp;
 			<select name='userFolder'>
-				<% for(int i = 0; i < userFolderIdList.size(); i++){
-						out.println("<option value='" + userFolderIdList.get(i) + "'>" + userFolderNameList.get(i) + "</option>");	
+				<% for(int i = 0; i < userForderList.size(); i++){
+						out.println("<option value='" + userForderList.get(i).getFolderId() + "'>" + userForderList.get(i).getFolderName() + "</option>");	
 				}%>
 			</select>
-			
+			<p>
 			<br>
 			<p>
 				공개 설정 : 
@@ -165,14 +101,67 @@
 		<br>
 	</div>
 </body>
-<script>
-	$("input[name='radioSelectedNews']").change(function(){
-		<% 
-		
-		String newsContent = "";	
-		int listLen = userScrapList.size();
-		
-			for(int i = 0; i < listLen; i++){%>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#firstCategory").change(function() {
+            	var subcategoryNameArray = new Array();
+    			var subcategoryNameinJS = "";
+    			var customCategoryNameArray = new Array();
+    			var customCategoryNameinJS = "";
+    			
+            	<%for(int i = 0; i< firstCategoryList.size(); i++){
+            		int selectedFirstCategory = firstCategoryList.get(i).getCategoryId();%>
+            		
+        			//상위 카테고리 선택시, 하위 카테고리 채워 넣기
+            		if(this.value == "<%=selectedFirstCategory%>"){
+            			
+            			//subcategory in js
+            			subcategoryNameArray = new Array();
+            	
+            			<%
+            			for(int j = 0; j < subCategoryList.size(); j++){
+            				if(subCategoryList.get(j).getFirstCategoryId() == selectedFirstCategory){%>
+            					subcategoryNameinJS = "<%=subCategoryList.get(j).getSubcategoryName()%>";
+            					subcategoryNameArray.push(subcategoryNameinJS)
+            				<%}else continue;
+            			}%>
+     
+            			//custom category in js
+            			customCategoryNameArray = new Array();
+            			<%
+            			for(int k = 0; k < userCustomCategoryList.size(); k++){
+            			if(userCustomCategoryList.get(k).getCategoryId() == selectedFirstCategory){%>
+            					customCategoryNameinJS = "<%=userCustomCategoryList.get(k).getCustomCategoryName()%>"
+            					customCategoryNameArray.push(customCategoryNameinJS)
+            				<%}else continue;
+            			}%>	
+            			
+            		}
+              <%}%>	
+            	
+            	$('#subCategory').empty();
+                for (var i = 0; i < subcategoryNameArray.length; i++) {
+                	var option = $("<option value='" + subcategoryNameArray[i] + "'>" + subcategoryNameArray[i] +  "</option>");
+                    $('#subCategory').append(option);
+                }
+                
+                for(var i = 0; i < customCategoryNameArray.length; i++){
+                	var option = $("<option value='" + customCategoryNameArray[i] + "'>" + customCategoryNameArray[i] +  "</option>");
+                    $('#subCategory').append(option);
+                }
+            });
+        });
+	</script>
+	<script>
+		function getUserChosenScap(){
+			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
+		}
+	</script>
+	<script>
+		$("input[name='radioSelectedNews']").change(function(){
+			<% 
+			for(int i = 0; i < userScrapList.size(); i++){%>
 				var index = <%=i%>
 				if(document.getElementsByName("radioSelectedNews")[index].checked == true){
 					<% 
@@ -183,9 +172,10 @@
 					<%}else%>
 					document.getElementById("selectedNewsFrame").src = "<%=selectedNewsURL%>";
 				}
-		<%}%>
-	});
-</script>
+		  <%}%>
+		});
+	</script>
+	
 
 
 </html>

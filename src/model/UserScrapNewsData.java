@@ -1,7 +1,7 @@
 package model;
 
 
-public class UserScrapNews {
+public class UserScrapNewsData {
 
 	int newsId;
 	String headline;
@@ -10,7 +10,7 @@ public class UserScrapNews {
 	String newsURL;
 
 
-	public UserScrapNews() {
+	public UserScrapNewsData() {
 		newsId = 0;
 		headline = "";
 		subCategoryId = 0;

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 public class ManageRecord {
 
+	
 	public static int insertUserRecord(Connection conn, HttpServletRequest request) {
 		
 		int result = -1;
@@ -20,11 +21,13 @@ public class ManageRecord {
 		HttpSession userSession = request.getSession(false);
 		int userId = (Integer)userSession.getAttribute("userId");
 		
-		String userSelectCategory = request.getParameter("subCategory");
-		int recordSubcategoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, userSelectCategory);
+		int recordSubcategoryId = (Integer)request.getAttribute("userSelectedSubCategoryId");
+		//int recordSubcategoryId = Integer.parseInt(recordSubcategory);
+		//int recordSubcategoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, userSelectCategory);
 		
-		String userCustomCategory = "전체";
-		int recordCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, userCustomCategory);
+		int recordCustomCategoryId = (Integer)request.getAttribute("userSelectedCustomCategoryId");
+		//String userCustomCategory = "전체";
+		//int recordCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, userCustomCategory);
 		
 		String userFolderStr =  request.getParameter("userFolder");
 		int folderId = Integer.parseInt(userFolderStr);

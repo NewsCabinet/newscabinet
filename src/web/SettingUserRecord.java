@@ -16,11 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CustomCategoryData;
+import model.FristCategoryData;
 import model.ManageCategory;
 import model.ManageRecord;
 import model.ManageScrapNews;
 import model.NewsData;
-import model.UserScrapNews;
+import model.SubcategoryData;
+import model.UserFolderData;
+import model.UserScrapNewsData;
 
 /**
  * Servlet implementation class SettingUserRecord
@@ -47,23 +51,93 @@ public class SettingUserRecord extends HttpServlet {
 		int userId = (int) userSession.getAttribute("userId");
 
 		ServletContext sc = getServletContext();
-		String todayDate = (String)sc.getAttribute("todayDate");
+		Calendar cal = Calendar.getInstance();
+	    String todayDate = cal.get(Calendar.YEAR) + "."+ (cal.get(Calendar.MONTH) + 1)+ "." + cal.get(Calendar.DAY_OF_MONTH);
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 
-		//사용자 폴더 내용 가져오기
-		ResultSet userFolder = null;
-		userFolder = (ResultSet) ManageRecord.searchFolderNameByUserId(conn, userId);
-		ArrayList<Integer> forderIdList = new ArrayList<>();
-		ArrayList<String> forderNameList = new ArrayList<>();
+		//first Category Setting
+		ResultSet resultFirstCategory = (ResultSet) ManageCategory.searchAllFirstCateogry(conn);
+		ArrayList<FristCategoryData> firstCategoryList = new ArrayList<FristCategoryData>();
 		
-		if (userFolder != null) {
+		try {
+			if(resultFirstCategory != null) {	
+				while(resultFirstCategory.next()) {
+					int firstCategoryId = resultFirstCategory.getInt(1);
+					String firstCategoryName = resultFirstCategory.getString(2);
+					FristCategoryData tmp = new FristCategoryData(firstCategoryId, firstCategoryName);
+					firstCategoryList.add(tmp);
+				}
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//SubCategory Setting
+		ResultSet resultSubCategory = (ResultSet) ManageCategory.searchAllSubCateogry(conn);
+		ArrayList<SubcategoryData> subCategoryList = new ArrayList<SubcategoryData>();
+		
+		try {
+			if(resultSubCategory != null) {
+				while(resultSubCategory.next()) {
+					int firstCategoryId = resultSubCategory.getInt(1);
+					int subCategoryId = resultSubCategory.getInt(2);
+					String subCategoryName = resultSubCategory.getString(3);
+					
+					SubcategoryData tmp = new SubcategoryData();
+					tmp.setFirstCategoryId(firstCategoryId);
+					tmp.setSubcategoryId(subCategoryId);
+					tmp.setSubcategoryName(subCategoryName);
+					subCategoryList.add(tmp);
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//Custom Category Setting
+		ResultSet resultUserCustomCategory = ManageCategory.searchAllUserCustomCateogry(conn, userId);
+		ArrayList<CustomCategoryData> userCustomCategoryList = new ArrayList<CustomCategoryData>();
+		
+		try {
+			if(resultUserCustomCategory != null) {
+				while(resultUserCustomCategory.next()) {
+					int firstCategoryId = resultUserCustomCategory.getInt(1);
+					int customCategoryId = resultUserCustomCategory.getInt(2);
+					String customCategoryName = resultUserCustomCategory.getString(3);
+					
+					CustomCategoryData tmp = new CustomCategoryData();
+					tmp.setCategoryId(firstCategoryId);
+					tmp.setCustomCategoryId(customCategoryId);
+					tmp.setCustomCategoryName(customCategoryName);
+					tmp.setUserId(userId);
+					
+					userCustomCategoryList.add(tmp);
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			
+		
+		//사용자 폴더 내용 가져오기
+		ResultSet resultUserFolder = (ResultSet) ManageRecord.searchFolderNameByUserId(conn, userId);
+		ArrayList<UserFolderData> userForderList = new ArrayList<UserFolderData>();
+		
+		
+		if (resultUserFolder != null) {
 				try {
-					while (userFolder.next()) {
-						String folderName = userFolder.getString(1);
+					while (resultUserFolder.next()) {
+						String folderName = resultUserFolder.getString(1);
+						int folderId = resultUserFolder.getInt(2);
 						
-						int folerId = userFolder.getInt(2);
-						forderNameList.add(folderName);
-						forderIdList.add(folerId);
+						UserFolderData tmp = new UserFolderData();
+						tmp.setFolderId(folderId);
+						tmp.setFolderName(folderName);
+						tmp.setUserId(userId);
+						userForderList.add(tmp);
 					}
 					
 				} catch (SQLException e) {
@@ -71,16 +145,17 @@ public class SettingUserRecord extends HttpServlet {
 					e.printStackTrace();
 				}
 			
-			} else {
-				System.out.println("DB에서 폴더가 로딩되지 않음");
-			}
+		} else {
+			System.out.println("resultUserFolder Problem");
+		}
 
-		ArrayList<UserScrapNews> userScrapList = new ArrayList<UserScrapNews>();
+		//사용자가 스크랩한 뉴스 가져오기
+		ArrayList<UserScrapNewsData> userScrapList = new ArrayList<UserScrapNewsData>();
 		ResultSet userScrapResult = ManageScrapNews.searchAllUserScrapNewsForRecord(conn, userId);
 		if (userScrapResult != null) {
 			try {
 				while(userScrapResult.next()) {
-					UserScrapNews tmp = new UserScrapNews();
+					UserScrapNewsData tmp = new UserScrapNewsData();
 					tmp.setNewsId(userScrapResult.getInt(1));
 					tmp.setHeadline(userScrapResult.getString(2));
 					
@@ -101,13 +176,14 @@ public class SettingUserRecord extends HttpServlet {
 			System.out.println("userScrapResult is null");
 		}
 		
-		
 		request.setAttribute("userId", userId);
-		request.setAttribute("forderIdList", forderIdList);
-		request.setAttribute("forderNameList", forderNameList);
 		request.setAttribute("todayDate", todayDate);
+		request.setAttribute("firstCategoryList", firstCategoryList);
+		request.setAttribute("subCategoryList", subCategoryList);
+		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
+		request.setAttribute("userForderList", userForderList);
 		request.setAttribute("userScrapList", userScrapList);
-		
+		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/Record/user/writingPage.jsp");
