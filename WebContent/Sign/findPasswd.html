@@ -2,16 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
+<link href="../style.css" rel="stylesheet" type="text/css">
+<style>
+div {
+	width: 400px;
+	height: 300px;
+}
+
+body {
+   margin: 0 auto;
+  text-align: center;
+  background-color:#C7C7C7;
+}
+h3{
+ padding-top:100px;
+}
+</style>
 </head>
 <body>
 	<div style='text-align: center'>
 		<form action="findPasswdAfter.jsp">
 			<h3>비밀번호 찾기</h3>
-			<p>비밀번호는 가입시 입력한 이메일과 핸드폰 번호를 통해 찾을 수 있습니다 </p> <br>
-			이메일 : <input type="email" name="userEmailId"> <br>
-			핸드폰 번호 : <input type="tel" name="userPhone" placeholder="010-9999-9999" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"required><br>
-			<input type="submit" value="비밀번호 찾기">
+			<p>비밀번호는 가입시 입력한 <b>이메일</b>과 <b>핸드폰 번호</b>를 통해 찾을 수 있습니다 </p> <br>
+			<input type="email" class="modifyLogin" name="userEmailId" placeholder="이메일을 입력해주세요"> <br>
+			<input type="tel" class="modifyLogin" name="userPhone" placeholder="번호를 입력해주세요 010-9999-9999"  pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"required><br>
+			<input type="submit"class="FindButton"  value="비밀번호 찾기">
 		</form>
 	</div>
 </body>

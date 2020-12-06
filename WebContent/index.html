@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link href="./style.css" rel="stylesheet">
+<link href="style.css?ver=1" rel="stylesheet" type="text/css">
 <script type="text/javascript"
    src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 <title>Home</title>
@@ -12,34 +12,32 @@
       <header class="head">
          <div class="wrapper">
             <div class="logo">
-               <a href="#"><b>N</b>ews<b>C</b>abinet</a>
+              <a href="/NewsCabinet/home.jsp"><b style="color: #bbb">N</b>ews<b
+					style="color: #bbb">C</b>abinet</a>
             </div>
          </div>
       </header>
    </div>
-   <div class="banner-area">
-      <h2>
-         <b class="title">Own your mind!</b>
-      </h2>
+    <div class ="banner-area">
+    <h2> <b class="title">Welcome!</b></h2>
       <script>
          $(function(){
-            $(".title").fadeIn(2000);
+            $(".title").fadeIn(1500);
          });
          </script>
+   </div>
     <script action="Sign/findId.html">
       function findId(){
-         window.open("Sign/findId.html", "아이디찾기", "width=400 height=350")
+         window.open("Sign/findId.html", "아이디찾기", "width=400 height=400");
       }
    </script> 
    <script action="Sign/findPasswd.html">
       function findPasswd(){
-         window.open("Sign/findPasswd.html", "비밀번호찾기", "width=400 height=350")
+         window.open("Sign/findPasswd.html", "비밀번호찾기", "width=400 height=400")
       }
    </script> 
-   </div>
-   <div class="index_content-area">
-      <div class="index_wrapper">
-         <div class="login"><h2>Login</h2>
+   <div class="index_content-area " style='background-color:#C7C7C7'>
+         <div class="login"><h2>Login</h2> <h5 style='font-size:12px'>-<i>자신만의 뉴스를 만들기 위해 <b>로그인</b>은 필수입니다</i> -</h5>
          <div>
             <form method="post" action="SignIn">
                <input class="enterId" type="text" name="userEmailId" placeholder="아이디를 입력해주세요." required /><br />
@@ -49,12 +47,14 @@
             </form>
          </div> 
          <div>
-         <a onclick='findId()'>아이디 찾기</a>
-          <a onclick='findPasswd()'>비밀번호 찾기</a>
-         <a href="signUp.jsp"> JOIN HERE </a> <br />
+         <button class="FindButton" onclick='findId()' >아이디 찾기</button>
+          <button class="FindButton"  onclick='findPasswd()'>비밀번호 찾기</button>
+         <button class="FindButton"><a href="signUp.jsp"> 회원가입</a> 
+          </button>
+          <br />
            </div>
+              </div>
+   
       </div>
-      </div>
-   </div>
 </body>
 </html>

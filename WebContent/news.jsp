@@ -6,20 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴스 보기</title>
-<link href="../style.css" rel="stylesheet">
-<style>
-/*body {
-   text-align: left;
-}*/
-
-.basic_contentzone {
-	padding-top: 20px;
-	position: relative;
-	top: 100px;
-	width: 100%;
-	height: 500px;
-}
-</style>
+<link href="../style.css?ver=1" rel="stylesheet">
 </head>
 <jsp:include page="webHeader.jsp"></jsp:include>
 
@@ -33,61 +20,70 @@
 	               SubcategoryData[] subcateData = (SubcategoryData[]) request.getAttribute("subcateData");
 	               String subCategory = (String) request.getAttribute("subCategory");
 	               
-	               out.println("<div class='categoryBox'>\n<ul class='categoryList'>");
+	               out.println("<div class='categoryBox'>");
+	               out.println("<div class='box1'>");
 	               for(int i = 0; i < subcateData.length; i++){
 	                  out.println(subcateData[i].getSubcategoryName());
 	                  if(subcateData[i].getSubcategoryName().equals(subCategory)){
-	                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked>");
-	                     subCategoryId = subcateData[i].getSubcategoryId();
+	                    // out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked>");
+	                    out.println("<label for='subcategory'><input type='radio' id='subcategory' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "' checked></label>");
+	                    subCategoryId = subcateData[i].getSubcategoryId();
 	                  }else{
-	                     out.println("<input type='radio' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'>");
+	                     out.println("<label for='subcategory'><input type='radio' id='subcategory' name='subCategory' value='" + subcateData[i].getSubcategoryName() + "'></label>");
 	                  }
 	                  if(i == 0){
 	                	  out.println("<br/>");
 	                  }
 	               }
+	               out.println("</div>"); //box1 태크 끝
 	               out.println("<br/>");
 	               
+	               out.println("<div class='box1'>");
 	               List customCategories = (ArrayList) request.getAttribute("customCategories");
 	               if(customCategories != null){
-	            	   out.println("내가 만든 카테고리 : ");
+	            	   out.println("<b>내가 만든 카테고리</b>");
 	            	   for(int i = 0; i< customCategories.size(); i++){
 	            			//System.out.println(customCategories[i]);
 	            			out.println(customCategories.get(i));
 	            			if(customCategories.get(i).equals(subCategory)){
-	            				out.println("<input type='radio' name='subCategory' value='" + customCategories.get(i) + "' checked>");
+	            				out.println("<label for='subcategory'><input type='radio' id='subcategory' name='subCategory' value='" + customCategories.get(i) + "' checked><label for='subcategory'>");
 	            				selectedCustomCategory = customCategories.get(i).toString();
 	            				subCategoryId = subcateData[0].getSubcategoryId();
 	            			}else{
-	            				out.println("<input type='radio' name='subCategory' value='" + customCategories.get(i) + "'>");
+	            				out.println("<label for='subcategory'><input type='radio' id='subcategory' name='subCategory' value='" + customCategories.get(i) + "'></label>");
 	            			}
 	            	   }
 	               }
+	               out.println("</div>"); //box1 태크 끝
+
 				%>
 				<script type="text/javascript">
 					function add_textbox() {
 						document.getElementById("addCustomCategories").innerHTML += "<input type='text' name='customCategories' >";
 					}
 				</script>
-				<div id="addCustomCategories">
-					<input type="button" value="나만의 키워드 추가" onclick="add_textbox()">
+				 <div id="addCustomCategories">
+					 <input class="FindButton" style='margin-top:5px' type="button" value="나만의 키워드 추가" onclick="add_textbox()"> 
 					<br>
-				</div>
+				</div> 
 				<%
+				out.println("<div class = 'box1'>");
                String newsType = (String) request.getAttribute("newsType");
                if (newsType.toString().equals("sim")) {
                   out.println(
-                        "관련도순 <input type='radio' name='newsType' value='sim' checked>\n최근순 <input type='radio' name='newsType' value='date'>");
+                        "관련도순 <label for='subcategory'><input type='radio' id='subcategory' name='newsType' value='sim' checked>\n최근순 <input type='radio' name='newsType' value='date'></label>");
                   out.println("<br/>"); 
                } else if (newsType.toString().equals("date")) {
                   out.println(
-                        "관련도순 <input type='radio' name='newsType' value='sim'>\n최근순 <input type='radio' name='newsType' value='date' checked>");
+                        "관련도순 <label for='subcategory'><input type='radio' id='subcategory' name='newsType' value='sim'>\n최근순 <input type='radio' name='newsType' value='date' checked></label>");
                }
+               out.println("</div>"); //box1태그 끝
          %>
-				<input type="submit" value="선택 완료">
+				<input class="FindButton" style='margin-top:15px' type="submit" value="선택 완료">
 			</form>
 		</div>
-		<section style="padding-top: 0px;">
+		
+		<section class ="sectionArti" style="padding-top: 0px;">
 			<%
 				NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 				List scrappedNewsId = (ArrayList) request.getAttribute("scrappedNewsId"); 
@@ -101,15 +97,17 @@
 					for(int j = scrappedNewsId.size() -1; j >= 0; j--){
 						if(scrappedNewsId.get(j).equals(i)){
 							check = true;
-							out.println((i + 1) + " <button name='scrap' onclick=" + tmpForScrap + "> 스크랩취소 </button>");
+							//out.println((i + 1) + " <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩취소 </button>");
+							out.println(" <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩취소 </button>");
 						}
 					}
 					if(!check){
-						out.println((i + 1) + " <button name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");	
+						//out.println((i + 1) + " <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");	
+						out.println("<button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");	
 					}
 					
 					request.setAttribute("SelectednewsCategory", subCategory);
-					out.println("<p style='font-size: 10px'><b><i>");
+					out.println("<p style='font-size: 13px'><b><i>");
 					out.println(nd[i].getHeadline());
 					out.println("</i></b><br/><p class='newsDescription'>");
 					out.println("<br>");

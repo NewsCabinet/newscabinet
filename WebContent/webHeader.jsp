@@ -4,7 +4,7 @@
 <div class="box-area">
 	<header class="head">
 		<div class="wrapper">
-			<form method="POST" name="changeuser" action="changeUser.jsp">
+			<form method="POST" name="changeuser" action="/NewsCabinet/changeUser.jsp">
 				<% 
             	  if(session.getAttribute("userName")!= null){
                 	 out.println("<button class=nameButton>"  + session.getAttribute("userName") + "님 환영합니다!</button>"); 
