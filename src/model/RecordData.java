@@ -5,6 +5,7 @@ public class RecordData {
 	String userName;
 	int recordId;
 	int subcategoryId;
+	String subcategoryName;
 	String recordTitle;
 	String recordDate;
 	int recordCount;
@@ -57,14 +58,22 @@ public class RecordData {
 		this.recordCount = recordCount;
 	}
 
-
 	public int getSubcategoryId() {
 		return subcategoryId;
 	}
 
-
 	public void setSubcategoryId(int subcategoryId) {
 		this.subcategoryId = subcategoryId;
+	}
+
+
+	public String getSubcategoryName() {
+		return subcategoryName;
+	}
+
+
+	public void setSubcategoryName(String subcategoryName) {
+		this.subcategoryName = subcategoryName;
 	}
 	
 	

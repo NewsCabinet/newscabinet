@@ -3,7 +3,7 @@
 <%@ page
 	import="model.UserScrapNewsData, model.CustomCategoryData, model.UserFolderData,
 			model.FristCategoryData, model.SubcategoryData"
-	import="java.sql.*, java.util.*"%>
+	import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
