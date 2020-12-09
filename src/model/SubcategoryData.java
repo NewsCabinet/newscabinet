@@ -18,6 +18,7 @@ public class SubcategoryData {
 		this.subcategoryName = subcategoryName;
 	}
 
+	
 	public int getSubcategoryId() {
 		return subcategoryId;
 	}

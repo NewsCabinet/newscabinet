@@ -92,24 +92,37 @@ public class WriteRecrod extends HttpServlet {
 		request.setAttribute("userSelectedCustomCategoryId", userSelectedCustomCategoryId);
 		
 		int recordId = ManageRecord.insertUserRecord(conn, request);
+		System.out.println("recordId = " + recordId);
 		
 		String[] userSelectNews = request.getParameterValues("checkBoxSelectedNews");
-	
-		if (recordId != -1) {					
-			for(int i = 0; i <userSelectNews.length; i++) {
-				int selectedNewsId =  Integer.parseInt(userSelectNews[i]);
-				int recordResult = ManageRecord.insertUserScrapRecord(conn, recordId, selectedNewsId);
-				
-				if(recordResult == -1) {
-					System.out.println("user_scrap_record 저장하는데 문제가 생김");
+		try {
+			if (recordId > 0 ) {					
+				for(int i = 0; i <userSelectNews.length; i++) {
+					int selectedNewsId =  Integer.parseInt(userSelectNews[i]);
+					int recordResult = ManageRecord.insertUserScrapRecord(conn, recordId, selectedNewsId);
+					
+					if(recordResult == -1) {
+						System.out.println("user_scrap_record 저장하는데 문제가 생김");
+						throw new Exception();
+					}
 				}
+				System.out.println("저장성공!");
+				out.print("<script>alert('저장되었습니다.'); location.href='./main' </script>\n");
+			//	RequestDispatcher view = request.getRequestDispatcher("/UserRecord/main");
+			//	view.forward(request, response);
+				out.flush();
+				
+			}else if(recordId == -2){
+				System.out.println("같은 기록이 존재함");
+				out.println("<script>alert('같은 글이 존재합니다. 제목이나 공개 여부를 다르게 하여 작성하여주세요'); location.href='../home.jsp'; </script>\r\n");
+				out.flush();
+
+			}else {
+				out.print("<script>alert('저장에 실패하였습니다.'); location.href='../home.jsp'; </script>\r\n");
+				out.flush();
 			}
-			System.out.println("저장성공!");
-			out.print("<script>alert('저장되었습니다.')</script>\n");
-			RequestDispatcher view = request.getRequestDispatcher("/UserRecord/main");
-			view.forward(request, response);
-		}else {
-			out.print("<script>alert('저장에 실패하였습니다.'); location.href='../home.jsp'; </script>\r\n");
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
