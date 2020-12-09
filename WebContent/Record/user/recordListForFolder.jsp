@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>폴더별 보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
 <style>
 	.basic_type_header {

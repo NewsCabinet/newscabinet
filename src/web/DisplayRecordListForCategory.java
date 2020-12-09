@@ -51,7 +51,7 @@ public class DisplayRecordListForCategory extends HttpServlet {
 		int userId = (int) userSession.getAttribute("userId");
 		
 		
-		RequestDispatcher view = request.getRequestDispatcher("../../Record/user/recordListForFolder.js");
+		RequestDispatcher view = request.getRequestDispatcher("../../Record/user/recordListForCategory.jsp");
 		view.forward(request, response);
 	}
 
