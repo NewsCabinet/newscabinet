@@ -11,24 +11,20 @@
 <style type="text/css">
 	.newsCategoryHeader{
 		width: 60%;
-		margin: 20px auto;
-		padding: 10px;
+		margin: 3px auto;
+		padding: 5px;
+		border-bottom: 1px solid #2E404E;
 	}
 	
 	ul{
-	 list-style:none;
+		list-style:none;
 	}
 	
 	.newsCategoryHeader a{
 		width: 60%;
-		margin: 20px auto;
 		padding: 10px;
 		text-decoration: none;
 		color: black;
-	}
-	
-	.newsCategoryHeader a:hover{
-		border-bottom: 2px solid #2E404E;
 	}
 	
 	.CategoryHeaderli {
@@ -36,24 +32,37 @@
 		margin: 1px;
 		display: block;
 		padding: 5px;
-		display: block;
-		float: left;
-		padding: 5px;
 		text-decoration: none;
 	}
 	
+	.CategoryHeaderli a:hover{
+		border-bottom: 2px solid #2E404E;
+	}
 	
 	.CategoryHeaderliOn {
 		float: left;
 		margin: 1px;
 		display: block;
 		padding: 5px;
-		display: block;
-		float: left;
-		padding: 5px;
-		border-bottom: 2px solid #2E404E;
+		text-decoration: none;
+		border: 2px solid #2E404E;
+		border-radius: 10px;
 	}
-
+	
+	.subCategoryHeaderli {
+		float: left;
+		margin: 1px;
+		display: block;
+		padding: 5px;
+		text-decoration: none;
+	}
+	
+	.subCategoryHeaderli a:hover{
+		background: #2E404E;
+		color: white;
+		font-weight: bold;
+		border-radius: 10px;
+	}
 
 	#recordContent{
 		text-align: left;
@@ -90,22 +99,24 @@
 					<ul>
 					<li class='CategoryHeaderli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
 						<%
-						String itemName = "";
+						String presentFisrtCategoryName = "";
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
-							itemName = firstCategoryList.get(i).getCategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?firstCategory=" + itemId;
+							String itemName = firstCategoryList.get(i).getCategoryName();
+							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
 							
 							if(itemId == SelectedfirstCategoryId){
 								out.println("<li class='CategoryHeaderliOn'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
+								presentFisrtCategoryName = itemName;
 							}else{
 								out.println("<li class='CategoryHeaderli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 							}
-							
-						}%>
+						}
+						%>
 					</ul>
 					<br><br>
-					<hr>
+				</div>
+				<div class="newsCategoryHeader">
 					<ul>
 						<%
 						for(int i = 0; i < subCategoryList.size(); i++){
@@ -115,13 +126,17 @@
 							String recordUrl = "/NewsCabinet/otherRecord?first=" + firstCategoryId + "&sub=" + subItemId ;
 							
 							if(firstCategoryId == SelectedfirstCategoryId){
-								out.println("<li class='CategoryHeaderli'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
+								if(presentFisrtCategoryName.equals(subItemName)){
+									continue;
+								}else{
+									out.println("<li class='subCategoryHeaderli'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
+								}
 							}
 						}%>
 					</ul>
 					<br><br>
-					<hr>
-				</div>
+			</div>
+				
 				<div id=recordContent>
 						<% 
 						for(int i = 0; i < simpleRecordList.size(); i++){

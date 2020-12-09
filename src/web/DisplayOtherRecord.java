@@ -30,16 +30,25 @@ public class DisplayOtherRecord extends HttpServlet {
 		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
-		
-		int firstCategoryId = Integer.parseInt((String)request.getParameter("firstCategory"));
-		ResultSet resultPublicRecordId = ManageRecord.searchPublicRecordIdByFirstcategoryId(conn, firstCategoryId);
+	
+		ResultSet resultPublicRecordIdSet = null;
 		ArrayList<RecordData> simpleRecordList = new ArrayList<RecordData>();
 		
+		int firstCategoryId = Integer.parseInt((String)request.getParameter("first"));
+		String subCategory = (String)request.getParameter("sub");
+		
+		if(subCategory == null) { // 상위 카테고리로 가져오기
+			resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdByFirstcategoryId(conn, firstCategoryId);
+		}else{
+			int subcategoryId = Integer.parseInt(subCategory);
+			resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdBySubcategoryId(conn, subcategoryId);
+		}
+		
+		
 		try {
-			if(resultPublicRecordId!= null) {
-				while(resultPublicRecordId.next()) {
-					int recordId = resultPublicRecordId.getInt(1);
-					System.out.println("top10 기록 가져오기 = " + recordId);
+			if(resultPublicRecordIdSet!= null) {
+				while(resultPublicRecordIdSet.next()) {
+					int recordId = resultPublicRecordIdSet.getInt(1);
 					if(recordId != -1) {
 						ResultSet simpleRecord = ManageRecord.searchSimpleUserRecordByRecordId(conn, recordId);
 						if(simpleRecord != null && simpleRecord.next()) {
@@ -69,6 +78,7 @@ public class DisplayOtherRecord extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		request.setAttribute("simpleRecordList", simpleRecordList);
 		request.setAttribute("SelectedCategoryId", firstCategoryId);

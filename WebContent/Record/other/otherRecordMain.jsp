@@ -93,7 +93,7 @@
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?firstCategory=" + itemId;
+							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
 							out.println("<li class='CategoryHeaderli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 						}%>
 					</ul>

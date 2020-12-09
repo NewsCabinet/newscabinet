@@ -236,17 +236,16 @@ public class ManageRecord {
 		return null;
 	}
 	
-	public static ResultSet searchPublicRecordBySubcategoryId(Connection conn, int subcategoryId) {
-		String query = "SELECT record_id, user_id, subcategory_id, record_title, record_date, record_count "
-					+ "FROM newscabinet.user_record WHERE record_private='0' and subcategory_id='" + subcategoryId + "'";
+	public static ResultSet searchPublicRecordIdBySubcategoryId(Connection conn, int subcategoryId) {
+		String query = "SELECT record_id FROM newscabinet.user_record "
+				+ "WHERE record_private='0' and subcategory_id='" + subcategoryId + "' "
+				+ "ORDER BY record_id DESC";
 		Statement st = null;
 		ResultSet rs = null;
 		try {
 			st = conn.createStatement();
 			if(st.execute(query)) {
-				rs = st.getResultSet();
-				if(rs.next())
-					return rs;
+				return rs = st.getResultSet();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -267,9 +266,8 @@ public class ManageRecord {
 		try {
 			st = conn.createStatement();
 			if(st.execute(query)) {
-				rs = st.getResultSet();
-				if(rs.next())
-					return rs;
+				return st.getResultSet();
+				
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -292,8 +290,7 @@ public class ManageRecord {
 		try {
 			st = conn.createStatement();
 			if(st.execute(query)) {
-				rs = st.getResultSet();
-				return rs;
+				return st.getResultSet();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -316,9 +313,7 @@ public class ManageRecord {
 		try {
 			st = conn.createStatement();
 			if(st.execute(query)) {
-				rs = st.getResultSet();
-				if(rs.next())
-					return rs;
+				return st.getResultSet();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -334,9 +329,7 @@ public class ManageRecord {
 		try {
 			st = conn.createStatement();
 			if(st.execute(query)) {
-				rs = st.getResultSet();
-				if(rs.next())
-					return rs;
+				return st.getResultSet();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
