@@ -62,49 +62,6 @@ public class SignIn extends HttpServlet {
 				+ cal.get(Calendar.DAY_OF_MONTH);
 		sc.setAttribute("todayDate", today);
 
-		// first Category Setting
-		ResultSet resultFirstCategory = (ResultSet) ManageCategory.searchAllFirstCateogry(conn);
-		ArrayList<FristCategoryData> firstCategoryList = new ArrayList<FristCategoryData>();
-
-		try {
-			if (resultFirstCategory != null) {
-				while (resultFirstCategory.next()) {
-					int firstCategoryId = resultFirstCategory.getInt(1);
-					String firstCategoryName = resultFirstCategory.getString(2);
-					FristCategoryData tmp = new FristCategoryData(firstCategoryId, firstCategoryName);
-					firstCategoryList.add(tmp);
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// SubCategory Setting
-		ResultSet resultSubCategory = (ResultSet) ManageCategory.searchAllSubCateogry(conn);
-		ArrayList<SubcategoryData> subCategoryList = new ArrayList<SubcategoryData>();
-
-		try {
-			if (resultSubCategory != null) {
-				while (resultSubCategory.next()) {
-					int firstCategoryId = resultSubCategory.getInt(1);
-					int subCategoryId = resultSubCategory.getInt(2);
-					String subCategoryName = resultSubCategory.getString(3);
-
-					SubcategoryData tmp = new SubcategoryData();
-					tmp.setFirstCategoryId(firstCategoryId);
-					tmp.setSubcategoryId(subCategoryId);
-					tmp.setSubcategoryName(subCategoryName);
-					subCategoryList.add(tmp);
-				}
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		sc.setAttribute("firstCategoryList", firstCategoryList);
-		sc.setAttribute("subCategoryList", subCategoryList);
 
 		ResultSet rs = ManageUser.searchUserByEmailId(conn, userEmailId);
 		PrintWriter out = response.getWriter();
@@ -160,6 +117,52 @@ public class SignIn extends HttpServlet {
 							e.printStackTrace();
 						}
 
+						
+						// first Category Setting
+						ResultSet resultFirstCategory = (ResultSet) ManageCategory.searchAllFirstCateogry(conn);
+						ArrayList<FristCategoryData> firstCategoryList = new ArrayList<FristCategoryData>();
+
+						try {
+							if (resultFirstCategory != null) {
+								while (resultFirstCategory.next()) {
+									int firstCategoryId = resultFirstCategory.getInt(1);
+									String firstCategoryName = resultFirstCategory.getString(2);
+									FristCategoryData tmp = new FristCategoryData(firstCategoryId, firstCategoryName);
+									firstCategoryList.add(tmp);
+								}
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+						// SubCategory Setting
+						ResultSet resultSubCategory = (ResultSet) ManageCategory.searchAllSubCateogry(conn);
+						ArrayList<SubcategoryData> subCategoryList = new ArrayList<SubcategoryData>();
+
+						try {
+							if (resultSubCategory != null) {
+								while (resultSubCategory.next()) {
+									int firstCategoryId = resultSubCategory.getInt(1);
+									int subCategoryId = resultSubCategory.getInt(2);
+									String subCategoryName = resultSubCategory.getString(3);
+
+									SubcategoryData tmp = new SubcategoryData();
+									tmp.setFirstCategoryId(firstCategoryId);
+									tmp.setSubcategoryId(subCategoryId);
+									tmp.setSubcategoryName(subCategoryName);
+									subCategoryList.add(tmp);
+								}
+							}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+
+						sc.setAttribute("firstCategoryList", firstCategoryList);
+						sc.setAttribute("subCategoryList", subCategoryList);
+						
+						
 						ResultSet categoryAndSubData = ManageCategory.searchAllCategoryAndSubCategory(conn);
 						sc.setAttribute("Categories", categoryAndSubData);
 
