@@ -201,7 +201,7 @@ public class ManageUser {
 		return null;
 	}
 
-
+	
 	public static String searchUserPasswdByEmailIdAndPhone(Connection conn, String userEmailId, String phone) {
 
 		String query = "SELECT user_pw FROM newscabinet.user WHERE user_email_id =" + "'" + userEmailId + "' AND user_phone='" + phone+ "'"; 

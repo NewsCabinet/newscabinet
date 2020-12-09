@@ -13,22 +13,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import model.FristCategoryData;
-import model.ManageCategory;
 import model.ManageRecord;
-import model.ManageUser;
 import model.RecordData;
-import model.SubcategoryData;
 
 /**
- * Servlet implementation class SettingOtherRecord
+ * Servlet implementation class DisplayOtherRecord
  */
-@WebServlet("/OthersRecord/main")
-public class SettingOtherRecord extends HttpServlet {
+@WebServlet("/otherRecord")
+public class DisplayOtherRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -36,19 +31,14 @@ public class SettingOtherRecord extends HttpServlet {
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 		
-		HttpSession userSession = request.getSession(false);
-		int userId = (int) userSession.getAttribute("userId");
-		int userFirstCategoryId = ManageCategory.searchUserFirstCategoryByUserId(conn, userId);
-
-		ResultSet resultTop10Record = ManageRecord.searchPublicRecordIdTop10(conn);
-		ArrayList<RecordData> popularTop10RecordList = new ArrayList<RecordData>();
+		int firstCategoryId = Integer.parseInt((String)request.getParameter("firstCategory"));
+		ResultSet resultPublicRecordId = ManageRecord.searchPublicRecordIdByFirstcategoryId(conn, firstCategoryId);
+		ArrayList<RecordData> simpleRecordList = new ArrayList<RecordData>();
 		
-		
-		//top-10 기록 가져오기
 		try {
-			if(resultTop10Record!= null) {
-				while(resultTop10Record.next()) {
-					int recordId = resultTop10Record.getInt(1);
+			if(resultPublicRecordId!= null) {
+				while(resultPublicRecordId.next()) {
+					int recordId = resultPublicRecordId.getInt(1);
 					System.out.println("top10 기록 가져오기 = " + recordId);
 					if(recordId != -1) {
 						ResultSet simpleRecord = ManageRecord.searchSimpleUserRecordByRecordId(conn, recordId);
@@ -70,8 +60,7 @@ public class SettingOtherRecord extends HttpServlet {
 							tmp.setRecordDate(recordDate);
 							tmp.setRecordCount(recordCount);
 							
-							popularTop10RecordList.add(tmp);
-							
+							simpleRecordList.add(tmp);
 						}
 					}
 				}
@@ -81,11 +70,9 @@ public class SettingOtherRecord extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		request.setAttribute("userId", userId);
-		request.setAttribute("popularTop10RecordList", popularTop10RecordList);
-		
-		RequestDispatcher view = request.getRequestDispatcher("/Record/other/otherRecordMain.jsp");
+		request.setAttribute("simpleRecordList", simpleRecordList);
+		request.setAttribute("SelectedCategoryId", firstCategoryId);
+		RequestDispatcher view = request.getRequestDispatcher("/Record/other/otherRecordCategory.jsp");
 		view.forward(request, response);
 		
 		
