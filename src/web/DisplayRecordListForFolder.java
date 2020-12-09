@@ -14,20 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ManageCategory;
 import model.ManageRecord;
 
 /**
- * Servlet implementation class DisplayMyRecord
+ * Servlet implementation class DisplayRecordListForFolder
  */
-@WebServlet("/UserRecord/main")
-public class DisplayMyRecord extends HttpServlet {
+@WebServlet("/UserRecord/main/folder/list")
+public class DisplayRecordListForFolder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayMyRecord() {
+    public DisplayRecordListForFolder() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,11 +50,23 @@ public class DisplayMyRecord extends HttpServlet {
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
 		
+
 		
-		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
-		request.setAttribute("folders", rs);
+		String tmp = (String) request.getParameter("folderId");
+		int folderId;
+		if(tmp==null) {
+			folderId=0;
+		}else {
+			folderId = Integer.parseInt(tmp);
+		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
+		String folderName = (String) ManageRecord.searchFolderNameByFolderId(conn, userId, folderId);
+		request.setAttribute("folderName", folderName);
+		
+		ResultSet rs = ManageRecord.searchRecordByUserIdAndFolderId(conn, userId, folderId);
+		request.setAttribute("recordData", rs);
+		
+		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/recordListForFolder.jsp");
 		view.forward(request, response);
 	}
 

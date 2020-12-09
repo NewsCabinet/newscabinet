@@ -14,20 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ManageCategory;
 import model.ManageRecord;
 
 /**
- * Servlet implementation class DisplayMyRecord
+ * Servlet implementation class DisplayRecordListForCategory
  */
-@WebServlet("/UserRecord/main")
-public class DisplayMyRecord extends HttpServlet {
+@WebServlet("/UserRecord/main/category")
+public class DisplayRecordListForCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayMyRecord() {
+    public DisplayRecordListForCategory() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -52,10 +51,7 @@ public class DisplayMyRecord extends HttpServlet {
 		int userId = (int) userSession.getAttribute("userId");
 		
 		
-		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
-		request.setAttribute("folders", rs);
-		
-		RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("../../Record/user/recordListForFolder.js");
 		view.forward(request, response);
 	}
 

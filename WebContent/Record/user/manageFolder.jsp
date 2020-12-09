@@ -8,14 +8,18 @@
 <style>
 html, body { overflow: hidden; }
 .folder {
-        background-image: url( "/NewsCabinet/images/folder_icon.png" );
-        background-repeat : no-repeat;
-        border: none;
-        width: 80px;
-        height: 80px;
-        text-align : center;
-        float:left;
-      }
+	background-repeat: no-repeat;
+	border-width: 3px;
+	border-top: 10px solid;
+	border-color: #2E404E;
+	background-color:white;
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+	margin: 20px;
+	float: left;
+}
 .folderName{
 	padding-top: 20px;
 	font-size : 10px;
@@ -24,7 +28,7 @@ html, body { overflow: hidden; }
 </head>
 <body>
 	<p>폴더 관리</p>
-	<form method="POST" action="/NewsCabinet/UserRecord/main/folder">
+	<form method="POST" action="/NewsCabinet/UserRecord/main/folder/management">
 		<p>
 			현재 폴더 :
 			<%
