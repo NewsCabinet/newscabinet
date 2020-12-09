@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.sql.*" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+html, body { overflow: hidden; }
+.folder {
+        background-image: url( "/NewsCabinet/images/folder_icon.png" );
+        background-repeat : no-repeat;
+        border: none;
+        width: 80px;
+        height: 80px;
+        text-align : center;
+        float:left;
+      }
+.folderName{
+	padding-top: 20px;
+	font-size : 10px;
+}
+</style>
+</head>
+<body>
+	<p>폴더 관리</p>
+	<form method="POST" action="/NewsCabinet/UserRecord/main/folder">
+		<p>
+			현재 폴더 :
+			<%
+					ResultSet rs = (ResultSet) request.getAttribute("folders");
+					if (rs != null) {
+						while (true) {
+							if (rs.next()) {
+								out.println("<div class='folder'> <p class='folderName'>"+ rs.getString("folder_name")+ "</p></div> ");
+							} else {
+								break;
+							}
+						}
+					}
+				%>
+		</p>
+		<script type="text/javascript">
+				function addFolder() {
+					document.getElementById("addedFolder").innerHTML += "추가할 폴더 : "
+					document.getElementById("addedFolder").innerHTML += "<input type='text' name='folder' >";
+				}
+				function reloadSelf(){
+					location.reload();
+				}	
+		</script>
+		<p/>
+		<div style="clear : both;">
+		<input type="button" value="폴더 삭제하기" onclick="">
+		<p/>
+		<input type="button" value="폴더 추가하기" onclick="addFolder()">
+		<div id="addedFolder">
+		</div>
+		<input type="submit" value="추가 완료" onClick="reloadSelf()">
+		</div>
+	</form>
+	<script type="text/javascript">
+		function closeWindow(){
+			window.opener.parent.location.reload();
+			self.close();
+		}
+	</script>
+	<input type="button" value="닫기" onClick="closeWindow()">
+</body>
+</html>
