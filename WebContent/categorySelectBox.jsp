@@ -24,8 +24,8 @@
 				<%
 					for(int i = 0; i< categoryInJava.size(); i++){%>
 						category.push("<%=categoryInJava.get(i).toString()%>");
-					<%}
-				%>
+					<%}%>
+				
 				function changes1Step(fr) {
 						<%for(int i = 0; i< categoryInJava.size(); i++){%>
 		 					if (fr == "<%=categoryInJava.get(i)%>") {
@@ -53,11 +53,9 @@
 								%>
 							}
 		 				<%}%>
-
 					for (i = 0; i < form.Step2.length; i++) {
 						form.Step2.options[i] = null;
 					}
-
 					for (i = 0; i < num.length; i++) {
 						form.Step2.options[i] = new Option(num[i], vnum[i]);
 					}
@@ -73,7 +71,8 @@
 								out.println("<option>"+ categoryInJava.get(i).toString() + "</option>");
 							}
 						%>
-					</select> <select name='Step2'>
+					</select> 
+					<select name='Step2'>
 						<option>--하위 카테고리--</option>
 					</select>
 				</form>

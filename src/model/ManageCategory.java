@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class ManageCategory {
+	
 	
 	public static ResultSet searchAllCategoryAndSubCategory(Connection conn) {
 		String sqlSt = "select category_name, subcategory_name from newscabinet.category join newscabinet.subcategory "
@@ -25,6 +27,7 @@ public class ManageCategory {
 		}
 		return null;
 	}
+	
 	public static ResultSet searchCategoryNameById(Connection con, int categoryId) {
 
 		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;
@@ -34,6 +37,27 @@ public class ManageCategory {
 			st = con.createStatement();
 			if (st.execute(sqlSt)) {
 				return st.getResultSet();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+	
+	public static String searchCategoryIdByCategoryName(Connection conn, int categoryId) {
+
+		String sqlSt = "SELECT category_name FROM newscabinet.category WHERE category_id=" +categoryId;
+		Statement st;
+		ResultSet rs = null;
+		
+		try {
+			st = conn.createStatement();
+			if (st.execute(sqlSt)) {
+				rs = st.getResultSet();
+				if(rs.next())
+					return rs.getString(1); 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -103,27 +127,34 @@ public class ManageCategory {
 		}
 		return null;
 		
-		
 	}
 	
 	
+	
 	public static int searchSubcatogoryIdBySubcateogoryName(Connection conn, String subcategoryName) {
-		String query = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_name=?";
-		ResultSet rs = null;
+		String sqlSt = "SELECT subcategory_id FROM newscabinet.subcategory WHERE subcategory_name='" +subcategoryName + "'";
+		
+		Statement st;
 		try {
-			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setString(1, subcategoryName);
-			rs = pstat.executeQuery();
-			if(rs.next()) {
-				return rs.getInt(1);
+			st = conn.createStatement();
+			if (st.execute(sqlSt)) {
+				ResultSet rs = st.getResultSet();
+				if(rs!=null) {
+					if(rs.next()) {
+						return rs.getInt(1);
+					}		
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
-	}
 		
+	}
+	
+
+	
 	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
 		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=?";
 		ResultSet rs = null;
@@ -133,11 +164,11 @@ public class ManageCategory {
 			pstat.setString(2, "전체");
 			
 			rs = pstat.executeQuery();
-				if(rs.next()) {
-					//System.out.println(rs.getInt(1));
-					return rs.getInt(1);
+			if(rs.next()) {
+				//System.out.println(rs.getInt(1));
+				return rs.getInt(1);
 				}
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -162,7 +193,7 @@ public class ManageCategory {
 		}
 		return null;
 	}
-	
+
 	public static int searchCustomcategoryIdByUserAndCustomcategoryName(Connection conn, int userId, String customCategoryName) {
 		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=? ";
 		ResultSet rs = null;
@@ -203,6 +234,7 @@ public class ManageCategory {
 				}
 			}
 		}
+		
 		String tmp = customCategoryName.trim();
 		if(tmp.length() == 0) {
 			return;
@@ -221,7 +253,91 @@ public class ManageCategory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	
+	public static int searchCustomCategoryIdByName(Connection conn, int userId, String customCategoryName) {
+		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id="
+						+"'"+ userId +"'" + "and custom_category_name='" +customCategoryName + "'";
+		
+		int result = -1;
+		
+		Statement st;
+		ResultSet rs;
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {
+					int userCustomCategoryId = rs.getInt(1);
+					result = userCustomCategoryId;
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
+
+	public static ResultSet searchAllFirstCateogry(Connection conn) {
+		String query = "SELECT category_id, category_name FROM newscabinet.category";
+		ResultSet rs = null;
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				 if(rs != null)
+					return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+
+	public static ResultSet searchAllSubCateogry(Connection conn) {
+		String query = "SELECT category_id, subcategory_id, subcategory_name FROM newscabinet.subcategory";
+		ResultSet rs = null;
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				
+				if(rs != null)
+					return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static ResultSet searchAllUserCustomCateogry(Connection conn, int userId) {
+		String query = "SELECT category_id, custom_category_id, custom_category_name FROM newscabinet.custom_category WHERE user_id='" + userId + "'";
+		ResultSet rs = null;
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				
+				if(rs != null)
+					return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

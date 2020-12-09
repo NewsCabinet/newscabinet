@@ -4,13 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>아이디 중복 확인</title>
-<script>
-	function windowClosed(){window.close();}
-</script>
+	<meta charset="UTF-8">
+	<title>아이디 중복 확인</title>
+	<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+	<script>
+		function windowClosed(){
+			
+		opener.document.getElementById("userEmailId").innerHTML = '<%=userEmail%>';
+		consol.log("<%=userEmail%>");
+			
+		window.close();
+		}
+	</script>
 </head>
 <body>
+	<%!String userEmail = ""; %>
 	<%	String userInputEmailId = (String)request.getParameter("checkEmailId");
 		System.out.println("입력 아이디 = " + userInputEmailId);
 		
@@ -24,7 +32,11 @@
 				<input type="submit" value="다시찾기">
 			</form>
 		<%}else {%>
-			<p> 사용가능한 아이디입니다.</p>
+			<p> <b> <%=userInputEmailId%></b> 는  사용가능한 아이디입니다.</p>
+			<% userEmail = userInputEmailId;
+				System.out.println("userEmail = " + userEmail);
+			%>
+			
 			<input type="submit" value="확인" onclick="windowClosed()">
 		<% }%>
 </body>

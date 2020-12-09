@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ManageScrapNews {
 	
@@ -55,6 +56,7 @@ public class ManageScrapNews {
 				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
 				+ " WHERE user_id=?";
 		ResultSet rs = null;
+		
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
 			pstat.setInt(1, userId);
@@ -67,8 +69,28 @@ public class ManageScrapNews {
 		return null;
 	}
 	
-	public static ResultSet searchScrapNewsByUserIdAndCategory(Connection conn, int userId, int subCategoryId) {
+	
+	public static ResultSet searchAllUserScrapNewsForRecord(Connection conn, int userId) {
 
+		String query = "SELECT user_scrap_news.news_id, headline, subcategory_id, url FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
+				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
+				+ " WHERE user_id=" + userId;
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public static ResultSet searchScrapNewsByUserIdAndCategory(Connection conn, int userId, int subCategoryId) {
+	
 		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
 				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
 				+ " WHERE user_id=? and subcategory_id=?";
@@ -85,8 +107,10 @@ public class ManageScrapNews {
 		}
 		return null;
 	}
+
 	
 	public static int searchScrapCountByUrl(Connection conn, String newsUrl) {
+
 		String query = "SELECT scrap_count from newscabinet.scrap_news WHERE url=?";
 		ResultSet rs = null;
 		int result = -1;
