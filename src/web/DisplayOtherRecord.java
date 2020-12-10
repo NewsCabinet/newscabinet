@@ -35,13 +35,14 @@ public class DisplayOtherRecord extends HttpServlet {
 		ArrayList<RecordData> simpleRecordList = new ArrayList<RecordData>();
 		
 		int firstCategoryId = Integer.parseInt((String)request.getParameter("first"));
+		int subCategoryId = -1;
 		String subCategory = (String)request.getParameter("sub");
 		
 		if(subCategory == null) { // 상위 카테고리로 가져오기
 			resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdByFirstcategoryId(conn, firstCategoryId);
 		}else{
-			int subcategoryId = Integer.parseInt(subCategory);
-			resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdBySubcategoryId(conn, subcategoryId);
+			subCategoryId = Integer.parseInt(subCategory);
+			resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdBySubcategoryId(conn, subCategoryId);
 		}
 		
 		
@@ -52,6 +53,7 @@ public class DisplayOtherRecord extends HttpServlet {
 					if(recordId != -1) {
 						ResultSet simpleRecord = ManageRecord.searchSimpleUserRecordByRecordId(conn, recordId);
 						if(simpleRecord != null && simpleRecord.next()) {
+							
 							int recordUserId = simpleRecord.getInt(1);
 							String recordUserName = simpleRecord.getString(2);
 							int recordSubcatergoryId = simpleRecord.getInt(3);
@@ -65,6 +67,7 @@ public class DisplayOtherRecord extends HttpServlet {
 							tmp.setUserName(recordUserName);
 							tmp.setSubcategoryId(recordSubcatergoryId);
 							tmp.setSubcategoryName(recordSubcatergoryName);
+							tmp.setRecordId(recordId);
 							tmp.setRecordTitle(recordTitle);
 							tmp.setRecordDate(recordDate);
 							tmp.setRecordCount(recordCount);
@@ -82,6 +85,7 @@ public class DisplayOtherRecord extends HttpServlet {
 		
 		request.setAttribute("simpleRecordList", simpleRecordList);
 		request.setAttribute("SelectedCategoryId", firstCategoryId);
+		request.setAttribute("SelectedSubCategoryId", subCategoryId);
 		RequestDispatcher view = request.getRequestDispatcher("/Record/other/otherRecordCategory.jsp");
 		view.forward(request, response);
 		
