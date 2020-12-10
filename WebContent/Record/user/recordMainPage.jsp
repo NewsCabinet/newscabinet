@@ -57,10 +57,6 @@
 		float: left;
 		border-bottom: 2px solid #2E404E;
 	}
-html, body {
-	overflow: hidden;
-	height: 100%;
-}
 
 .folder {
 	background-repeat: no-repeat;
