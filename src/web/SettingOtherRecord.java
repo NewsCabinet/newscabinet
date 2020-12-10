@@ -49,7 +49,6 @@ public class SettingOtherRecord extends HttpServlet {
 			if(resultTop10Record!= null) {
 				while(resultTop10Record.next()) {
 					int recordId = resultTop10Record.getInt(1);
-					System.out.println("top10 기록 가져오기 = " + recordId);
 					if(recordId != -1) {
 						ResultSet simpleRecord = ManageRecord.searchSimpleUserRecordByRecordId(conn, recordId);
 						if(simpleRecord != null && simpleRecord.next()) {
@@ -66,6 +65,7 @@ public class SettingOtherRecord extends HttpServlet {
 							tmp.setUserName(recordUserName);
 							tmp.setSubcategoryId(recordSubcatergoryId);
 							tmp.setSubcategoryName(recordSubcatergoryName);
+							tmp.setRecordId(recordId);
 							tmp.setRecordTitle(recordTitle);
 							tmp.setRecordDate(recordDate);
 							tmp.setRecordCount(recordCount);
