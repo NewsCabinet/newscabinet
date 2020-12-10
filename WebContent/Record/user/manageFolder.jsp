@@ -38,15 +38,6 @@ html, body { overflow: hidden; }
 				}
 			%>
 		</p>
-		<script type="text/javascript">
-				function addFolder() {
-					document.getElementById("addedFolder").innerHTML += "추가할 폴더 : "
-					document.getElementById("addedFolder").innerHTML += "<input type='text' name='folder' >";
-				}
-				function reloadSelf(){
-					location.reload();
-				}	
-		</script>
 		<p/>
 		<div style="clear : both;">
 		<input type="button" value="폴더 삭제하기" onclick="">
@@ -65,4 +56,13 @@ html, body { overflow: hidden; }
 	</script>
 	<input type="button" value="닫기" onClick="closeWindow()">
 </body>
+<script type="text/javascript">
+	function addFolder() {
+		document.getElementById("addedFolder").innerHTML += "추가할 폴더 : "
+		document.getElementById("addedFolder").innerHTML += "<input type='text' name='folder' >";
+	}
+	function reloadSelf() {
+		location.reload();
+	}
+</script>
 </html>
