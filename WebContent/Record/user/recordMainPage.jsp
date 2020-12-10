@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.sql.*" import="java.util.*"%>
+	pageEncoding="UTF-8" import="java.sql.*" import="java.util.*, model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,18 +104,10 @@ html, body {
 		<div style="background-color: #EEEEEE; width: 60%; margin:0px auto;">
 			
 			<%
-				ResultSet rs = (ResultSet) request.getAttribute("folders");
-				if (rs != null) {
-					while (true) {
-						if (rs.next()) {
-							String tmpForFolder = "location.href='../UserRecord/main/folder/list?folderId=" + rs.getInt("folder_id")
-									+ "'";
-							out.println("<button name='folder' class='folder' onclick=" + tmpForFolder + ">" + rs.getString("folder_name")
-									+ "</button>");
-						} else {
-							break;
-						}
-					}
+				ArrayList<UserFolderData> userForderList = (ArrayList) request.getAttribute("folders");
+				for(int i = 0; i< userForderList.size(); i++){
+					String tmpForFolder = "location.href='../UserRecord/main/folder/list?folderId=" + userForderList.get(i).getFolderId() + "'";
+					out.println("<button name='folder' class='folder' onclick=" + tmpForFolder + ">" + userForderList.get(i).getFolderName() + "</button>");
 				}
 			%>
 		</div>
