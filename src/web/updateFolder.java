@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.ManageRecord;
+import model.UserFolderData;
 
 /**
  * Servlet implementation class updateFolder
@@ -50,7 +53,32 @@ public class updateFolder extends HttpServlet {
 		int userId = (int) userSession.getAttribute("userId");
 		
 		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
-		request.setAttribute("folders", rs);
+		ArrayList<UserFolderData> userForderList = new ArrayList<UserFolderData>();
+		
+		if (rs != null) {
+			try {
+				while (rs.next()) {
+					String folderName = rs.getString(1);
+					int folderId = rs.getInt(2);
+
+					UserFolderData tmp = new UserFolderData();
+					tmp.setFolderId(folderId);
+					tmp.setFolderName(folderName);
+					tmp.setUserId(userId);
+					userForderList.add(tmp);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			System.out.println("resultUserFolder Problem");
+		}
+		
+		request.setAttribute("folders", userForderList);
+		
 		
 		String[] addfolder = request.getParameterValues("folder");
 		

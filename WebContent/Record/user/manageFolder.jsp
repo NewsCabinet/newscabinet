@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.sql.*" import="java.util.*"%>
+    pageEncoding="UTF-8" import="java.sql.*" import="java.util.*, model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,17 +32,11 @@ html, body { overflow: hidden; }
 		<p>
 			현재 폴더 :
 			<%
-					ResultSet rs = (ResultSet) request.getAttribute("folders");
-					if (rs != null) {
-						while (true) {
-							if (rs.next()) {
-								out.println("<div class='folder'> <p class='folderName'>"+ rs.getString("folder_name")+ "</p></div> ");
-							} else {
-								break;
-							}
-						}
-					}
-				%>
+				ArrayList<UserFolderData> userForderList = (ArrayList) request.getAttribute("folders");
+				for(int i = 0; i< userForderList.size(); i++){
+					out.println("<div class='folder'> <p class='folderName'>"+ userForderList.get(i).getFolderName()+ "</p></div> ");
+				}
+			%>
 		</p>
 		<script type="text/javascript">
 				function addFolder() {

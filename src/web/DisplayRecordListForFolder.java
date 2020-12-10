@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.ManageRecord;
+import model.RecordData;
 
 /**
  * Servlet implementation class DisplayRecordListForFolder
@@ -64,7 +67,26 @@ public class DisplayRecordListForFolder extends HttpServlet {
 		request.setAttribute("folderName", folderName);
 		
 		ResultSet rs = ManageRecord.searchRecordByUserIdAndFolderId(conn, userId, folderId);
-		request.setAttribute("recordData", rs);
+		ArrayList<RecordData> recordList = new ArrayList<RecordData>();
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					int recordId = rs.getInt("record_id");
+					String recordTitle = rs.getString("record_title");
+					String recordDate = rs.getString("record_date");
+					int recordCount = rs.getInt("record_count");
+
+					RecordData record = new RecordData(userId, recordId, recordTitle, recordDate, recordCount);
+
+					recordList.add(record);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		request.setAttribute("recordData", recordList);
 		
 		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/recordListForFolder.jsp");
 		view.forward(request, response);

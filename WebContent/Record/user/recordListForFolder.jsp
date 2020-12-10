@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.sql.*" import="java.util.*"%>
+    pageEncoding="UTF-8" import="java.sql.*" import="java.util.*, model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,32 +86,26 @@
 		<div style="background-color: #EEEEEE; width: 60%; margin:0px auto;">
 			<div>
 				<%
-					ResultSet rs = (ResultSet) request.getAttribute("recordData");
-				if (rs != null) {
-					while (true) {
-						if (rs.next()) {
-					String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId=" + rs.getInt("record_id")
-							+ "'";
+					ArrayList<RecordData> recordList = (ArrayList) request.getAttribute("recordData");
+					for(int i = 0; i< recordList.size(); i++){
+						String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId=" + recordList.get(i).getRecordId() + "'";
 				%>
-							<div class="otherRecordItem" style="cursor: pointer;" onclick="<%=tmpForScrap%>;">
-								<p>
-									&nbsp;
-									<%=rs.getString("record_title")%>
-								</p>
-								<br>
-								<p>
-									&nbsp;
-									<%=rs.getString("record_date")%>
-									&nbsp; | &nbsp; 조회수 &nbsp;<%=rs.getString("record_count")%>
-								</p>
-								<br>
-							</div>
+						<div class="otherRecordItem" style="cursor: pointer;"
+							onclick="<%=tmpForScrap%>;">
+							<p>
+								&nbsp;
+								<%=recordList.get(i).getRecordTitle()%>
+							</p>
+							<br>
+							<p>
+								&nbsp;
+								<%=recordList.get(i).getRecordDate()%>
+								&nbsp; | &nbsp; 조회수 &nbsp;<%=recordList.get(i).getRecordCount()%>
+							</p>
+							<br>
+						</div>
 				<%
-						} else {
-							break;
-						}
 					}
-				}
 				%>
 			</div>
 		</div>
