@@ -55,7 +55,7 @@ public class DisplaySpecificRecord extends HttpServlet {
 		}
 		
 		int selectedRecordId = Integer.parseInt((String)request.getParameter("id"));
-		System.out.println("넘어온 recordId = " +selectedRecordId );
+
 		ResultSet resultSelectedRecord = ManageRecord.searchSpecificRecordByRecordId(conn, selectedRecordId);
 		RecordData recordData = new RecordData();
 		

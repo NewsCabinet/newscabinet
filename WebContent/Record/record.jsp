@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ page import="java.util.ArrayList, model.RecordData, model.UserScrapNewsData"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+    <%@ page import="java.util.ArrayList, model.RecordData, model.UserScrapNewsData"  %>
 <jsp:include page="../webHeader.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>특정 기록 보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
 
@@ -128,6 +127,7 @@
 		
 	</div>
 
+</body>
 <script>
 	function goBack(){
 		window.history.back();
@@ -160,6 +160,4 @@ function likeToggle(){
 }
 </script>
 
-
-</body>
 </html>

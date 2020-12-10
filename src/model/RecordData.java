@@ -1,6 +1,7 @@
 package model;
 
 public class RecordData {
+
 	int userId;
 	String userName;
 	int recordId;
@@ -24,6 +25,20 @@ public class RecordData {
 		this.recordCount = 0;
 	}
 	
+	public RecordData(int userId, int recordId, String recordTitle, String recordDate, int recordCount) {
+		super();
+		this.userId = userId;
+		this.userName =  "";
+		this.recordId = recordId;
+		this.firstCategoryName = "";
+		this.subcategoryId = 0;
+		this.subcategoryName = "";
+		this.recordTitle = recordTitle;
+		this.recordDate = recordDate;
+		this.recordCount = recordCount;
+	}
+	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -99,6 +114,7 @@ public class RecordData {
 	public void setFirstCategoryName(String firstCategoryName) {
 		this.firstCategoryName = firstCategoryName;
 	}
+	
 	
 	public void printRecord() {
 		System.out.println("------------------------");

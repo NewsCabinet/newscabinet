@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -17,21 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ManageCategory;
 import model.ManageRecord;
-import model.UserFolderData;
+import model.RecordData;
 
 /**
- * Servlet implementation class DisplayMyRecord
+ * Servlet implementation class DisplayRecordListForFolder
  */
-@WebServlet("/UserRecord/main")
-public class DisplayMyRecord extends HttpServlet {
+@WebServlet("/UserRecord/main/folder/list")
+public class DisplayRecordListForFolder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayMyRecord() {
+    public DisplayRecordListForFolder() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,35 +53,42 @@ public class DisplayMyRecord extends HttpServlet {
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
 		
+
 		
-		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
-		ArrayList<UserFolderData> userForderList = new ArrayList<UserFolderData>();
-		
-		if (rs != null) {
-			try {
-				while (rs.next()) {
-					String folderName = rs.getString(1);
-					int folderId = rs.getInt(2);
-
-					UserFolderData tmp = new UserFolderData();
-					tmp.setFolderId(folderId);
-					tmp.setFolderName(folderName);
-					tmp.setUserId(userId);
-					userForderList.add(tmp);
-				}
-
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} else {
-			System.out.println("resultUserFolder Problem");
+		String tmp = (String) request.getParameter("folderId");
+		int folderId;
+		if(tmp==null) {
+			folderId=0;
+		}else {
+			folderId = Integer.parseInt(tmp);
 		}
 		
-		request.setAttribute("folders", userForderList);
+		String folderName = (String) ManageRecord.searchFolderNameByFolderId(conn, userId, folderId);
+		request.setAttribute("folderName", folderName);
 		
-		RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
+		ResultSet rs = ManageRecord.searchRecordByUserIdAndFolderId(conn, userId, folderId);
+		ArrayList<RecordData> recordList = new ArrayList<RecordData>();
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					int recordId = rs.getInt("record_id");
+					String recordTitle = rs.getString("record_title");
+					String recordDate = rs.getString("record_date");
+					int recordCount = rs.getInt("record_count");
+
+					RecordData record = new RecordData(userId, recordId, recordTitle, recordDate, recordCount);
+
+					recordList.add(record);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		request.setAttribute("recordData", recordList);
+		
+		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/recordListForFolder.jsp");
 		view.forward(request, response);
 	}
 

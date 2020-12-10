@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ManageRecord {
 
 	
-	
 	public static ResultSet searchFolderNameByUserId(Connection conn, int userId) {
-		String query = "SELECT folder_name, folder_id FROM newscabinet.user_record_folder WHERE user_id=?";
+		String query = "SELECT folder_name, folder_id FROM newscabinet.user_record_folder WHERE user_id=? ORDER BY folder_name";
 
 		ResultSet rs = null;
 		try {
@@ -52,9 +51,31 @@ public class ManageRecord {
 		return result;
 	}
 	
+	public static String searchFolderNameByFolderId(Connection conn, int userId, int folderId) {
+
+		String query = "SELECT folder_name FROM newscabinet.user_record_folder "
+				+ "WHERE user_id ='"+userId+"' and folder_id=" +folderId;
+		Statement st = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				rs = st.getResultSet();
+				if(rs.next()){
+					return rs.getString(1);
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public static ResultSet searchRecordByUserIdAndFolderId(Connection conn, int userId, int folderId) {
 		String query = "SELECT * FROM newscabinet.user_record WHERE user_id=? and folder_id=?";
-
+		
 		ResultSet rs = null;
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
@@ -220,7 +241,7 @@ public class ManageRecord {
 		return null;
 	}
 	
-	
+
 	//처음 record insert시 사용
 
 	public static int insertUserRecord(Connection conn, HttpServletRequest request) {
@@ -312,7 +333,7 @@ public class ManageRecord {
 					+ "WHERE user_id=? and record_title = ? and record_private=? and subcategory_id=?";
 		ResultSet rs = null;
 		int result = -1;
-		
+
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, userId);
@@ -373,5 +394,42 @@ public class ManageRecord {
 		return result;
 
 	}
+
+			
 	
+	public static ResultSet searchRecordByRecordId(Connection conn, int recordId) {
+		String query = "SELECT * FROM newscabinet.user_record WHERE record_id=?";
+
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, recordId);
+			rs = pstat.executeQuery();
+				return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static int insertFolderUsingFolderName(Connection conn, int userId, String folderName) {
+		if(searchFolderIdByFolderName(conn, userId, folderName) != -1) {
+			return -1;
+		}
+		
+		String query = "insert into newscabinet.user_record_folder (user_id, folder_name) values(?, ?)";
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, folderName);
+			int tuple = pstat.executeUpdate();
+			
+			return tuple;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
+
