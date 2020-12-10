@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.UserScrapNewsData" %>
-<jsp:include page="webHeader.jsp"></jsp:include>
+    
+<%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.CustomCategoryData" %>
+<jsp:include page="../webHeader.jsp"></jsp:include>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>스크랩보기</title>
+<title>스크랩한 뉴스보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
 <style type="text/css">
 	/*CH : categoryHeader*/
@@ -108,19 +110,24 @@
 	}
 	
 </style>
-</head>
 
+</head>
 <body>
-	<%	
-		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
-		ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
-		ArrayList<UserScrapNewsData> scrapTop10List = (ArrayList)request.getAttribute("scrapTop10List");
-	%>
+	<%
+	ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
+	ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
+	ArrayList<CustomCategoryData> customCategoryList =  (ArrayList)request.getAttribute("customCategoryList");
+	int SelectedfirstCategoryId = 1; //= (Integer)request.getAttribute("SelectedCategoryId");
+	int SelectedSubCategoryId =3;//= (Integer)request.getAttribute("SelectedSubCategoryId");
+
 	
+	%>
+
+
 	<div class="basic_contentzone">
-			<section>
+		<section>
 			<br>
-			<h3>스크랩 보기</h3>
+			<h3>스크랩한 뉴스 보기</h3>
 			<br>
 			</section>
 				
@@ -129,55 +136,49 @@
 					<ul>
 					<li class='CH_FirtstLineli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
 						<%
+						String presentFisrtCategoryName = "";
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
-							out.println("<li class='CH_FirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
-						}%>
+							String scrapUrl = "/NewsCabinet/scrap/news?first=" + itemId;
+							
+							if(itemId == SelectedfirstCategoryId){
+								out.println("<li class='CH_FirtstLineliOn'><a href='" + scrapUrl + "'>" + itemName + "</a></li>");
+								presentFisrtCategoryName = itemName;
+							}else{
+								out.println("<li class='CH_FirtstLineli'><a href='" + scrapUrl + "'>" + itemName + "</a></li>");
+							}
+						}
+						%>
 					</ul>
 					<br><br>
 				</div>
 				<div class="newsCategoryHeader">
 					<ul>
-						<li class="CH_SecondLineli">인기 스크랩 top10 </li>
+						<%
+						for(int i = 0; i < subCategoryList.size(); i++){
+							int firstCategoryId = subCategoryList.get(i).getFirstCategoryId();
+							int subItemId = subCategoryList.get(i).getSubcategoryId();
+							String subItemName = subCategoryList.get(i).getSubcategoryName();
+							String recordUrl = "/NewsCabinet/scrap/news?first=" + firstCategoryId + "&sub=" + subItemId ;
+							
+							if(firstCategoryId == SelectedfirstCategoryId){
+								if(presentFisrtCategoryName.equals(subItemName)){
+									continue;
+								}else if(subCategoryList.get(i).getSubcategoryId() == SelectedSubCategoryId){
+									out.println("<li class='CH_SecondLineliOn'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
+								}else{
+									out.println("<li class='CH_SecondLineli'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
+								}
+							}
+						}%>
 					</ul>
 					<br><br>
 				</div>
-				<div class="simpleRecordContent">
-					<h3>&nbsp;&nbsp;인기 스크랩 기사</h3>
-						<% 
-						for(int i = 0; i < scrapTop10List.size(); i++){
-							
-							String scrapSubcategoryName = scrapTop10List.get(i).getSubCategoryName();
-							String scrapHeadline = scrapTop10List.get(i).getHeadline();
-							String scrapDescription = scrapTop10List.get(i).getDescription();
-							String scrapPublicDate = scrapTop10List.get(i).getPublishedDate();
-							int scrapCount = scrapTop10List.get(i).getScrapCount();
-							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + 1;
-							
-							%>
-							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
-								<p><b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
-								</p>
-								<br>
-								<%=scrapDescription%>
-								<br>
-								<br>
-								<p>
-								 출고 날짜 <%=scrapPublicDate %> &nbsp; | &nbsp; 스크랩수 &nbsp;<%=scrapCount %>
-								</p><br>
-							</div>
-						<%} %>
-							
-				</div>
 				
-			</div>
-			
+				
+	
 	</div>
-			
-
-
 
 </body>
 </html>

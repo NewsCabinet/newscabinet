@@ -78,7 +78,7 @@ public class SettingScrapNews extends HttpServlet {
 
 	   request.setAttribute("scrapTop10List", scrapTop10List);
 		
-	   RequestDispatcher view = request.getRequestDispatcher("/scrapNewsHome.jsp");
+	   RequestDispatcher view = request.getRequestDispatcher("../Scrap/scrapNewsHome.jsp");
 	   view.forward(request, response);
 	   
    
