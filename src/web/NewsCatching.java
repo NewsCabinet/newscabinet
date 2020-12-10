@@ -99,15 +99,6 @@ public class NewsCatching extends HttpServlet {
 		request.setAttribute("newsdata", newsdata);
 		sc.setAttribute("newsdata", newsdata);
 		
-		String[] customCategories = request.getParameterValues("customCategories");
-		
-		if(customCategories != null) {
-			//System.out.println(customCategories[0]);
-			for(int i = 0; i < customCategories.length; i++) {
-				ManageCategory.insertCustomcategory(conn,userId,customCategories[i],userCategoryId);
-			}
-		}
-		
 		List tmp = new ArrayList<String>();
 		try {
 			ResultSet customCategoryArray = ManageCategory.searchCustomcategoryNameByUser(conn, userId, userCategoryId);	

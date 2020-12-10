@@ -55,6 +55,24 @@ public class UpdateCustomCategory extends HttpServlet {
 		int userCategoryId = (int) userSession.getAttribute("userCategoryId");
 		int userId = (int) userSession.getAttribute("userId");
 		
+		String newCustomCategory = (String) request.getParameter("keyword");
+		if(newCustomCategory != null) {
+			ManageCategory.insertCustomcategory(conn,userId,newCustomCategory,userCategoryId);
+		}
+
+		String[] removeKeyword = request.getParameterValues("removeCategory");
+		
+		if(removeKeyword != null) {
+			for(int i = 0; i<removeKeyword.length; i++) {
+				int check = ManageCategory.removeCustomCategoryByCustomCategoryName(conn, userId, removeKeyword[i]);
+				if(check == 1) {
+					System.out.println("삭제되었습니다.");
+				}else {
+					System.out.println("삭제가 안되었습니다.");
+				}
+			}			
+		}
+
 		List tmp = new ArrayList<String>();
 		try {
 			ResultSet customCategoryArray = ManageCategory.searchCustomcategoryNameByUser(conn, userId, userCategoryId);	
@@ -71,22 +89,7 @@ public class UpdateCustomCategory extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("customCategories", tmp);
-		
-		String[] removeKeyword = request.getParameterValues("removeCategory");
-		
-		if(removeKeyword != null) {
-			for(int i = 0; i<removeKeyword.length; i++) {
-				int check = ManageCategory.removeCustomCategoryByCustomCategoryName(conn, userId, removeKeyword[i]);
-				if(check == 1) {
-					System.out.println("삭제되었습니다.");
-				}else {
-					System.out.println("삭제가 안되었습니다.");
-				}
-			}			
-		}
-
-		
+		request.setAttribute("customCategories", tmp);		
 		
 		RequestDispatcher view = request.getRequestDispatcher("../../News/manageCustomCategory.jsp");
 		view.forward(request, response);

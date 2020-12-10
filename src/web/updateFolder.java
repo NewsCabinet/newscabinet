@@ -99,7 +99,7 @@ public class UpdateFolder extends HttpServlet {
 			}
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/manageFolder.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Record/user/manageFolder.jsp");
 		view.forward(request, response);
 	}
 
