@@ -50,6 +50,9 @@ public class ManageScrapNews {
 		return false;		
 	}
 	
+	
+	
+	
 	public static ResultSet searchScrapNewsByNewsId(Connection conn, int newsId) {
 		String query = "SELECT scrap_news.subcategory_id, subcategory_name, headline, url " 
 					+ "FROM newscabinet.scrap_news "
@@ -67,6 +70,46 @@ public class ManageScrapNews {
 		}
 		return null;
 	}
+	
+
+	public static ResultSet searchScrapNewsDataByNewsId(Connection conn, int newsId) {
+		String query = "SELECT news_id, scrap_news.subcategory_id, subcategory_name, "
+					+ "headline, url, published_date, description, scrap_count " 
+					+ "FROM newscabinet.scrap_news "
+					+ "JOIN newscabinet.subcategory ON scrap_news.subcategory_id = subcategory.subcategory_id "
+					+ "WHERE news_id=" + newsId ;
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//스크랩순 top 10 기록 가져오기
+	public static ResultSet searchScrapNewsIdTop10(Connection conn) {
+		String query = "SELECT news_id FROM newscabinet.scrap_news ORDER BY scrap_count DESC LIMIT 10";
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+		
+	
 	
 	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {
 
@@ -87,6 +130,24 @@ public class ManageScrapNews {
 		return null;
 	}
 	
+
+	public static ResultSet searchUserScrapNewsByUserId(Connection conn, int userId) {
+
+		String query = "SELECT news_id, custom_category_id FROM newscabinet.scrap_news "
+				+ " WHERE user_id=" + userId;
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 	public static ResultSet searchAllUserScrapNewsForRecord(Connection conn, int userId) {
 

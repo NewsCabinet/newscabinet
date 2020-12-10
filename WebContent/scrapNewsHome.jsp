@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.RecordData" %>
-<jsp:include page="../../webHeader.jsp"></jsp:include>
+<%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.UserScrapNewsData" %>
+<jsp:include page="webHeader.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체 기록 보기</title>
+<title>스크랩보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
 <style type="text/css">
 	/*CH : categoryHeader*/
 	.newsCategoryHeader{
-		width: 60%;
+		width: 65%;
 		margin: 5px auto;
 		border-bottom: 1px solid #2E404E;
 	}
-	
-	
+
 	.newsCategoryHeader a{
 		width: 60%;
 		margin: 20px auto;
@@ -55,9 +54,7 @@
 		padding: 5px;
 		text-decoration: none;
 		font-weight:bolder;
-		
 	}
-	
 	
 	.CH_SecondLineli {
 		float: left;
@@ -88,13 +85,12 @@
 
 	.simpleRecordContent{
 		text-align: left;
-		width: 50%;
+		width: 60%;
 		margin: 10px auto;
 		padding : 10px;
 	}
 	
 	.simpleRecordItem {
-		width: 98%;
 		text-align: left;
 		border-bottom: 1px solid gray;
 		margin: 10px auto;
@@ -118,15 +114,13 @@
 	<%	
 		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
 		ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
-		ArrayList<RecordData> simpleRecordList = (ArrayList)request.getAttribute("simpleRecordList");
-		int SelectedfirstCategoryId = (Integer)request.getAttribute("SelectedCategoryId");
-		int SelectedSubCategoryId = (Integer)request.getAttribute("SelectedSubCategoryId");
+		ArrayList<UserScrapNewsData> scrapTop10List = (ArrayList)request.getAttribute("scrapTop10List");
 	%>
 	
 	<div class="basic_contentzone">
 			<section>
 			<br>
-			<h3>전체 기록 보기</h3>
+			<h3>스크랩 보기</h3>
 			<br>
 			</section>
 				
@@ -135,62 +129,43 @@
 					<ul>
 					<li class='CH_FirtstLineli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
 						<%
-						String presentFisrtCategoryName = "";
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
 							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
-							
-							if(itemId == SelectedfirstCategoryId){
-								out.println("<li class='CH_FirtstLineliOn'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
-								presentFisrtCategoryName = itemName;
-							}else{
-								out.println("<li class='CH_FirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
-							}
-						}
-						%>
+							out.println("<li class='CH_FirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
+						}%>
 					</ul>
 					<br><br>
 				</div>
 				<div class="newsCategoryHeader">
 					<ul>
-						<%
-						for(int i = 0; i < subCategoryList.size(); i++){
-							int firstCategoryId = subCategoryList.get(i).getFirstCategoryId();
-							int subItemId = subCategoryList.get(i).getSubcategoryId();
-							String subItemName = subCategoryList.get(i).getSubcategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?first=" + firstCategoryId + "&sub=" + subItemId ;
-							
-							if(firstCategoryId == SelectedfirstCategoryId){
-								if(presentFisrtCategoryName.equals(subItemName)){
-									continue;
-								}else if(subCategoryList.get(i).getSubcategoryId() == SelectedSubCategoryId){
-									out.println("<li class='CH_SecondLineliOn'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
-								}else{
-									out.println("<li class='CH_SecondLineli'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
-								}
-							}
-						}%>
+						<li class="CH_SecondLineli">인기 스크랩 top10 </li>
 					</ul>
 					<br><br>
-			</div>
-				
+				</div>
 				<div class="simpleRecordContent">
+					<h3>&nbsp;&nbsp;인기 스크랩 기사</h3>
 						<% 
-						for(int i = 0; i < simpleRecordList.size(); i++){
-							int recordId = simpleRecordList.get(i).getRecordId();
-							String subcategoryName = simpleRecordList.get(i).getSubcategoryName();
-							String recordTitle = simpleRecordList.get(i).getRecordTitle();
-							String userName = simpleRecordList.get(i).getUserName();
-							String recordDate = simpleRecordList.get(i).getRecordDate();
-							int recordCount = simpleRecordList.get(i).getRecordCount();
-							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
+						for(int i = 0; i < scrapTop10List.size(); i++){
+							
+							String scrapSubcategoryName = scrapTop10List.get(i).getSubCategoryName();
+							String scrapHeadline = scrapTop10List.get(i).getHeadline();
+							String scrapDescription = scrapTop10List.get(i).getDescription();
+							String scrapPublicDate = scrapTop10List.get(i).getPublishedDate();
+							int scrapCount = scrapTop10List.get(i).getScrapCount();
+							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + 1;
+							
 							%>
 							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
-								<p> <b>[<%=subcategoryName%>]</b> &nbsp; <%=recordTitle %>
-								</p><br>
+								<p><b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
+								</p>
+								<br>
+								<%=scrapDescription%>
+								<br>
+								<br>
 								<p>
-								<%=userName %> &nbsp; | &nbsp; <%=recordDate %> &nbsp; | &nbsp; 조회수 &nbsp;<%=recordCount %>
+								 출고 날짜 <%=scrapPublicDate %> &nbsp; | &nbsp; 스크랩수 &nbsp;<%=scrapCount %>
 								</p><br>
 							</div>
 						<%} %>

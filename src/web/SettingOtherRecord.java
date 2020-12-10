@@ -38,7 +38,7 @@ public class SettingOtherRecord extends HttpServlet {
 		
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
-		int userFirstCategoryId = ManageCategory.searchUserFirstCategoryByUserId(conn, userId);
+		//int userFirstCategoryId = ManageCategory.searchUserFirstCategoryByUserId(conn, userId);
 
 		ResultSet resultTop10Record = ManageRecord.searchPublicRecordIdTop10(conn);
 		ArrayList<RecordData> popularTop10RecordList = new ArrayList<RecordData>();

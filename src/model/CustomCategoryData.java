@@ -4,12 +4,14 @@ public class CustomCategoryData {
 
 	int userId;
 	int categoryId;
+	String firstCategoryName;
 	int customCategoryId;
 	String customCategoryName;
 	
 	public CustomCategoryData() {
 		this.userId = 0;
 		this.categoryId = 0;
+		this.firstCategoryName = "";
 		this.customCategoryId = 0;
 		this.customCategoryName="";
 	}
@@ -38,6 +40,14 @@ public class CustomCategoryData {
 	}
 	public void setCustomCategoryName(String customCategoryName) {
 		this.customCategoryName = customCategoryName;
+	}
+
+	public String getFirstCategoryName() {
+		return firstCategoryName;
+	}
+
+	public void setFirstCategoryName(String firstCategoryName) {
+		this.firstCategoryName = firstCategoryName;
 	}
 	
 }

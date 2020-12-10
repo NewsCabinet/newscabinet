@@ -18,8 +18,8 @@
 	<div class="basic_contentzone">
 	
 		<%		String today = (String)request.getAttribute("todayDate");
-				ArrayList<FristCategoryData> firstCategoryList = (ArrayList)request.getAttribute("firstCategoryList");
-				ArrayList<SubcategoryData> subCategoryList = (ArrayList)request.getAttribute("subCategoryList");
+				ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
+				ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
 				ArrayList<CustomCategoryData> userCustomCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
 				ArrayList<UserFolderData> userForderList = (ArrayList)request.getAttribute("userForderList");				
 				ArrayList<UserScrapNewsData> userScrapList = (ArrayList)request.getAttribute("userScrapList");

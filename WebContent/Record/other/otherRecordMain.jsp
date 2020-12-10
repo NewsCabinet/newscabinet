@@ -15,10 +15,6 @@
 		padding: 10px;
 	}
 	
-	ul{
-	 list-style:none;
-	}
-	
 	.newsCategoryHeader a{
 		width: 60%;
 		margin: 20px auto;
@@ -31,6 +27,10 @@
 		border-bottom: 2px solid #2E404E;
 	}
 	
+	
+	.newsCategoryHeader ul{
+		list-style:none;
+	}
 	.CategoryHeaderli {
 		float: left;
 		margin: 1px;
