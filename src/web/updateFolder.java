@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -17,21 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ManageCategory;
 import model.ManageRecord;
 import model.UserFolderData;
 
 /**
- * Servlet implementation class DisplayMyRecord
+ * Servlet implementation class updateFolder
  */
-@WebServlet("/UserRecord/main")
-public class DisplayMyRecord extends HttpServlet {
+@WebServlet("/UserRecord/main/folder/management")
+public class updateFolder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayMyRecord() {
+    public updateFolder() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,7 +42,6 @@ public class DisplayMyRecord extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		
 		PrintWriter out = response.getWriter();
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
@@ -54,7 +51,6 @@ public class DisplayMyRecord extends HttpServlet {
 		
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
-		
 		
 		ResultSet rs = ManageRecord.searchFolderNameByUserId(conn, userId);
 		ArrayList<UserFolderData> userForderList = new ArrayList<UserFolderData>();
@@ -83,7 +79,27 @@ public class DisplayMyRecord extends HttpServlet {
 		
 		request.setAttribute("folders", userForderList);
 		
-		RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
+		
+		String[] addfolder = request.getParameterValues("folder");
+		
+		if(addfolder != null) {
+			int tuple = 0;
+			for(int i = 0; i < addfolder.length; i++) {
+				System.out.println("folder "+addfolder[i]);
+				addfolder[i] = addfolder[i].trim();
+				if(addfolder[i]!=null) {
+					System.out.println("add folder "+addfolder[i]);
+					tuple = ManageRecord.insertFolderUsingFolderName(conn, userId, addfolder[i]);	
+				}
+			}
+			if(tuple == addfolder.length) {
+				System.out.println("folder가 잘 추가되었습니다.");
+			}else {
+				System.out.println("folder가 추가 안 되었습니다..");
+			}
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/manageFolder.jsp");
 		view.forward(request, response);
 	}
 
