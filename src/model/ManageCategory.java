@@ -360,4 +360,36 @@ public class ManageCategory {
 		}
 		return null;
 	}
+	
+	public static int updateFirstCategoryInCustomCategory(Connection conn, int userId, int categoryId) {
+		String query = "UPDATE newscabinet.custom_category SET category_id=? WHERE user_id=? and custom_category_name='전체'";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, categoryId);
+			pstat.setInt(2, userId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public static int removeCustomCategoryByCustomCategoryName(Connection conn, int userId, String customCategoryName) {
+		String query = "";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, customCategoryName);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }

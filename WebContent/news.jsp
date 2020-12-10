@@ -7,6 +7,18 @@
 <meta charset="UTF-8">
 <title>뉴스 보기</title>
 <link href="../style.css?ver=1" rel="stylesheet">
+<style>
+.setting{
+	position: relative;
+	background-image: url( "/NewsCabinet/images/setting.png" );
+	background-repeat: no-repeat;
+	width : 50px;
+	height: 50px;
+	border: none;
+	background-color : white;
+	margin-left: 700px;
+}
+</style>
 </head>
 <jsp:include page="webHeader.jsp"></jsp:include>
 
@@ -82,7 +94,11 @@
 				<input class="FindButton" style='margin-top:15px' type="submit" value="선택 완료">
 			</form>
 		</div>
-		
+		<div>
+			<p style="font-size: 20px; font-weight:bold; margin-right : 50px;" >
+				<button class="setting" onclick="window.open('/NewsCabinet/news/customCategory/management','키워드 수정하기','width=430,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');"></button>
+			</p>
+		</div>
 		<section class ="sectionArti" style="padding-top: 0px;">
 			<%
 				NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
