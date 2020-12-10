@@ -75,7 +75,17 @@ public class UpdateCustomCategory extends HttpServlet {
 		
 		String[] removeKeyword = request.getParameterValues("removeCategory");
 		
-		
+		if(removeKeyword != null) {
+			for(int i = 0; i<removeKeyword.length; i++) {
+				int check = ManageCategory.removeCustomCategoryByCustomCategoryName(conn, userId, removeKeyword[i]);
+				if(check == 1) {
+					System.out.println("삭제되었습니다.");
+				}else {
+					System.out.println("삭제가 안되었습니다.");
+				}
+			}			
+		}
+
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("../../News/manageCustomCategory.jsp");

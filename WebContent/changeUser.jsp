@@ -44,13 +44,13 @@ body {
 				<p style='font-size:15px'>관심 분야를 선택해주세요</p>
 				<select name="category" size="1">
 					<option value="1">정치</option>
-					<option value="2">사회</option>
-					<option value="3">경제</option>
-					<option value="4">국제</option>
+					<option value="2">경제</option>
+					<option value="3">국제</option>
+					<option value="4">사회</option>
 					<option value="5">문화</option>
-					<option value="6">스포츠</option>
-					<option value="7">IT</option>
-					<option value="8">과학</option>
+					<option value="6">IT</option>
+					<option value="7">과학</option>
+					<option value="8">스포츠</option>
 				</select> 
 				<br />
 				<br />

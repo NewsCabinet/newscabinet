@@ -69,7 +69,7 @@ public class ScrappingNews extends HttpServlet {
 			String newsUrl = ManageScrapNews.insertScrapNewsData(conn, subcategoryId, nd[location]);
 			//System.out.println(newsUrl);
 			int newsId = ManageScrapNews.searchScrapNewsIdByUrl(conn, newsUrl);
-			int customCategoryId = customCategoryId = ManageCategory.searchDefualtCustomCategoryIdByUserId(conn, userId);
+			int customCategoryId = customCategoryId = ManageCategory.searchDefaultCustomCategoryIdByUserId(conn, userId);
 			customcategoryName = customcategoryName.trim();
 			if(customcategoryName.length() > 0) {
 				customCategoryId = ManageCategory.searchCustomcategoryIdByUserAndCustomcategoryName(conn, userId, customcategoryName);
