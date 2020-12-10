@@ -169,6 +169,30 @@ public class ManageCategory {
 		}
 		return -1;
 	}
+	
+	
+	public static String searchFirstCategoryNameBySubcategoryId(Connection conn, int subcategoryId) {
+		String query = "SELECT category_name FROM newscabinet.subcategory " 
+					+ "JOIN newscabinet.category ON subcategory.category_id = category.category_id " 
+					+ "WHERE subcategory_id ='" +  subcategoryId + "'" ; 
+		
+		Statement st;
+		ResultSet rs;
+
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				rs = st.getResultSet();
+				if(rs.next()) {
+					return rs.getString(1);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 
 	
 	public static String searchSubcatogoryNameBySubcateogoryId(Connection conn, int subcategoryId) {

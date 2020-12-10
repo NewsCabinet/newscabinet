@@ -26,7 +26,9 @@
 			%>
 
 		<form method="post" action="/NewsCabinet/UserRecord/restore">
+			<br>
 			<h2 style="text-align: center; margin-left: 30px">기록 작성하기</h2>
+			<br>
 				<p>
 					<input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요" required>
 				</p>

@@ -50,6 +50,24 @@ public class ManageScrapNews {
 		return false;		
 	}
 	
+	public static ResultSet searchScrapNewsByNewsId(Connection conn, int newsId) {
+		String query = "SELECT scrap_news.subcategory_id, subcategory_name, headline, url " 
+					+ "FROM newscabinet.scrap_news "
+					+ "JOIN newscabinet.subcategory ON scrap_news.subcategory_id = subcategory.subcategory_id "
+					+ "WHERE news_id='" + newsId + "'";
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {
 
 		String query = "SELECT * FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
@@ -74,7 +92,7 @@ public class ManageScrapNews {
 
 		String query = "SELECT user_scrap_news.news_id, headline, subcategory_id, url FROM newscabinet.scrap_news JOIN newscabinet.user_scrap_news"
 				+ " ON newscabinet.scrap_news.news_id = newscabinet.user_scrap_news.news_id"
-				+ " WHERE user_id=" + userId;
+				+ " WHERE user_id='" + userId + "'";
 		Statement st;
 		
 		try {

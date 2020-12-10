@@ -5,28 +5,32 @@ public class RecordData {
 	int userId;
 	String userName;
 	int recordId;
+	String firstCategoryName;
 	int subcategoryId;
 	String subcategoryName;
 	String recordTitle;
 	String recordDate;
+	String recordComment;
 	int recordCount;
 	
 	public RecordData() {
 		this.userId = 0;
 		this.userName = "";
+		this.firstCategoryName = "";
+		this.subcategoryId = 0;
+		this.subcategoryName = "";
 		this.recordId = 0;
 		this.recordTitle = "";
 		this.recordDate = "";
 		this.recordCount = 0;
-		this.subcategoryId = 0;
 	}
 	
-
 	public RecordData(int userId, int recordId, String recordTitle, String recordDate, int recordCount) {
 		super();
 		this.userId = userId;
 		this.userName =  "";
 		this.recordId = recordId;
+		this.firstCategoryName = "";
 		this.subcategoryId = 0;
 		this.subcategoryName = "";
 		this.recordTitle = recordTitle;
@@ -34,6 +38,7 @@ public class RecordData {
 		this.recordCount = recordCount;
 	}
 	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -90,6 +95,40 @@ public class RecordData {
 	}
 	
 	
+	public String getRecordComment() {
+		return recordComment;
+	}
+
+
+	public void setRecordComment(String recordComment) {
+		this.recordComment = recordComment;
+	}
 	
+
+	
+	public String getFirstCategoryName() {
+		return firstCategoryName;
+	}
+
+
+	public void setFirstCategoryName(String firstCategoryName) {
+		this.firstCategoryName = firstCategoryName;
+	}
+	
+	
+	public void printRecord() {
+		System.out.println("------------------------");
+		System.out.println("userId = " + userId);
+		System.out.println("userName = " + userName);
+		System.out.println("recordId = " + recordId);
+		System.out.println("firstCategoryName = " + firstCategoryName);
+		System.out.println("subcategoryId = " + subcategoryId);
+		System.out.println("subcategoryName = " + subcategoryName);
+		System.out.println("recordTitle = " + recordTitle);
+		System.out.println("recordDate = " + recordDate);
+		System.out.println("recordComment = " + recordComment);
+		System.out.println("recordCount = " + recordCount);
+		
+	}
 
 }

@@ -82,7 +82,9 @@
 	
 	<div class="basic_contentzone">
 			<section>
+			<br>
 			<h3>전체 기록 보기</h3>
+			<br>
 			</section>
 				
 			<div class="newsType">
@@ -93,7 +95,7 @@
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?firstCategory=" + itemId;
+							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
 							out.println("<li class='CategoryHeaderli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 						}%>
 					</ul>
@@ -110,12 +112,15 @@
 						<% 
 						for(int i = 0; i < popularTop10RecordList.size(); i++){
 							String subcategoryName = popularTop10RecordList.get(i).getSubcategoryName();
+							int recordId = popularTop10RecordList.get(i).getRecordId();
 							String recordTitle = popularTop10RecordList.get(i).getRecordTitle();
 							String userName = popularTop10RecordList.get(i).getUserName();
 							String recordDate = popularTop10RecordList.get(i).getRecordDate();
 							int recordCount = popularTop10RecordList.get(i).getRecordCount();
+							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
+							String recordTest = "/NewsCabinet/Record/record.jsp";
 							%>
-							<div class="otherRecordItem">
+							<div class="otherRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
 								<p> <b>[<%=subcategoryName%>]</b> &nbsp; <%=recordTitle %>
 								</p><br>
 								<p>
