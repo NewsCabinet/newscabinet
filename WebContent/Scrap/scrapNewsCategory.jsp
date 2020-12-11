@@ -108,7 +108,12 @@
 			
 			
 			<div class="simpleRecordContent">
-				<h3>&nbsp;&nbsp;스크랩 기사</h3>
+				<%	String scrapinfo= "스크랩 기사";
+					if(userScrapList.size() == 0){
+						scrapinfo = "스크랩한 기사가 없습니다";
+					}
+				%>
+				<h3>&nbsp;&nbsp;<%=scrapinfo %></h3>
 					<% 
 					for(int i = 0; i < userScrapList.size(); i++){
 						

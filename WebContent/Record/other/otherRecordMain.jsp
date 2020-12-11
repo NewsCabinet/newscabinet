@@ -13,8 +13,8 @@
 	<%	
 		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
 		ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
-		
 		ArrayList<RecordData> popularTop10RecordList = (ArrayList)request.getAttribute("popularTop10RecordList");
+		request.setAttribute("isOherRecord", true);
 	%>
 	
 	<div class="basic_contentzone">
@@ -27,7 +27,7 @@
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='CH_FirtstLineli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
+					<li class='CH_FirtstLineliOn'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
 						<%
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();

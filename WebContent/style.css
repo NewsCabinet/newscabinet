@@ -507,18 +507,18 @@ div a {
 	}
 	
 
-/*기록 작성 페이지 추가 css*/
-#writeForm{
-	text-align:left;
-	width:100%;
-	margin: 20 auto;
-	margin-bottom: 80px;
-	position: relative;
-}
-.basicTest {
-	position: relative;
-	top: 100px;
-	width : 70%;
-	margin: 0 auto;
-}
+	/*기록 작성 페이지 추가 css*/
+	#writeForm{
+		text-align:left;
+		width:100%;
+		margin: 20 auto;
+		margin-bottom: 80px;
+		position: relative;
+	}
+	.basicTest {
+		position: relative;
+		top: 100px;
+		width : 70%;
+		margin: 0 auto;
+	}
 }

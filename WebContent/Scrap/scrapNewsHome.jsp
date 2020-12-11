@@ -19,14 +19,14 @@
 	<div class="basic_contentzone">
 			<section>
 			<br>
-			<h3>스크랩 보기</h3>
+			<h3>스크랩 뉴스 보기</h3>
 			<br>
 			</section>
 				
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='CH_FirtstLineli'><a href="/NewsCabinet/scrap/main">홈</a><li>
+					<li class='CH_FirtstLineliOn'><a href="/NewsCabinet/scrap/main">홈</a><li>
 						<%
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
