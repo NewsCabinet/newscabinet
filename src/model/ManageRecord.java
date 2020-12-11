@@ -431,5 +431,66 @@ public class ManageRecord {
 		}
 		return -1;
 	}
+	
+	public static int removeRecordInUserScrapRecord(Connection conn, int recordId) {
+		String query = "DELETE FROM newscabinet.user_scrap_record where record_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, recordId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return -1;
+	}
+	
+	public static int removeRecordInLikeRecord(Connection conn, int userId, int recordId) {
+		String query = "DELETE FROM newscabinet.user_like_record where user_id=? and record_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setInt(2, recordId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return -1;
+	}
+	
+	public static int removeRecordByRecordId(Connection conn, int userId, int recordId) {
+		int checkScrap = -1;
+		int checkLike = -1;
+		checkScrap = removeRecordInUserScrapRecord(conn, recordId);
+		checkLike = removeRecordInLikeRecord(conn, userId, recordId);
+		
+		if(checkScrap>-1 && checkLike>-1) {
+			String query = "DELETE FROM newscabinet.user_record where user_id=? and record_id=?";
+			
+			try {
+				PreparedStatement pstat = conn.prepareStatement(query);
+				pstat.setInt(1, userId);
+				pstat.setInt(2, recordId);
+				int result = pstat.executeUpdate();
+				return result;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(checkScrap ==1 ){
+			System.out.println("스크랩이 업데이트 안됨");
+		}else if(checkLike ==1 ){
+			System.out.println("좋아요가 업데이트 안됨");
+		}else {
+			System.out.println("다 안됨");
+		}
+		
+		return -1;
+	}
 }
 
