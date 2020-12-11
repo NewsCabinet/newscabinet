@@ -257,10 +257,8 @@ public class ManageRecord {
 			e.printStackTrace();
 		}
 		return false;
-
 	}
 	
-
 	//처음 record insert시 사용
 	public static int insertUserRecord(Connection conn, HttpServletRequest request) {
 		
@@ -510,8 +508,75 @@ public class ManageRecord {
 		
 		return -1;
 	}
-
-
+	public static int updateUserRecord(Connection conn, HttpServletRequest request) {
+		PreparedStatement pstmt = null;
+		
+		String tmpId = (String)request.getParameter("recordId");
+		int recordId = Integer.parseInt(tmpId);
+		
+		int userId = (Integer)request.getAttribute("recordUserId");
+		int recordSubcategoryId = (Integer)request.getAttribute("userSelectedSubCategoryId");
+		int recordCustomCategoryId = (Integer)request.getAttribute("userSelectedCustomCategoryId");
+		
+		String userFolderStr =  request.getParameter("userFolder");
+		int folderId = Integer.parseInt(userFolderStr);
+		
 	
+		String recordTitle = (String)request.getParameter("recordTitle");
+		String recordDate = (String)request.getAttribute("todayDate");
+		String recordComment = request.getParameter("recordComment");
+		
+		String recordPrivateStr[] = request.getParameterValues("recordPrivate");
+		boolean recordPrivate = false;
+		for(String str : recordPrivateStr) {
+			if(str.equals("true"))
+				recordPrivate = true;
+		}
+		
+		
+		String query = "UPDATE newscabinet.user_record"
+				+ " SET user_id=?, subcategory_id=?, custom_category_id=?, folder_id=?, record_title=?, record_date=?, record_private=?, record_comment=?"
+				+ " WHERE record_id=?";
+		
+		try {
+			conn.setAutoCommit(false);
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("connection problem");
+			}
+			
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, recordSubcategoryId);
+			pstmt.setInt(3, recordCustomCategoryId);
+			pstmt.setInt(4, folderId);
+			pstmt.setString(5, recordTitle);
+			pstmt.setString(6, recordDate);
+			pstmt.setBoolean(7, recordPrivate);
+			pstmt.setString(8, recordComment);
+			pstmt.setInt(9, recordId);
+			
+			int result = pstmt.executeUpdate();
+			conn.commit();
+			conn.setAutoCommit(true);
+			
+			return result;
+			
+		}catch(Exception e) {
+			System.out.println("userId = "+ userId);
+			System.out.println("recordSubcategoryId = " + recordSubcategoryId);
+			System.out.println("recordCustomCategoryId = " + recordCustomCategoryId);
+			System.out.println("folderId = " + folderId);
+			System.out.println("record Title = "+recordTitle);
+			System.out.println("record date = " + recordDate);
+			System.out.println("record private = " + recordPrivate);
+			System.out.println("record comment = " + recordComment);
+		}
+			
+		return -1;	
+	}
 }
 
