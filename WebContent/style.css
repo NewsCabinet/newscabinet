@@ -225,10 +225,8 @@ div a {
 }
 
 .textBox {
-	width: 60%;
+	width: 100%;
 	height: 400px;
-	/*cols:"110";
-   rows:"30";*/
 	border: none;
 	box-shadow: 0 0 5px #666666;
 }
@@ -249,8 +247,8 @@ div a {
 }
 
 .textBox {
-	width: 60%;
-	height: 400px;
+	width: 100%;
+	height: 350px;
 	/*cols:"110";
    rows:"30";*/
 	border: none;
@@ -273,6 +271,7 @@ div a {
 	font-size: 15px;
 	border-radius: 3px;
 	padding: 10px 10px;
+	float: right;
 }
 
 .nameButton {
@@ -404,4 +403,19 @@ div a {
    border:none;
    text-align: center;
 
+}
+/*기록 작성 페이지 추가 css*/
+#writeForm{
+	text-align:left;
+	width:100%;
+	margin: 20 auto;
+	margin-bottom: 80px;
+	position: relative;
+}
+.basicTest {
+	position: relative;
+	top: 100px;
+	width : 70%;
+	margin: 0 auto;
+	
 }
