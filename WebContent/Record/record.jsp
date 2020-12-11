@@ -105,7 +105,7 @@
 	<div class="basic_contentzone">
 		<section>
 			<div id="btnAlign" style="display:none">
-				<input class="FindButton" type="button" value="기록 수정하기" >
+				<input class="FindButton" type="button" value="기록 수정하기" onclick="location.href='<%=tmpForEdit%>'">
 				<input class="FindButton" type="button" value="기록 삭제하기" onclick="location.href='<%=tmpForRemove%>'"><br/>
 			</div>
 		</section>
