@@ -8,108 +8,7 @@
 <meta charset="UTF-8">
 <title>스크랩보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
-<style type="text/css">
-	/*CH : categoryHeader*/
-	.newsCategoryHeader{
-		width: 65%;
-		margin: 5px auto;
-		border-bottom: 1px solid #2E404E;
-	}
-
-	.newsCategoryHeader a{
-		width: 60%;
-		margin: 20px auto;
-		padding:8px;
-		text-decoration: none;
-		color: black;
-	}
-	
-	.newsCategoryHeader ul{
-	list-style:none;
-	}
-	
-	.CH_FirtstLineli {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-	}
-	
-	.CH_FirtstLineli a{
-		width: 60%;
-		padding: 10px;
-		text-decoration: none;
-		color: black;
-	}
-	
-	.CH_FirtstLineli a:hover{
-		border-bottom: 2px solid #2E404E;
-	}
-	
-	.CH_FirtstLineliOn {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-		font-weight:bolder;
-	}
-	
-	.CH_SecondLineli {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-	}
-	
-	.CH_SecondLineli a:hover{
-		background: #2E404E;
-		color: white;
-		font-weight: bold;
-		border-radius: 10px;
-	}
-	
-	.CH_SecondLineliOn {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-		background: #2E404E;
-		color: white;
-		font-weight: bold;
-		border-radius: 10px;
-	}
-
-	.simpleRecordContent{
-		text-align: left;
-		width: 60%;
-		margin: 10px auto;
-		padding : 10px;
-	}
-	
-	.simpleRecordItem {
-		text-align: left;
-		border-bottom: 1px solid gray;
-		margin: 10px auto;
-		padding : 10px;
-	}
-	
-	.simpleRecordItem a{
-		text-decoration: none;
-		padding: 20px;
-		color:black;
-	}
-	
-	.simpleRecordItem a:hover{
-		box-shadow: 1px 1px 10px #ddd;
-	}
-	
-</style>
 </head>
-
 <body>
 	<%	
 		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
@@ -148,17 +47,20 @@
 				<div class="simpleRecordContent">
 					<h3>&nbsp;&nbsp;인기 스크랩 기사</h3>
 						<% 
+						if(scrapTop10List == null)
+							System.out.println("scrapTop10List is null");
+						
 						for(int i = 0; i < scrapTop10List.size(); i++){
-							
 							String scrapSubcategoryName = scrapTop10List.get(i).getSubCategoryName();
 							String scrapHeadline = scrapTop10List.get(i).getHeadline();
 							String scrapDescription = scrapTop10List.get(i).getDescription();
 							String scrapPublicDate = scrapTop10List.get(i).getPublishedDate();
+							String scrapNewsUrl = scrapTop10List.get(i).getNewsURL();
 							int scrapCount = scrapTop10List.get(i).getScrapCount();
-							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + 1;
 							
 							%>
-							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
+							<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
+								
 								<p><b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
 								</p>
 								<br>
@@ -167,7 +69,9 @@
 								<br>
 								<p>
 								 출고 날짜 <%=scrapPublicDate %> &nbsp; | &nbsp; 스크랩수 &nbsp;<%=scrapCount %>
-								</p><br>
+								</p>
+								
+								<br>
 							</div>
 						<%} %>
 							

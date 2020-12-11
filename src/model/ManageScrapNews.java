@@ -51,8 +51,6 @@ public class ManageScrapNews {
 	}
 	
 	
-	
-	
 	public static ResultSet searchScrapNewsByNewsId(Connection conn, int newsId) {
 		String query = "SELECT scrap_news.subcategory_id, subcategory_name, headline, url " 
 					+ "FROM newscabinet.scrap_news "
@@ -109,6 +107,71 @@ public class ManageScrapNews {
 		return null;
 	}
 		
+	// 사용자가 스크랩한 뉴스 중에서 상위 카테고리로 정보가져오기
+	public static ResultSet searchScrapNewsIdByUserIdAndCategoryId(Connection conn, int userId, int categoryId) {
+		String query = "SELECT scrap_news.news_id FROM newscabinet.scrap_news "
+				+"JOIN newscabinet.user_scrap_news ON user_scrap_news.news_id = scrap_news.news_id "
+				+"JOIN newscabinet.subcategory ON subcategory.subcategory_id = scrap_news.subcategory_id "
+				+ "WHERE user_scrap_news.user_id =" + userId
+				+" AND subcategory.category_id =" + categoryId;
+		
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	// 사용자가 스크랩한 뉴스 중에서 하위 카테고리로 정보가져오기
+	public static ResultSet searchScrapNewsIdByUserIdAndSubcategoryId(Connection conn, int userId, int subCategoryId) {
+		String query = "SELECT scrap_news.news_id FROM newscabinet.scrap_news "
+				+"JOIN newscabinet.user_scrap_news ON user_scrap_news.news_id = scrap_news.news_id "
+				+ "WHERE user_scrap_news.user_id =" + userId
+				+" AND scrap_news.subcategory_id =" + subCategoryId;
+		
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	// 사용자가 스크랩한 뉴스 중에서 커스텀 카테고리로 정보가져오기
+	public static ResultSet searchScrapNewsIdByUserIdAndcustomCategoryId(Connection conn, int userId, int customCategoryId) {
+		String query = "SELECT news_id FROM newscabinet.user_scrap_news "
+				+"JOIN newscabinet.custom_category ON user_scrap_news.custom_category_id = custom_category.custom_category_id "
+				+ "WHERE user_scrap_news.user_id =" + userId
+				+" AND user_scrap_news.custom_category_id =" + customCategoryId;
+		
+		Statement st;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) 
+				return st.getResultSet();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 	
 	public static ResultSet searchAllScrapNewsByUserId(Connection conn, int userId) {

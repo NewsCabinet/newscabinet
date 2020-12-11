@@ -131,7 +131,7 @@
             			customCategoryNameArray = new Array();
             			<%
             			for(int k = 0; k < userCustomCategoryList.size(); k++){
-            			if(userCustomCategoryList.get(k).getCategoryId() == selectedFirstCategory){%>
+            			if(userCustomCategoryList.get(k).getFirstCategoryId() == selectedFirstCategory){%>
             					customCategoryNameinJS = "<%=userCustomCategoryList.get(k).getCustomCategoryName()%>"
             					customCategoryNameArray.push(customCategoryNameinJS)
             				<%}else continue;

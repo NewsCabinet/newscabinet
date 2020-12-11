@@ -3,17 +3,28 @@ package model;
 public class CustomCategoryData {
 
 	int userId;
-	int categoryId;
+	int firstCategoryId;
 	String firstCategoryName;
 	int customCategoryId;
 	String customCategoryName;
 	
 	public CustomCategoryData() {
 		this.userId = 0;
-		this.categoryId = 0;
+		this.firstCategoryId = 0;
 		this.firstCategoryName = "";
 		this.customCategoryId = 0;
 		this.customCategoryName="";
+	}
+	
+	public void print() {
+		System.out.println("-------------------------");
+		System.out.println("userId = " + userId);
+		System.out.println("firstCategoryId = " + firstCategoryId);
+		System.out.println("firstCategoryName = " + firstCategoryName);
+		System.out.println("customCategoryId = " + customCategoryId);
+		System.out.println("customCategoryName = " + customCategoryName);
+		System.out.println("-------------------------");
+		
 	}
 	
 	public int getUserId() {
@@ -23,12 +34,22 @@ public class CustomCategoryData {
 		this.userId = userId;
 	}
 	
-	public int getCategoryId() {
-		return categoryId;
+	public int getFirstCategoryId() {
+		return firstCategoryId;
 	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	
+	public void setFirstCategoryId(int firstCategoryId) {
+		this.firstCategoryId = firstCategoryId;
 	}
+	
+	public String getFirstCategoryName() {
+		return firstCategoryName;
+	}
+
+	public void setFirstCategoryName(String firstCategoryName) {
+		this.firstCategoryName = firstCategoryName;
+	}
+	
 	public int getCustomCategoryId() {
 		return customCategoryId;
 	}
@@ -42,12 +63,7 @@ public class CustomCategoryData {
 		this.customCategoryName = customCategoryName;
 	}
 
-	public String getFirstCategoryName() {
-		return firstCategoryName;
-	}
-
-	public void setFirstCategoryName(String firstCategoryName) {
-		this.firstCategoryName = firstCategoryName;
-	}
+	
+	
 	
 }

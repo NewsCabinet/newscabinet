@@ -22,11 +22,12 @@ import model.ManageRecord;
 import model.ManageScrapNews;
 import model.NewsData;
 import model.RecordData;
+import model.UserScrapNewsData;
 
 /**
  * Servlet implementation class DisplayScrapNews
  */
-@WebServlet("/scrap/category")
+@WebServlet("/scrap/news")
 public class DisplayScrapNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,33 +57,56 @@ public class DisplayScrapNews extends HttpServlet {
 		
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
-		
+
 		String firstCategory = (String)request.getParameter("first");
 		String subCategory = (String)request.getParameter("sub");
-		int firstCategoryId = -1;
+		
+		int firstCategoryId = Integer.parseInt(firstCategory);
 		int subCategoryId = -1;
 		
+		ResultSet resultscrapNewsIdSet = null;
 		
-		ResultSet resultUserScrapIdSet = null;
-		resultUserScrapIdSet = ManageScrapNews.searchUserScrapNewsByUserId(conn, userId);
+		if(subCategory != null) { // 서브카테고리 눌러 넘어온 경우
+			subCategoryId  = Integer.parseInt(subCategory);
+			
+			if(subCategoryId > 200) { // custom category로 넘어온 경우
+				int customCategoryId = subCategoryId - 200;
+				resultscrapNewsIdSet = ManageScrapNews.searchScrapNewsIdByUserIdAndcustomCategoryId(conn, userId, customCategoryId);
+			}else { //기본 서브 카테고리로 넘어온 경우
+				resultscrapNewsIdSet = ManageScrapNews.searchScrapNewsIdByUserIdAndSubcategoryId(conn, userId, subCategoryId);
+			}
+			
+		}else { // 상위 카테고리 눌러서 넘어온 경우
+			resultscrapNewsIdSet = ManageScrapNews.searchScrapNewsIdByUserIdAndCategoryId(conn, userId, firstCategoryId);
+		}
 		
-		ArrayList<NewsData> scrapNewsList = new ArrayList<>();
-		ArrayList<CustomCategoryData> customCategoryList = new ArrayList<>();
+		ArrayList<UserScrapNewsData> userScrapList = new ArrayList<>();
 		
 		try {
-			if(resultUserScrapIdSet!= null) {
-				while(resultUserScrapIdSet.next()) {
-					int newsId = resultUserScrapIdSet.getInt(1);
-					int customCategoryId = resultUserScrapIdSet.getInt(2);
-					if(newsId > 0 && customCategoryId > 0) {
-						ResultSet scapNews = ManageScrapNews.searchScrapNewsDataByNewsId(conn, newsId);
-						ResultSet customCategory = ManageCategory.searchCustomCategoryDataByCustomId(conn, customCategoryId);
+			if(resultscrapNewsIdSet != null) {
+				while(resultscrapNewsIdSet.next()) {
+					int newsId = resultscrapNewsIdSet.getInt(1);
+					ResultSet scrapNews = ManageScrapNews.searchScrapNewsDataByNewsId(conn, newsId);
+					if(scrapNews != null && scrapNews.next()) {
+						int scrapSubCategoryId = scrapNews.getInt("subcategory_id");
+						   String scrapSubCategoryName = scrapNews.getString("subcategory_name");
+						   String scrapHeadline = scrapNews.getString("headline");
+						   String scrapURL = scrapNews.getString("url");
+						   String scrapDescription = scrapNews.getString("description");
+						   String scrapPublicDate = scrapNews.getString("published_date");
+						   int scrapCount = scrapNews.getInt("scrap_count");
+						   
+						   UserScrapNewsData tmp = new UserScrapNewsData();
+						   tmp.setNewsId(newsId);
+						   tmp.setHeadline(scrapHeadline);
+						   tmp.setNewsURL(scrapURL);
+						   tmp.setDescription(scrapDescription);
+						   tmp.setPublishedDate(scrapPublicDate);
+						   tmp.setScrapCount(scrapCount);
+						   tmp.setSubCategoryId(scrapSubCategoryId);
+						   tmp.setSubCategoryName(scrapSubCategoryName);
 						
-						if(scapNews != null && scapNews.next()) {
-							
-						}
-						
-						
+						   userScrapList.add(tmp);
 					}
 				}
 			}
@@ -91,41 +115,37 @@ public class DisplayScrapNews extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		if(resultUserScrapIdSet != null) {
+		//Custom Category Setting
+			ResultSet resultUserCustomCategory = ManageCategory.searchAllUserCustomCateogry(conn, userId);
+			ArrayList<CustomCategoryData> userCustomCategoryList = new ArrayList<CustomCategoryData>();
 			
-				
+			try {
+				if(resultUserCustomCategory != null) {
+					while(resultUserCustomCategory.next()) {
+						int firstId = resultUserCustomCategory.getInt(1);
+						int customId = resultUserCustomCategory.getInt(2);
+						String customCategoryName = resultUserCustomCategory.getString(3);
+						
+						CustomCategoryData tmp = new CustomCategoryData();
+						tmp.setFirstCategoryId(firstId);
+						tmp.setCustomCategoryId(customId);
+						tmp.setCustomCategoryName(customCategoryName);
+						tmp.setUserId(userId);
+						
+						userCustomCategoryList.add(tmp);
+					}
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		
+		request.setAttribute("userScrapList", userScrapList);
+		request.setAttribute("SelectedCategoryId", firstCategoryId);
+		request.setAttribute("SelectedSubCategoryId", subCategoryId);
+		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		
-		
-		
-		
-		if(subCategory != null) { // 상위 카테고리로 가져오기
-			//resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdByFirstcategoryId(conn, firstCategoryId);
-		}else if(firstCategory != null) {
-			subCategoryId = Integer.parseInt(subCategory);
-			//resultPublicRecordIdSet = ManageRecord.searchPublicRecordIdBySubcategoryId(conn, subCategoryId);
-		}
-		
-		
-		//get parameter로 넘어온게 없다면 사용자 category로 설정
-		
-		
-		// TODO: custom category 받아와서 뿌려주기
-		
-		String selectedCategory = request.getParameter("Step1");
-		String selectedSubCategory = request.getParameter("Step2");
-		request.setAttribute("selectedCategory", selectedCategory);
-		request.setAttribute("selectedSubCategory", selectedSubCategory);
-		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, selectedSubCategory);
-		ResultSet rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
-		
-		request.setAttribute("ScrapNews", rs);
-		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
-		
-		
-		RequestDispatcher view = request.getRequestDispatcher("/scrapnews.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("../Scrap/scrapNewsCategory.jsp");
 		view.forward(request, response);
 	}
 
