@@ -35,7 +35,7 @@
 				}
 			%>
 			<p>
-				<input class="FindButton" type="submit" value="폴더 삭제하기"onClick="reloadSelf()">
+				<input class="FindButton" type="submit" value="폴더 삭제하기" onClick="reloadSelf()">
 				<input class="FindButton" type="reset" value="선택 초기화">
 			</p>
 		</form>
