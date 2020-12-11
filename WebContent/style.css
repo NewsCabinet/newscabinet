@@ -649,27 +649,6 @@ div a {
 	height: 200px;
 	top: 100px;
 }
-
-.newsCategoryHeader {
-	width: 60%;
-	margin: 20px auto;
-}
-
-ul {
-	list-style: none;
-}
-
-.newsCategoryHeader a {
-	width: 60%;
-	padding: 10px;
-	text-decoration: none;
-	color: black;
-}
-
-.newsCategoryHeader a:hover {
-	border-bottom: 2px solid #2E404E;
-}
-
 .CategoryHeaderli {
 	float: left;
 	margin: 1px;
@@ -731,3 +710,19 @@ ul {
 	font-weight: bold;
 	margin-right: 50px;
 }
+
+/*record list for folder css*/
+	#listType{
+		padding-top: 100px;
+		width: 80%;
+		height: 50px;
+		top: 300px;
+		text-align:left;
+		margin-top:80px;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	#list{
+		width: 70%;
+		background-color: #EEEEEE;
+	}
