@@ -12,20 +12,6 @@
 	<link href="/NewsCabinet/style.css" rel="stylesheet">
 	<title>기록작성하기</title>
 <style>
-#writeForm{
-	text-align:left;
-	width:100%;
-	margin: 20 auto;
-	margin-bottom: 80px;
-	position: relative;
-}
-.basicTest {
-	position: relative;
-	top: 100px;
-	width : 70%;
-	margin: 0 auto;
-	
-}
 </style>
 </head>
 <body>
