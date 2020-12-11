@@ -18,7 +18,6 @@
 		margin: 50px auto; 
 		padding: 30px;
 	}
-
 	.SRInfoContecnt{
 		font-size: small;
 		text-align:right;

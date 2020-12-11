@@ -11,6 +11,50 @@ import java.util.ArrayList;
 public class ManageCategory {
 	
 	
+	public static void insertCustomcategory(Connection conn, int userId, String customCategoryName, int categoryId) {
+		
+		if(searchCustomcategoryNameByUser(conn, userId, categoryId) != null) {
+			ResultSet tmp = searchCustomcategoryNameByUser(conn, userId, categoryId);
+			if(tmp!=null) {
+				while(true) {
+					try {
+						if(tmp.next()) {
+							if(tmp.getString(1).equals(customCategoryName))
+								return;
+						}else {
+							break;
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+						
+				}
+			}
+		}
+		
+		String tmp = customCategoryName.trim();
+		if(tmp.length() == 0) {
+			return;
+		}
+		
+		String query = "INSERT INTO newscabinet.custom_category (user_id, custom_category_name, category_id) VALUES(?, ?, ?)";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setString(2, customCategoryName);
+			pstat.setInt(3, categoryId);
+			pstat.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 	public static ResultSet searchAllCategoryAndSubCategory(Connection conn) {
 		String sqlSt = "select category_name, subcategory_name from newscabinet.category join newscabinet.subcategory "
 						+"on newscabinet.category.category_id = newscabinet.subcategory.category_id";
@@ -199,7 +243,7 @@ public class ManageCategory {
 	
 
 	
-	public static int searchDefualtCustomCategoryIdByUserId(Connection conn, int userid) {
+	public static int searchDefaultCustomCategoryIdByUserId(Connection conn, int userid) {
 		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id=? and custom_category_name=?";
 		ResultSet rs = null;
 		try {
@@ -256,50 +300,6 @@ public class ManageCategory {
 		}
 		return -1;
 	}
-	
-	public static void insertCustomcategory(Connection conn, int userId, String customCategoryName, int categoryId) {
-		
-		if(searchCustomcategoryNameByUser(conn, userId, categoryId) != null) {
-			ResultSet tmp = searchCustomcategoryNameByUser(conn, userId, categoryId);
-			if(tmp!=null) {
-				while(true) {
-					try {
-						if(tmp.next()) {
-							if(tmp.getString(1).equals(customCategoryName))
-								return;
-						}else {
-							break;
-						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-						
-				}
-			}
-		}
-		
-		String tmp = customCategoryName.trim();
-		if(tmp.length() == 0) {
-			return;
-		}
-		
-		String query = "INSERT INTO newscabinet.custom_category (user_id, custom_category_name, category_id) VALUES(?, ?, ?)";
-		
-		try {
-			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setInt(1, userId);
-			pstat.setString(2, customCategoryName);
-			pstat.setInt(3, categoryId);
-			pstat.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
 	
 	public static int searchCustomCategoryIdByName(Connection conn, int userId, String customCategoryName) {
 		String query = "SELECT custom_category_id FROM newscabinet.custom_category WHERE user_id="
@@ -383,5 +383,88 @@ public class ManageCategory {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static int updateFirstCategoryInCustomCategory(Connection conn, int userId, int categoryId) {
+		String query = "UPDATE newscabinet.custom_category SET category_id=? WHERE user_id=? and custom_category_name='전체'";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, categoryId);
+			pstat.setInt(2, userId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public static int updateCustomCategoryInUserRecord(Connection conn, int userId, int customCategoryId, int defaultCustomCategoryId) {
+		String query = "UPDATE newscabinet.user_record SET custom_category_id=? WHERE user_id=? and custom_category_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, defaultCustomCategoryId);
+			pstat.setInt(2, userId);
+			pstat.setInt(3, customCategoryId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public static int updateCustomCategoryInUserScrapNews(Connection conn, int userId, int customCategoryId, int defaultCustomCategoryId) {
+		String query = "UPDATE newscabinet.user_scrap_news SET custom_category_id=? WHERE user_id=? and custom_category_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, defaultCustomCategoryId);
+			pstat.setInt(2, userId);
+			pstat.setInt(3, customCategoryId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public static int removeCustomCategoryByCustomCategoryName(Connection conn, int userId, String customCategoryName) {
+		int defaultCustomCategoryId = searchDefaultCustomCategoryIdByUserId(conn, userId);
+		int customCategoryId = searchCustomCategoryIdByName(conn, userId, customCategoryName);
+		int checkRecord = -1;
+		int checkScrap = -1;
+		checkRecord = updateCustomCategoryInUserRecord(conn, userId, customCategoryId, defaultCustomCategoryId);
+		checkScrap = updateCustomCategoryInUserScrapNews(conn, userId, customCategoryId, defaultCustomCategoryId);
+		
+		System.out.println("checkRecord : " + checkRecord + " checkScrap : "+checkScrap);
+		
+		if(checkRecord >-1 && checkScrap > -1) {
+			String query = "DELETE FROM newscabinet.custom_category where custom_category_id=?";
+			
+			try {
+				PreparedStatement pstat = conn.prepareStatement(query);
+				pstat.setInt(1, customCategoryId);
+				int result = pstat.executeUpdate();
+				return result;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}else if(checkRecord ==1 ){
+			System.out.println("스크랩이 업데이트 안됨");
+		}else if(checkScrap ==1 ){
+			System.out.println("기록이 업데이트 안됨");
+		}else {
+			System.out.println("다 안됨");
+		}
+		
+		return -1;
 	}
 }
