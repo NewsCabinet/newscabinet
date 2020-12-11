@@ -22,8 +22,10 @@
 			<nav>
 				<a class=headerA href="/NewsCabinet/news/main">뉴스보기</a> 
 				<a class=headerA href="/NewsCabinet/scrap/main">스크랩보기</a>
-				<a class=headerA href="/NewsCabinet/UserRecord/main">나의기록보기</a> 
-				<a class=headerA href="#">전체기록보기</a>
+
+				<a class=headerA href="/NewsCabinet/UserRecord/main">나의 기록보기</a> 
+				<a class=headerA href="/NewsCabinet/OthersRecord/main">다른사람의 기록보기</a>
+
 				<a class=headerA href="/NewsCabinet/UserRecord/write">기록작성</a>
 			</nav>
 		</div>
