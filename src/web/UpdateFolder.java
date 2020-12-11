@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ManageCategory;
 import model.ManageRecord;
 import model.UserFolderData;
 
@@ -60,12 +61,13 @@ public class UpdateFolder extends HttpServlet {
 				while (rs.next()) {
 					String folderName = rs.getString(1);
 					int folderId = rs.getInt(2);
-
-					UserFolderData tmp = new UserFolderData();
-					tmp.setFolderId(folderId);
-					tmp.setFolderName(folderName);
-					tmp.setUserId(userId);
-					userForderList.add(tmp);
+					if(!folderName.equals("default")) {
+						UserFolderData tmp = new UserFolderData();
+						tmp.setFolderId(folderId);
+						tmp.setFolderName(folderName);
+						tmp.setUserId(userId);
+						userForderList.add(tmp);
+					}
 				}
 
 			} catch (SQLException e) {
@@ -80,23 +82,30 @@ public class UpdateFolder extends HttpServlet {
 		request.setAttribute("folders", userForderList);
 		
 		
-		String[] addfolder = request.getParameterValues("folder");
+		String newFolder = request.getParameter("folder");
 		
-		if(addfolder != null) {
-			int tuple = 0;
-			for(int i = 0; i < addfolder.length; i++) {
-				System.out.println("folder "+addfolder[i]);
-				addfolder[i] = addfolder[i].trim();
-				if(addfolder[i]!=null) {
-					System.out.println("add folder "+addfolder[i]);
-					tuple = ManageRecord.insertFolderUsingFolderName(conn, userId, addfolder[i]);	
-				}
-			}
-			if(tuple == addfolder.length) {
+		if(newFolder != null) {
+			int check =  ManageRecord.insertFolderUsingFolderName(conn, userId, newFolder);	
+			System.out.println("folder :" + newFolder);
+			if(check >-1) {
 				System.out.println("folder가 잘 추가되었습니다.");
 			}else {
 				System.out.println("folder가 추가 안 되었습니다..");
 			}
+		}
+		
+		String[] removeFolders = request.getParameterValues("removeFolders");
+		
+		if(removeFolders != null) {
+			for(int i = 0; i<removeFolders.length; i++) {
+				int folderId = Integer.parseInt(removeFolders[i]);
+				int check = ManageRecord.removeFolderByFolderId(conn, userId, folderId);
+				if(check == 1) {
+					System.out.println("삭제되었습니다.");
+				}else {
+					System.out.println("삭제가 안되었습니다.");
+				}
+			}			
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/Record/user/manageFolder.jsp");

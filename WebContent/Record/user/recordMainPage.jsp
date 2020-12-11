@@ -97,7 +97,7 @@
 	<div>
 		<div>
 			<p id="introRecord"> Folder 
-				<button class="settingForRecord" onclick="window.open('/NewsCabinet/UserRecord/main/folder/management','폴더 추가하기','width=430,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');"></button>
+				<button class="settingForRecord" onclick="window.open('/NewsCabinet/UserRecord/main/folder/management','폴더 추가하기','width=500,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');"></button>
 			</p>
 		</div>
 		<div style="background-color: #EEEEEE; width: 60%; margin:0px auto;">

@@ -617,3 +617,15 @@ div a {
 		margin: 10px auto;
 		padding : 10px;
 	}
+
+/*관리 창 css*/
+.category {
+	align: float;
+	margin-top : 20px;
+}
+
+#cateListForEdit {
+	background-color: #EEEEEE;
+	width: 80%;
+	margin: 0 auto;
+}
