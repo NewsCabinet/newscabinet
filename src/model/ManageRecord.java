@@ -439,7 +439,6 @@ public class ManageRecord {
 			pstat.setInt(1, userId);
 			pstat.setString(2, folderName);
 			int tuple = pstat.executeUpdate();
-			
 			return tuple;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -508,6 +507,63 @@ public class ManageRecord {
 		
 		return -1;
 	}
+	
+	public static int removeFolderByFolderId(Connection conn, int userId, int folderId) {
+		int checkRecord = -1;
+		ResultSet records = searchRecordByUserIdAndFolderId(conn, userId, folderId);
+
+		int defaultFolderId = searchFolderIdByFolderName(conn, userId, "default");
+		
+		if (records != null) {
+			try {
+				while (true) {
+					if (records.next()) {
+						checkRecord = updateUserRecordFolderId(conn, records.getInt("record_id"), defaultFolderId);
+					}else {
+						checkRecord = 0;
+						break;
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(checkRecord>-1) {
+			String query = "DELETE FROM newscabinet.user_record_folder where folder_id=?";
+			
+			try {
+				PreparedStatement pstat = conn.prepareStatement(query);
+				pstat.setInt(1, folderId);
+				int result = pstat.executeUpdate();
+				return result;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(checkRecord != 1 ){
+			System.out.println("기록이 업데이트 안됨");
+		}
+		
+		return -1;
+	}
+	
+	public static int updateUserRecordFolderId(Connection conn, int recordId, int folderId) {
+		String query = "UPDATE newscabinet.user_record SET folder_id=? WHERE record_id=?";
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, folderId);
+			pstat.setInt(2, recordId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public static int updateUserRecord(Connection conn, HttpServletRequest request) {
 		PreparedStatement pstmt = null;
 		
