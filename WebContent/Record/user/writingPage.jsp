@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="model.UserScrapNewsData, model.CustomCategoryData, model.UserFolderData,
-			model.FristCategoryData, model.SubcategoryData"
-	import="java.util.*"%>
+<%@ page import="model.*" import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="../../webHeader.jsp"></jsp:include>
-	<meta charset="UTF-8">
-	<link href="/NewsCabinet/style.css" rel="stylesheet">
-	<title>기록작성하기</title>
+<jsp:include page="../../webHeader.jsp"></jsp:include>
+<meta charset="UTF-8">
+<link href="/NewsCabinet/style.css" rel="stylesheet">
+<title>기록작성하기</title>
 <style>
 </style>
 </head>
