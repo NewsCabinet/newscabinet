@@ -8,8 +8,6 @@
 <meta charset="UTF-8">
 <link href="/NewsCabinet/style.css" rel="stylesheet">
 <title>기록작성하기</title>
-<style>
-</style>
 </head>
 <body>
 	

@@ -5,71 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>특정 기록 보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
-
-
-<style type="text/css">
-	/* SR 의미 specificReocrd --*/
-	.SRContentArea{
-		width: 60%;
-		text-align: left;
-		margin: 50px auto; 
-		padding: 30px;
-	}
-	.SRInfoContecnt{
-		font-size: small;
-		text-align:right;
-		padding: 10px;
-		border-bottom: 2px solid #2E404E;
-	}
-	
-	.SRTitle{
-		font-weight: bold;
-		font-size: larger;
-		padding: 30px;
-	}
-	
-	.SRCommnet{
-		font-size: medium;
-		margin: 30px auto; 
-		padding: 20px;
-		
-	}
-	
-	.SRScrapNews{
-		font-size: medium;
-		margin: 30px auto; 
-		padding: 20px;
-		border-top: 2px solid #2E404E;
-	}
-	
-	
-	.SRScrapNewsItem{
-		margin-top:15px;
-		margin-bottom:10px;
-	}
-	
-	.SRScrapNewsItem a{
-		text-decoration: none;
-		padding: 20px;
-		color:black;
-	}
-	
-	.SRScrapNewsItem a:hover{
-		box-shadow: 1px 1px 10px #ddd;
-	}
-	
-	#btnAlign{
-		float: right;
-		margin-right: 200px;
-	}
-	#defaultAlign{
-		clear: both;
-	}
-	
-</style>
 
 </head>
 <body>
