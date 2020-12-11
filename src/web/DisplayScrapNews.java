@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,13 +16,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CustomCategoryData;
 import model.ManageCategory;
+import model.ManageRecord;
 import model.ManageScrapNews;
+import model.NewsData;
+import model.RecordData;
+import model.UserScrapNewsData;
 
 /**
  * Servlet implementation class DisplayScrapNews
  */
-@WebServlet("/scrap/main")
+@WebServlet("/scrap/news")
 public class DisplayScrapNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,21 +57,95 @@ public class DisplayScrapNews extends HttpServlet {
 		
 		HttpSession userSession = request.getSession(false);
 		int userId = (int) userSession.getAttribute("userId");
+
+		String firstCategory = (String)request.getParameter("first");
+		String subCategory = (String)request.getParameter("sub");
 		
-		// TODO: custom category 받아와서 뿌려주기
+		int firstCategoryId = Integer.parseInt(firstCategory);
+		int subCategoryId = -1;
 		
-		String selectedCategory = request.getParameter("Step1");
-		String selectedSubCategory = request.getParameter("Step2");
-		request.setAttribute("selectedCategory", selectedCategory);
-		request.setAttribute("selectedSubCategory", selectedSubCategory);
-		int categoryId = ManageCategory.searchSubcatogoryIdBySubcateogoryName(conn, selectedSubCategory);
-		ResultSet rs = ManageScrapNews.searchScrapNewsByUserIdAndCategory(conn, userId, categoryId);
+		ResultSet resultscrapNewsIdSet = null;
 		
-		request.setAttribute("ScrapNews", rs);
-		ResultSet scrapNews = (ResultSet) request.getAttribute("ScrapNews");
+		if(subCategory != null) { // 서브카테고리 눌러 넘어온 경우
+			subCategoryId  = Integer.parseInt(subCategory);
+			
+			if(subCategoryId > 200) { // custom category로 넘어온 경우
+				int customCategoryId = subCategoryId - 200;
+				resultscrapNewsIdSet = ManageScrapNews.searchScrapNewsIdByUserIdAndcustomCategoryId(conn, userId, customCategoryId);
+			}else { //기본 서브 카테고리로 넘어온 경우
+				resultscrapNewsIdSet = ManageScrapNews.searchScrapNewsIdByUserIdAndSubcategoryId(conn, userId, subCategoryId);
+			}
+			
+		}else { // 상위 카테고리 눌러서 넘어온 경우
+			resultscrapNewsIdSet = ManageScrapNews.searchScrapNewsIdByUserIdAndCategoryId(conn, userId, firstCategoryId);
+		}
 		
+		ArrayList<UserScrapNewsData> userScrapList = new ArrayList<>();
 		
-		RequestDispatcher view = request.getRequestDispatcher("/scrapnews.jsp");
+		try {
+			if(resultscrapNewsIdSet != null) {
+				while(resultscrapNewsIdSet.next()) {
+					int newsId = resultscrapNewsIdSet.getInt(1);
+					ResultSet scrapNews = ManageScrapNews.searchScrapNewsDataByNewsId(conn, newsId);
+					if(scrapNews != null && scrapNews.next()) {
+						int scrapSubCategoryId = scrapNews.getInt("subcategory_id");
+						   String scrapSubCategoryName = scrapNews.getString("subcategory_name");
+						   String scrapHeadline = scrapNews.getString("headline");
+						   String scrapURL = scrapNews.getString("url");
+						   String scrapDescription = scrapNews.getString("description");
+						   String scrapPublicDate = scrapNews.getString("published_date");
+						   int scrapCount = scrapNews.getInt("scrap_count");
+						   
+						   UserScrapNewsData tmp = new UserScrapNewsData();
+						   tmp.setNewsId(newsId);
+						   tmp.setHeadline(scrapHeadline);
+						   tmp.setNewsURL(scrapURL);
+						   tmp.setDescription(scrapDescription);
+						   tmp.setPublishedDate(scrapPublicDate);
+						   tmp.setScrapCount(scrapCount);
+						   tmp.setSubCategoryId(scrapSubCategoryId);
+						   tmp.setSubCategoryName(scrapSubCategoryName);
+						
+						   userScrapList.add(tmp);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Custom Category Setting
+			ResultSet resultUserCustomCategory = ManageCategory.searchAllUserCustomCateogry(conn, userId);
+			ArrayList<CustomCategoryData> userCustomCategoryList = new ArrayList<CustomCategoryData>();
+			
+			try {
+				if(resultUserCustomCategory != null) {
+					while(resultUserCustomCategory.next()) {
+						int firstId = resultUserCustomCategory.getInt(1);
+						int customId = resultUserCustomCategory.getInt(2);
+						String customCategoryName = resultUserCustomCategory.getString(3);
+						
+						CustomCategoryData tmp = new CustomCategoryData();
+						tmp.setFirstCategoryId(firstId);
+						tmp.setCustomCategoryId(customId);
+						tmp.setCustomCategoryName(customCategoryName);
+						tmp.setUserId(userId);
+						
+						userCustomCategoryList.add(tmp);
+					}
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+		request.setAttribute("userScrapList", userScrapList);
+		request.setAttribute("SelectedCategoryId", firstCategoryId);
+		request.setAttribute("SelectedSubCategoryId", subCategoryId);
+		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
+		
+		RequestDispatcher view = request.getRequestDispatcher("../Scrap/scrapNewsCategory.jsp");
 		view.forward(request, response);
 	}
 

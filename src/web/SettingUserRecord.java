@@ -55,46 +55,7 @@ public class SettingUserRecord extends HttpServlet {
 	    String todayDate = cal.get(Calendar.YEAR) + "."+ (cal.get(Calendar.MONTH) + 1)+ "." + cal.get(Calendar.DAY_OF_MONTH);
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
 
-		//first Category Setting
-		ResultSet resultFirstCategory = (ResultSet) ManageCategory.searchAllFirstCateogry(conn);
-		ArrayList<FristCategoryData> firstCategoryList = new ArrayList<FristCategoryData>();
-		
-		try {
-			if(resultFirstCategory != null) {	
-				while(resultFirstCategory.next()) {
-					int firstCategoryId = resultFirstCategory.getInt(1);
-					String firstCategoryName = resultFirstCategory.getString(2);
-					FristCategoryData tmp = new FristCategoryData(firstCategoryId, firstCategoryName);
-					firstCategoryList.add(tmp);
-				}
-			}
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//SubCategory Setting
-		ResultSet resultSubCategory = (ResultSet) ManageCategory.searchAllSubCateogry(conn);
-		ArrayList<SubcategoryData> subCategoryList = new ArrayList<SubcategoryData>();
-		
-		try {
-			if(resultSubCategory != null) {
-				while(resultSubCategory.next()) {
-					int firstCategoryId = resultSubCategory.getInt(1);
-					int subCategoryId = resultSubCategory.getInt(2);
-					String subCategoryName = resultSubCategory.getString(3);
-					
-					SubcategoryData tmp = new SubcategoryData();
-					tmp.setFirstCategoryId(firstCategoryId);
-					tmp.setSubcategoryId(subCategoryId);
-					tmp.setSubcategoryName(subCategoryName);
-					subCategoryList.add(tmp);
-				}
-			}
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		
 		//Custom Category Setting
 		ResultSet resultUserCustomCategory = ManageCategory.searchAllUserCustomCateogry(conn, userId);
@@ -108,7 +69,7 @@ public class SettingUserRecord extends HttpServlet {
 					String customCategoryName = resultUserCustomCategory.getString(3);
 					
 					CustomCategoryData tmp = new CustomCategoryData();
-					tmp.setCategoryId(firstCategoryId);
+					tmp.setFirstCategoryId(firstCategoryId);
 					tmp.setCustomCategoryId(customCategoryId);
 					tmp.setCustomCategoryName(customCategoryName);
 					tmp.setUserId(userId);
@@ -178,12 +139,9 @@ public class SettingUserRecord extends HttpServlet {
 		
 		request.setAttribute("userId", userId);
 		request.setAttribute("todayDate", todayDate);
-		request.setAttribute("firstCategoryList", firstCategoryList);
-		request.setAttribute("subCategoryList", subCategoryList);
 		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		request.setAttribute("userForderList", userForderList);
 		request.setAttribute("userScrapList", userScrapList);
-		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		
 		
 		RequestDispatcher view = request.getRequestDispatcher("/Record/user/writingPage.jsp");

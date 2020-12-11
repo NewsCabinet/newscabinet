@@ -7,114 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>전체 기록 보기</title>
-<link href="/NewsCabinet/style.css" rel="stylesheet">
-<style type="text/css">
-	/* OR -> OtherRecord*/
-	.newsCategoryHeader{
-		width: 60%;
-		margin: 5px auto;
-		border-bottom: 1px solid #2E404E;
-	}
-	
-	ul{
-	 list-style:none;
-	}
-	
-	.newsCategoryHeader a{
-		width: 60%;
-		margin: 20px auto;
-		padding:8px;
-		text-decoration: none;
-		color: black;
-	}
-	
-	
-	.ORFirtstLineli {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-	}
-	
-	.ORFirtstLineli a{
-		width: 60%;
-		padding: 10px;
-		text-decoration: none;
-		color: black;
-	}
-	
-	.ORFirtstLineli a:hover{
-		border-bottom: 2px solid #2E404E;
-	}
-	
-	.ORFirtstLineliOn {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-		font-weight:bolder;
-		/*border: 2px solid #2E404E;
-		border-radius: 10px;*/
-	}
-	
-	
-	.ORSecondLineli {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-	}
-	
-	.ORSecondLineli a:hover{
-		background: #2E404E;
-		color: white;
-		font-weight: bold;
-		border-radius: 10px;
-	}
-	
-	.ORSecondLineliOn {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		text-decoration: none;
-		background: #2E404E;
-		color: white;
-		font-weight: bold;
-		border-radius: 10px;
-	}
-
-	#recordContent{
-		text-align: left;
-		width: 50%;
-		margin: 10px auto;
-		padding : 10px;
-	}
-	
-	.otherRecordItem {
-		width: 98%;
-		text-align: left;
-		border-bottom: 1px solid gray;
-		margin: 10px auto;
-		padding : 10px;
-	}
-	
-	.otherRecordItem a{
-		text-decoration: none;
-		padding: 20px;
-		color:black;
-	}
-	
-	.otherRecordItem a:hover{
-		box-shadow: 1px 1px 10px #ddd;
-	}
-	
-</style>
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
 </head>
-
 <body>
 	<%	
 		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
@@ -134,7 +28,7 @@
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='ORFirtstLineli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
+					<li class='CH_FirtstLineli'><a href="/NewsCabinet/scrap/main">홈</a><li>
 						<%
 						String presentFisrtCategoryName = "";
 						for(int i = 0; i < firstCategoryList.size(); i++){
@@ -143,10 +37,10 @@
 							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
 							
 							if(itemId == SelectedfirstCategoryId){
-								out.println("<li class='ORFirtstLineliOn'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
+								out.println("<li class='CH_FirtstLineliOn'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 								presentFisrtCategoryName = itemName;
 							}else{
-								out.println("<li class='ORFirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
+								out.println("<li class='CH_FirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 							}
 						}
 						%>
@@ -166,17 +60,17 @@
 								if(presentFisrtCategoryName.equals(subItemName)){
 									continue;
 								}else if(subCategoryList.get(i).getSubcategoryId() == SelectedSubCategoryId){
-									out.println("<li class='ORSecondLineliOn'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
+									out.println("<li class='CH_SecondLineliOn'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
 								}else{
-									out.println("<li class='ORSecondLineli'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
+									out.println("<li class='CH_SecondLineli'><a href='" + recordUrl + "'>" + subItemName + "</a></li>");
 								}
 							}
 						}%>
 					</ul>
 					<br><br>
-			</div>
+				</div>
 				
-				<div id=recordContent>
+				<div class="simpleRecordContent">
 						<% 
 						for(int i = 0; i < simpleRecordList.size(); i++){
 							int recordId = simpleRecordList.get(i).getRecordId();
@@ -187,7 +81,7 @@
 							int recordCount = simpleRecordList.get(i).getRecordCount();
 							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
 							%>
-							<div class="otherRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
+							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
 								<p> <b>[<%=subcategoryName%>]</b> &nbsp; <%=recordTitle %>
 								</p><br>
 								<p>

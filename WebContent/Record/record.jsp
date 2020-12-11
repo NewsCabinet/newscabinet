@@ -75,6 +75,7 @@
 <body>
 	<%! boolean userLikeRecord = true;%>
 	<%
+		boolean isCheckMyRecord = (Boolean)request.getAttribute("isCheckMyRecord");
 		RecordData recordData = (RecordData)request.getAttribute("selectedRecordData");
 		ArrayList<UserScrapNewsData> scrapNewsList = (ArrayList)request.getAttribute("scrapNewsList");
 		
@@ -103,7 +104,7 @@
 
 	<div class="basic_contentzone">
 		<section>
-			<div id="btnAlign">
+			<div id="btnAlign" style="display:none">
 				<input class="FindButton" type="button" value="기록 수정하기" > 
 				<input class="FindButton" type="button" value="기록 삭제하기" onclick="location.href='<%=tmpForRemove%>'"><br/>
 			</div>
@@ -144,12 +145,11 @@
 	</div>
 
 </body>
-<script>
-	function goBack(){
+<script type="text/javascript">
+function goBack(){
 		window.history.back();
 	}
-</script>
-<script type="text/javascript">
+
 function likeToggle(){
 	<%
 		System.out.println("자바스크립트 눌림");
@@ -174,6 +174,14 @@ function likeToggle(){
 		console.log(like)	
 	}
 }
+
+window.onload = function(){
+	var check = <%=isCheckMyRecord%>
+	if(check == false)
+		document.getElementById("btnAlign").style.display="none";
+	else
+		document.getElementById("btnAlign").style.display="";
+} 
 </script>
 
 </html>
