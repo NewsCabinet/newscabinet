@@ -15,15 +15,17 @@
 	
 	<div class="basicTest">
 		<div>
-			<%		String today = (String)request.getAttribute("todayDate");
-					ArrayList<FristCategoryData> firstCategoryList = (ArrayList)request.getAttribute("firstCategoryList");
-					ArrayList<SubcategoryData> subCategoryList = (ArrayList)request.getAttribute("subCategoryList");
-					ArrayList<CustomCategoryData> userCustomCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
-					ArrayList<UserFolderData> userForderList = (ArrayList)request.getAttribute("userForderList");				
-					ArrayList<UserScrapNewsData> userScrapList = (ArrayList)request.getAttribute("userScrapList");
-				%>
+			<%	
+				String today = (String)request.getAttribute("todayDate");
+				ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
+				ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
+				ArrayList<CustomCategoryData> userCustomCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
+				ArrayList<UserFolderData> userForderList = (ArrayList)request.getAttribute("userForderList");				
+				ArrayList<UserScrapNewsData> scrapNewsList = (ArrayList)request.getAttribute("scrapNewsList");
+			%>
 	
-			<form id="writeForm" method="post" action="/NewsCabinet/UserRecord/edit">
+			<form id="writeForm" method="post" action="/NewsCabinet/UserRecord/record/edit/save">
+				<input type="hidden" name="recordId" value="<%=(int)request.getAttribute("recordId")%>">
 				<br>
 				<h2>기록 작성하기</h2>
 				<br>
@@ -61,41 +63,28 @@
 					</b>
 				</p>
 				<br>
-				<p>
-					<input class="FindButton" type="button" value="스크랩한 뉴스 고르기" onclick="getUserChosenScap()">
-				</p>
-				
-				<div id="scrapNewsDiv" >
-				<br>
+				<div class="SRScrapNews">
 					<%
-					if(userScrapList.size() > 0){
-						for(int i = 0; i < userScrapList.size() ; i++){
-							int newsId = userScrapList.get(i).getNewsId();
-							String newsHead = userScrapList.get(i).getHeadline();
-							String subCategoryName = userScrapList.get(i).getSubCategoryName();
-							String newsUrl = userScrapList.get(i).getNewsURL();
-							String pTag = "<p id='" + "SelectedPtag"+ newsId + "' style='display:none'>";
-							String str = "<input type='radio' name='radioSelectedNews' value='" + newsId +"'>" 
-										+ "&nbsp&nbsp [" + subCategoryName +"] "+ newsHead + "</input><br>";
-							String checkboxStr = "<input type='checkbox' name='checkBoxSelectedNews' value='"+ newsId +"' style='display:none'>" ;
-							out.println(pTag + str + checkboxStr+ "</p>");
-						}
-					}else{
-						out.println("스크랩한 뉴스 불러오는데 오류");
-					}
-					%>
-				</div>
+					for(int i = 0; i < scrapNewsList.size(); i++){
+						String scrapSubCategoryName = scrapNewsList.get(i).getSubCategoryName();
+						String scrapHeadline = scrapNewsList.get(i).getHeadline();
+						String scrapNewsUrl = scrapNewsList.get(i).getNewsURL();%>
+						
+						<br>
+						<div class="SRScrapNewsItem">
+						<a href='<%=scrapNewsUrl%>'> [<%=scrapSubCategoryName%>] <%=scrapHeadline%></a>
+						</div>
+					
+					<% }%>					
+			</div>
 				<br>
-				<div>
-					<iframe id='selectedNewsFrame' name='selectedNewsFrame' width='100%' height='400' style="display:none"></iframe>
-				</div>
 				<br>
 				<br>
 	
 				<textarea class="textBox" name="recordComment" required></textarea>
 				<br>
 				<br>
-				<button class="push_button_Stoore" type="submit">저장하기</button>
+				<button class="push_button_Stoore" type="submit">수정 완료하기</button>
 			</form>
 			<br/>
 		</div>
@@ -152,27 +141,5 @@
                 }
             });
         });
-	</script>
-	<script>
-		function getUserChosenScap(){
-			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
-		}
-	</script>
-	<script>
-		$("input[name='radioSelectedNews']").change(function(){
-			<% 
-			for(int i = 0; i < userScrapList.size(); i++){%>
-				var index = <%=i%>
-				if(document.getElementsByName("radioSelectedNews")[index].checked == true){
-					<% 
-					String selectedNewsURL = userScrapList.get(i).getNewsURL();
-					if(selectedNewsURL == null || selectedNewsURL.equals("")){%>
-					//URL이 없는 경우도 있어서 없을 경우 네이버 뉴스 뜨도록 설정
-					document.getElementById("selectedNewsFrame").src = "https://news.naver.com/";
-					<%}else%>
-					document.getElementById("selectedNewsFrame").src = "<%=selectedNewsURL%>";
-				}
-		  <%}%>
-		});
 	</script>
 </html>

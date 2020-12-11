@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.*" import="java.util.*"%>
+<%@ page
+	import="model.UserScrapNewsData, model.CustomCategoryData, model.UserFolderData,
+			model.FristCategoryData, model.SubcategoryData"
+	import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,13 +155,9 @@
                 }
             });
         });
-	</script>
-	<script>
 		function getUserChosenScap(){
 			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
 		}
-	</script>
-	<script>
 		$("input[name='radioSelectedNews']").change(function(){
 			<% 
 			for(int i = 0; i < userScrapList.size(); i++){%>

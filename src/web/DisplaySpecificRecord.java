@@ -55,7 +55,6 @@ public class DisplaySpecificRecord extends HttpServlet {
 		}
 		
 		int selectedRecordId = Integer.parseInt((String)request.getParameter("id"));
-		request.setAttribute("recordId", selectedRecordId);
 		
 		ResultSet resultSelectedRecord = ManageRecord.searchSpecificRecordByRecordId(conn, selectedRecordId);
 		RecordData recordData = new RecordData();

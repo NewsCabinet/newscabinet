@@ -97,14 +97,14 @@
 		
 	%>
 	<%
-		int recordId = (int) request.getAttribute("recordId");
-		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordId;
+		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordData.getRecordId();
+		String tmpForEdit = "/NewsCabinet/UserRecord/record/edit?id="+ recordData.getRecordId();
 	%>
 
 	<div class="basic_contentzone">
 		<section>
 			<div id="btnAlign">
-				<input class="FindButton" type="button" value="기록 수정하기" > 
+				<input class="FindButton" type="button" value="기록 수정하기" onclick="location.href='<%=tmpForEdit%>'"> 
 				<input class="FindButton" type="button" value="기록 삭제하기" onclick="location.href='<%=tmpForRemove%>'"><br/>
 			</div>
 		</section>
