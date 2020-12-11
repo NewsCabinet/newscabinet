@@ -84,10 +84,6 @@ public class EditedRecordSave extends HttpServlet {
 			userSelectedCustomCategoryId = ManageCategory.searchCustomCategoryIdByName(conn, userId, "전체");
 
 		}
-
-		request.setAttribute("recordUserId", userId);
-		request.setAttribute("userSelectedSubCategoryId", userSelectedSubCategoryId);
-		request.setAttribute("userSelectedCustomCategoryId", userSelectedCustomCategoryId);
 		
 		int check = ManageRecord.updateUserRecord(conn, request);
 		if(check >-1) {
