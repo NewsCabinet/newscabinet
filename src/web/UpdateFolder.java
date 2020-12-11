@@ -23,13 +23,13 @@ import model.UserFolderData;
  * Servlet implementation class updateFolder
  */
 @WebServlet("/UserRecord/main/folder/management")
-public class updateFolder extends HttpServlet {
+public class UpdateFolder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateFolder() {
+    public UpdateFolder() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -99,7 +99,7 @@ public class updateFolder extends HttpServlet {
 			}
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/manageFolder.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Record/user/manageFolder.jsp");
 		view.forward(request, response);
 	}
 

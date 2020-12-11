@@ -88,10 +88,9 @@
 				<%
 					ArrayList<RecordData> recordList = (ArrayList) request.getAttribute("recordData");
 					for(int i = 0; i< recordList.size(); i++){
-						String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?recordId=" + recordList.get(i).getRecordId() + "'";
+						String tmpForScrap = "location.href='/NewsCabinet/UserRecord/record?id=" + recordList.get(i).getRecordId() + "'";
 				%>
-						<div class="otherRecordItem" style="cursor: pointer;"
-							onclick="<%=tmpForScrap%>;">
+						<div class="otherRecordItem" style="cursor: pointer;" onclick="<%=tmpForScrap%>;">
 							<p>
 								&nbsp;
 								<%=recordList.get(i).getRecordTitle()%>

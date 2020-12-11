@@ -48,15 +48,13 @@ html, body { overflow: hidden; }
 		<input type="submit" value="추가 완료" onClick="reloadSelf()">
 		</div>
 	</form>
-	<script type="text/javascript">
-		function closeWindow(){
-			window.opener.parent.location.reload();
-			self.close();
-		}
-	</script>
 	<input type="button" value="닫기" onClick="closeWindow()">
 </body>
 <script type="text/javascript">
+	function closeWindow(){
+		window.opener.parent.location.reload();
+		self.close();
+	}
 	function addFolder() {
 		document.getElementById("addedFolder").innerHTML += "추가할 폴더 : "
 		document.getElementById("addedFolder").innerHTML += "<input type='text' name='folder' >";

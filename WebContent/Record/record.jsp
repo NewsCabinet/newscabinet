@@ -18,7 +18,6 @@
 		margin: 50px auto; 
 		padding: 30px;
 	}
-
 	.SRInfoContecnt{
 		font-size: small;
 		text-align:right;
@@ -62,6 +61,14 @@
 		box-shadow: 1px 1px 10px #ddd;
 	}
 	
+	#btnAlign{
+		float: right;
+		margin-right: 200px;
+	}
+	#defaultAlign{
+		clear: both;
+	}
+	
 </style>
 
 </head>
@@ -89,10 +96,19 @@
 		
 		
 	%>
-
+	<%
+		int recordId = (int) request.getAttribute("recordId");
+		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordId;
+	%>
 
 	<div class="basic_contentzone">
 		<section>
+			<div id="btnAlign">
+				<input class="FindButton" type="button" value="기록 수정하기" > 
+				<input class="FindButton" type="button" value="기록 삭제하기" onclick="location.href='<%=tmpForRemove%>'"><br/>
+			</div>
+		</section>
+		<section id="defaultAlign">
 			<br>
 			<h2><%=firstCategoryName %> | <%=subCategoryName %></h2>
 		</section>

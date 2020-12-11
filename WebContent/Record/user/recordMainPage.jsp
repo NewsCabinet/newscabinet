@@ -71,7 +71,7 @@
 	margin: 20px;
 	float: left;
 }
-.setting{
+.settingForRecord{
 	position: relative;
 	background-image: url( "/NewsCabinet/images/setting.png" );
 	background-repeat: no-repeat;
@@ -86,6 +86,9 @@
 	width: 60%;
 	/*margin:0px auto;*/
 }
+#introRecord{
+	font-size: 20px; font-weight:bold; margin-right : 50px;
+}
 </style>
 </head>
 <body>
@@ -93,8 +96,8 @@
 <jsp:include page="recordType.jsp"></jsp:include>
 	<div>
 		<div>
-			<p style="font-size: 20px; font-weight:bold; margin-right : 50px;" > Folder 
-				<button class="setting" onclick="window.open('/NewsCabinet/UserRecord/main/folder/management','폴더 추가하기','width=430,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');"></button>
+			<p id="introRecord"> Folder 
+				<button class="settingForRecord" onclick="window.open('/NewsCabinet/UserRecord/main/folder/management','폴더 추가하기','width=430,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');"></button>
 			</p>
 		</div>
 		<div style="background-color: #EEEEEE; width: 60%; margin:0px auto;">

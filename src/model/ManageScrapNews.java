@@ -290,8 +290,8 @@ public class ManageScrapNews {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return null;
 			}
+			return null;
 		}
 		
 		//System.out.println(newsData.getUrl() + "out of the method");
@@ -312,9 +312,8 @@ public class ManageScrapNews {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
-		
+		return null;
 	}
 	
 	public static void insertScrapNewsRelationWithUser(Connection conn, int newsId, int userId, int customCategoryId) {
@@ -344,5 +343,50 @@ public class ManageScrapNews {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static int updateScrapNewsCountMinus(Connection conn, int newsId) throws SQLException {
+		ResultSet tmp = searchScrapNewsByNewsId(conn, newsId); 
+		if (tmp != null) {
+			String url = null;
+			if(tmp.next()) {
+				url = tmp.getString("url");
+			}
+			int scrapCount = searchScrapCountByUrl(conn, url);
+			// UPDATE 테이블명 SET 칼럼명 = '내용' WHERE 조건문
+			if(scrapCount>0) {
+				String query = "UPDATE newscabinet.scrap_news SET scrap_count = ? where news_id = ?";
+				
+				try {
+					PreparedStatement pstat = conn.prepareStatement(query);
+					pstat.setInt(1, --scrapCount);
+					pstat.setInt(2, newsId);
+	
+					int result = pstat.executeUpdate();
+					
+					return result;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return -1;
+	}
+	
+	public static int removeScrapNewsByUserId(Connection conn, int userId, int newsId) {
+		String query = "DELETE FROM newscabinet.user_scrap_news where user_id=? and news_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setInt(2, newsId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return -1;
 	}
 }

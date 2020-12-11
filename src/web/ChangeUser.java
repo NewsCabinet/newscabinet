@@ -40,7 +40,8 @@ public class ChangeUser extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		HttpSession httpSession = request.getSession();
+		HttpSession userSession = request.getSession();
+		int userId = (int) userSession.getAttribute("userId");
 		System.out.println("회원정보수정 서블릿");
 		String userName = request.getParameter("userName");	
 		//String passWd = request.getParameter("userPassword");
@@ -58,6 +59,12 @@ public class ChangeUser extends HttpServlet {
 		Connection conn = (Connection) sc.getAttribute("DBconnection");
 		try {
 			ManageUser.updateChangeUser(conn,userName,userPhone,userAge,userGender,category,userPassword,userEmailId);
+			int check = ManageCategory.updateFirstCategoryInCustomCategory(conn, userId, category);
+			if(check ==1) {
+				System.out.println("카테고리가 잘 업데이트되었습니다.");
+			}else {
+				System.out.println("카테고리가 업데이트 안됨");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
