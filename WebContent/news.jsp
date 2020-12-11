@@ -130,11 +130,11 @@
 				<%
 					NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
 					List scrappedNewsId = (ArrayList) request.getAttribute("scrappedNewsId");
-	
+					
 					for (int i = 0; i < nd.length; i++) {
-						String tmpForScrap = "location.href='../scrap/scrapNews?location=" + i + "&subId=" + subCategoryId + "&custom="
-						+ selectedCustomCategory + "'";
 						boolean check = false;
+						String tmpForScrap = "location.href='../scrap/scrapNews?location=" + i + "&subId=" + subCategoryId + "&custom="
+						+ selectedCustomCategory + "&check=";
 					%>
 						<div class="otherRecordItem" style="cursor: pointer;" onclick="window.open('<%=nd[i].getUrl()%>')">
 						<%
@@ -142,12 +142,12 @@
 							if (scrappedNewsId.get(j).equals(i)) {
 								check = true;
 								//out.println((i + 1) + " <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩취소 </button>");
-								out.println(" <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩취소 </button>");
+								out.println(" <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + check + "'" + "> 스크랩취소 </button>");
 							}
 						}
 						if (!check) {
 							//out.println((i + 1) + " <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");	
-							out.println("<button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "> 스크랩하기 </button>");
+							out.println("<button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + check + "'" + "> 스크랩하기 </button>");
 						}
 					%>
 							<p>
