@@ -9,22 +9,20 @@
 <head>
 <jsp:include page="../../webHeader.jsp"></jsp:include>
 <meta charset="UTF-8">
-<link href="/NewsCabinet/style.css" rel="stylesheet">
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet" type="text/css">
 <title>기록작성하기</title>
-<style>
-</style>
 </head>
 <body>
 	
 	<div class="basicTest">
 		<div>
-			<%		String today = (String)request.getAttribute("todayDate");
-					ArrayList<FristCategoryData> firstCategoryList = (ArrayList)request.getAttribute("firstCategoryList");
-					ArrayList<SubcategoryData> subCategoryList = (ArrayList)request.getAttribute("subCategoryList");
-					ArrayList<CustomCategoryData> userCustomCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
-					ArrayList<UserFolderData> userForderList = (ArrayList)request.getAttribute("userForderList");				
-					ArrayList<UserScrapNewsData> userScrapList = (ArrayList)request.getAttribute("userScrapList");
-				%>
+			<%	String today = (String)request.getAttribute("todayDate");
+				ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
+				ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
+				ArrayList<CustomCategoryData> userCustomCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
+				ArrayList<UserFolderData> userForderList = (ArrayList)request.getAttribute("userForderList");				
+				ArrayList<UserScrapNewsData> userScrapList = (ArrayList)request.getAttribute("userScrapList");
+			%>
 	
 			<form id="writeForm" method="post" action="/NewsCabinet/UserRecord/restore">
 				<br>
@@ -55,7 +53,7 @@
 								out.println("<option value='" + userForderList.get(i).getFolderId() + "'>" + userForderList.get(i).getFolderName() + "</option>");	
 						}%>
 					</select>
-				<p>
+				</p>
 				<br>
 				<p>
 					<b>공개 설정 : 
@@ -68,7 +66,7 @@
 					<input class="FindButton" type="button" value="스크랩한 뉴스 고르기" onclick="getUserChosenScap()">
 				</p>
 				
-				<div id="scrapNewsDiv" >
+				<div id="scrapNewsDiv">
 				<br>
 					<%
 					if(userScrapList.size() > 0){
@@ -101,6 +99,8 @@
 				<button class="push_button_Stoore" type="submit">저장하기</button>
 			</form>
 			<br/>
+			<br>
+			<br>
 		</div>
 	</div>
 </body>
@@ -134,7 +134,7 @@
             			customCategoryNameArray = new Array();
             			<%
             			for(int k = 0; k < userCustomCategoryList.size(); k++){
-            			if(userCustomCategoryList.get(k).getCategoryId() == selectedFirstCategory){%>
+            			if(userCustomCategoryList.get(k).getFirstCategoryId() == selectedFirstCategory){%>
             					customCategoryNameinJS = "<%=userCustomCategoryList.get(k).getCustomCategoryName()%>"
             					customCategoryNameArray.push(customCategoryNameinJS)
             				<%}else continue;

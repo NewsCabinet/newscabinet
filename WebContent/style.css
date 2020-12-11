@@ -402,20 +402,122 @@ div a {
    font-weight:bold;
    border:none;
    text-align: center;
-
 }
-/*기록 작성 페이지 추가 css*/
-#writeForm{
-	text-align:left;
-	width:100%;
-	margin: 20 auto;
-	margin-bottom: 80px;
-	position: relative;
-}
-.basicTest {
-	position: relative;
-	top: 100px;
-	width : 70%;
-	margin: 0 auto;
+/*다른 사람 기록보기에서 사용*/
+	/*CH : categoryHeader*/
+	.newsCategoryHeader{
+		width: 60%;
+		margin: 5px auto;
+		border-bottom: 1px solid #2E404E;
+	}
 	
-}
+	
+	.newsCategoryHeader a{
+		width: 60%;
+		margin: 20px auto;
+		padding:8px;
+		text-decoration: none;
+		color: black;
+	}
+	
+	.newsCategoryHeader ul{
+	list-style:none;
+	}
+	
+	.CH_FirtstLineli {
+		float: left;
+		margin: 1px;
+		display: block;
+		padding: 5px;
+		text-decoration: none;
+	}
+	
+	.CH_FirtstLineli a{
+		width: 60%;
+		padding: 10px;
+		text-decoration: none;
+		color: black;
+	}
+	
+	.CH_FirtstLineli a:hover{
+		border-bottom: 2px solid #2E404E;
+	}
+	
+	.CH_FirtstLineliOn {
+		float: left;
+		margin: 1px;
+		display: block;
+		padding: 5px;
+		text-decoration: none;
+		font-weight:bolder;
+		
+	}
+	
+	
+	.CH_SecondLineli {
+		float: left;
+		margin: 1px;
+		display: block;
+		padding: 5px;
+		text-decoration: none;
+	}
+	
+	.CH_SecondLineli a:hover{
+		background: #2E404E;
+		color: white;
+		font-weight: bold;
+		border-radius: 10px;
+	}
+	
+	.CH_SecondLineliOn {
+		float: left;
+		margin: 1px;
+		display: block;
+		padding: 5px;
+		text-decoration: none;
+		background: #2E404E;
+		color: white;
+		font-weight: bold;
+		border-radius: 10px;
+	}
+
+	.simpleRecordContent{
+		text-align: left;
+		width: 50%;
+		margin: 10px auto;
+		padding : 10px;
+	}
+	
+	.simpleRecordItem {
+		width: 98%;
+		text-align: left;
+		border-bottom: 1px solid gray;
+		margin: 10px auto;
+		padding : 10px;
+	}
+	
+	.simpleRecordItem a{
+		text-decoration: none;
+		padding: 20px;
+		color:black;
+	}
+	
+	.simpleRecordItem:hover{
+		box-shadow: 1px 1px 10px #ddd;
+	}
+	
+
+	/*기록 작성 페이지 추가 css*/
+	#writeForm{
+		text-align:left;
+		width:100%;
+		margin: 20 auto;
+		margin-bottom: 80px;
+		position: relative;
+	}
+	.basicTest {
+		position: relative;
+		top: 100px;
+		width : 70%;
+		margin: 0 auto;
+	}

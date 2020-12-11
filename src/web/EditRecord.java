@@ -78,7 +78,7 @@ public class EditRecord extends HttpServlet {
 					String customCategoryName = resultUserCustomCategory.getString(3);
 					
 					CustomCategoryData tmp = new CustomCategoryData();
-					tmp.setCategoryId(firstCategoryId);
+					tmp.setFirstCategoryId(firstCategoryId);
 					tmp.setCustomCategoryId(customCategoryId);
 					tmp.setCustomCategoryName(customCategoryName);
 					tmp.setUserId(userId);

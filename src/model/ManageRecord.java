@@ -241,7 +241,24 @@ public class ManageRecord {
 		return null;
 	}
 	
-
+	//자신이 쓴 기록인지 확인
+	public static boolean checkRecordIdByUserId(Connection conn, int userId, int recordId) {
+		String query = "SELECT user_id FROM newscabinet.user_record WHERE record_id =" + recordId + " AND user_id= " + userId;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.createStatement();
+			if (st.execute(query)) {
+				rs = st.getResultSet();
+				if (rs.next())
+					return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	//처음 record insert시 사용
 	public static int insertUserRecord(Connection conn, HttpServletRequest request) {
 		
@@ -491,7 +508,6 @@ public class ManageRecord {
 		
 		return -1;
 	}
-	
 	public static int updateUserRecord(Connection conn, HttpServletRequest request) {
 		PreparedStatement pstmt = null;
 		

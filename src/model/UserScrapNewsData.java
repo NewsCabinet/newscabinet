@@ -5,14 +5,21 @@ public class UserScrapNewsData {
 
 	int newsId;
 	String headline;
+	String newsURL;
+	String description;
+	String publishedDate;
+	int scrapCount;
 	int subCategoryId;
 	String subCategoryName;
-	String newsURL;
-
+	
 
 	public UserScrapNewsData() {
 		newsId = 0;
 		headline = "";
+		newsURL="";
+		description = "";
+		publishedDate = "";
+		scrapCount = 0;
 		subCategoryId = 0;
 		subCategoryName = "";
 	}
@@ -56,6 +63,29 @@ public class UserScrapNewsData {
 	public void setNewsURL(String newsURL) {
 		this.newsURL = newsURL;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPublishedDate() {
+		return publishedDate;
+	}
+
+	public void setPublishedDate(String publishedDate) {
+		this.publishedDate = publishedDate;
+	}
+
+	public int getScrapCount() {
+		return scrapCount;
+	}
+
+	public void setScrapCount(int scrapCount) {
+		this.scrapCount = scrapCount;
+	}
 	
 }
