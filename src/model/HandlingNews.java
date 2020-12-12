@@ -26,7 +26,7 @@ public class HandlingNews {
 		BufferedReader br = null;
 		try {
 			keyword = URLEncoder.encode(keyword, "UTF-8");
-			String urlstr = apiUrl + "?query=" + keyword + "&display=10&start=1&sort=" + type;
+			String urlstr = apiUrl + "?query=" + keyword + "&display=20&start=1&sort=" + type;
 			//System.out.println(urlstr);
 			URL url = new URL(urlstr);
 			

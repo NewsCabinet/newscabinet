@@ -11,8 +11,10 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<%! boolean userLikeRecord = true;%>
+	
 	<%
+		boolean isUserLikeRecord = (Boolean)request.getAttribute("isUserLikeRecord");
+		System.out.println("like = " + isUserLikeRecord);
 		
 		boolean isCheckMyRecord = (Boolean)request.getAttribute("isCheckMyRecord");
 		RecordData recordData = (RecordData)request.getAttribute("selectedRecordData");
@@ -23,6 +25,7 @@
 		String recordTitle = "";
 		String recordDate = "";
 		int recordCount = -1;
+		int recordId = -1;
 		String recordComment = "";
 		
 		if(recordData != null){
@@ -30,15 +33,14 @@
 			subCategoryName = recordData.getSubcategoryName();
 			recordTitle = recordData.getRecordTitle();
 			recordDate = recordData.getRecordDate();
+			recordId = recordData.getRecordId();
 			recordCount = recordData.getRecordCount();
 			recordComment = recordData.getRecordComment();
 		}
 		
-		
-	%>
-	<%
-		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordData.getRecordId();
-		String tmpForEdit = "/NewsCabinet/UserRecord/record/edit?id="+ recordData.getRecordId();
+		String likeRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId+"&like=click";
+		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordId;
+		String tmpForEdit = "/NewsCabinet/UserRecord/record/edit?id="+ recordId;
 	%>
 
 	<div class="basic_contentzone">
@@ -57,7 +59,8 @@
 			<h2> <%=recordTitle %> </h2>
 			<div class="SRInfoContecnt">
 				<%=recordDate %> &nbsp;| &nbsp; 조회수 <%=recordCount %> &nbsp; | &nbsp; 
-				<img src="/NewsCabinet/images/emptyHeart.png" id="likeButton" name ="likeButton" width="40px" onclick="likeToggle()">
+				<img src="/NewsCabinet/images/emptyHeart.png" id="likeButton" name ="likeButton" width="40px" 
+				onclick="location.href='<%=likeRecordUrl%>'"> 
 			</div>
 			<div class="SRCommnet">
 				<%=recordComment %>
@@ -89,44 +92,7 @@ function goBack(){
 		window.history.back();
 	}
 
-var likeButton = false;
-function likeToggle(){
-	<%
-		System.out.println("자바스크립트 눌림");
-		if(userLikeRecord == true){
-			userLikeRecord = false;
-			System.out.println(userLikeRecord);
-		}else{
-			userLikeRecord = true;
-			System.out.println(userLikeRecord);
-		}
-		System.out.println("-------------");
-	%>
-	
-	var like = <%=userLikeRecord%>
-	console.log(like)
-	
-	if(like == true){
-		document.getElementById("likeButton").src = "/NewsCabinet/images/fullHeart.png";
-		console.log(like)
-		
-	}else if(like == false){
-		document.getElementById("likeButton").src = "/NewsCabinet/images/emptyHeart.png";
-		console.log(like)	
-	}
-	
-	
-	if(likeButton == true){
-		document.getElementById("likeButton").src = "/NewsCabinet/images/fullHeart.png";
-		likeButton = false;
-		console.log(like)
-		
-	}else if(likeButton == false){
-		document.getElementById("likeButton").src = "/NewsCabinet/images/emptyHeart.png";
-		likeButton = true;
-		console.log(like)	
-	}
-}
+
 
 window.onload = function(){
 	var check = <%=isCheckMyRecord%>
@@ -134,6 +100,18 @@ window.onload = function(){
 		document.getElementById("btnAlign").style.display="none";
 	else
 		document.getElementById("btnAlign").style.display="";
+	
+	
+	var likeButton = <%=isUserLikeRecord%>
+	if(likeButton == true){
+		document.getElementById("likeButton").src = "/NewsCabinet/images/fullHeart.png";
+		
+	}else if(likeButton == false){
+		document.getElementById("likeButton").src = "/NewsCabinet/images/emptyHeart.png";
+	}
+	
+	console.log(likeButton)	
+	
 } 
 </script>
 
