@@ -10,7 +10,7 @@
 <script src="https://kit.fontawesome.com/faf91fea33.js"
 	crossorigin="anonymous"></script>
 </head>
-<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body>
 	<jsp:include page="webHeader.jsp"></jsp:include>
 
 	<div class="basic_contentzone">
