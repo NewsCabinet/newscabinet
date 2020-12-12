@@ -5,7 +5,7 @@
 
 	<nav class="navbar">
 		<div class="navbar_logo">
-			<img src="images/logo.png">
+			<img src="/NewsCabinet/images/logo.png">
 			 <a href="/NewsCabinet/home.jsp">NewsCabinet</a>
 		</div>
 
