@@ -21,7 +21,7 @@
 	
 	%>
 	<div class="basic_contentzone">
-		<div class="newsType">
+		<div>
 			<div class="newsCategoryHeader">
 				<ul>
 					<li class='CH_FirtstLineli'><a

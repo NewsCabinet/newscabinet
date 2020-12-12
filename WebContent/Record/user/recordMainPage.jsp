@@ -9,7 +9,17 @@
 </head>
 <body>
 <jsp:include page="../../webHeader.jsp"></jsp:include>
-<jsp:include page="recordType.jsp"></jsp:include>
+	<div class="basic_contentzone">
+			<div class="newsCategoryHeader">
+				<ul>
+					<li class='CH_FirtstLineli'><a
+						href="/NewsCabinet/UserRecord/main">Folder</a></li>
+					<li class='CH_FirtstLineliOn'><a
+						href="/NewsCabinet/UserRecord/main/category">Category</a></li>
+				</ul>
+				<br>
+				<br>
+			</div>
 	<div>
 		<div>
 			<p id="introRecord"> Folder 

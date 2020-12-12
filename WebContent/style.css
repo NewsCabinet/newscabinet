@@ -614,14 +614,6 @@ div a {
 	padding: 10px;
 }
 
-.otherRecordItem {
-	width: 90%;
-	text-align: left;
-	border-bottom: 1px solid gray;
-	margin: 10px auto;
-	padding: 10px;
-}
-
 /*관리 창 css*/
 .category {
 	align: float;
@@ -635,17 +627,11 @@ div a {
 }
 
 /*record main css*/
-.basic_contentzone {
-	padding-top: 20px;
-	position: relative;
-	width: 100%;
-	top: 100px;
-}
-
 .basic_type_header {
 	padding-top: 10px;
 	position: relative;
 	width: 100%;
+	height: 70px;
 	top: 100px;
 }
 .CategoryHeaderli {
@@ -707,21 +693,21 @@ div a {
 #introRecord {
 	font-size: 20px;
 	font-weight: bold;
+	position: relative;
+	top: 10px;
 	margin-right: 50px;
 }
 
 /*record list for folder css*/
-	#listType{
-		padding-top: 100px;
-		width: 80%;
-		height: 50px;
-		top: 300px;
-		text-align:left;
-		margin-top:80px;
-		font-size: 20px;
-		font-weight: bold;
-	}
-	#list{
+#listType{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 40px;
+	margin-right: 700px;
+}
+
+#list{
 		width: 70%;
 		background-color: #EEEEEE;
 	}
+	
