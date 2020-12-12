@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ManageCategory;
 import model.ManageRecord;
 import model.RecordData;
 
@@ -75,9 +76,16 @@ public class DisplayRecordListForFolder extends HttpServlet {
 					String recordTitle = rs.getString("record_title");
 					String recordDate = rs.getString("record_date");
 					int recordCount = rs.getInt("record_count");
+					int recordSubcatergoryId = rs.getInt("subcategory_id");
+					String recordSubcatergoryName = ManageCategory.searchSubcatogoryNameBySubcateogoryId(conn, recordSubcatergoryId);
 
-					RecordData record = new RecordData(userId, recordId, recordTitle, recordDate, recordCount);
-
+					RecordData record = new RecordData();
+					record.setSubcategoryId(recordSubcatergoryId);
+					record.setSubcategoryName(recordSubcatergoryName);
+					record.setRecordId(recordId);
+					record.setRecordTitle(recordTitle);
+					record.setRecordDate(recordDate);
+					record.setRecordCount(recordCount);
 					recordList.add(record);
 				}
 			}
