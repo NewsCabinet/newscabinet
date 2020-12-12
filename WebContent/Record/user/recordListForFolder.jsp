@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>폴더별 보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<jsp:include page="../../webHeader.jsp"></jsp:include>

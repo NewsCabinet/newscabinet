@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>전체 기록 보기</title>
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 <link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
 </head>
 <body>

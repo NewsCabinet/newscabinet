@@ -15,19 +15,14 @@
 body {
 	text-align: center;
 }
+
 /*
 _wrapper {
    width: 1170px;
    margin: 0 auto;
 }
 */
-.wrapper {
-	width: 1170px;
-	margin: 0 auto;
-}
-
 .head {
-	height: 100px;
 	background: #2E404E;
 	width: 100%;
 	z-index: 10;
@@ -47,7 +42,7 @@ _wrapper {
 	color: #fff;
 	letter-spacing: 5px;
 }
-
+/*
 nav {
 	float: right;
 	line-height: 100px;
@@ -67,7 +62,7 @@ nav a {
 	font-weight: bolder;
 	text-decoration: underline;
 }
-
+*/
 .banner-area {
 	width: 100%;
 	height: 300px;
@@ -104,11 +99,9 @@ nav a {
 }
 
 .basic_contentzone {
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 	position: relative;
 	width: 100%;
-	/*height: 700px;*/
-	top: 100px;
 }
 
 .index_content-area {
@@ -205,7 +198,7 @@ div a {
 */
 .listWriteInput {
 	padding-top: 10px;
-	width: 700px;
+	width: 300px;
 	height: 40px;
 	border: none;
 	outline: none;
@@ -276,14 +269,11 @@ div a {
 }
 
 .nameButton {
-	float: right;
-	background-color: #2E404E;
-	color: white;
-	font-weight: bold;
+	background-color: #263343;
 	border: none;
-	text-align: center;
+	color: white;
+	padding: 8px;
 }
-
 /*FindButton Css*/
 .FindButton {
 	background: #2E404E;
@@ -318,7 +308,7 @@ div a {
 	width: 100%;
 	height: 220px;
 	padding: 5px;
-	/*     padding-bottom:10px; */
+	/* padding-bottom:10px; */
 }
 
 .box1 input {
@@ -413,6 +403,25 @@ div a {
 	border: none;
 	text-align: center;
 }
+/*
+body {
+	background: #f2f2f2;
+}
+*/
+.writingPage {
+	width: 50%;
+	margin: 0 auto;
+	border: 1px solid red;
+}
+
+.selectdiv {
+	position: relative;
+	/*Don't really need this just for demo styling*/
+	float: left;
+	min-width: 100px;
+	margin: 20px 1%;
+}
+
 /*다른 사람 기록보기에서 사용*/
 /*CH : categoryHeader*/
 .newsCategoryHeader {
@@ -524,7 +533,6 @@ div a {
 
 .basicTest {
 	position: relative;
-	top: 100px;
 	width: 70%;
 	margin: 0 auto;
 }
@@ -642,6 +650,7 @@ div a {
 	height: 70px;
 	top: 100px;
 }
+
 .CategoryHeaderli {
 	float: left;
 	margin: 1px;
@@ -660,8 +669,9 @@ div a {
 	border-bottom: 2px solid #2E404E;
 }
 
-.folderListInMain{
-	width: 60%; margin:0px auto;
+.folderListInMain {
+	width: 60%;
+	margin: 0px auto;
 }
 
 .folder {
@@ -677,7 +687,8 @@ div a {
 	margin: 20px;
 	float: left;
 }
-.folder:hover{
+
+.folder:hover {
 	background-color: #EEEEEE;
 }
 
@@ -693,3 +704,92 @@ div a {
 	margin-top: 40px;
 	margin-right: 700px;
 }
+
+/*반응형 헤더*/
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #263343;
+	padding: 15px 12px;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+.navbar_logo {
+	font-size: 24px;
+	color: white;
+}
+
+.navbar_logo i {
+	color: #d49466;
+}
+
+.navbar_manu {
+	display: flex;
+	list-style: none;
+}
+
+.navbar_manu li {
+	padding: 8px 12px;
+}
+
+.navbar_manu li:hover {
+	background-color: #d49466;
+	border-radius: 4px;
+}
+
+.navbar_icons {
+	list-style: none;
+	color: white;
+	display: flex;
+	padding-left: 0;
+}
+
+.navbar_icons li {
+	padding: 8px 12px;
+}
+
+.navbar_togglebtn {
+	display: none;
+	position: absolute;
+	right: 32px;
+	font-size: 24px;
+	color: #d49466;
+}
+
+@media screen and (max-width:768px) {
+	.navbar {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 8px 24px;
+	}
+	.navbar_manu {
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+	.navbar_manu li {
+		width: 100%;
+		text-align: center;
+	}
+	.navbar_icons {
+		display: none;
+		justify-content: center;
+		width: 100%;
+	}
+	.navbar_togglebtn {
+		display: block;
+	}
+	.navbar_manu.active {
+		display: flex;
+	}
+	.navbar_icons.active {
+		display: flex;
+	}
+}
+/*반응형 헤더 끝*/

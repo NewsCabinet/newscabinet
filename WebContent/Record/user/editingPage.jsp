@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <link href="/NewsCabinet/style.css" rel="stylesheet">
 <title>기록작성하기</title>
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	

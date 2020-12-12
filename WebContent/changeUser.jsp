@@ -7,20 +7,15 @@
 <title>Insert title here</title>
 <link href="./style.css?ver=1" rel="stylesheet">
 <style>
-.basic_contentzone {
-	padding-top: 20px;
-	position: relative;
-	width: 100%;
-	height: 630px;
-	top: 100px;
-}
 
 body {
 	overflow: hidden;
 }
 </style>
-</head>
 
+</head>
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 <jsp:include page="webHeader.jsp"></jsp:include>
 
 <body>

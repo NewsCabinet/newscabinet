@@ -37,4 +37,8 @@
 		<param-name>X-Naver-Client-Secret</param-name>
 		<param-value>89otjYHreJ</param-value>
 	</context-param>
+	
+	 <session-config>
+        <session-timeout>40</session-timeout> 
+    </session-config>
 </web-app>

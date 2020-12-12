@@ -7,9 +7,12 @@
 <meta charset="UTF-8">
 <title>뉴스 보기</title>
 <link href="../style.css?ver=1" rel="stylesheet">
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<jsp:include page="webHeader.jsp"></jsp:include>
+
 	<div class="basic_contentzone">
 		<div>
 			<br />
@@ -130,5 +133,7 @@
 			</section>
 		</div>
 	</div>
+   </script>
+
 </body>
 </html>

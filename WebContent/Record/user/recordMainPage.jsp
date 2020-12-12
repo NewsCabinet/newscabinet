@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>나의 기록 보기</title>
 <link href="../style.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 <jsp:include page="../../webHeader.jsp"></jsp:include>

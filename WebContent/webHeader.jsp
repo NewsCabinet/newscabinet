@@ -1,30 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-	<%@ page import="javax.servlet.http.HttpSession" %>
-<div class="box-area">
-	<header class="head">
-		<div class="wrapper">
-			<form method="POST" name="changeuser" action="/NewsCabinet/changeUser.jsp">
-				<% 
-            	  if(session.getAttribute("userName")!= null){
-                	 out.println("<button class=nameButton>"  + session.getAttribute("userName") + "님 환영합니다!</button>"); 
+	pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
+
+
+	<nav class="navbar">
+		<div class="navbar_logo">
+			<img src="images/logo.png">
+			 <a href="/NewsCabinet/home.jsp">NewsCabinet</a>
+		</div>
+
+		<ul class="navbar_manu">
+			<li><a href="/NewsCabinet/news/main">뉴스보기</a></li>
+			<li><a href="/NewsCabinet/scrap/main">스크랩보기</a></li>
+			<li><a href="/NewsCabinet/UserRecord/main">나의 기록보기</a></li>
+			<li><a href="/NewsCabinet/OthersRecord/main">공유된 기록보기</a></li>
+			<li><a href="/NewsCabinet/UserRecord/write">기록작성</a></li>
+		</ul>
+		<div class="navbar_icons">
+				<form method="POST" name="changeuser" action="/NewsCabinet/changeUser.jsp">
+				<%
+            	  if(session.getAttribute("userName")!= null || request.isRequestedSessionIdValid()){
+                	 out.println("<button class=nameButton>"  + session.getAttribute("userName") + "</button>"); 
             	  }
             	  else{
-            	   out.println("<p class=nameButton> SignIn session이 종료되었습니다.</p>");
+            		  if(session.getAttribute("userName") == null || !request.isRequestedSessionIdValid())
+            	   				out.println("<p class=nameButton> session이 종료되었습니다.</p>");
             	  }
             	 %>
 			</form>
-			<div class="logo">
-				<a href="/NewsCabinet/home.jsp"><b style="color: #bbb">N</b>ews<b
-					style="color: #bbb">C</b>abinet</a>
-			</div>
-			<nav>
-				<a class=headerA href="/NewsCabinet/news/main">뉴스보기</a> 
-				<a class=headerA href="/NewsCabinet/scrap/main">스크랩보기</a>
-				<a class=headerA href="/NewsCabinet/UserRecord/main">나의 기록보기</a> 
-				<a class=headerA href="/NewsCabinet/OthersRecord/main">다른사람의 기록보기</a>
-				<a class=headerA href="/NewsCabinet/UserRecord/write">기록작성</a>
-			</nav>
+		<form method="POST" name="logout" action="/NewsCabinet/SignOut">
+			  <% 
+			if(session.getAttribute("userName")!= null || request.isRequestedSessionIdValid()){
+				out.println("<button class=nameButton>" + "로그아웃" + "</button>");			}
+				%>
+			</form>
+
+			
 		</div>
-	</header>
-</div>
+		<a href="#" class="navbar_togglebtn"> <i class="fas fa-bars"></i>
+		</a>
+	</nav>
+	<script>
+	const toggleBtn = document.querySelector('.navbar_togglebtn');
+	const menu = document.querySelector('.navbar_manu');
+	const icons = document.querySelector('.navbar_icons');
+
+	toggleBtn.addEventListener('click', () => {
+ 	menu.classList.toggle("active");
+ 	icons.classList.toggle("active");
+}); 
+</script>
+
