@@ -56,22 +56,34 @@ public class DisplaySpecificRecord extends HttpServlet {
 		
 		int selectedRecordId = Integer.parseInt((String)request.getParameter("id"));
 		boolean isCheckMyRecord = ManageRecord.checkRecordIdByUserId(conn, userId, selectedRecordId);
+		boolean isUserLikeRecord = ManageRecord.checkUserLikeRecordByUserIdAndReocordId(conn, userId, selectedRecordId);
+		
+		
+		String selectedUserLikeRecord = (String)request.getParameter("like");
 		
 		//다른 사람 기록 볼 때 조회수 + 1
-		if( isCheckMyRecord == false)
+		if(isCheckMyRecord == false && selectedUserLikeRecord==null)
 			ManageRecord.updateRecordCount(conn, selectedRecordId);
+	
+		
+		if(selectedUserLikeRecord != null) { // 하트를 눌렀음.
+			if(isUserLikeRecord == true) { // 좋아요 취소를 누른 것
+				ManageRecord.deleteUserLikeRecord(conn, userId, selectedRecordId);
+				isUserLikeRecord = false;
+			}else {
+				ManageRecord.insertUserLikeRecord(conn, userId, selectedRecordId);
+				isUserLikeRecord = true;
+			}
+		}
+			
 		
 		ResultSet resultSelectedRecord = ManageRecord.searchSpecificRecordByRecordId(conn, selectedRecordId);
 		RecordData recordData = new RecordData();
-		
-		
 		
 		// 선택한 record Data setting
 		try {
 			if(resultSelectedRecord != null) {
 				if(resultSelectedRecord.next()) {
-					
-					
 					
 					int recordUserId = resultSelectedRecord.getInt(1);
 					String recordUserName = resultSelectedRecord.getString(2);
@@ -141,6 +153,7 @@ public class DisplaySpecificRecord extends HttpServlet {
 		request.setAttribute("selectedRecordData", recordData);
 		request.setAttribute("scrapNewsList", scrapNewsList);
 		request.setAttribute("isCheckMyRecord", isCheckMyRecord);
+		request.setAttribute("isUserLikeRecord", isUserLikeRecord);
 		RequestDispatcher view = request.getRequestDispatcher("/Record/record.jsp");
 		view.forward(request, response);
 		
