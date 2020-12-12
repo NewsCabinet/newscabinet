@@ -68,8 +68,9 @@ public class DisplaySpecificRecord extends HttpServlet {
 			if(resultSelectedRecord != null) {
 				if(resultSelectedRecord.next()) {
 					
-					//조회수 + 1
-					ManageRecord.updateRecordCount(conn, selectedRecordId);
+					//다른 사람 기록 볼 때 조회수 + 1
+					if( isCheckMyRecord == false)
+						ManageRecord.updateRecordCount(conn, selectedRecordId);
 					
 					int recordUserId = resultSelectedRecord.getInt(1);
 					String recordUserName = resultSelectedRecord.getString(2);

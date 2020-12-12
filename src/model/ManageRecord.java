@@ -144,6 +144,67 @@ public class ManageRecord {
 		return null;
 	}
 	
+	//나의 기록보기에서 상위 카테고리 선택 시 
+	public static ResultSet searchUserRecordIdByFirstcategoryId(Connection conn, int userId, int firstCategoryId) {
+		String query = "SELECT record_id FROM newscabinet.user_record "
+					+ "JOIN newscabinet.subcategory ON user_record.subcategory_id = subcategory.subcategory_id "
+					+ "WHERE subcategory.category_id =" + firstCategoryId
+					+ " AND user_record.user_id=" + userId
+					+ " ORDER BY record_id DESC";
+		Statement st = null;
+
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+				
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("searchPublicRecordIdByFirstcategoryId Err");
+		}
+		return null;
+	}
+	
+	//나의 기록보기에서 하위 카테고리 선택 시
+	public static ResultSet searchUserRecordIdBySubcategoryId(Connection conn, int userId, int subcategoryId) {
+		String query = "SELECT record_id FROM newscabinet.user_record "
+				+ "WHERE subcategory_id=" + subcategoryId
+				+ " AND user_id=" + userId
+				+ " ORDER BY record_id DESC";
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	//나의 기록보기에서 하위 카테고리 선택 시
+	public static ResultSet searchUserRecordIdByCustomCategoryId(Connection conn, int userId, int customCategoryId) {
+		String query = "SELECT record_id FROM newscabinet.user_record "
+				+ "WHERE custom_category_id=" + customCategoryId
+				+ " AND user_id=" + userId
+				+ " ORDER BY record_id DESC";
+		Statement st = null;
+		
+		try {
+			st = conn.createStatement();
+			if(st.execute(query)) {
+				return st.getResultSet();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 	//전체 기록보기에서 사용
 	public static ResultSet searchSimpleUserRecordByRecordId(Connection conn, int recordId) {
