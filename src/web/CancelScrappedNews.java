@@ -54,10 +54,10 @@ public class CancelScrappedNews extends HttpServlet {
 			int checkRemove = ManageScrapNews.removeScrapNewsByUserId(conn, userId, newsId);
 			if(checkRemove == 1) {
 				System.out.println("스크랩 취소 완료");
-				out.print("<script>alert('스크랩 취소되었습니다!'); location.href='/NewsCabinet/news/main'; </script>\r\n");
+				out.print("<script>alert('스크랩 취소되었습니다!'); location.href='/NewsCabinet/scrap/main'; </script>\r\n");
 			}else {
 				System.out.println("스크랩 취소 안됨");
-				out.print("<script>alert('스크랩 취소가 안되었습니다.!'); location.href='/NewsCabinet/news/main'; </script>\r\n");
+				out.print("<script>alert('스크랩 취소가 안되었습니다.!'); location.href='/NewsCabinet/scrap/main'; </script>\r\n");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
