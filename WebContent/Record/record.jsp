@@ -76,8 +76,8 @@
 						String scrapNewsUrl = scrapNewsList.get(i).getNewsURL();%>
 						
 						<br>
-						<div class="SRScrapNewsItem">
-						<a href='<%=scrapNewsUrl%>'> [<%=scrapSubCategoryName%>] <%=scrapHeadline%></a>
+						<div class="SRScrapNewsItem" style="cursor: pointer;" onclick="window.open('<%=scrapNewsUrl%>')">
+						[<%=scrapSubCategoryName%>] <%=scrapHeadline%>
 						</div>
 					
 					<% }%>					

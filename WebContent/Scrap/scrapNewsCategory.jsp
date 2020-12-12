@@ -134,7 +134,7 @@
 				%>
 				<button class='scrab_btn' name='scrap' onclick=<%=tmpForScrap%>>
 					스크랩취소</button>
-				<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
+				<div class="simpleRecordItem" style="cursor: pointer;" onclick="window.open('<%=scrapNewsUrl%>')">
 					<p>
 						<b>[<%=scrapSubcategoryName%>]
 						</b> &nbsp;
