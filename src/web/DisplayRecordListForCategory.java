@@ -25,7 +25,7 @@ import model.RecordData;
 /**
  * Servlet implementation class DisplayRecordListForCategory
  */
-@WebServlet("/UserRecord/main/category")
+@WebServlet("/record/user/category")
 public class DisplayRecordListForCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -155,7 +155,7 @@ public class DisplayRecordListForCategory extends HttpServlet {
 		request.setAttribute("SelectedSubCategoryId", subCategoryId);
 		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		
-		RequestDispatcher view = request.getRequestDispatcher("../../Record/user/recordListForCategory.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Record/user/recordListForCategory.jsp");
 		view.forward(request, response);
 	}
 

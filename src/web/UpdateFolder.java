@@ -23,7 +23,7 @@ import model.UserFolderData;
 /**
  * Servlet implementation class updateFolder
  */
-@WebServlet("/UserRecord/main/folder/management")
+@WebServlet("/record/user/folder/manage")
 public class UpdateFolder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

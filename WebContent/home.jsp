@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="style.css?ver=1" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet" type="text/css">
 <title>HOME</title>
 <script src="https://kit.fontawesome.com/faf91fea33.js"
 	crossorigin="anonymous"></script>

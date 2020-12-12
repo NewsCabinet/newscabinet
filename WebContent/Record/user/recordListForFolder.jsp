@@ -15,9 +15,9 @@
 			<div class="newsCategoryHeader">
 				<ul>
 					<li class='CH_FirtstLineliOn'><a
-						href="/NewsCabinet/UserRecord/main">Folder</a></li>
+						href="/NewsCabinet/record/user/folder">Folder</a></li>
 					<li class='CH_FirtstLineli'><a
-						href="/NewsCabinet/UserRecord/main/category">Category</a></li>
+						href="/NewsCabinet/record/user/category">Category</a></li>
 				</ul>
 				<br>
 				<br>
@@ -37,7 +37,7 @@
 					String recordTitle = simpleRecordList.get(i).getRecordTitle();
 					String recordDate = simpleRecordList.get(i).getRecordDate();
 					int recordCount = simpleRecordList.get(i).getRecordCount();
-					String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
+					String specificRecordUrl = "/NewsCabinet/record/specific?id=" + recordId;
 				%>
 				<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
 					<p>

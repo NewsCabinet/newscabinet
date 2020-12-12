@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
-<link href="style.css?ver=1" rel="stylesheet">
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
 <title>Home</title>
 <script method="post" action="Sign/checkId.html">
 		function idCheck(){
@@ -30,7 +30,7 @@
 		<div class="basic_contentzone">
 			<div class="login">
 			<h2>SignUp</h2>
-				<form method="post" action="SignUp">
+				<form method="post" action="sign-up">
 					<input class="modifyLogin" type="email" name="userEmailId" placeholder="이메일을 입력해주세요" required>  
 					<input class ="FindButton"type="button" name="checkID" value="중복 체크" onclick="idCheck()" >
         			 <input class="modifyLogin" type="password" name="userPassword" placeholder="비밀번호를 입력해주세요" required><br/>

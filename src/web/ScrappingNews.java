@@ -24,7 +24,7 @@ import model.NewsData;
 /**
  * Servlet implementation class ScrapNews
  */
-@WebServlet("/scrap/scrapNews")
+@WebServlet("/news/scrap")
 public class ScrappingNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

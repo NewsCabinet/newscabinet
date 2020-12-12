@@ -29,12 +29,12 @@
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='CH_FirtstLineliOn'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
+					<li class='CH_FirtstLineliOn'><a href="/NewsCabinet/record/shared/main">홈</a><li>
 						<%
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
+							String recordUrl = "/NewsCabinet/record/shared/category?first=" + itemId;
 							out.println("<li class='CH_FirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 						}%>
 					</ul>
@@ -56,7 +56,7 @@
 							String userName = popularTop10RecordList.get(i).getUserName();
 							String recordDate = popularTop10RecordList.get(i).getRecordDate();
 							int recordCount = popularTop10RecordList.get(i).getRecordCount();
-							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
+							String specificRecordUrl = "/NewsCabinet/record/specific?id=" + recordId;
 							String recordTest = "/NewsCabinet/Record/record.jsp";
 							%>
 							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">

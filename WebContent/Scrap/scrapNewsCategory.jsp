@@ -43,7 +43,7 @@
 						for (int i = 0; i < firstCategoryList.size(); i++) {
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String scrapUrl = "/NewsCabinet/scrap/news?first=" + itemId;
+							String scrapUrl = "/NewsCabinet/scrap/category?first=" + itemId;
 
 							if (itemId == SelectedfirstCategoryId) {
 								out.println("<li class='CH_FirtstLineliOn'><a href='" + scrapUrl + "'>" + itemName + "</a></li>");
@@ -65,7 +65,7 @@
 						int firstCategoryId = subCategoryList.get(i).getFirstCategoryId();
 						int subItemId = subCategoryList.get(i).getSubcategoryId();
 						String subItemName = subCategoryList.get(i).getSubcategoryName();
-						String scrapUrl = "/NewsCabinet/scrap/news?first=" + firstCategoryId + "&sub=" + subItemId;
+						String scrapUrl = "/NewsCabinet/scrap/category?first=" + firstCategoryId + "&sub=" + subItemId;
 
 						if (firstCategoryId == SelectedfirstCategoryId) {
 							if (presentFisrtCategoryName.equals(subItemName)) {
@@ -93,7 +93,7 @@
 
 						//custom Category -> 200이상
 						customItemId += 200;
-						String scrapUrl = "/NewsCabinet/scrap/news?first=" + firstCategoryId + "&sub=" + customItemId;
+						String scrapUrl = "/NewsCabinet/scrap/category?first=" + firstCategoryId + "&sub=" + customItemId;
 
 						if (firstCategoryId == SelectedfirstCategoryId && !customItemName.equals("전체")) {
 							checkCustomCategory = true;
@@ -130,12 +130,11 @@
 					String scrapNewsUrl = userScrapList.get(i).getNewsURL();
 					int scrapCount = userScrapList.get(i).getScrapCount();
 
-					String tmpForScrap = "location.href='../scrap/cancel?newsId=" + userScrapList.get(i).getNewsId() + "'";
+					String tmpForScrap = "location.href='/NewsCabinet/scrap/cancel?newsId=" + userScrapList.get(i).getNewsId() + "'";
 				%>
 				<button class='scrab_btn' name='scrap' onclick=<%=tmpForScrap%>>
 					스크랩취소</button>
-				<div class="simpleRecordItem"
-					onclick="location.href=<%=scrapNewsUrl%>">
+				<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
 					<p>
 						<b>[<%=scrapSubcategoryName%>]
 						</b> &nbsp;

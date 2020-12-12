@@ -38,9 +38,9 @@
 			recordComment = recordData.getRecordComment();
 		}
 		
-		String likeRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId+"&like=click";
-		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordId;
-		String tmpForEdit = "/NewsCabinet/UserRecord/record/edit?id="+ recordId;
+		String likeRecordUrl = "/NewsCabinet/record/specific?id=" + recordId+"&like=click";
+		String tmpForRemove = "/NewsCabinet/record/user/remove?id="+ recordId;
+		String tmpForEdit = "/NewsCabinet/record/user/edit?id="+ recordId;
 	%>
 
 	<div class="basic_contentzone">

@@ -20,7 +20,7 @@ import model.RecordData;
 /**
  * Servlet implementation class DisplayOtherRecord
  */
-@WebServlet("/otherRecord")
+@WebServlet("/record/shared/category")
 public class DisplayOtherRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
