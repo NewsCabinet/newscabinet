@@ -22,8 +22,6 @@
 	int SelectedfirstCategoryId = (Integer)request.getAttribute("SelectedCategoryId");
 	int SelectedSubCategoryId = (Integer)request.getAttribute("SelectedSubCategoryId");
 	
-	System.out.println("first = " + SelectedfirstCategoryId + " sub = " + SelectedSubCategoryId );
-
 	%>
 
 
@@ -93,7 +91,6 @@
 						
 						if(firstCategoryId == SelectedfirstCategoryId && !customItemName.equals("전체") ){
 							checkCustomCategory = true;
-							customCategoryList.get(i).print();
 							if(customItemId == SelectedSubCategoryId){
 								out.println("<li class='CH_SecondLineliOn'><a href='" + scrapUrl + "'>" + customItemName + "</a></li>");
 							}else{

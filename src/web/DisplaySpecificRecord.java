@@ -55,12 +55,15 @@ public class DisplaySpecificRecord extends HttpServlet {
 		}
 		
 		int selectedRecordId = Integer.parseInt((String)request.getParameter("id"));
+		boolean isCheckMyRecord = ManageRecord.checkRecordIdByUserId(conn, userId, selectedRecordId);
+		
+		//다른 사람 기록 볼 때 조회수 + 1
+		if( isCheckMyRecord == false)
+			ManageRecord.updateRecordCount(conn, selectedRecordId);
 		
 		ResultSet resultSelectedRecord = ManageRecord.searchSpecificRecordByRecordId(conn, selectedRecordId);
 		RecordData recordData = new RecordData();
 		
-		boolean isCheckMyRecord = ManageRecord.checkRecordIdByUserId(conn, userId, selectedRecordId);
-		System.out.println("isCheckMyRecord = " + isCheckMyRecord);
 		
 		
 		// 선택한 record Data setting
@@ -68,9 +71,7 @@ public class DisplaySpecificRecord extends HttpServlet {
 			if(resultSelectedRecord != null) {
 				if(resultSelectedRecord.next()) {
 					
-					//다른 사람 기록 볼 때 조회수 + 1
-					if( isCheckMyRecord == false)
-						ManageRecord.updateRecordCount(conn, selectedRecordId);
+					
 					
 					int recordUserId = resultSelectedRecord.getInt(1);
 					String recordUserName = resultSelectedRecord.getString(2);
@@ -91,8 +92,10 @@ public class DisplaySpecificRecord extends HttpServlet {
 					recordData.setRecordId(selectedRecordId);
 					recordData.setRecordTitle(recordTitle);
 					recordData.setRecordDate(recordDate);
-					recordData.setRecordComment(recordComment);
-					recordData.setRecordCount(recordCount+1);
+					recordData.setRecordComment(recordComment);						
+					recordData.setRecordCount(recordCount);
+					
+					
 				}
 			}
 		} catch (SQLException e) {

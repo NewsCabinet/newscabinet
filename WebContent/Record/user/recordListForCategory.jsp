@@ -30,7 +30,6 @@
 				<br>
 				<br>
 			</div>
-		
 			<div class="newsCategoryHeader">
 				<ul>
 					<%
