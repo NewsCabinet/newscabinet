@@ -21,7 +21,7 @@
 				<br>
 			</div>
 		<div>
-			<p id="listType" >
+			<p id="introRecord" >
 				Folder > <%=request.getAttribute("folderName")%>
 			</p>
 		</div>
