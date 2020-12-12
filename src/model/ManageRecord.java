@@ -320,6 +320,69 @@ public class ManageRecord {
 		return false;
 	}
 	
+	//사용자가 좋아요한 기록인지 확인
+	public static boolean checkUserLikeRecordByUserIdAndReocordId(Connection conn, int userId, int recordId) {
+		String query = "SELECT record_id FROM newscabinet.user_like_record WHERE record_id =" + recordId + " AND user_id= " + userId;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.createStatement();
+			if (st.execute(query)) {
+				rs = st.getResultSet();
+				if (rs.next())
+					return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	//사용자가 좋아요 눌렀을 때 삽입
+	public static int insertUserLikeRecord(Connection conn, int userId, int recordId) {
+		String query = "INSERT INTO newscabinet.user_like_record"
+				+ " (user_id, record_id)"
+				+ " VALUES(?, ?)";
+		
+		ResultSet rs = null;
+		int result = -1;
+
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, recordId);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return result;
+		
+	}
+	
+	
+	//사용자가 좋아요 취소 눌렀을 때 delete
+	public static int deleteUserLikeRecord(Connection conn, int userId, int recordId) {
+		String query = "DELETE FROM newscabinet.user_like_record "
+				+ " WHERE user_id =" + userId
+				+ " AND record_id =" + recordId;
+		
+		int result = -1;
+		Statement st = null;
+
+		try {
+			st = conn.createStatement();
+			result = st.executeUpdate(query);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	//처음 record insert시 사용
 	public static int insertUserRecord(Connection conn, HttpServletRequest request) {
 		
@@ -418,6 +481,8 @@ public class ManageRecord {
 			pstmt.setBoolean(3, recordPrivate);
 			pstmt.setInt(4, subcategoryId);
 			rs = pstmt.executeQuery();
+			
+			
 			
 			boolean checkSameRecord = true;
 			while(rs.next()) {
