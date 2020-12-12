@@ -11,10 +11,13 @@
 	margin: 0;
 	padding: 0;
 }
-ol,ul{
-	list-style-type:none;
+
+ol, ul {
+	list-style-type: none;
 }
+
 body {
+	background-color:#F7F7F7;
 	text-align: center;
 }
 
@@ -700,9 +703,8 @@ a {
 	color: white;
 }
 
-
-.navbar_logo img{
-	width:25px;
+.navbar_logo img {
+	width: 25px;
 	object-fit: cover;
 }
 
@@ -780,7 +782,7 @@ a {
 /*banner*/
 #banner {
 	padding: 14em 0 12em 0;
-	background-image: url(images/read.jpg);
+	background-image: url(images/read3.jpg);
 	background-size: cover;
 	background-position: center top;
 	opacity: 0.7;
@@ -799,16 +801,16 @@ a {
 }
 
 #banner h1 {
-	font-size: 3em;
-	color: #25a2c3;
+	font-size: 5em;
+	color: #d49466;
 	line-height: 1em;
-	margin: 0 0 0.5em 0;
+	margin: 0 0 0.3em 0;
 	padding: 0;
 }
 
 #banner p {
 	font-size: 1.25em;
-	margin-bottom: 1.75em;
+	margin-bottom: 0.8em;
 }
 
 @media screen and (max-width: 1280px) {
@@ -1098,57 +1100,52 @@ body.is-loading #banner .content {
 }
 /*footer*/
 #footer {
-		padding: 4em 0 4em 0;
-		background: #2E404E;
-		text-align: center;
-		color: #c8e7f0;
+	padding: 2em 0 2em 0;
+	background: #2E404E;
+	text-align: center;
+	color: #c8e7f0;
+}
+
+#footer h2 {
+	color: #fff;
+}
+
+#footer .icon {
+	color: #f6755e;
+}
+
+#footer a {
+	color: #c8e7f0;
+	text-decoration: none;
+}
+
+#footer ul li {
+	padding: 0 2em;
+}
+
+#footer .copyright {
+	display: inline-block;
+	color: #a7d9e7;
+	font-size: 0.75em;
+	margin: 0 0 2em 0;
+	padding: 0;
+	text-align: center;
+	border-top: 1px solid rgba(255, 255, 255, 0.25);
+	padding: 2em 5em;
+}
+
+@media screen and (max-width: 980px) {
+	#footer {
+		padding: 3em 0 1em 0;
 	}
+	#footer ul li {
+		display: block;
+		padding: .25em 0;
+	}
+}
 
-		#footer h2 {
-			color: #fff;
-		}
-
-		#footer .icon {
-			color: #f6755e;
-		}
-
-		#footer a {
-			color: #c8e7f0;
-			text-decoration: none;
-		}
-
-		#footer ul li {
-			padding: 0 2em;
-		}
-
-		#footer .copyright {
-			display: inline-block;
-			color: #a7d9e7;
-			font-size: 0.75em;
-			margin: 0 0 2em 0;
-			padding: 0;
-			text-align: center;
-			border-top: 1px solid rgba(255, 255, 255, 0.25);
-			padding: 2em 5em;
-		}
-
-		@media screen and (max-width: 980px) {
-
-			#footer {
-				padding: 3em 0 1em 0;
-			}
-
-				#footer ul li {
-					display: block;
-					padding: .25em 0;
-				}
-
-		}
-
-		@media screen and (max-width: 736px) {
-
-			#footer .copyright {
-				padding: 2em 5em;
-			}
-
-		}
+@media screen and (max-width: 736px) {
+	#footer .copyright {
+		padding: 2em 5em;
+	}
+}

@@ -15,10 +15,7 @@
 <body>
    <section id="banner">
 				<div class="content">
-                    <h1><b style="color:#25A2C3">OWN YOUR MIND!</b></h1>
-					<ul class="actions">
-						<li  style="padding-top: 40px"><a href="#one" class="button scrolly">Get Started</a></li>
-					</ul>
+                    <h1><b>OWN YOUR MIND!</b></h1>
 				</div>
 			</section>
 	<section id="one" class="wrapper">
@@ -49,18 +46,6 @@
 					</div>
 				</div>
 			</section>
-					<footer id="footer">
-				<div class="inner">
-					<h2>(주)NewsCabinet</h2>
-					<ul class="actions">
-						<li><span class="icon fa-phone"></span> <a href="#">(010) 123-1234</a></li>
-						<li><span class="icon fa-envelope"></span> <a href="#">newscabinet@sungshin.ac.kr</a></li>
-						<li><span class="icon fa-map-marker"></span> 서울 성북구 미정관 랩실</li>
-					</ul>
-				</div>
-				<div class="copyright">
-                    &copy; NewsCabinet <p> 권성민 김혜진 장혜령.</p>
-				</div>
-			</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

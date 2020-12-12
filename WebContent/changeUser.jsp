@@ -7,18 +7,20 @@
 <title>Insert title here</title>
 <link href="./style.css?ver=1" rel="stylesheet">
 <style>
-
-body {
-	overflow: hidden;
-}
 </style>
-
 </head>
 <script src="https://kit.fontawesome.com/faf91fea33.js"
 	crossorigin="anonymous"></script>
 <jsp:include page="webHeader.jsp"></jsp:include>
-
 <body>
+	<section id="banner">
+		<div class="content">
+			<h1>
+				<b>OWN YOUR MIND!</b>
+			</h1>
+
+		</div>
+	</section>
 	<form method="POST" name="chaxngeuser" action="user/changeuser">
 		<div class="basic_contentzone" style='background-color: #C7C7C7'>
 			<div class="login">
@@ -53,5 +55,7 @@ body {
 			</div>
 		</div>
 	</form>
+		<jsp:include page="footer.jsp"></jsp:include>
+	
 </body>
 </html>
