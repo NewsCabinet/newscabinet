@@ -16,11 +16,7 @@
 <%
 System.out.println("로그아웃");
     // 1: 기존의 세션 데이터를 모두 삭제
-       session.invalidate();
- 	    out.println("<script language='javascript'>");
- 	    out.println("alert('재로그인 해주세요');");  
- 	    out.println("window.open('index.html','toolbar=0')");
- 	    out.println("</script>");
+      
 %>
 </body>
 </html>

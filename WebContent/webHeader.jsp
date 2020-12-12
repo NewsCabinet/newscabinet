@@ -28,7 +28,7 @@
             	  }
             	 %>
 			</form>
-		<form method="POST" name="logout" action="/NewsCabinet/Logout.jsp">
+		<form method="POST" name="logout" action="/NewsCabinet/SignOut">
 			  <% 
 			if(session.getAttribute("userName")!= null || request.isRequestedSessionIdValid()){
 				out.println("<button class=nameButton>" + "로그아웃" + "</button>");			}
