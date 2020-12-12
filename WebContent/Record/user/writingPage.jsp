@@ -155,13 +155,9 @@
                 }
             });
         });
-	</script>
-	<script>
 		function getUserChosenScap(){
 			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
 		}
-	</script>
-	<script>
 		$("input[name='radioSelectedNews']").change(function(){
 			<% 
 			for(int i = 0; i < userScrapList.size(); i++){%>

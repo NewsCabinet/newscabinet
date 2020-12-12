@@ -39,6 +39,9 @@ public class WriteRecrod extends HttpServlet {
 		
 		ServletContext sc = getServletContext();
 		Connection conn= (Connection)sc.getAttribute("DBconnection");
+		if(conn == null) {
+			System.out.println("DBconnection is null");
+		}
 		PrintWriter out = response.getWriter();
 		Calendar cal = Calendar.getInstance();
 	    String today = cal.get(Calendar.YEAR) + "."+ (cal.get(Calendar.MONTH) + 1)+ "." + cal.get(Calendar.DAY_OF_MONTH);
