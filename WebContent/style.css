@@ -102,7 +102,7 @@ nav a {
 	padding-top: 10px;
 	position: relative;
 	width: 100%;
-	height: 700px;
+	/*height: 700px;*/
 	top: 100px;
 }
 
@@ -358,6 +358,14 @@ div a {
 	border-bottom: 1px solid #bbb;
 }
 
+.otherRecordItem {
+	width: 90%;
+	text-align: left;
+	border-bottom: 1px solid gray;
+	margin: 10px auto;
+	padding: 10px;
+}
+
 .scrab_canclebtn {
 	background: #445F74;
 	color: #fff;
@@ -599,10 +607,10 @@ body {
 
 .setting {
 	position: relative;
-	background-image: url( "/NewsCabinet/images/setting.png" );
+	background-image: url( "/NewsCabinet/images/settingImg.png" );
 	background-repeat: no-repeat;
-	width: 50px;
-	height: 50px;
+	width: 30px;
+	height: 30px;
 	border: none;
 	background-color: white;
 }
@@ -625,14 +633,6 @@ body {
 	padding: 10px;
 }
 
-.otherRecordItem {
-	width: 90%;
-	text-align: left;
-	border-bottom: 1px solid gray;
-	margin: 10px auto;
-	padding: 10px;
-}
-
 /*관리 창 css*/
 .category {
 	align: float;
@@ -646,18 +646,11 @@ body {
 }
 
 /*record main css*/
-.basic_contentzone {
-	padding-top: 20px;
-	position: relative;
-	width: 100%;
-	top: 100px;
-}
-
 .basic_type_header {
 	padding-top: 10px;
 	position: relative;
 	width: 100%;
-	height: 200px;
+	height: 70px;
 	top: 100px;
 }
 
@@ -702,17 +695,6 @@ body {
 	background-color: #EEEEEE;
 }
 
-.settingForRecord {
-	position: relative;
-	background-image: url( "/NewsCabinet/images/setting.png" );
-	background-repeat: no-repeat;
-	width: 50px;
-	height: 50px;
-	border: none;
-	background-color: white;
-	margin-left: 700px;
-}
-
 .contents {
 	background-color: #EEEEEE;
 	width: 60%;
@@ -723,6 +705,8 @@ body {
 	font-size: 20px;
 	font-weight: bold;
 	margin-right: 50px;
+    margin-top: 40px;
+	margin-right: 700px;
 }
 
 /*record list for folder css*/
@@ -821,4 +805,5 @@ a{
         display: flex;
     }
 }
+/*반응형 헤더 끝*/
 

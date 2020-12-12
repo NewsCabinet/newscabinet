@@ -24,8 +24,6 @@
 	int SelectedfirstCategoryId = (Integer)request.getAttribute("SelectedCategoryId");
 	int SelectedSubCategoryId = (Integer)request.getAttribute("SelectedSubCategoryId");
 	
-	System.out.println("first = " + SelectedfirstCategoryId + " sub = " + SelectedSubCategoryId );
-
 	%>
 
 
@@ -95,7 +93,6 @@
 						
 						if(firstCategoryId == SelectedfirstCategoryId && !customItemName.equals("전체") ){
 							checkCustomCategory = true;
-							customCategoryList.get(i).print();
 							if(customItemId == SelectedSubCategoryId){
 								out.println("<li class='CH_SecondLineliOn'><a href='" + scrapUrl + "'>" + customItemName + "</a></li>");
 							}else{
@@ -126,11 +123,12 @@
 						String scrapNewsUrl = userScrapList.get(i).getNewsURL();
 						int scrapCount = userScrapList.get(i).getScrapCount();
 						
-						
+						String tmpForScrap = "location.href='../scrap/cancel?newsId=" + userScrapList.get(i).getNewsId()+"'";
 						%>
-						<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
+						<button class='scrab_btn' name='scrap' onclick=<%=tmpForScrap%>> 스크랩취소 </button>
+						<div class="simpleRecordItem" onclick="location.href=<%=scrapNewsUrl%>">
 							<p>
-							<b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
+							<b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline%>
 							</p>
 							<br>
 							<%=scrapDescription%>

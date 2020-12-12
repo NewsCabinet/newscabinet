@@ -90,7 +90,7 @@ public class ManageCategory {
 		return null;
 	}
 	
-	public static int searchUserFirstCategoryByUserId(Connection conn, int userId) {
+	public static int searchUserFirstCategoryIdByUserId(Connection conn, int userId) {
 		String query = "SELECT category_id FROM newscabinet.user WHERE user_id ='" + userId + "'" ; 
 		Statement st;
 		ResultSet rs;

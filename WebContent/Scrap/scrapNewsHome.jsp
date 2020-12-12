@@ -33,10 +33,9 @@
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String scrapUrl = "/NewsCabinet/scrap/news?first=" + itemId;
-							String scrapTest = "/NewsCabinet/Scrap/scrapNewsCategory.jsp";
-							out.println("<li class='CH_FirtstLineli'><a href='" + scrapUrl + "'>" + itemName + "</a></li>");
-						}%>
+							String scrapUrl = "/NewsCabinet/scrap/news?first=" + itemId;%>
+							<li class='CH_FirtstLineli'><a href="<%=scrapUrl%>"> <%=itemName %></a></li>
+						<% }%>
 					</ul>
 					<br><br>
 				</div>
@@ -59,7 +58,7 @@
 							String scrapPublicDate = scrapTop10List.get(i).getPublishedDate();
 							String scrapNewsUrl = scrapTop10List.get(i).getNewsURL();
 							int scrapCount = scrapTop10List.get(i).getScrapCount();
-							
+
 							%>
 							<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
 								
