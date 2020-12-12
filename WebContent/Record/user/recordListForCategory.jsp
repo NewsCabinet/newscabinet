@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.RecordData" %>
+    <%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.CustomCategoryData, model.RecordData" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,7 @@
 		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
 		ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
 		ArrayList<RecordData> simpleRecordList = (ArrayList)request.getAttribute("simpleRecordList");
+		ArrayList<CustomCategoryData> customCategoryList = (ArrayList)request.getAttribute("userCustomCategoryList");
 		int SelectedfirstCategoryId = (Integer)request.getAttribute("SelectedCategoryId");
 		int SelectedSubCategoryId = (Integer)request.getAttribute("SelectedSubCategoryId");
 	
@@ -72,7 +74,32 @@
 					</ul>
 					<br><br>
 				</div>
-				
+				<div class="newsCategoryHeader" id="customCategory" >
+				<ul>
+					<%
+					boolean checkCustomCategory = false;
+					for(int i = 0; i < customCategoryList.size(); i++){
+						int firstCategoryId = customCategoryList.get(i).getFirstCategoryId();
+						int customItemId = customCategoryList.get(i).getCustomCategoryId();
+						String customItemName = customCategoryList.get(i).getCustomCategoryName();
+
+						//custom Category -> 200이상
+						customItemId += 200;
+						String scrapUrl = "/NewsCabinet/UserRecord/main/category?first=" + firstCategoryId + "&sub=" + customItemId;
+						
+						if(firstCategoryId == SelectedfirstCategoryId && !customItemName.equals("전체") ){
+							checkCustomCategory = true;
+							if(customItemId == SelectedSubCategoryId){
+								out.println("<li class='CH_SecondLineliOn'><a href='" + scrapUrl + "'>" + customItemName + "</a></li>");
+							}else{
+								out.println("<li class='CH_SecondLineli'><a href='" + scrapUrl + "'>" + customItemName + "</a></li>");
+							}
+						}
+					}
+					%>
+				</ul>
+				<br><br>
+				</div>
 				<div class="simpleRecordContent">
 					<% 
 					for(int i = 0; i < simpleRecordList.size(); i++){
@@ -97,6 +124,15 @@
 				
 			</div>
 </div>
+<script>
+	window.onload = function(){
+		var check = <%=checkCustomCategory%>
+		if(check == false)
+			document.getElementById("customCategory").style.display="none";
+		else
+			document.getElementById("customCategory").style.display="";
+	} 
+</script>
 
 </body>
 </html>

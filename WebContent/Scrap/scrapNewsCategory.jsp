@@ -124,9 +124,9 @@
 						String tmpForScrap = "location.href='../scrap/cancel?newsId=" + userScrapList.get(i).getNewsId()+"'";
 						%>
 						<button class='scrab_btn' name='scrap' onclick=<%=tmpForScrap%>> 스크랩취소 </button>
-						<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
+						<div class="simpleRecordItem" onclick="location.href=<%=scrapNewsUrl%>">
 							<p>
-							<b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
+							<b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline%>
 							</p>
 							<br>
 							<%=scrapDescription%>

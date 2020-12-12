@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CustomCategoryData;
 import model.ManageCategory;
 import model.ManageRecord;
 import model.ManageScrapNews;
@@ -122,11 +123,37 @@ public class DisplayRecordListForCategory extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		//Custom Category Setting
+		ResultSet resultUserCustomCategory = ManageCategory.searchAllUserCustomCateogry(conn, userId);
+		ArrayList<CustomCategoryData> userCustomCategoryList = new ArrayList<CustomCategoryData>();
+		
+		try {
+			if(resultUserCustomCategory != null) {
+				while(resultUserCustomCategory.next()) {
+					int firstId = resultUserCustomCategory.getInt(1);
+					int customId = resultUserCustomCategory.getInt(2);
+					String customCategoryName = resultUserCustomCategory.getString(3);
+					
+					CustomCategoryData tmp = new CustomCategoryData();
+					tmp.setFirstCategoryId(firstId);
+					tmp.setCustomCategoryId(customId);
+					tmp.setCustomCategoryName(customCategoryName);
+					tmp.setUserId(userId);
+					
+					userCustomCategoryList.add(tmp);
+				}
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		
 
 		request.setAttribute("simpleRecordList", simpleRecordList);
 		request.setAttribute("SelectedCategoryId", firstCategoryId);
 		request.setAttribute("SelectedSubCategoryId", subCategoryId);
-		
+		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		
 		RequestDispatcher view = request.getRequestDispatcher("../../Record/user/recordListForCategory.jsp");
 		view.forward(request, response);
