@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.UserScrapNewsData" %>
+	pageEncoding="UTF-8"%>
+<%@ page
+	import="java.util.*, model.FristCategoryData, model.SubcategoryData, model.UserScrapNewsData"%>
 <jsp:include page="../webHeader.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
@@ -17,37 +18,42 @@
 		ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
 		ArrayList<UserScrapNewsData> scrapTop10List = (ArrayList)request.getAttribute("scrapTop10List");
 	%>
-	
+
 	<div class="basic_contentzone">
-			<section>
+		<section>
 			<br>
 			<h3>스크랩 뉴스 보기</h3>
 			<br>
-			</section>
-				
-			<div class="newsType">
-				<div class="newsCategoryHeader">
-					<ul>
-					<li class='CH_FirtstLineliOn'><a href="/NewsCabinet/scrap/main">홈</a><li>
+		</section>
+
+		<div>
+			<div class="newsCategoryHeader">
+				<ul>
+					<li class='CH_FirtstLineliOn'><a
+						href="/NewsCabinet/scrap/main">홈</a>
+					<li>
 						<%
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
 							String scrapUrl = "/NewsCabinet/scrap/category?first=" + itemId;%>
-							<li class='CH_FirtstLineli'><a href="<%=scrapUrl%>"> <%=itemName %></a></li>
-						<% }%>
-					</ul>
-					<br><br>
-				</div>
-				<div class="newsCategoryHeader">
-					<ul>
-						<li class="CH_SecondLineli">인기 스크랩 top10 </li>
-					</ul>
-					<br><br>
-				</div>
-				<div class="simpleRecordContent">
-					<h3>&nbsp;&nbsp;인기 스크랩 기사</h3>
-						<% 
+					
+					<li class='CH_FirtstLineli'><a href="<%=scrapUrl%>"> <%=itemName %></a></li>
+					<% }%>
+				</ul>
+				<br>
+				<br>
+			</div>
+			<div class="newsCategoryHeader">
+				<ul>
+					<li class="CH_SecondLineli">인기 스크랩 top10</li>
+				</ul>
+				<br>
+				<br>
+			</div>
+			<div class="simpleRecordContent">
+				<h3>&nbsp;&nbsp;인기 스크랩 기사</h3>
+				<% 
 						if(scrapTop10List == null)
 							System.out.println("scrapTop10List is null");
 						
@@ -60,30 +66,32 @@
 							int scrapCount = scrapTop10List.get(i).getScrapCount();
 
 							%>
-							<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
-								
-								<p><b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
-								</p>
-								<br>
-								<%=scrapDescription%>
-								<br>
-								<br>
-								<p>
-								 출고 날짜 <%=scrapPublicDate %> &nbsp; | &nbsp; 스크랩수 &nbsp;<%=scrapCount %>
-								</p>
-								
-								<br>
-							</div>
-						<%} %>
-							
+				<div class="simpleRecordItem"
+					onclick="location.href='<%=scrapNewsUrl%>'">
+
+					<p>
+						<b>[<%=scrapSubcategoryName%>]
+						</b> &nbsp;
+						<%=scrapHeadline %>
+					</p>
+					<br>
+					<%=scrapDescription%>
+					<br> <br>
+					<p>
+						출고 날짜
+						<%=scrapPublicDate %>
+						&nbsp; | &nbsp; 스크랩수 &nbsp;<%=scrapCount %>
+					</p>
+
+					<br>
 				</div>
-				
+				<%} %>
+
 			</div>
-			
+
+		</div>
+
 	</div>
-			
-
-
-
+<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

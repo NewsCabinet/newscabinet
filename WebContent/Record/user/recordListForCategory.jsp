@@ -135,6 +135,6 @@
 			document.getElementById("customCategory").style.display="";
 	} 
 </script>
-
+<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 </html>

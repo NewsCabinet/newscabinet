@@ -29,7 +29,7 @@
 	</section>
 		<div class="basic_contentzone">
 			<div class="login">
-			<h2>SignUp</h2>
+			<h2>Join</h2>
 				<form method="post" action="sign-up">
 					<input class="modifyLogin" type="email" name="userEmailId" placeholder="이메일을 입력해주세요" required>  
 					<input class ="FindButton"type="button" name="checkID" value="중복 체크" onclick="idCheck()" >
@@ -53,7 +53,6 @@
 						<option value="7">과학</option>
 						<option value="8">스포츠</option>
 					</select>
-
 					<br />
 					<br />
 				  <input class="FindButton" style="top:20px" type="submit" value="가입하기"/>
