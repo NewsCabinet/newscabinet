@@ -277,14 +277,13 @@ div a {
 }
 
 .nameButton {
-	float: right;
+	clear:both;
 	background-color: #2E404E;
 	color: white;
+	margin-left:20px;
 	font-weight: bold;
 	border: none;
-	text-align: center;
 }
-
 /*FindButton Css*/
 .FindButton {
 	background: #2E404E;
@@ -471,3 +470,4 @@ display: none;
   -ms-word-break: normal;
   word-break: normal;
 }
+

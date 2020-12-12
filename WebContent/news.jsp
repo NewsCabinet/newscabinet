@@ -46,8 +46,9 @@
 	}
 </style>
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<jsp:include page="webHeader.jsp"></jsp:include>
+
 	<div class="basic_contentzone">
 		<div>
 			<br />
@@ -168,5 +169,7 @@
 			</section>
 		</div>
 	</div>
+   </script>
+
 </body>
 </html>

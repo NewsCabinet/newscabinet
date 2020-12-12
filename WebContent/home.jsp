@@ -13,6 +13,7 @@
 </head>
 <jsp:include page="webHeader.jsp"></jsp:include>
 <body>
+
  <div class ="banner-area">
     <h2><b class="title1">own your mine!</b></h2>
       <script>
@@ -21,7 +22,8 @@
          });
          </script>
    </div>
-   <div class ="index_content-area" style="padding-top:0px"></div>
+
+   <div class ="index_content-area" style="padding-top:0px">여기냐?</div>
 </body>
 
 </html>

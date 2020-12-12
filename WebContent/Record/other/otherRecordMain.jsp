@@ -7,69 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>전체 기록 보기</title>
-<link href="/NewsCabinet/style.css" rel="stylesheet">
-<style type="text/css">
-	.newsCategoryHeader{
-		width: 60%;
-		margin: 20px auto;
-		padding: 10px;
-	}
-	
-	ul{
-	 list-style:none;
-	}
-	
-	.newsCategoryHeader a{
-		width: 60%;
-		margin: 20px auto;
-		padding: 10px;
-		text-decoration: none;
-		color: black;
-	}
-	
-	.newsCategoryHeader a:hover{
-		border-bottom: 2px solid #2E404E;
-	}
-	
-	.CategoryHeaderli {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		display: block;
-		float: left;
-		padding: 5px;
-		text-decoration: none;
-	}
-	
-	
-	.CategoryHeaderliOn {
-		float: left;
-		margin: 1px;
-		display: block;
-		padding: 5px;
-		display: block;
-		float: left;
-		padding: 5px;
-		border-bottom: 2px solid #2E404E;
-	}
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
 
-
-	#recordContent{
-		text-align: left;
-		width: 50%;
-		margin: 10px auto;
-		padding : 10px;
-	}
-	
-	.otherRecordItem{
-		width: 90%;
-		text-align: left;
-		border-bottom: 1px solid gray;
-		margin: 10px auto;
-		padding : 10px;
-	}
-</style>
 </head>
 
 <body>
