@@ -6,16 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
-<style>
-.category{
-	align: float;
-}
-#cateListForEdit{
-	background-color : #EEEEEE;
-	width: 80%;
-	margin: 0 auto;
-}
-</style>
 </head>
 <body>
 	<div class="category">

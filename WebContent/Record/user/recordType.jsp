@@ -1,5 +1,5 @@
 <div class="basic_type_header">
-	<div class="newsType">
+	<div>
 		<div class="newsCategoryHeader">
 			<ul>
 				<li class='CategoryHeaderli'><a

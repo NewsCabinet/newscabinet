@@ -7,44 +7,8 @@
 <meta charset="UTF-8">
 <title>뉴스 보기</title>
 <link href="../style.css?ver=1" rel="stylesheet">
-<style>
-#intro{
-	text-align:left;
-	margin: 0 auto;
-	width:70%;
-}
-.setting{
-	position: relative;
-	background-image: url( "/NewsCabinet/images/setting.png" );
-	background-repeat: no-repeat;
-	width : 50px;
-	height: 50px;
-	border: none;
-	background-color : white;
-}
-#newsType{
-	text-align:left;
-	margin: 0 auto;
-	width:70%;
-	background-color : #EEEEEE;
-}
-.newsListBox{
-	background-color : white;
-}
-	#recordContent{
-		text-align: left;
-		width: 50%;
-		margin: 10px auto;
-		padding : 10px;
-	}
-	.otherRecordItem{
-		width: 90%;
-		text-align: left;
-		border-bottom: 1px solid gray;
-		margin: 10px auto;
-		padding : 10px;
-	}
-</style>
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 </head>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<jsp:include page="webHeader.jsp"></jsp:include>

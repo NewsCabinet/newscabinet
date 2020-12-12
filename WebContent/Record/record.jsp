@@ -5,68 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>특정 기록 보기</title>
 <link href="/NewsCabinet/style.css" rel="stylesheet">
-
-
-<style type="text/css">
-	/* SR 의미 specificReocrd --*/
-	.SRContentArea{
-		width: 60%;
-		text-align: left;
-		margin: 50px auto; 
-		padding: 30px;
-	}
-	.SRInfoContecnt{
-		font-size: small;
-		text-align:right;
-		padding: 10px;
-		border-bottom: 2px solid #2E404E;
-	}
-	
-	.SRTitle{
-		font-weight: bold;
-		font-size: larger;
-		padding: 30px;
-	}
-	
-	.SRCommnet{
-		font-size: medium;
-		margin: 30px auto; 
-		padding: 20px;
-		
-	}
-	
-	.SRScrapNews{
-		font-size: medium;
-		margin: 30px auto; 
-		padding: 20px;
-		border-top: 2px solid #2E404E;
-	}
-	
-	
-	.SRScrapNewsItem{
-		margin-top:15px;
-		margin-bottom:10px;
-	}
-	
-	.SRScrapNewsItem a{
-		text-decoration: none;
-		padding: 20px;
-		color:black;
-	}
-	
-	.SRScrapNewsItem a:hover{
-		box-shadow: 1px 1px 10px #ddd;
-	}
-	
-</style>
-
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<%! boolean userLikeRecord = true;%>
 	<%
+		boolean isCheckMyRecord = (Boolean)request.getAttribute("isCheckMyRecord");
 		RecordData recordData = (RecordData)request.getAttribute("selectedRecordData");
 		ArrayList<UserScrapNewsData> scrapNewsList = (ArrayList)request.getAttribute("scrapNewsList");
 		
@@ -88,10 +35,19 @@
 		
 		
 	%>
-
+	<%
+		String tmpForRemove = "/NewsCabinet/UserRecord/record/remove?id="+ recordData.getRecordId();
+		String tmpForEdit = "/NewsCabinet/UserRecord/record/edit?id="+ recordData.getRecordId();
+	%>
 
 	<div class="basic_contentzone">
 		<section>
+			<div id="btnAlign" style="display:none">
+				<input class="FindButton" type="button" value="기록 수정하기" onclick="location.href='<%=tmpForEdit%>'">
+				<input class="FindButton" type="button" value="기록 삭제하기" onclick="location.href='<%=tmpForRemove%>'"><br/>
+			</div>
+		</section>
+		<section id="defaultAlign">
 			<br>
 			<h2><%=firstCategoryName %> | <%=subCategoryName %></h2>
 		</section>
@@ -127,12 +83,11 @@
 	</div>
 
 </body>
-<script>
-	function goBack(){
+<script type="text/javascript">
+function goBack(){
 		window.history.back();
 	}
-</script>
-<script type="text/javascript">
+
 function likeToggle(){
 	<%
 		System.out.println("자바스크립트 눌림");
@@ -157,6 +112,14 @@ function likeToggle(){
 		console.log(like)	
 	}
 }
+
+window.onload = function(){
+	var check = <%=isCheckMyRecord%>
+	if(check == false)
+		document.getElementById("btnAlign").style.display="none";
+	else
+		document.getElementById("btnAlign").style.display="";
+} 
 </script>
 
 </html>

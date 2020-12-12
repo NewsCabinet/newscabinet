@@ -55,9 +55,12 @@ public class DisplaySpecificRecord extends HttpServlet {
 		}
 		
 		int selectedRecordId = Integer.parseInt((String)request.getParameter("id"));
-
+		
 		ResultSet resultSelectedRecord = ManageRecord.searchSpecificRecordByRecordId(conn, selectedRecordId);
 		RecordData recordData = new RecordData();
+		
+		boolean isCheckMyRecord = ManageRecord.checkRecordIdByUserId(conn, userId, selectedRecordId);
+		System.out.println("isCheckMyRecord = " + isCheckMyRecord);
 		
 		
 		// 선택한 record Data setting
@@ -133,6 +136,7 @@ public class DisplaySpecificRecord extends HttpServlet {
 		
 		request.setAttribute("selectedRecordData", recordData);
 		request.setAttribute("scrapNewsList", scrapNewsList);
+		request.setAttribute("isCheckMyRecord", isCheckMyRecord);
 		RequestDispatcher view = request.getRequestDispatcher("/Record/record.jsp");
 		view.forward(request, response);
 		

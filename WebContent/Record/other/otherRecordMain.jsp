@@ -7,16 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>전체 기록 보기</title>
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 <link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
-
 </head>
-
 <body>
 	<%	
 		ArrayList<FristCategoryData> firstCategoryList = (ArrayList)application.getAttribute("firstCategoryList");
 		ArrayList<SubcategoryData> subCategoryList = (ArrayList)application.getAttribute("subCategoryList");
-		
 		ArrayList<RecordData> popularTop10RecordList = (ArrayList)request.getAttribute("popularTop10RecordList");
+		request.setAttribute("isOherRecord", true);
 	%>
 	
 	<div class="basic_contentzone">
@@ -29,24 +29,24 @@
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='CategoryHeaderli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
+					<li class='CH_FirtstLineliOn'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
 						<%
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
 							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
-							out.println("<li class='CategoryHeaderli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
+							out.println("<li class='CH_FirtstLineli'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
 						}%>
 					</ul>
 					<br><br>
-					<hr>
+				</div>
+				<div class="newsCategoryHeader">
 					<ul>
-						<li class="CategoryHeaderli">인기 기록 top10 </li>
+						<li class="CH_SecondLineli">인기 기록 top10 </li>
 					</ul>
 					<br><br>
-					<hr>
 				</div>
-				<div id=recordContent>
+				<div class="simpleRecordContent">
 					<h3>&nbsp;&nbsp;인기 기록</h3>
 						<% 
 						for(int i = 0; i < popularTop10RecordList.size(); i++){
@@ -59,7 +59,7 @@
 							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
 							String recordTest = "/NewsCabinet/Record/record.jsp";
 							%>
-							<div class="otherRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
+							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
 								<p> <b>[<%=subcategoryName%>]</b> &nbsp; <%=recordTitle %>
 								</p><br>
 								<p>
@@ -73,9 +73,6 @@
 			</div>
 			
 	</div>
-			
-
-
 
 </body>
 </html>

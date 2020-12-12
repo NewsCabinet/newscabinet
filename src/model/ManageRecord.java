@@ -241,9 +241,25 @@ public class ManageRecord {
 		return null;
 	}
 	
-
+	//자신이 쓴 기록인지 확인
+	public static boolean checkRecordIdByUserId(Connection conn, int userId, int recordId) {
+		String query = "SELECT user_id FROM newscabinet.user_record WHERE record_id =" + recordId + " AND user_id= " + userId;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.createStatement();
+			if (st.execute(query)) {
+				rs = st.getResultSet();
+				if (rs.next())
+					return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	//처음 record insert시 사용
-
 	public static int insertUserRecord(Connection conn, HttpServletRequest request) {
 		
 		int result = -1;
@@ -423,13 +439,200 @@ public class ManageRecord {
 			pstat.setInt(1, userId);
 			pstat.setString(2, folderName);
 			int tuple = pstat.executeUpdate();
-			
 			return tuple;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	public static int removeRecordInUserScrapRecord(Connection conn, int recordId) {
+		String query = "DELETE FROM newscabinet.user_scrap_record where record_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, recordId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return -1;
+	}
+	
+	public static int removeRecordInLikeRecord(Connection conn, int userId, int recordId) {
+		String query = "DELETE FROM newscabinet.user_like_record where user_id=? and record_id=?";
+		
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, userId);
+			pstat.setInt(2, recordId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return -1;
+	}
+	
+	public static int removeRecordByRecordId(Connection conn, int userId, int recordId) {
+		int checkScrap = -1;
+		int checkLike = -1;
+		checkScrap = removeRecordInUserScrapRecord(conn, recordId);
+		checkLike = removeRecordInLikeRecord(conn, userId, recordId);
+		
+		if(checkScrap>-1 && checkLike>-1) {
+			String query = "DELETE FROM newscabinet.user_record where user_id=? and record_id=?";
+			
+			try {
+				PreparedStatement pstat = conn.prepareStatement(query);
+				pstat.setInt(1, userId);
+				pstat.setInt(2, recordId);
+				int result = pstat.executeUpdate();
+				return result;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(checkScrap ==1 ){
+			System.out.println("스크랩이 업데이트 안됨");
+		}else if(checkLike ==1 ){
+			System.out.println("좋아요가 업데이트 안됨");
+		}else {
+			System.out.println("다 안됨");
+		}
+		
+		return -1;
+	}
+	
+	public static int removeFolderByFolderId(Connection conn, int userId, int folderId) {
+		int checkRecord = -1;
+		ResultSet records = searchRecordByUserIdAndFolderId(conn, userId, folderId);
+
+		int defaultFolderId = searchFolderIdByFolderName(conn, userId, "default");
+		
+		if (records != null) {
+			try {
+				while (true) {
+					if (records.next()) {
+						checkRecord = updateUserRecordFolderId(conn, records.getInt("record_id"), defaultFolderId);
+					}else {
+						checkRecord = 0;
+						break;
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(checkRecord>-1) {
+			String query = "DELETE FROM newscabinet.user_record_folder where folder_id=?";
+			
+			try {
+				PreparedStatement pstat = conn.prepareStatement(query);
+				pstat.setInt(1, folderId);
+				int result = pstat.executeUpdate();
+				return result;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(checkRecord != 1 ){
+			System.out.println("기록이 업데이트 안됨");
+		}
+		
+		return -1;
+	}
+	
+	public static int updateUserRecordFolderId(Connection conn, int recordId, int folderId) {
+		String query = "UPDATE newscabinet.user_record SET folder_id=? WHERE record_id=?";
+		try {
+			PreparedStatement pstat = conn.prepareStatement(query);
+			pstat.setInt(1, folderId);
+			pstat.setInt(2, recordId);
+			int result = pstat.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public static int updateUserRecord(Connection conn, HttpServletRequest request) {
+		PreparedStatement pstmt = null;
+		
+		String tmpId = (String)request.getParameter("recordId");
+		int recordId = Integer.parseInt(tmpId);
+		
+		int userId = (Integer)request.getAttribute("recordUserId");
+		int recordSubcategoryId = (Integer)request.getAttribute("userSelectedSubCategoryId");
+		int recordCustomCategoryId = (Integer)request.getAttribute("userSelectedCustomCategoryId");
+		
+		String userFolderStr =  request.getParameter("userFolder");
+		int folderId = Integer.parseInt(userFolderStr);
+		
+	
+		String recordTitle = (String)request.getParameter("recordTitle");
+		String recordDate = (String)request.getAttribute("todayDate");
+		String recordComment = request.getParameter("recordComment");
+		
+		String recordPrivateStr[] = request.getParameterValues("recordPrivate");
+		boolean recordPrivate = false;
+		for(String str : recordPrivateStr) {
+			if(str.equals("true"))
+				recordPrivate = true;
+		}
+		
+		
+		String query = "UPDATE newscabinet.user_record"
+				+ " SET user_id=?, subcategory_id=?, custom_category_id=?, folder_id=?, record_title=?, record_date=?, record_private=?, record_comment=?"
+				+ " WHERE record_id=?";
+		
+		try {
+			conn.setAutoCommit(false);
+			
+			try {
+				pstmt = conn.prepareStatement(query);
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("connection problem");
+			}
+			
+			pstmt.setInt(1, userId);
+			pstmt.setInt(2, recordSubcategoryId);
+			pstmt.setInt(3, recordCustomCategoryId);
+			pstmt.setInt(4, folderId);
+			pstmt.setString(5, recordTitle);
+			pstmt.setString(6, recordDate);
+			pstmt.setBoolean(7, recordPrivate);
+			pstmt.setString(8, recordComment);
+			pstmt.setInt(9, recordId);
+			
+			int result = pstmt.executeUpdate();
+			conn.commit();
+			conn.setAutoCommit(true);
+			
+			return result;
+			
+		}catch(Exception e) {
+			System.out.println("userId = "+ userId);
+			System.out.println("recordSubcategoryId = " + recordSubcategoryId);
+			System.out.println("recordCustomCategoryId = " + recordCustomCategoryId);
+			System.out.println("folderId = " + folderId);
+			System.out.println("record Title = "+recordTitle);
+			System.out.println("record date = " + recordDate);
+			System.out.println("record private = " + recordPrivate);
+			System.out.println("record comment = " + recordComment);
+		}
+			
+		return -1;	
 	}
 }
 

@@ -19,8 +19,10 @@ body {
 	overflow: hidden;
 }
 </style>
-</head>
 
+</head>
+<script src="https://kit.fontawesome.com/faf91fea33.js"
+	crossorigin="anonymous"></script>
 <jsp:include page="webHeader.jsp"></jsp:include>
 
 <body>
