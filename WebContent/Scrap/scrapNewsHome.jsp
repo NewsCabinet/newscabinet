@@ -57,7 +57,7 @@
 							String scrapPublicDate = scrapTop10List.get(i).getPublishedDate();
 							String scrapNewsUrl = scrapTop10List.get(i).getNewsURL();
 							int scrapCount = scrapTop10List.get(i).getScrapCount();
-							
+
 							%>
 							<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
 								
