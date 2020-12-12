@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 <link href="./style.css?ver=1" rel="stylesheet">
 <style>
-.basic_contentzone {
-	padding-top: 20px;
-	position: relative;
-	width: 100%;
-	height: 630px;
-	top: 100px;
-}
 
 body {
 	overflow: hidden;

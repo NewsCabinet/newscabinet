@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
-<div class="box-area">
+
 	<nav class="navbar">
 		<div class="navbar_logo">
 			<img src="images/logo.png">
@@ -13,7 +13,7 @@
 			<li><a href="/NewsCabinet/news/main">뉴스보기</a></li>
 			<li><a href="/NewsCabinet/scrap/main">스크랩보기</a></li>
 			<li><a href="/NewsCabinet/UserRecord/main">나의 기록보기</a></li>
-			<li><a href="/NewsCabinet/OthersRecord/main">다른사람 기록보기</a></li>
+			<li><a href="/NewsCabinet/OthersRecord/main">공유된 기록보기</a></li>
 			<li><a href="/NewsCabinet/UserRecord/write">기록작성</a></li>
 		</ul>
 		<div class="navbar_icons">
@@ -50,4 +50,4 @@
  	icons.classList.toggle("active");
 }); 
 </script>
-</div>
+
