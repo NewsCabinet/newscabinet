@@ -33,7 +33,7 @@
 			<br>
 		</section>
 
-		<div class="newsType">
+		<div>
 			<div class="newsCategoryHeader">
 				<ul>
 					<li class='CH_FirtstLineli'><a href="/NewsCabinet/scrap/main">홈</a>
@@ -157,6 +157,8 @@
 			</div>
 		</div>
 	</div>
+		<jsp:include page="/footer.jsp"></jsp:include>
+	
 </body>
 <script>
 	window.onload = function(){

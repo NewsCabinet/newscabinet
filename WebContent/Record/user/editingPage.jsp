@@ -89,6 +89,7 @@
 			<br/>
 		</div>
 	</div>
+	<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript">

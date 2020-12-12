@@ -90,7 +90,7 @@
 			</form>
 		</div>
 		<br/><br/><br/><br/><br/>
-		<div class="newsListBox">
+		<div>
 			<section class ="sectionArti">
 				<%
 					NewsData[] nd = (NewsData[]) request.getAttribute("newsdata");
@@ -133,7 +133,7 @@
 			</section>
 		</div>
 	</div>
-   </script>
+	<jsp:include page="/footer.jsp"></jsp:include>
 
 </body>
 </html>

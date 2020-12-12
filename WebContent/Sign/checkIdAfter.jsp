@@ -39,5 +39,6 @@
 			
 			<input type="submit" value="확인" onclick="windowClosed()">
 		<% }%>
+		
 </body>
 </html>

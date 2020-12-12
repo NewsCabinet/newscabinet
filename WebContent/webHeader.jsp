@@ -34,8 +34,6 @@
 				out.println("<button class=nameButton>" + "로그아웃" + "</button>");			}
 				%>
 			</form>
-
-			
 		</div>
 		<a href="#" class="navbar_togglebtn"> <i class="fas fa-bars"></i>
 		</a>

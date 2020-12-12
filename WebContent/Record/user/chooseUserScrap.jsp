@@ -39,7 +39,7 @@
 		<input type="button" value="선택하기" onclick="sendSelectedData2()" >
 		</div>
 	</form>
-
+<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 <script>
 	function sendSelectedData2(){
