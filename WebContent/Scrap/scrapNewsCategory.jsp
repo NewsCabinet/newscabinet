@@ -125,9 +125,8 @@
 						int scrapCount = userScrapList.get(i).getScrapCount();
 						
 						String tmpForScrap = "location.href='../scrap/cancel?newsId=" + userScrapList.get(i).getNewsId();
-						out.println(" <button class='scrab_btn' name='scrap' onclick=" + tmpForScrap + "'" + "> 스크랩취소 </button>");
-						
 						%>
+						<button class='scrab_btn' name='scrap' onclick="<%=tmpForScrap%>"> 스크랩취소 </button>
 						<div class="simpleRecordItem" onclick="location.href='<%=scrapNewsUrl%>'">
 							<p>
 							<b>[<%=scrapSubcategoryName%>]</b> &nbsp; <%=scrapHeadline %>
