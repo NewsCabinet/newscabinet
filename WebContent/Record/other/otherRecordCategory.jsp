@@ -28,7 +28,7 @@
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='CH_FirtstLineli'><a href="/NewsCabinet/scrap/main">홈</a><li>
+					<li class='CH_FirtstLineli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
 						<%
 						String presentFisrtCategoryName = "";
 						for(int i = 0; i < firstCategoryList.size(); i++){

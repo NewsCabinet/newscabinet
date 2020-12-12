@@ -12,6 +12,7 @@
 <body>
 	<%! boolean userLikeRecord = true;%>
 	<%
+		
 		boolean isCheckMyRecord = (Boolean)request.getAttribute("isCheckMyRecord");
 		RecordData recordData = (RecordData)request.getAttribute("selectedRecordData");
 		ArrayList<UserScrapNewsData> scrapNewsList = (ArrayList)request.getAttribute("scrapNewsList");
@@ -87,6 +88,7 @@ function goBack(){
 		window.history.back();
 	}
 
+var likeButton = false;
 function likeToggle(){
 	<%
 		System.out.println("자바스크립트 눌림");
@@ -97,17 +99,30 @@ function likeToggle(){
 			userLikeRecord = true;
 			System.out.println(userLikeRecord);
 		}
+		System.out.println("-------------");
 	%>
 	
 	var like = <%=userLikeRecord%>
 	console.log(like)
 	
 	if(like == true){
-		document.getElementById("likeButton").src = "/NewsCabinet/images/emptyHeart.png";
+		document.getElementById("likeButton").src = "/NewsCabinet/images/fullHeart.png";
 		console.log(like)
 		
 	}else if(like == false){
+		document.getElementById("likeButton").src = "/NewsCabinet/images/emptyHeart.png";
+		console.log(like)	
+	}
+	
+	
+	if(likeButton == true){
 		document.getElementById("likeButton").src = "/NewsCabinet/images/fullHeart.png";
+		likeButton = false;
+		console.log(like)
+		
+	}else if(likeButton == false){
+		document.getElementById("likeButton").src = "/NewsCabinet/images/emptyHeart.png";
+		likeButton = true;
 		console.log(like)	
 	}
 }
