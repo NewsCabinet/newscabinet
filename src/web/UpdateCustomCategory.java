@@ -21,7 +21,7 @@ import model.ManageCategory;
 /**
  * Servlet implementation class UpdateCustomCategory
  */
-@WebServlet("/news/customCategory/management")
+@WebServlet("/news/custom-category/manage")
 public class UpdateCustomCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -91,7 +91,7 @@ public class UpdateCustomCategory extends HttpServlet {
 		}
 		request.setAttribute("customCategories", tmp);		
 		
-		RequestDispatcher view = request.getRequestDispatcher("../../News/manageCustomCategory.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/News/manageCustomCategory.jsp");
 		view.forward(request, response);
 	}
 

@@ -24,7 +24,7 @@ import model.NewsData;
  * Servlet implementation class WriteRecrod
  * userid, newsid, folderid, record -> title, date, private, comment
  */
-@WebServlet("/UserRecord/restore")
+@WebServlet("/record/user/write/save")
 public class WriteRecrod extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -110,18 +110,18 @@ public class WriteRecrod extends HttpServlet {
 					}
 				}
 				System.out.println("저장성공!");
-				out.print("<script>alert('저장되었습니다.'); location.href='./main' </script>\n");
-			//	RequestDispatcher view = request.getRequestDispatcher("/UserRecord/main");
+				out.print("<script>alert('저장되었습니다.'); location.href='/NewsCabinet/record/user/folder' </script>\n");
+			//	RequestDispatcher view = request.getRequestDispatcher("/record/user/folder");
 			//	view.forward(request, response);
 				out.flush();
 				
 			}else if(recordId == -2){
 				System.out.println("같은 기록이 존재함");
-				out.println("<script>alert('같은 글이 존재합니다. 제목이나 공개 여부를 다르게 하여 작성하여주세요'); location.href='../home.jsp'; </script>\r\n");
+				out.println("<script>alert('같은 글이 존재합니다. 제목이나 공개 여부를 다르게 하여 작성하여주세요'); location.href='/home.jsp'; </script>\r\n");
 				out.flush();
 
 			}else {
-				out.print("<script>alert('저장에 실패하였습니다.'); location.href='../home.jsp'; </script>\r\n");
+				out.print("<script>alert('저장에 실패하였습니다.'); location.href='/home.jsp'; </script>\r\n");
 				out.flush();
 			}
 		}catch(Exception e) {

@@ -144,7 +144,7 @@ public class NewsCatching extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("../news.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/news.jsp");
 		view.forward(request, response);
 	}
 

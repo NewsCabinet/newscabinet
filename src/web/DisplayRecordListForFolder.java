@@ -23,7 +23,7 @@ import model.RecordData;
 /**
  * Servlet implementation class DisplayRecordListForFolder
  */
-@WebServlet("/UserRecord/main/folder/list")
+@WebServlet("/record/user/folder/list")
 public class DisplayRecordListForFolder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -96,7 +96,7 @@ public class DisplayRecordListForFolder extends HttpServlet {
 
 		request.setAttribute("recordData", recordList);
 		
-		RequestDispatcher view = request.getRequestDispatcher("../../../Record/user/recordListForFolder.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Record/user/recordListForFolder.jsp");
 		view.forward(request, response);
 	}
 

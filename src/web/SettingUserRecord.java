@@ -38,7 +38,7 @@ import model.UserScrapNewsData;
 
 
 
-@WebServlet("/UserRecord/write")
+@WebServlet("/record/user/write")
 public class SettingUserRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

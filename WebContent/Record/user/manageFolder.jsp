@@ -24,7 +24,7 @@
 		<br /> <br />
 		<p><h4>폴더 삭제</h4>('default' 폴더는 삭제할 수 없음)</p>
 		<form id="cateListForEdit" method="post"
-			action="/NewsCabinet/UserRecord/main/folder/management">
+			action="/NewsCabinet/record/user/folder/manage">
 			<%
 				if (userForderList != null) {
 					for (int i = 0; i < userForderList.size(); i++) {

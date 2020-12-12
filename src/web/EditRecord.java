@@ -29,7 +29,7 @@ import model.UserScrapNewsData;
 /**
  * Servlet implementation class EditRecord
  */
-@WebServlet("/UserRecord/record/edit")
+@WebServlet("/record/user/edit")
 public class EditRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

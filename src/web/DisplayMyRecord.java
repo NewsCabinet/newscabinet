@@ -24,7 +24,7 @@ import model.UserFolderData;
 /**
  * Servlet implementation class DisplayMyRecord
  */
-@WebServlet("/UserRecord/main")
+@WebServlet("/record/user/folder")
 public class DisplayMyRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -83,7 +83,7 @@ public class DisplayMyRecord extends HttpServlet {
 		
 		request.setAttribute("folders", userForderList);
 		
-		RequestDispatcher view = request.getRequestDispatcher("../Record/user/recordMainPage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Record/user/recordMainPage.jsp");
 		view.forward(request, response);
 	}
 

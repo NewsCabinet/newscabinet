@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>뉴스 보기</title>
-<link href="../style.css?ver=1" rel="stylesheet">
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
 <script src="https://kit.fontawesome.com/faf91fea33.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -18,7 +18,7 @@
 			<br />
 			<h3 id="intro">
 				<b>뉴스 보기 설정</b>
-				<button class="setting" onclick="window.open('/NewsCabinet/news/customCategory/management','키워드 수정하기','width=500,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');">
+				<button class="setting" onclick="window.open('/NewsCabinet/news/custom-category/manage','키워드 수정하기','width=500,height=500,location=no,status=no,scrollbars=yes, toolbar=0, menubar=no');">
 				</button>
 			</h3>
 			<form id="newsType" method="post" action="../news/main">
@@ -98,7 +98,7 @@
 					
 					for (int i = 0; i < nd.length; i++) {
 						boolean check = false;
-						String tmpForScrap = "location.href='../scrap/scrapNews?location=" + i + "&subId=" + subCategoryId + "&custom="
+						String tmpForScrap = "location.href='/NewsCabinet/news/scrap?location=" + i + "&subId=" + subCategoryId + "&custom="
 						+ selectedCustomCategory + "&check=";
 					%>
 						<div class="otherRecordItem" style="cursor: pointer;" onclick="window.open('<%=nd[i].getUrl()%>')">

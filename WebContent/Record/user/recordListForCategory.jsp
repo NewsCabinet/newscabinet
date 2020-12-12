@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카테고리별 보기</title>
-<link href="../../style.css" rel="stylesheet">
+<link href="/NewsCabinet/style.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/faf91fea33.js"
 	crossorigin="anonymous"></script>
 </head>
@@ -27,9 +27,9 @@
 			<div class="newsCategoryHeader">
 				<ul>
 					<li class='CH_FirtstLineli'><a
-						href="/NewsCabinet/UserRecord/main">Folder</a></li>
+						href="/NewsCabinet/record/user/folder">Folder</a></li>
 					<li class='CH_FirtstLineliOn'><a
-						href="/NewsCabinet/UserRecord/main/category">Category</a></li>
+						href="/NewsCabinet/record/user/category">Category</a></li>
 				</ul>
 				<br>
 				<br>
@@ -41,7 +41,7 @@
 					for(int i = 0; i < firstCategoryList.size(); i++){
 						int itemId = firstCategoryList.get(i).getCategoryId();
 						String itemName = firstCategoryList.get(i).getCategoryName();
-						String recordUrl = "/NewsCabinet/UserRecord/main/category?first=" + itemId;
+						String recordUrl = "/NewsCabinet/record/user/category?first=" + itemId;
 						
 						if(itemId == SelectedfirstCategoryId){
 							out.println("<li class='CH_FirtstLineliOn'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
@@ -61,7 +61,7 @@
 							int firstCategoryId = subCategoryList.get(i).getFirstCategoryId();
 							int subItemId = subCategoryList.get(i).getSubcategoryId();
 							String subItemName = subCategoryList.get(i).getSubcategoryName();
-							String recordUrl = "/NewsCabinet/UserRecord/main/category?first=" + firstCategoryId + "&sub=" + subItemId ;
+							String recordUrl = "/NewsCabinet/record/user/category?first=" + firstCategoryId + "&sub=" + subItemId ;
 							
 							if(firstCategoryId == SelectedfirstCategoryId){
 								if(presentFisrtCategoryName.equals(subItemName)){
@@ -87,7 +87,7 @@
 
 						//custom Category -> 200이상
 						customItemId += 200;
-						String scrapUrl = "/NewsCabinet/UserRecord/main/category?first=" + firstCategoryId + "&sub=" + customItemId;
+						String scrapUrl = "/NewsCabinet/record/user/category?first=" + firstCategoryId + "&sub=" + customItemId;
 						
 						if(firstCategoryId == SelectedfirstCategoryId && !customItemName.equals("전체") ){
 							checkCustomCategory = true;
@@ -111,7 +111,7 @@
 						String userName = simpleRecordList.get(i).getUserName();
 						String recordDate = simpleRecordList.get(i).getRecordDate();
 						int recordCount = simpleRecordList.get(i).getRecordCount();
-						String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
+						String specificRecordUrl = "/NewsCabinet/record/specific?id=" + recordId;
 						%>
 						<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
 							<p> <b>[<%=subcategoryName%>]</b> &nbsp; <%=recordTitle %>

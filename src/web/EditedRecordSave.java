@@ -19,7 +19,7 @@ import model.ManageRecord;
 /**
  * Servlet implementation class EditedRecordSave
  */
-@WebServlet("/UserRecord/record/edit/save")
+@WebServlet("/record/user/edit/save")
 public class EditedRecordSave extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -85,11 +85,15 @@ public class EditedRecordSave extends HttpServlet {
 
 		}
 		
+		request.setAttribute("recordUserId", userId);
+		request.setAttribute("userSelectedSubCategoryId", userSelectedSubCategoryId);
+		request.setAttribute("userSelectedCustomCategoryId", userSelectedCustomCategoryId);
+		
 		int check = ManageRecord.updateUserRecord(conn, request);
 		if(check >-1) {
-			out.print("<script>alert('기록이 수정되었습니다!'); location.href='/NewsCabinet/UserRecord/main'; </script>\r\n");
+			out.print("<script>alert('기록이 수정되었습니다!'); location.href='/NewsCabinet/record/user/folder'; </script>\r\n");
 		}else {
-			out.print("<script>alert('기록이 수정되지 않았습니다!'); location.href='/NewsCabinet/UserRecord/main'; </script>\r\n");		
+			out.print("<script>alert('기록이 수정되지 않았습니다!'); location.href='/NewsCabinet/record/user/folder'; </script>\r\n");		
 		}
 	}
 

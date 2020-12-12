@@ -22,7 +22,7 @@ import model.ManageCategory;
 /**
  * Servlet implementation class ChooseUserScrapRecord
  */
-@WebServlet("/UserRecord/scrapNews")
+@WebServlet("/record/user/write/scrap-news")
 public class ChooseUserScrapRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    

@@ -17,7 +17,7 @@ import model.ManageRecord;
 /**
  * Servlet implementation class RemoveRecord
  */
-@WebServlet("/UserRecord/record/remove")
+@WebServlet("/record/user/remove")
 public class RemoveRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -52,9 +52,9 @@ public class RemoveRecord extends HttpServlet {
 		
 		int check = ManageRecord.removeRecordByRecordId(conn, userId, recordId);
 		if(check >-1) {
-			out.print("<script>alert('기록이 삭제되었습니다!'); location.href='/NewsCabinet/UserRecord/main'; </script>\r\n");
+			out.print("<script>alert('기록이 삭제되었습니다!'); location.href='/NewsCabinet/record/user/folder'; </script>\r\n");
 		}else {
-			out.print("<script>alert('기록이 삭제되지 않았습니다!'); location.href='/NewsCabinet/UserRecord/main'; </script>\r\n");
+			out.print("<script>alert('기록이 삭제되지 않았습니다!'); location.href='/NewsCabinet/record/user/folder'; </script>\r\n");
 		}
 	}
 

@@ -26,7 +26,7 @@
 				ArrayList<UserScrapNewsData> userScrapList = (ArrayList)request.getAttribute("userScrapList");
 			%>
 	
-			<form id="writeForm" method="post" action="/NewsCabinet/UserRecord/restore">
+			<form id="writeForm" method="post" action="/NewsCabinet/record/user/write/save">
 				<br>
 				<h2>기록 작성하기</h2>
 				<br>
@@ -158,7 +158,7 @@
             });
         });
 		function getUserChosenScap(){
-			window.open("/NewsCabinet/UserRecord/scrapNews", "뉴스 선택하기", "width=600 height=500")
+			window.open("/NewsCabinet/record/user/write/scrap-news", "뉴스 선택하기", "width=600 height=500")
 		}
 		$("input[name='radioSelectedNews']").change(function(){
 			<% 

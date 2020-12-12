@@ -30,13 +30,13 @@
 			<div class="newsType">
 				<div class="newsCategoryHeader">
 					<ul>
-					<li class='CH_FirtstLineli'><a href="/NewsCabinet/OthersRecord/main">홈</a><li>
+					<li class='CH_FirtstLineli'><a href="/NewsCabinet/record/shared/main">홈</a><li>
 						<%
 						String presentFisrtCategoryName = "";
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?first=" + itemId;
+							String recordUrl = "/NewsCabinet/record/shared/category?first=" + itemId;
 							
 							if(itemId == SelectedfirstCategoryId){
 								out.println("<li class='CH_FirtstLineliOn'><a href='" + recordUrl + "'>" + itemName + "</a></li>");
@@ -56,7 +56,7 @@
 							int firstCategoryId = subCategoryList.get(i).getFirstCategoryId();
 							int subItemId = subCategoryList.get(i).getSubcategoryId();
 							String subItemName = subCategoryList.get(i).getSubcategoryName();
-							String recordUrl = "/NewsCabinet/otherRecord?first=" + firstCategoryId + "&sub=" + subItemId ;
+							String recordUrl = "/NewsCabinet/record/shared/category?first=" + firstCategoryId + "&sub=" + subItemId ;
 							
 							if(firstCategoryId == SelectedfirstCategoryId){
 								if(presentFisrtCategoryName.equals(subItemName)){
@@ -81,7 +81,7 @@
 							String userName = simpleRecordList.get(i).getUserName();
 							String recordDate = simpleRecordList.get(i).getRecordDate();
 							int recordCount = simpleRecordList.get(i).getRecordCount();
-							String specificRecordUrl = "/NewsCabinet/UserRecord/record?id=" + recordId;
+							String specificRecordUrl = "/NewsCabinet/record/specific?id=" + recordId;
 							%>
 							<div class="simpleRecordItem" onclick="location.href='<%=specificRecordUrl%>'">
 								<p> <b>[<%=subcategoryName%>]</b> &nbsp; <%=recordTitle %>
