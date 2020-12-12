@@ -25,7 +25,7 @@ import model.UserScrapNewsData;
 /**
  * Servlet implementation class DisplaySpecificRecord
  */
-@WebServlet("/UserRecord/record")
+@WebServlet("/record/specific")
 public class DisplaySpecificRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

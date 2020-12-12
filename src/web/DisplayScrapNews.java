@@ -27,7 +27,7 @@ import model.UserScrapNewsData;
 /**
  * Servlet implementation class DisplayScrapNews
  */
-@WebServlet("/scrap/news")
+@WebServlet("/scrap/category")
 public class DisplayScrapNews extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -145,7 +145,7 @@ public class DisplayScrapNews extends HttpServlet {
 		request.setAttribute("SelectedSubCategoryId", subCategoryId);
 		request.setAttribute("userCustomCategoryList", userCustomCategoryList);
 		
-		RequestDispatcher view = request.getRequestDispatcher("../Scrap/scrapNewsCategory.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/Scrap/scrapNewsCategory.jsp");
 		view.forward(request, response);
 	}
 

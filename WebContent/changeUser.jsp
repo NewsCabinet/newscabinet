@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="./style.css?ver=1" rel="stylesheet">
+<link href="/NewsCabinet/style.css?ver=1" rel="stylesheet">
 <style>
 
 body {
@@ -19,7 +19,7 @@ body {
 <jsp:include page="webHeader.jsp"></jsp:include>
 
 <body>
-	<form method="POST" name="chaxngeuser" action="user/changeuser">
+	<form method="POST" name="chaxngeuser" action="user/manage">
 		<div class="basic_contentzone" style='background-color: #C7C7C7'>
 			<div class="login">
 				<h2>회원 정보 수정</h2>

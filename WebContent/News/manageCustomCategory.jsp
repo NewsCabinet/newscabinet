@@ -20,7 +20,7 @@
 		<br /> <br />
 		<p><h4>카테고리 삭제</h4></p>
 		<form id="cateListForEdit" method="post"
-			action="/NewsCabinet/news/customCategory/management">
+			action="/NewsCabinet/news/custom-category/manage">
 			<%
 				List customCategories = (ArrayList) request.getAttribute("customCategories");
 				if (customCategories != null) {

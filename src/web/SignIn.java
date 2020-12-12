@@ -25,7 +25,7 @@ import model.SubcategoryData;
 /**
  * Servlet implementation class DoLogin
  */
-@WebServlet("/SignIn")
+@WebServlet("/sign-in")
 public class SignIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

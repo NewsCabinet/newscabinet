@@ -24,10 +24,10 @@
 				ArrayList<UserScrapNewsData> scrapNewsList = (ArrayList)request.getAttribute("scrapNewsList");
 			%>
 	
-			<form id="writeForm" method="post" action="/NewsCabinet/UserRecord/record/edit/save">
+			<form id="writeForm" method="post" action="/NewsCabinet/record/user/edit/save">
 				<input type="hidden" name="recordId" value="<%=(int)request.getAttribute("recordId")%>">
 				<br>
-				<h2>기록 작성하기</h2>
+				<h2>기록 수정하기</h2>
 				<br>
 					<p>
 						<b>제목 : &nbsp;&nbsp;</b><input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요" required>

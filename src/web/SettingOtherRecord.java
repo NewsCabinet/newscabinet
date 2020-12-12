@@ -25,7 +25,7 @@ import model.SubcategoryData;
 /**
  * Servlet implementation class SettingOtherRecord
  */
-@WebServlet("/OthersRecord/main")
+@WebServlet("/record/shared/main")
 public class SettingOtherRecord extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

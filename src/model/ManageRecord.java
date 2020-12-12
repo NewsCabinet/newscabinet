@@ -589,12 +589,11 @@ public class ManageRecord {
 	}
 	
 	public static int removeRecordInLikeRecord(Connection conn, int userId, int recordId) {
-		String query = "DELETE FROM newscabinet.user_like_record where user_id=? and record_id=?";
+		String query = "DELETE FROM newscabinet.user_like_record where record_id=?";
 		
 		try {
 			PreparedStatement pstat = conn.prepareStatement(query);
-			pstat.setInt(1, userId);
-			pstat.setInt(2, recordId);
+			pstat.setInt(1, recordId);
 			int result = pstat.executeUpdate();
 			return result;
 		} catch (SQLException e) {
@@ -617,6 +616,7 @@ public class ManageRecord {
 				PreparedStatement pstat = conn.prepareStatement(query);
 				pstat.setInt(1, userId);
 				pstat.setInt(2, recordId);
+				System.out.println("checkLike: "+checkLike);
 				int result = pstat.executeUpdate();
 				return result;
 			} catch (SQLException e) {

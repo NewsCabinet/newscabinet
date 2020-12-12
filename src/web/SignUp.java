@@ -23,7 +23,7 @@ import model.ManageUser;
 /**
  * Servlet implementation class DoJoin
  */
-@WebServlet("/SignUp")
+@WebServlet("/sign-up")
 public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

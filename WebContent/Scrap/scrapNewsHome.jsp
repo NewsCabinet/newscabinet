@@ -33,7 +33,7 @@
 						for(int i = 0; i < firstCategoryList.size(); i++){
 							int itemId = firstCategoryList.get(i).getCategoryId();
 							String itemName = firstCategoryList.get(i).getCategoryName();
-							String scrapUrl = "/NewsCabinet/scrap/news?first=" + itemId;%>
+							String scrapUrl = "/NewsCabinet/scrap/category?first=" + itemId;%>
 							<li class='CH_FirtstLineli'><a href="<%=scrapUrl%>"> <%=itemName %></a></li>
 						<% }%>
 					</ul>

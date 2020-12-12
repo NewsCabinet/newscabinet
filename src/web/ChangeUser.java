@@ -21,7 +21,7 @@ import model.ManageUser;
 /**3
  * Servlet implementation class ChangeUser
  */
-@WebServlet("/user/changeuser")
+@WebServlet("/user/manage")
 public class ChangeUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
