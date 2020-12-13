@@ -44,7 +44,6 @@
 		<br /> <br /> <br />
 		<input class="FindButton" type="button" value="닫기" onClick="closeWindow()">
 	</div>
-	<jsp:include page="/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
 	function closeWindow(){

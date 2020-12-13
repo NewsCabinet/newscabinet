@@ -473,7 +473,7 @@ body {
 	padding: 5px;
 	text-decoration: none;
 	background: #2E404E;
-	color: white;
+	color:white;
 	font-weight: bold;
 	border-radius: 10px;
 }
@@ -740,7 +740,7 @@ a {
 	position: absolute;
 	right: 32px;
 	font-size: 24px;
-	color: #d49466;
+	color: #25a2c3;
 }
 
 @media screen and (max-width:768px) {
