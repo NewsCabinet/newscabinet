@@ -31,7 +31,7 @@
 				<h2>기록 작성하기</h2>
 				<br>
 					<p>
-						<b>제목 : &nbsp;&nbsp;</b><input class="listWriteInput" type="text" name="recordTitle" placeholder="제목을 입력해주세요" required>
+						<b>제목 : &nbsp;&nbsp;</b><input type="text" name="recordTitle" placeholder="제목을 입력해주세요" required>
 					</p>
 				<br>
 					<p>

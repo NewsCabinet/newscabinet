@@ -31,7 +31,7 @@
 			<div class="login">
 			<h2>Join</h2>
 				<form method="post" action="sign-up">
-					<input class="modifyLogin" type="email" name="userEmailId" placeholder="이메일을 입력해주세요" required>  
+					<input class="modifyLogin" type="email" name="userEmailId" id="userEmailId" placeholder="이메일을 입력해주세요" required>  
 					<input class ="FindButton"type="button" name="checkID" value="중복 체크" onclick="idCheck()" >
         			 <input class="modifyLogin" type="password" name="userPassword" placeholder="비밀번호를 입력해주세요" required><br/>
         			 <input class="modifyLogin" type="text" name="userName" placeholder="이름을 입력해주세요" required><br/>

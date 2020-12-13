@@ -66,8 +66,7 @@
 							int scrapCount = scrapTop10List.get(i).getScrapCount();
 
 							%>
-				<div class="simpleRecordItem"
-					onclick="location.href='<%=scrapNewsUrl%>'">
+				<div class="simpleRecordItem" style="cursor: pointer;" onclick="window.open('<%=scrapNewsUrl%>')">
 
 					<p>
 						<b>[<%=scrapSubcategoryName%>]

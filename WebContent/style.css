@@ -41,19 +41,20 @@ body {
 	color: #fff;
 	letter-spacing: 5px;
 }
-
+/*
 .banner-area {
 	width: 100%;
 	height: 300px;
 	position: fixed;
 	padding-top: 100px;
 	/*	top: 100px;*/
+	/*
 	background-image: url("images/news.jpg");
 	background-size: cover;
 	opacity: 0.9;
 	background-position: center center;
 }
-
+*/
 .home_banner-area {
 	padding-top: 8%;
 	width: 100%;
@@ -719,7 +720,7 @@ a {
 }
 
 .navbar_manu li:hover {
-	background-color: #d49466;
+	background-color:#aec5d8;
 	border-radius: 4px;
 }
 
@@ -1145,4 +1146,15 @@ body.is-loading #banner .content {
 	#footer .copyright {
 		padding: 2em 5em;
 	}
+}
+
+.inputTitle{
+	padding-top: 10px;
+	width: 300px;
+	height: 40px;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	color: #333;
+	font-size: 15px;
 }

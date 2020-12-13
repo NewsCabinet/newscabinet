@@ -7,15 +7,6 @@
 	<meta charset="UTF-8">
 	<title>아이디 중복 확인</title>
 	<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
-	<script>
-		function windowClosed(){
-			
-		opener.document.getElementById("userEmailId").innerHTML = '<%=userEmail%>';
-		consol.log("<%=userEmail%>");
-			
-		window.close();
-		}
-	</script>
 </head>
 <body>
 	<%!String userEmail = ""; %>
@@ -41,4 +32,14 @@
 		<% }%>
 		
 </body>
+<script>
+function windowClosed(){
+	console.log(opener.location);	
+	
+	opener.document.getElementById("userEmailId").value = "<%=userEmail%>";
+	console.log("<%=userEmail%>");
+		
+	self.close();
+}
+</script>
 </html>
